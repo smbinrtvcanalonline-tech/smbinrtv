@@ -1,6 +1,3 @@
-
-
-Index · HTML
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -42,7 +39,7 @@ Index · HTML
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
- 
+
   <style>
     /* ===== DIARIO AUTOMATICO ===== */
     .diario-section { background: #f8f9fa; padding: 2rem 0; }
@@ -93,7 +90,7 @@ Index · HTML
   </style>
 </head>
 <body data-theme="light">
- 
+
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="container-fluid px-3">
@@ -120,7 +117,7 @@ Index · HTML
     </div>
   </div>
 </div>
- 
+
 <!-- HEADER -->
 <header class="site-header sticky-top">
   <nav class="navbar navbar-expand-lg">
@@ -162,9 +159,9 @@ Index · HTML
     </div>
   </nav>
 </header>
- 
+
 <main>
- 
+
   <!-- HERO -->
   <section class="hero-section">
     <div class="container-fluid px-3">
@@ -213,12 +210,12 @@ Index · HTML
       </div>
     </div>
   </section>
- 
+
   <div class="ultima-hora-bar d-md-none">
     <span class="badge-ultima-hora">ÚLTIMA HORA</span>
     <div class="ticker-mobile" id="ticker-mobile">Autoridades refuerzan la seguridad ciudadana · Fiscalía investiga presunto desvío de recursos</div>
   </div>
- 
+
   <!-- ===== DIARIO AUTOMATICO CON IA ===== -->
   <section class="diario-section">
     <div class="container-fluid px-3">
@@ -251,7 +248,7 @@ Index · HTML
       </p>
     </div>
   </section>
- 
+
   <!-- NOTICIAS PROPIAS -->
   <section class="section-block">
     <div class="container-fluid px-3">
@@ -331,7 +328,7 @@ Index · HTML
       </div>
     </div>
   </section>
- 
+
   <!-- BANNER PUBLICITARIO -->
   <div class="ad-banner">
     <div class="container-fluid px-3">
@@ -343,7 +340,7 @@ Index · HTML
       </div>
     </div>
   </div>
- 
+
   <!-- MÁS LEÍDAS + SIDEBAR -->
   <section class="section-block">
     <div class="container-fluid px-3">
@@ -434,9 +431,9 @@ Index · HTML
       </div>
     </div>
   </section>
- 
+
 </main>
- 
+
 <!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-top">
@@ -506,7 +503,7 @@ Index · HTML
     </div>
   </div>
 </footer>
- 
+
 <!-- MODAL: Noticia propia -->
 <div class="modal-own" id="modalOwn" onclick="if(event.target===this)this.classList.remove('show')">
   <div class="modal-own-box">
@@ -534,7 +531,7 @@ Index · HTML
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL: Ver noticia generada -->
 <div class="noticia-generada" id="modalNoticia" onclick="if(event.target===this)this.classList.remove('show')">
   <div class="ng-box">
@@ -546,16 +543,16 @@ Index · HTML
     <div class="ng-share" id="ng-share-btns"></div>
   </div>
 </div>
- 
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script type="module" src="js/firebase-config.js"></script>
 <script src="js/app.js"></script>
- 
+
 <script>
 // ===== DIARIO AUTOMATICO CON IA =====
 const PORTAL_URL = 'https://smbinrtv.vercel.app';
 const WA_NUMBER = '51975367559';
- 
+
 const noticiasBase = [
   { zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', titulo:'Gobierno anuncia nuevas medidas económicas para reducir la inflación en regiones', hace:'1h' },
   { zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', titulo:'Congreso debate proyecto de ley sobre seguridad ciudadana en zonas rurales', hace:'3h' },
@@ -567,10 +564,10 @@ const noticiasBase = [
   { zona:'lima', cat:'LIMA', catClass:'cat-lima', titulo:'Caos en calles de Lima por paro de transportistas en avenidas principales', hace:'1h' },
   { zona:'lima', cat:'POLÍTICA', catClass:'cat-lima', titulo:'Fiscalía investiga actos de corrupción en municipios de Lima Norte', hace:'4h' }
 ];
- 
+
 let noticiasActuales = [...noticiasBase];
 let filtroActual = 'todas';
- 
+
 function compartirFB(titulo) {
   window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(PORTAL_URL)+'&quote='+encodeURIComponent(titulo+' - SMBINRTV'),'_blank');
 }
@@ -583,7 +580,7 @@ function compartirTW(titulo) {
 function compartirIG(titulo) {
   alert('Para compartir en Instagram:\n1. Copia el enlace: '+PORTAL_URL+'\n2. Pégalo en tu historia o bio de Instagram.\n\nNoticia: '+titulo);
 }
- 
+
 function renderNoticias(lista) {
   const grid = document.getElementById('diario-grid');
   if (!lista.length) { grid.innerHTML = '<p class="text-muted text-center w-100 py-4">No hay noticias en esta categoría.</p>'; return; }
@@ -602,7 +599,7 @@ function renderNoticias(lista) {
     </div>
   `).join('');
 }
- 
+
 function filtrarNoticias(zona, btn) {
   filtroActual = zona;
   document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));
@@ -610,7 +607,7 @@ function filtrarNoticias(zona, btn) {
   const filtradas = zona === 'todas' ? noticiasActuales : noticiasActuales.filter(n=>n.zona===zona);
   renderNoticias(filtradas);
 }
- 
+
 async function verNoticia(idx) {
   const n = noticiasActuales[idx];
   document.getElementById('ng-titulo').textContent = n.titulo;
@@ -639,7 +636,7 @@ async function verNoticia(idx) {
     <button class="d-share-btn btn-ig" onclick="compartirIG('${n.titulo.replace(/'/g,"\\'")}')"><i class="bi bi-instagram"></i> Instagram</button>
   `;
 }
- 
+
 async function generarNoticias() {
   const btn = document.getElementById('btnActualizar');
   btn.disabled = true;
@@ -667,7 +664,7 @@ async function generarNoticias() {
   btn.disabled = false;
   btn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Actualizar noticias';
 }
- 
+
 async function generarNoticiaPropia() {
   const titulo = document.getElementById('own-titulo').value.trim();
   const zona = document.getElementById('own-zona').value;
@@ -705,7 +702,7 @@ async function generarNoticiaPropia() {
   btn.disabled = false;
   btn.innerHTML = '<i class="bi bi-stars"></i> Generar con IA';
 }
- 
+
 // Iniciar
 document.getElementById('ultima-actualizacion').textContent = new Date().toLocaleTimeString('es-PE');
 renderNoticias(noticiasActuales);
@@ -713,6 +710,3 @@ document.getElementById('footer-year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
- 
-
-
