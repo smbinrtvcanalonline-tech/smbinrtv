@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMBINRTV Canal Online - Noticias de la Región</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="SMBINRTV Canal Online - Portal de noticias regional. Últimas noticias, investigaciones, denuncias y transmisiones en vivo." />
+  <meta name="keywords" content="SMBINRTV, noticias, canal online, región, periodismo, en vivo" />
+  <meta name="author" content="SMBINRTV Canal Online" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://smbinrtv.vercel.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SMBINRTV Canal Online" />
+  <meta property="og:description" content="Portal de noticias regional. Últimas noticias e investigaciones." />
+  <meta property="og:image" content="assets/img/og-image.jpg" />
+  <meta property="og:url" content="https://smbinrtv.vercel.app/" />
+  <meta property="og:site_name" content="SMBINRTV Canal Online" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SMBINRTV Canal Online" />
+  <meta name="twitter:description" content="Portal de noticias regional." />
+  <meta name="twitter:image" content="assets/img/og-image.jpg" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsMediaOrganization",
+    "name": "SMBINRTV Canal Online",
+    "url": "https://smbinrtv.vercel.app",
+    "logo": "assets/img/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+51-973753796",
+      "email": "smbinrtvcanalonline@gmail.com"
+    }
+  }
+  </script>
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-theme="light">
+
+<!-- ========== TOP BAR ========== -->
+<div class="topbar">
+  <div class="container-fluid px-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="topbar-left d-flex align-items-center gap-3">
+        <span id="topbar-date" class="topbar-date"></span>
+        <span class="topbar-ticker-wrap d-none d-md-flex align-items-center gap-2">
+          <span class="badge-ultima-hora">ÚLTIMA HORA</span>
+          <div class="ticker-content" id="ticker-text">Cargando noticias...</div>
+        </span>
+      </div>
+      <div class="topbar-right d-flex align-items-center gap-2">
+        <a href="https://www.facebook.com" target="_blank" class="topbar-social" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.youtube.com" target="_blank" class="topbar-social" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        <a href="https://www.twitter.com" target="_blank" class="topbar-social" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+        <a href="https://www.instagram.com" target="_blank" class="topbar-social" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <button class="btn-theme-toggle ms-2" id="themeToggle" aria-label="Cambiar tema">
+          <i class="bi bi-moon-fill" id="themeIcon"></i>
+        </button>
+        <a href="https://wa.me/51973753796" target="_blank" class="btn-whatsapp ms-1">
+          <i class="bi bi-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== HEADER / NAVBAR ========== -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid px-3">
+
+      <!-- Logo -->
+      <a class="navbar-brand" href="index.html">
+        <div class="logo-wrap d-flex align-items-center gap-2">
+          <div class="logo-icon">
+            <span class="logo-sm">SM</span>
+          </div>
+          <div class="logo-text">
+            <span class="logo-name">SMBINRTV</span>
+            <span class="logo-sub">CANAL ONLINE</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <!-- Nav Links -->
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/noticias.html">Noticias</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/programas.html">Programas</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/envivo.html">En Vivo</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/investigaciones.html">Investigaciones</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/denuncias.html">Denuncias</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/videos.html">Videos</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/galeria.html">Galería</a></li>
+          <li class="nav-item"><a class="nav-link" href="pages/contacto.html">Contacto</a></li>
+        </ul>
+
+        <!-- Buscador + EN VIVO -->
+        <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0">
+          <div class="search-wrap">
+            <input type="search" class="search-input" placeholder="Buscar noticias..." id="searchInput" autocomplete="off" />
+            <button class="search-btn" aria-label="Buscar"><i class="bi bi-search"></i></button>
+          </div>
+          <a href="pages/envivo.html" class="btn-envivo">
+            <span class="envivo-dot"></span> EN VIVO
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ========== MAIN ========== -->
+<main>
+
+  <!-- HERO / NOTICIA PRINCIPAL -->
+  <section class="hero-section">
+    <div class="container-fluid px-3">
+      <div class="row g-3">
+
+        <!-- Hero Principal -->
+        <div class="col-lg-7">
+          <div class="hero-card" id="hero-main">
+            <div class="hero-img-wrap">
+              <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&q=80" alt="Noticia principal" class="hero-img" loading="eager" />
+              <div class="hero-overlay">
+                <span class="badge-cat bg-danger">ÚLTIMA HORA</span>
+                <span class="badge-cat ms-1">REGIONALES</span>
+                <h1 class="hero-title">Aprueban ambicioso plan de modernización vial para la región</h1>
+                <p class="hero-desc">El proyecto contempla nuevas vías, ciclovías y semaforización inteligente con una inversión histórica para el desarrollo regional.</p>
+                <div class="hero-meta">
+                  <span><i class="bi bi-pen"></i> Redacción SMBINRTV</span>
+                  <span><i class="bi bi-clock"></i> hace 19 horas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Secundarias -->
+        <div class="col-lg-5">
+          <div class="row g-3 h-100" id="hero-secondary">
+
+            <div class="col-12">
+              <div class="secondary-card">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=70" alt="Corrupción" class="sec-img" loading="lazy" />
+                <div class="sec-body">
+                  <span class="badge-cat-sm text-danger">CORRUPCIÓN</span>
+                  <h3 class="sec-title">Investigación revela presuntas irregularidades en contratos públicos</h3>
+                  <span class="sec-meta"><i class="bi bi-eye"></i> 8930 · hace 1 día</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="secondary-card">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=70" alt="Economía" class="sec-img" loading="lazy" />
+                <div class="sec-body">
+                  <span class="badge-cat-sm text-success">ECONOMÍA</span>
+                  <h3 class="sec-title">Crece la economía local impulsada por el comercio y el turismo</h3>
+                  <span class="sec-meta"><i class="bi bi-clock"></i> hace 3 horas</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER ÚLTIMA HORA (mobile) -->
+  <div class="ultima-hora-bar d-md-none">
+    <span class="badge-ultima-hora">ÚLTIMA HORA</span>
+    <div class="ticker-mobile" id="ticker-mobile">Autoridades refuerzan la seguridad ciudadana · Fiscalía investiga presunto desvío de recursos</div>
+  </div>
+
+  <!-- ========== NOTICIAS PROPIAS ========== -->
+  <section class="section-block">
+    <div class="container-fluid px-3">
+      <div class="section-header d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title"><span class="title-bar"></span> Noticias Propias</h2>
+        <a href="pages/noticias.html" class="ver-mas">Ver todas <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="row g-3" id="noticias-propias-grid">
+        <!-- Se cargan dinámicamente -->
+        <div class="col-md-4">
+          <article class="news-card">
+            <div class="nc-img-wrap">
+              <img src="https://images.unsplash.com/photo-1541872705-1f73c6400ec9?w=600&q=70" alt="Salud" class="nc-img" loading="lazy" />
+              <span class="nc-cat">SALUD</span>
+            </div>
+            <div class="nc-body">
+              <h4 class="nc-title">Nuevo hospital regional iniciará construcción este semestre</h4>
+              <p class="nc-desc">Las autoridades de salud confirmaron el inicio de obras del moderno complejo hospitalario.</p>
+              <div class="nc-meta">
+                <span><i class="bi bi-person"></i> Redacción</span>
+                <span><i class="bi bi-clock"></i> hace 5h</span>
+              </div>
+              <div class="nc-share mt-2">
+                <a href="#" class="share-btn" title="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="share-btn" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" class="share-btn" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="news-card">
+            <div class="nc-img-wrap">
+              <img src="https://images.unsplash.com/photo-1529686342540-1b43aec0df75?w=600&q=70" alt="Medio Ambiente" class="nc-img" loading="lazy" />
+              <span class="nc-cat">MEDIO AMBIENTE</span>
+            </div>
+            <div class="nc-body">
+              <h4 class="nc-title">Alerta por deforestación en zonas protegidas de la amazonía</h4>
+              <p class="nc-desc">Especialistas piden acción inmediata ante la acelerada pérdida de cobertura vegetal.</p>
+              <div class="nc-meta">
+                <span><i class="bi bi-person"></i> Unidad Ambiental</span>
+                <span><i class="bi bi-clock"></i> hace 8h</span>
+              </div>
+              <div class="nc-share mt-2">
+                <a href="#" class="share-btn"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="share-btn"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" class="share-btn"><i class="bi bi-twitter-x"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="news-card">
+            <div class="nc-img-wrap">
+              <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?w=600&q=70" alt="Educación" class="nc-img" loading="lazy" />
+              <span class="nc-cat">EDUCACIÓN</span>
+            </div>
+            <div class="nc-body">
+              <h4 class="nc-title">Estudiantes de la región logran primeros lugares en olimpiada nacional</h4>
+              <p class="nc-desc">Jóvenes talentos representaron con éxito a la región en matemáticas y ciencias.</p>
+              <div class="nc-meta">
+                <span><i class="bi bi-person"></i> Redacción</span>
+                <span><i class="bi bi-clock"></i> hace 12h</span>
+              </div>
+              <div class="nc-share mt-2">
+                <a href="#" class="share-btn"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="share-btn"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" class="share-btn"><i class="bi bi-twitter-x"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Botón agregar noticia (futuro admin) -->
+      <div class="text-center mt-4">
+        <button class="btn-admin-add" id="btnAddNews" onclick="alert('Panel de administración próximamente. Conecta Firebase para activarlo.')">
+          <i class="bi bi-plus-circle"></i> Agregar Nueva Noticia
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER PUBLICITARIO -->
+  <div class="ad-banner">
+    <div class="container-fluid px-3">
+      <div class="ad-slot text-center">
+        <!-- Google AdSense: reemplaza con tu código -->
+        <span class="ad-label">PUBLICIDAD</span>
+        <div class="ad-placeholder">
+          <i class="bi bi-image"></i> Espacio publicitario 728×90
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== NOTICIAS AUTOMÁTICAS (RSS/API) ========== -->
+  <section class="section-block bg-section-alt">
+    <div class="container-fluid px-3">
+      <div class="section-header d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title"><span class="title-bar" style="background:#198754"></span> Noticias Nacionales</h2>
+        <span class="badge bg-secondary">Vía NewsAPI / RSS</span>
+      </div>
+      <div class="row g-3" id="noticias-auto-grid">
+        <!-- Skeleton loaders -->
+        <div class="col-md-3">
+          <div class="auto-card skeleton-card">
+            <div class="skeleton-img skeleton"></div>
+            <div class="skeleton-line skeleton"></div>
+            <div class="skeleton-line short skeleton"></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="auto-card skeleton-card">
+            <div class="skeleton-img skeleton"></div>
+            <div class="skeleton-line skeleton"></div>
+            <div class="skeleton-line short skeleton"></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="auto-card skeleton-card">
+            <div class="skeleton-img skeleton"></div>
+            <div class="skeleton-line skeleton"></div>
+            <div class="skeleton-line short skeleton"></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="auto-card skeleton-card">
+            <div class="skeleton-img skeleton"></div>
+            <div class="skeleton-line skeleton"></div>
+            <div class="skeleton-line short skeleton"></div>
+          </div>
+        </div>
+      </div>
+      <p class="text-muted text-center mt-3 small">
+        <i class="bi bi-info-circle"></i> Conecta tu clave de <strong>NewsAPI</strong> en <code>js/news-api.js</code> para cargar noticias automáticas.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== MÁS LEÍDAS + SIDEBAR ========== -->
+  <section class="section-block">
+    <div class="container-fluid px-3">
+      <div class="row g-4">
+
+        <!-- Más leídas -->
+        <div class="col-lg-8">
+          <div class="section-header d-flex justify-content-between align-items-center mb-4">
+            <h2 class="section-title"><span class="title-bar" style="background:#dc3545"></span> Más Leídas</h2>
+          </div>
+          <div class="row g-3" id="mas-leidas">
+            <div class="col-md-6">
+              <div class="leida-card d-flex gap-3">
+                <div class="leida-num">01</div>
+                <div>
+                  <h5 class="leida-title">Autoridades refuerzan la seguridad ciudadana con nuevo patrullaje nocturno</h5>
+                  <span class="leida-meta"><i class="bi bi-eye"></i> 12,450 vistas</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="leida-card d-flex gap-3">
+                <div class="leida-num">02</div>
+                <div>
+                  <h5 class="leida-title">Fiscalía formaliza investigación por presunto desvío de recursos públicos</h5>
+                  <span class="leida-meta"><i class="bi bi-eye"></i> 9,821 vistas</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="leida-card d-flex gap-3">
+                <div class="leida-num">03</div>
+                <div>
+                  <h5 class="leida-title">Plan de modernización vial recibirá inversión histórica para la infraestructura</h5>
+                  <span class="leida-meta"><i class="bi bi-eye"></i> 8,930 vistas</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="leida-card d-flex gap-3">
+                <div class="leida-num">04</div>
+                <div>
+                  <h5 class="leida-title">Economía regional crece por tercer trimestre consecutivo según reporte oficial</h5>
+                  <span class="leida-meta"><i class="bi bi-eye"></i> 7,104 vistas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+          <div class="sidebar">
+            <!-- EN VIVO promo -->
+            <div class="sidebar-widget envivo-widget mb-4">
+              <div class="evw-header">
+                <span class="envivo-dot"></span> TRANSMISIÓN EN VIVO
+              </div>
+              <p class="evw-text">Sigue nuestra señal en vivo con las últimas noticias de la región.</p>
+              <a href="pages/envivo.html" class="btn-envivo-full">
+                <i class="bi bi-play-circle-fill"></i> Ver transmisión
+              </a>
+            </div>
+
+            <!-- Publicidad lateral -->
+            <div class="sidebar-widget ad-slot-side mb-4">
+              <span class="ad-label">PUBLICIDAD</span>
+              <div class="ad-placeholder-side">
+                <i class="bi bi-image"></i><br />300×250
+              </div>
+            </div>
+
+            <!-- Redes sociales -->
+            <div class="sidebar-widget social-widget">
+              <h6 class="widget-title">Síguenos</h6>
+              <div class="social-counts">
+                <a href="https://www.facebook.com" target="_blank" class="sc-item sc-fb">
+                  <i class="bi bi-facebook"></i>
+                  <div><strong>Facebook</strong><small>Seguir</small></div>
+                </a>
+                <a href="https://www.youtube.com" target="_blank" class="sc-item sc-yt">
+                  <i class="bi bi-youtube"></i>
+                  <div><strong>YouTube</strong><small>Suscribirse</small></div>
+                </a>
+                <a href="https://www.instagram.com" target="_blank" class="sc-item sc-ig">
+                  <i class="bi bi-instagram"></i>
+                  <div><strong>Instagram</strong><small>Seguir</small></div>
+                </a>
+                <a href="https://wa.me/51973753796" target="_blank" class="sc-item sc-wa">
+                  <i class="bi bi-whatsapp"></i>
+                  <div><strong>WhatsApp</strong><small>Contactar</small></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="container-fluid px-3">
+      <div class="row g-4">
+
+        <div class="col-lg-4">
+          <div class="logo-wrap d-flex align-items-center gap-2 mb-3">
+            <div class="logo-icon"><span class="logo-sm">SM</span></div>
+            <div class="logo-text">
+              <span class="logo-name">SMBINRTV</span>
+              <span class="logo-sub" style="color:#adb5bd">CANAL ONLINE</span>
+            </div>
+          </div>
+          <p class="footer-desc">Portal de noticias regional comprometido con la verdad, la investigación y la transparencia. Informamos con responsabilidad.</p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.youtube.com" target="_blank" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4">
+          <h6 class="footer-heading">Secciones</h6>
+          <ul class="footer-links">
+            <li><a href="pages/noticias.html">Noticias</a></li>
+            <li><a href="pages/programas.html">Programas</a></li>
+            <li><a href="pages/envivo.html">En Vivo</a></li>
+            <li><a href="pages/investigaciones.html">Investigaciones</a></li>
+            <li><a href="pages/videos.html">Videos</a></li>
+            <li><a href="pages/galeria.html">Galería</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-4">
+          <h6 class="footer-heading">Legal</h6>
+          <ul class="footer-links">
+            <li><a href="#">Política de Privacidad</a></li>
+            <li><a href="#">Términos de Uso</a></li>
+            <li><a href="#">Aviso Legal</a></li>
+            <li><a href="sitemap.xml">Sitemap</a></li>
+            <li><a href="pages/denuncias.html">Denuncias</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-4">
+          <h6 class="footer-heading">Contacto</h6>
+          <div class="footer-contact">
+            <p><i class="bi bi-telephone-fill"></i> 973 753 796</p>
+            <p><i class="bi bi-envelope-fill"></i> smbinrtvcanalonline@gmail.com</p>
+            <div class="d-flex gap-2 mt-3 flex-wrap">
+              <a href="https://wa.me/51973753796" class="btn-contact-footer" target="_blank">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+              </a>
+              <a href="tel:+51973753796" class="btn-contact-footer">
+                <i class="bi bi-telephone"></i> Llamar
+              </a>
+              <a href="mailto:smbinrtvcanalonline@gmail.com" class="btn-contact-footer">
+                <i class="bi bi-envelope"></i> Email
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container-fluid px-3 text-center">
+      <p>&copy; <span id="footer-year"></span> SMBINRTV Canal Online. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Firebase SDK (preparado) -->
+<script type="module" src="js/firebase-config.js"></script>
+<!-- App JS -->
+<script src="js/app.js"></script>
+</body>
+</html>

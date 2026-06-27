@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "name": "smbinrtv-canal-online",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    },
+    {
+      "source": "/js/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/css/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/noticias", "destination": "/pages/noticias.html" },
+    { "source": "/envivo", "destination": "/pages/envivo.html" },
+    { "source": "/denuncias", "destination": "/pages/denuncias.html" },
+    { "source": "/contacto", "destination": "/pages/contacto.html" },
+    { "source": "/galeria", "destination": "/pages/galeria.html" },
+    { "source": "/videos", "destination": "/pages/videos.html" }
+  ]
+}

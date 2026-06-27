@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>En Vivo - SMBINRTV Canal Online</title>
+  <meta name="description" content="Sigue la transmisión en vivo de SMBINRTV Canal Online." />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .live-container { background:#000; border-radius:8px; overflow:hidden; aspect-ratio:16/9; position:relative; }
+    .live-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; gap:12px; }
+    .live-placeholder i { font-size:3rem; color:#dc3545; }
+    .programacion-item { border-left:3px solid var(--blue-primary); padding:10px 14px; margin-bottom:8px; background:var(--card-bg); border-radius:0 6px 6px 0; }
+    .prog-hora { font-size:0.72rem; color:var(--gray-mid); font-weight:600; }
+    .prog-nombre { font-size:0.9rem; font-weight:700; color:var(--black-title); }
+  </style>
+</head>
+<body data-theme="light">
+
+<div class="topbar">
+  <div class="container-fluid px-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <span style="color:#adb5bd;font-size:0.75rem;" id="topbar-date2"></span>
+      <a href="https://wa.me/51973753796" target="_blank" class="btn-whatsapp"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand" href="../index.html">
+        <div class="logo-wrap d-flex align-items-center gap-2">
+          <div class="logo-icon"><span class="logo-sm">SM</span></div>
+          <div class="logo-text"><span class="logo-name">SMBINRTV</span><span class="logo-sub">CANAL ONLINE</span></div>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav2"><i class="bi bi-list"></i></button>
+      <div class="collapse navbar-collapse" id="mainNav2">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
+          <li class="nav-item"><a class="nav-link" href="programas.html">Programas</a></li>
+          <li class="nav-item"><a class="nav-link active" href="envivo.html">En Vivo</a></li>
+          <li class="nav-item"><a class="nav-link" href="investigaciones.html">Investigaciones</a></li>
+          <li class="nav-item"><a class="nav-link" href="denuncias.html">Denuncias</a></li>
+          <li class="nav-item"><a class="nav-link" href="videos.html">Videos</a></li>
+          <li class="nav-item"><a class="nav-link" href="galeria.html">Galería</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </ul>
+        <a href="envivo.html" class="btn-envivo"><span class="envivo-dot"></span> EN VIVO</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="section-block">
+  <div class="container-fluid px-3">
+    <div class="section-header mb-4">
+      <h1 class="section-title"><span class="title-bar" style="background:#dc3545"></span> Transmisión En Vivo</h1>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-8">
+
+        <!-- YouTube Live -->
+        <div class="mb-4">
+          <h5 style="font-size:0.85rem;font-weight:700;color:var(--gray-mid);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;"><i class="bi bi-youtube text-danger"></i> YouTube Live</h5>
+          <div class="live-container">
+            <!-- Reemplaza VIDEO_ID con el ID real de tu transmisión de YouTube -->
+            <iframe
+              id="yt-live"
+              src="https://www.youtube.com/embed/live_stream?channel=UCxxxxxxxxxxxxxxx&autoplay=1"
+              width="100%" height="100%"
+              style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              title="SMBINRTV En Vivo YouTube">
+            </iframe>
+            <div class="live-placeholder" id="yt-placeholder">
+              <i class="bi bi-youtube"></i>
+              <strong>YouTube Live</strong>
+              <p style="font-size:0.82rem;color:#adb5bd;text-align:center;max-width:300px;">Reemplaza el Channel ID en <code>pages/envivo.html</code> con el ID real de tu canal de YouTube.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Facebook Live -->
+        <div>
+          <h5 style="font-size:0.85rem;font-weight:700;color:var(--gray-mid);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;"><i class="bi bi-facebook" style="color:#1877f2"></i> Facebook Live</h5>
+          <div class="live-container">
+            <!-- Reemplaza tu-pagina con el nombre real de tu página de Facebook -->
+            <iframe
+              src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ftu-pagina%2Fvideos&show_text=0&autoplay=1"
+              width="100%" height="100%"
+              style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              allowfullscreen
+              title="SMBINRTV En Vivo Facebook">
+            </iframe>
+            <div class="live-placeholder">
+              <i class="bi bi-facebook" style="color:#1877f2"></i>
+              <strong>Facebook Live</strong>
+              <p style="font-size:0.82rem;color:#adb5bd;text-align:center;max-width:300px;">Reemplaza <code>tu-pagina</code> en el src con el nombre real de tu página de Facebook.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Programación -->
+      <div class="col-lg-4">
+        <div class="sidebar-widget">
+          <h6 class="widget-title"><i class="bi bi-calendar3"></i> Programación de Hoy</h6>
+          <div id="programacion">
+            <div class="programacion-item">
+              <div class="prog-hora">06:00 AM</div>
+              <div class="prog-nombre">Buenos Días Región</div>
+              <div style="font-size:0.75rem;color:var(--gray-mid);">Noticias matutinas</div>
+            </div>
+            <div class="programacion-item">
+              <div class="prog-hora">09:00 AM</div>
+              <div class="prog-nombre">Agenda Regional</div>
+              <div style="font-size:0.75rem;color:var(--gray-mid);">Política y sociedad</div>
+            </div>
+            <div class="programacion-item" style="border-left-color:#dc3545;">
+              <div class="prog-hora" style="color:#dc3545;">12:00 PM · EN VIVO</div>
+              <div class="prog-nombre">Noticiero Mediodía</div>
+              <div style="font-size:0.75rem;color:var(--gray-mid);">Principales noticias del día</div>
+            </div>
+            <div class="programacion-item">
+              <div class="prog-hora">03:00 PM</div>
+              <div class="prog-nombre">Investigación Periodística</div>
+              <div style="font-size:0.75rem;color:var(--gray-mid);">Reportajes especiales</div>
+            </div>
+            <div class="programacion-item">
+              <div class="prog-hora">07:00 PM</div>
+              <div class="prog-nombre">Noticiero Central</div>
+              <div style="font-size:0.75rem;color:var(--gray-mid);">El informativo de la noche</div>
+            </div>
+            <div class="programacion-item">
+              <div class="prog-hora">09:00 PM</div>
+              <div class="prog-nombre">Debate Abierto</div>
+              <div style="font-size:0.75rem;color:var(--gray-mid);">Análisis y opinión</div>
+            </div>
+          </div>
+          <div class="mt-3 p-2" style="background:var(--gray-light);border-radius:6px;font-size:0.75rem;color:var(--gray-mid);">
+            <i class="bi bi-info-circle"></i> La programación puede cambiar sin previo aviso.
+          </div>
+        </div>
+
+        <div class="sidebar-widget mt-3">
+          <h6 class="widget-title">¿Problemas con la señal?</h6>
+          <p style="font-size:0.82rem;color:var(--gray-mid);margin-bottom:12px;">Contáctanos y lo resolvemos de inmediato.</p>
+          <a href="https://wa.me/51973753796" target="_blank" class="btn-envivo-full">
+            <i class="bi bi-whatsapp"></i> Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-bottom">
+    <div class="container-fluid px-3 text-center">
+      <p>&copy; <span id="footer-year2"></span> SMBINRTV Canal Online. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.getElementById('footer-year2').textContent = new Date().getFullYear();
+  const d = document.getElementById('topbar-date2');
+  if(d) d.textContent = new Date().toLocaleDateString('es-PE',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const saved = localStorage.getItem('smbinrtv-theme') || 'light';
+  document.body.setAttribute('data-theme', saved);
+</script>
+</body>
+</html>

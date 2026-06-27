@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /js/firebase-config.js
+
+Sitemap: https://smbinrtv.vercel.app/sitemap.xml
+
+# Google News
+User-agent: Googlebot-News
+Allow: /pages/noticias.html
+Allow: /pages/investigaciones.html

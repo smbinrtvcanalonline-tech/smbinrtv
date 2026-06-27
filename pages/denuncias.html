@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Denuncias - SMBINRTV Canal Online</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .denuncia-form-wrap { background:var(--card-bg); border-radius:10px; padding:32px; box-shadow:var(--shadow); border:1px solid var(--border-color); }
+    .form-label { font-size:0.85rem; font-weight:600; color:var(--black-title); margin-bottom:5px; }
+    .form-control, .form-select {
+      background: var(--gray-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-body);
+      font-size:0.85rem;
+      border-radius:6px;
+      padding:9px 12px;
+      transition: all 0.2s;
+    }
+    .form-control:focus, .form-select:focus { border-color:var(--blue-accent); box-shadow:0 0 0 3px rgba(26,108,196,0.15); background:var(--card-bg); color:var(--black-title); }
+    .btn-submit { background:var(--blue-primary); color:#fff; font-size:0.9rem; font-weight:600; padding:11px 28px; border-radius:6px; border:none; cursor:pointer; transition:all 0.2s; width:100%; }
+    .btn-submit:hover { background:var(--blue-light); transform:translateY(-1px); }
+    .garantia-item { display:flex; gap:12px; align-items:flex-start; margin-bottom:14px; }
+    .garantia-icon { color:var(--blue-accent); font-size:1.2rem; flex-shrink:0; margin-top:2px; }
+  </style>
+</head>
+<body data-theme="light">
+
+<div class="topbar">
+  <div class="container-fluid px-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <span style="color:#adb5bd;font-size:0.75rem;" id="topbar-date"></span>
+      <a href="https://wa.me/51973753796" target="_blank" class="btn-whatsapp"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand" href="../index.html">
+        <div class="logo-wrap d-flex align-items-center gap-2">
+          <div class="logo-icon"><span class="logo-sm">SM</span></div>
+          <div class="logo-text"><span class="logo-name">SMBINRTV</span><span class="logo-sub">CANAL ONLINE</span></div>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"><i class="bi bi-list"></i></button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
+          <li class="nav-item"><a class="nav-link" href="envivo.html">En Vivo</a></li>
+          <li class="nav-item"><a class="nav-link active" href="denuncias.html">Denuncias</a></li>
+          <li class="nav-item"><a class="nav-link" href="videos.html">Videos</a></li>
+          <li class="nav-item"><a class="nav-link" href="galeria.html">Galería</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </ul>
+        <a href="envivo.html" class="btn-envivo"><span class="envivo-dot"></span> EN VIVO</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="section-block">
+  <div class="container-fluid px-3">
+    <div class="section-header mb-5">
+      <h1 class="section-title"><span class="title-bar" style="background:#dc3545"></span> Centro de Denuncias</h1>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Formulario -->
+      <div class="col-lg-7">
+        <div class="denuncia-form-wrap">
+          <h4 style="font-size:1.1rem;font-weight:700;margin-bottom:5px;color:var(--black-title);">Envía tu denuncia</h4>
+          <p style="font-size:0.82rem;color:var(--gray-mid);margin-bottom:24px;">Tu información es tratada con total confidencialidad. Puedes enviar evidencias adjuntas.</p>
+
+          <form id="denunciaForm" novalidate>
+            <!-- Honeypot anti-spam -->
+            <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off" />
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="nombre">Nombre completo <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Tu nombre (opcional)" maxlength="100" />
+                <div class="invalid-feedback">Nombre demasiado largo.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="celular">Celular</label>
+                <input type="tel" class="form-control" id="celular" name="celular" placeholder="Ej: 987654321" maxlength="15" pattern="[0-9+\-\s]+" />
+                <div class="invalid-feedback">Número no válido.</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="correo">Correo electrónico</label>
+                <input type="email" class="form-control" id="correo" name="correo" placeholder="tucorreo@email.com" maxlength="150" />
+                <div class="invalid-feedback">Correo no válido.</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="asunto">Asunto <span class="text-danger">*</span></label>
+                <select class="form-select" id="asunto" name="asunto" required>
+                  <option value="">-- Selecciona el tipo de denuncia --</option>
+                  <option value="corrupcion">Corrupción pública</option>
+                  <option value="abuso">Abuso de autoridad</option>
+                  <option value="medio-ambiente">Daño ambiental</option>
+                  <option value="salud">Negligencia en salud</option>
+                  <option value="educacion">Problemas en educación</option>
+                  <option value="seguridad">Inseguridad ciudadana</option>
+                  <option value="otro">Otro</option>
+                </select>
+                <div class="invalid-feedback">Selecciona un tipo de denuncia.</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="descripcion">Descripción detallada <span class="text-danger">*</span></label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="6" placeholder="Describe los hechos con fecha, lugar y personas involucradas..." required maxlength="3000"></textarea>
+                <div class="d-flex justify-content-between">
+                  <div class="invalid-feedback">La descripción es obligatoria.</div>
+                  <small class="text-muted mt-1" id="charCount">0 / 3000</small>
+                </div>
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="archivos">Evidencias (fotos, videos, documentos)</label>
+                <input type="file" class="form-control" id="archivos" name="archivos" multiple accept="image/*,video/*,.pdf,.doc,.docx" />
+                <small class="text-muted">Máx. 5 archivos · 10MB cada uno · Formatos: JPG, PNG, MP4, PDF, DOC</small>
+              </div>
+
+              <!-- Captcha básico -->
+              <div class="col-12">
+                <div class="p-3" style="background:var(--gray-bg);border-radius:6px;border:1px solid var(--border-color);">
+                  <label class="form-label" for="captcha">Verificación anti-spam <span class="text-danger">*</span></label>
+                  <div class="d-flex align-items-center gap-3">
+                    <span id="captchaQuestion" style="font-weight:600;color:var(--black-title);"></span>
+                    <input type="number" class="form-control" id="captcha" style="width:80px;" required />
+                  </div>
+                  <div class="invalid-feedback" id="captchaError">Respuesta incorrecta.</div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn-submit">
+                  <i class="bi bi-send-fill me-2"></i> Enviar Denuncia
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Éxito -->
+          <div id="formSuccess" class="alert alert-success mt-3 d-none">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            <strong>¡Denuncia recibida!</strong> Revisaremos tu caso con responsabilidad y reserva. Gracias por tu valentía.
+          </div>
+          <div id="formError" class="alert alert-danger mt-3 d-none">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            Hubo un problema al enviar. Intenta de nuevo o contáctanos directamente.
+          </div>
+        </div>
+      </div>
+
+      <!-- Garantías -->
+      <div class="col-lg-4">
+        <div class="sidebar-widget mb-3">
+          <h6 class="widget-title"><i class="bi bi-shield-check text-success me-2"></i>Tus derechos y nuestra garantía</h6>
+          <div class="garantia-item">
+            <i class="bi bi-lock-fill garantia-icon"></i>
+            <div><strong style="font-size:0.85rem;color:var(--black-title);">Confidencialidad total</strong><p style="font-size:0.78rem;color:var(--gray-mid);margin:3px 0 0;">Tu identidad y datos nunca serán divulgados sin tu autorización.</p></div>
+          </div>
+          <div class="garantia-item">
+            <i class="bi bi-person-check-fill garantia-icon"></i>
+            <div><strong style="font-size:0.85rem;color:var(--black-title);">Denuncia anónima</strong><p style="font-size:0.78rem;color:var(--gray-mid);margin:3px 0 0;">Puedes denunciar sin revelar tu nombre ni datos de contacto.</p></div>
+          </div>
+          <div class="garantia-item">
+            <i class="bi bi-journal-check garantia-icon"></i>
+            <div><strong style="font-size:0.85rem;color:var(--black-title);">Investigación periodística</strong><p style="font-size:0.78rem;color:var(--gray-mid);margin:3px 0 0;">Evaluamos cada caso y actuamos con responsabilidad.</p></div>
+          </div>
+          <div class="garantia-item">
+            <i class="bi bi-clock-fill garantia-icon"></i>
+            <div><strong style="font-size:0.85rem;color:var(--black-title);">Respuesta en 48h</strong><p style="font-size:0.78rem;color:var(--gray-mid);margin:3px 0 0;">Confirmamos la recepción de tu denuncia en 48 horas hábiles.</p></div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h6 class="widget-title">¿Prefieres hablar directamente?</h6>
+          <div class="d-flex flex-column gap-2">
+            <a href="https://wa.me/51973753796" target="_blank" class="btn-envivo-full" style="background:#25d366;">
+              <i class="bi bi-whatsapp"></i> WhatsApp confidencial
+            </a>
+            <a href="tel:+51973753796" class="btn-envivo-full" style="background:var(--blue-primary);">
+              <i class="bi bi-telephone-fill"></i> Llamar: 973 753 796
+            </a>
+            <a href="mailto:smbinrtvcanalonline@gmail.com" class="btn-envivo-full" style="background:var(--gray-mid);">
+              <i class="bi bi-envelope-fill"></i> Correo electrónico
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-bottom">
+    <div class="container-fluid px-3 text-center">
+      <p>&copy; <span id="footer-year"></span> SMBINRTV Canal Online. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Theme
+  document.body.setAttribute('data-theme', localStorage.getItem('smbinrtv-theme') || 'light');
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+  const d = document.getElementById('topbar-date');
+  if(d) d.textContent = new Date().toLocaleDateString('es-PE',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  // Captcha simple
+  let captchaAnswer = 0;
+  function generateCaptcha() {
+    const a = Math.floor(Math.random() * 10) + 1;
+    const b = Math.floor(Math.random() * 10) + 1;
+    captchaAnswer = a + b;
+    document.getElementById('captchaQuestion').textContent = `¿Cuánto es ${a} + ${b}?`;
+  }
+  generateCaptcha();
+
+  // Contador caracteres
+  const desc = document.getElementById('descripcion');
+  const charCount = document.getElementById('charCount');
+  if(desc) desc.addEventListener('input', () => {
+    charCount.textContent = `${desc.value.length} / 3000`;
+  });
+
+  // Validación archivos
+  document.getElementById('archivos').addEventListener('change', function() {
+    const files = Array.from(this.files);
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    const invalid = files.filter(f => f.size > maxSize);
+    if(invalid.length) {
+      alert(`Archivo(s) demasiado grande(s): ${invalid.map(f=>f.name).join(', ')}. Máximo 10MB por archivo.`);
+      this.value = '';
+    }
+    if(files.length > 5) {
+      alert('Máximo 5 archivos permitidos.');
+      this.value = '';
+    }
+  });
+
+  // Sanitizar texto XSS básico
+  function sanitize(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  // Form submit
+  document.getElementById('denunciaForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Honeypot
+    if(document.querySelector('input[name="website"]').value) return;
+
+    // Captcha
+    const userAnswer = parseInt(document.getElementById('captcha').value);
+    if(userAnswer !== captchaAnswer) {
+      document.getElementById('captchaError').style.display = 'block';
+      document.getElementById('captcha').classList.add('is-invalid');
+      generateCaptcha();
+      document.getElementById('captcha').value = '';
+      return;
+    }
+    document.getElementById('captchaError').style.display = 'none';
+    document.getElementById('captcha').classList.remove('is-invalid');
+
+    // Validación básica
+    const asunto = document.getElementById('asunto').value;
+    const descripcion = document.getElementById('descripcion').value.trim();
+    if(!asunto || !descripcion) {
+      this.classList.add('was-validated');
+      return;
+    }
+
+    // Sanitizar
+    const data = {
+      nombre: sanitize(document.getElementById('nombre').value),
+      correo: sanitize(document.getElementById('correo').value),
+      celular: sanitize(document.getElementById('celular').value),
+      asunto,
+      descripcion: sanitize(descripcion),
+      fecha: new Date().toISOString()
+    };
+
+    console.log('Denuncia (conectar Firebase para guardar):', data);
+
+    // Simular envío exitoso
+    document.getElementById('formSuccess').classList.remove('d-none');
+    this.reset();
+    charCount.textContent = '0 / 3000';
+    generateCaptcha();
+    setTimeout(() => document.getElementById('formSuccess').classList.add('d-none'), 8000);
+
+    // TODO: Conectar Firebase
+    // import { db } from '../js/firebase-config.js';
+    // import { addDoc, collection } from "firebase/firestore";
+    // await addDoc(collection(db, "denuncias"), data);
+  });
+</script>
+</body>
+</html>
