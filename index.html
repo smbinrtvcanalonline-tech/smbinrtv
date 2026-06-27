@@ -1,32 +1,27 @@
+
+
+Index · HTML
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SMBINRTV Canal Online - Noticias de la Región</title>
-
-  <!-- SEO Meta Tags -->
   <meta name="description" content="SMBINRTV Canal Online - Portal de noticias regional. Últimas noticias, investigaciones, denuncias y transmisiones en vivo." />
   <meta name="keywords" content="SMBINRTV, noticias, canal online, región, periodismo, en vivo" />
   <meta name="author" content="SMBINRTV Canal Online" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://smbinrtv.vercel.app/" />
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="SMBINRTV Canal Online" />
   <meta property="og:description" content="Portal de noticias regional. Últimas noticias e investigaciones." />
   <meta property="og:image" content="assets/img/og-image.jpg" />
   <meta property="og:url" content="https://smbinrtv.vercel.app/" />
   <meta property="og:site_name" content="SMBINRTV Canal Online" />
-
-  <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="SMBINRTV Canal Online" />
   <meta name="twitter:description" content="Portal de noticias regional." />
   <meta name="twitter:image" content="assets/img/og-image.jpg" />
-
-  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -36,26 +31,70 @@
     "logo": "assets/img/logo.png",
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+51-975367559°,
+      "telephone": "+51-975367559",
       "email": "smbinrtvcanalonline@gmail.com"
     }
   }
   </script>
-
-  <!-- Bootstrap 5 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
+ 
+  <style>
+    /* ===== DIARIO AUTOMATICO ===== */
+    .diario-section { background: #f8f9fa; padding: 2rem 0; }
+    .diario-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 10px; }
+    .diario-title { font-size: 1.1rem; font-weight: 700; color: #1a1a2e; display: flex; align-items: center; gap: 8px; }
+    .diario-title .bar { width: 4px; height: 22px; background: #e63946; border-radius: 2px; display: inline-block; }
+    .diario-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .dtab { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1.5px solid #dee2e6; background: #fff; cursor: pointer; color: #495057; transition: all .2s; }
+    .dtab.active { background: #e63946; color: #fff; border-color: #e63946; }
+    .diario-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .d-news-card { background: #fff; border-radius: 10px; border: 1px solid #e9ecef; overflow: hidden; transition: box-shadow .2s; }
+    .d-news-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.10); }
+    .d-news-card .d-cat { font-size: 10px; font-weight: 700; letter-spacing: .06em; padding: 3px 10px; border-radius: 20px; display: inline-block; margin: 10px 10px 0; }
+    .cat-nacional { background: #dbeafe; color: #1d4ed8; }
+    .cat-loreto { background: #dcfce7; color: #15803d; }
+    .cat-lima { background: #fef3c7; color: #92400e; }
+    .d-news-card .d-title { font-size: 13.5px; font-weight: 600; color: #1a1a2e; padding: 6px 10px 4px; line-height: 1.4; }
+    .d-news-card .d-meta { font-size: 11px; color: #868e96; padding: 0 10px 6px; display: flex; align-items: center; gap: 5px; }
+    .d-news-card .d-share { display: flex; gap: 6px; padding: 8px 10px; border-top: 1px solid #f1f3f5; flex-wrap: wrap; }
+    .d-share-btn { display: flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; transition: opacity .2s; }
+    .d-share-btn:hover { opacity: .8; }
+    .btn-fb { background: #1877f2; color: #fff; }
+    .btn-wa { background: #25d366; color: #fff; }
+    .btn-tw { background: #000; color: #fff; }
+    .btn-ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+    .d-news-card .d-leer { font-size: 11px; color: #e63946; font-weight: 600; padding: 0 10px 10px; display: block; text-decoration: none; }
+    .ai-badge { font-size: 10px; background: #7c3aed; color: #fff; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+    .btn-actualizar { background: #e63946; color: #fff; border: none; border-radius: 8px; padding: 8px 20px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .btn-actualizar:disabled { opacity: .6; cursor: not-allowed; }
+    .btn-publicar-own { background: #1a1a2e; color: #fff; border: none; border-radius: 8px; padding: 8px 20px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    /* Modal noticia propia */
+    .modal-own { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 9999; align-items: center; justify-content: center; }
+    .modal-own.show { display: flex; }
+    .modal-own-box { background: #fff; border-radius: 14px; padding: 1.5rem; width: 90%; max-width: 520px; max-height: 90vh; overflow-y: auto; }
+    .modal-own-box h5 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+    .modal-own-box input, .modal-own-box textarea, .modal-own-box select { width: 100%; border: 1.5px solid #dee2e6; border-radius: 8px; padding: 8px 12px; font-size: 13px; margin-bottom: 10px; outline: none; }
+    .modal-own-box input:focus, .modal-own-box textarea:focus { border-color: #e63946; }
+    .modal-own-box textarea { height: 90px; resize: vertical; }
+    /* Noticia generada modal */
+    .noticia-generada { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 99999; align-items: center; justify-content: center; }
+    .noticia-generada.show { display: flex; }
+    .ng-box { background: #fff; border-radius: 14px; padding: 1.5rem; width: 92%; max-width: 600px; max-height: 90vh; overflow-y: auto; }
+    .ng-box h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+    .ng-body { font-size: 14px; line-height: 1.7; color: #333; white-space: pre-wrap; }
+    .ng-share { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1rem; }
+    .spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin .6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
 </head>
 <body data-theme="light">
-
-<!-- ========== TOP BAR ========== -->
+ 
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="container-fluid px-3">
     <div class="d-flex justify-content-between align-items-center">
@@ -67,10 +106,10 @@
         </span>
       </div>
       <div class="topbar-right d-flex align-items-center gap-2">
-        <a href="https://www.facebook.com" target="_blank" class="topbar-social" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-        <a href="https://www.youtube.com" target="_blank" class="topbar-social" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-        <a href="https://www.twitter.com" target="_blank" class="topbar-social" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
-        <a href="https://www.instagram.com" target="_blank" class="topbar-social" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.facebook.com/smbinrtv" target="_blank" class="topbar-social" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.youtube.com/smbinrtv" target="_blank" class="topbar-social" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        <a href="https://www.twitter.com/smbinrtv" target="_blank" class="topbar-social" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+        <a href="https://www.instagram.com/smbinrtv" target="_blank" class="topbar-social" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
         <button class="btn-theme-toggle ms-2" id="themeToggle" aria-label="Cambiar tema">
           <i class="bi bi-moon-fill" id="themeIcon"></i>
         </button>
@@ -81,31 +120,23 @@
     </div>
   </div>
 </div>
-
-<!-- ========== HEADER / NAVBAR ========== -->
+ 
+<!-- HEADER -->
 <header class="site-header sticky-top">
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid px-3">
-
-      <!-- Logo -->
       <a class="navbar-brand" href="index.html">
         <div class="logo-wrap d-flex align-items-center gap-2">
-          <div class="logo-icon">
-            <span class="logo-sm">SM</span>
-          </div>
+          <div class="logo-icon"><span class="logo-sm">SM</span></div>
           <div class="logo-text">
             <span class="logo-name">SMBINRTV</span>
             <span class="logo-sub">CANAL ONLINE</span>
           </div>
         </div>
       </a>
-
-      <!-- Toggler -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
         <i class="bi bi-list"></i>
       </button>
-
-      <!-- Nav Links -->
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav mx-auto gap-1">
           <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
@@ -118,8 +149,6 @@
           <li class="nav-item"><a class="nav-link" href="pages/galeria.html">Galería</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/contacto.html">Contacto</a></li>
         </ul>
-
-        <!-- Buscador + EN VIVO -->
         <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0">
           <div class="search-wrap">
             <input type="search" class="search-input" placeholder="Buscar noticias..." id="searchInput" autocomplete="off" />
@@ -133,16 +162,13 @@
     </div>
   </nav>
 </header>
-
-<!-- ========== MAIN ========== -->
+ 
 <main>
-
-  <!-- HERO / NOTICIA PRINCIPAL -->
+ 
+  <!-- HERO -->
   <section class="hero-section">
     <div class="container-fluid px-3">
       <div class="row g-3">
-
-        <!-- Hero Principal -->
         <div class="col-lg-7">
           <div class="hero-card" id="hero-main">
             <div class="hero-img-wrap">
@@ -160,11 +186,8 @@
             </div>
           </div>
         </div>
-
-        <!-- Hero Secundarias -->
         <div class="col-lg-5">
           <div class="row g-3 h-100" id="hero-secondary">
-
             <div class="col-12">
               <div class="secondary-card">
                 <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=70" alt="Corrupción" class="sec-img" loading="lazy" />
@@ -175,7 +198,6 @@
                 </div>
               </div>
             </div>
-
             <div class="col-12">
               <div class="secondary-card">
                 <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=70" alt="Economía" class="sec-img" loading="lazy" />
@@ -186,21 +208,51 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
   </section>
-
-  <!-- TICKER ÚLTIMA HORA (mobile) -->
+ 
   <div class="ultima-hora-bar d-md-none">
     <span class="badge-ultima-hora">ÚLTIMA HORA</span>
     <div class="ticker-mobile" id="ticker-mobile">Autoridades refuerzan la seguridad ciudadana · Fiscalía investiga presunto desvío de recursos</div>
   </div>
-
-  <!-- ========== NOTICIAS PROPIAS ========== -->
+ 
+  <!-- ===== DIARIO AUTOMATICO CON IA ===== -->
+  <section class="diario-section">
+    <div class="container-fluid px-3">
+      <div class="diario-header">
+        <div class="diario-title">
+          <span class="bar"></span>
+          Diario Automático SMBINRTV
+          <span class="ai-badge"><i class="bi bi-stars"></i> IA</span>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+          <div class="diario-tabs">
+            <button class="dtab active" onclick="filtrarNoticias('todas',this)">Todas</button>
+            <button class="dtab" onclick="filtrarNoticias('nacional',this)">Nacional (4)</button>
+            <button class="dtab" onclick="filtrarNoticias('loreto',this)">Loreto (3)</button>
+            <button class="dtab" onclick="filtrarNoticias('lima',this)">Lima (2)</button>
+          </div>
+          <button class="btn-actualizar" id="btnActualizar" onclick="generarNoticias()">
+            <i class="bi bi-arrow-clockwise"></i> Actualizar noticias
+          </button>
+          <button class="btn-publicar-own" onclick="document.getElementById('modalOwn').classList.add('show')">
+            <i class="bi bi-plus-circle"></i> Mi noticia
+          </button>
+        </div>
+      </div>
+      <div id="diario-grid" class="diario-grid">
+        <!-- Noticias se generan con JS -->
+      </div>
+      <p class="text-muted text-center mt-3 small">
+        <i class="bi bi-info-circle"></i> Noticias generadas y reescritas automáticamente por IA cada 12 horas · Última actualización: <span id="ultima-actualizacion">cargando...</span>
+      </p>
+    </div>
+  </section>
+ 
+  <!-- NOTICIAS PROPIAS -->
   <section class="section-block">
     <div class="container-fluid px-3">
       <div class="section-header d-flex justify-content-between align-items-center mb-4">
@@ -208,7 +260,6 @@
         <a href="pages/noticias.html" class="ver-mas">Ver todas <i class="bi bi-arrow-right"></i></a>
       </div>
       <div class="row g-3" id="noticias-propias-grid">
-        <!-- Se cargan dinámicamente -->
         <div class="col-md-4">
           <article class="news-card">
             <div class="nc-img-wrap">
@@ -223,9 +274,9 @@
                 <span><i class="bi bi-clock"></i> hace 5h</span>
               </div>
               <div class="nc-share mt-2">
-                <a href="#" class="share-btn" title="Facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="share-btn" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-                <a href="#" class="share-btn" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://smbinrtv.vercel.app" target="_blank" class="share-btn" title="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="https://wa.me/?text=Nuevo hospital regional iniciará construcción este semestre - https://smbinrtv.vercel.app" target="_blank" class="share-btn" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                <a href="https://twitter.com/intent/tweet?text=Nuevo hospital regional iniciará construcción este semestre&url=https://smbinrtv.vercel.app" target="_blank" class="share-btn" title="Twitter"><i class="bi bi-twitter-x"></i></a>
               </div>
             </div>
           </article>
@@ -244,9 +295,9 @@
                 <span><i class="bi bi-clock"></i> hace 8h</span>
               </div>
               <div class="nc-share mt-2">
-                <a href="#" class="share-btn"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="share-btn"><i class="bi bi-whatsapp"></i></a>
-                <a href="#" class="share-btn"><i class="bi bi-twitter-x"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://smbinrtv.vercel.app" target="_blank" class="share-btn"><i class="bi bi-facebook"></i></a>
+                <a href="https://wa.me/?text=Alerta por deforestación en zonas protegidas de la amazonía - https://smbinrtv.vercel.app" target="_blank" class="share-btn"><i class="bi bi-whatsapp"></i></a>
+                <a href="https://twitter.com/intent/tweet?text=Alerta por deforestación en la amazonía&url=https://smbinrtv.vercel.app" target="_blank" class="share-btn"><i class="bi bi-twitter-x"></i></a>
               </div>
             </div>
           </article>
@@ -265,29 +316,26 @@
                 <span><i class="bi bi-clock"></i> hace 12h</span>
               </div>
               <div class="nc-share mt-2">
-                <a href="#" class="share-btn"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="share-btn"><i class="bi bi-whatsapp"></i></a>
-                <a href="#" class="share-btn"><i class="bi bi-twitter-x"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://smbinrtv.vercel.app" target="_blank" class="share-btn"><i class="bi bi-facebook"></i></a>
+                <a href="https://wa.me/?text=Estudiantes de la región logran primeros lugares en olimpiada - https://smbinrtv.vercel.app" target="_blank" class="share-btn"><i class="bi bi-whatsapp"></i></a>
+                <a href="https://twitter.com/intent/tweet?text=Estudiantes de la región logran primeros lugares en olimpiada&url=https://smbinrtv.vercel.app" target="_blank" class="share-btn"><i class="bi bi-twitter-x"></i></a>
               </div>
             </div>
           </article>
         </div>
       </div>
-
-      <!-- Botón agregar noticia (futuro admin) -->
       <div class="text-center mt-4">
-        <button class="btn-admin-add" id="btnAddNews" onclick="alert('Panel de administración próximamente. Conecta Firebase para activarlo.')">
+        <button class="btn-admin-add" onclick="document.getElementById('modalOwn').classList.add('show')">
           <i class="bi bi-plus-circle"></i> Agregar Nueva Noticia
         </button>
       </div>
     </div>
   </section>
-
+ 
   <!-- BANNER PUBLICITARIO -->
   <div class="ad-banner">
     <div class="container-fluid px-3">
       <div class="ad-slot text-center">
-        <!-- Google AdSense: reemplaza con tu código -->
         <span class="ad-label">PUBLICIDAD</span>
         <div class="ad-placeholder">
           <i class="bi bi-image"></i> Espacio publicitario 728×90
@@ -295,57 +343,11 @@
       </div>
     </div>
   </div>
-
-  <!-- ========== NOTICIAS AUTOMÁTICAS (RSS/API) ========== -->
-  <section class="section-block bg-section-alt">
-    <div class="container-fluid px-3">
-      <div class="section-header d-flex justify-content-between align-items-center mb-4">
-        <h2 class="section-title"><span class="title-bar" style="background:#198754"></span> Noticias Nacionales</h2>
-        <span class="badge bg-secondary">Vía NewsAPI / RSS</span>
-      </div>
-      <div class="row g-3" id="noticias-auto-grid">
-        <!-- Skeleton loaders -->
-        <div class="col-md-3">
-          <div class="auto-card skeleton-card">
-            <div class="skeleton-img skeleton"></div>
-            <div class="skeleton-line skeleton"></div>
-            <div class="skeleton-line short skeleton"></div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="auto-card skeleton-card">
-            <div class="skeleton-img skeleton"></div>
-            <div class="skeleton-line skeleton"></div>
-            <div class="skeleton-line short skeleton"></div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="auto-card skeleton-card">
-            <div class="skeleton-img skeleton"></div>
-            <div class="skeleton-line skeleton"></div>
-            <div class="skeleton-line short skeleton"></div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="auto-card skeleton-card">
-            <div class="skeleton-img skeleton"></div>
-            <div class="skeleton-line skeleton"></div>
-            <div class="skeleton-line short skeleton"></div>
-          </div>
-        </div>
-      </div>
-      <p class="text-muted text-center mt-3 small">
-        <i class="bi bi-info-circle"></i> Conecta tu clave de <strong>NewsAPI</strong> en <code>js/news-api.js</code> para cargar noticias automáticas.
-      </p>
-    </div>
-  </section>
-
-  <!-- ========== MÁS LEÍDAS + SIDEBAR ========== -->
+ 
+  <!-- MÁS LEÍDAS + SIDEBAR -->
   <section class="section-block">
     <div class="container-fluid px-3">
       <div class="row g-4">
-
-        <!-- Más leídas -->
         <div class="col-lg-8">
           <div class="section-header d-flex justify-content-between align-items-center mb-4">
             <h2 class="section-title"><span class="title-bar" style="background:#dc3545"></span> Más Leídas</h2>
@@ -389,11 +391,8 @@
             </div>
           </div>
         </div>
-
-        <!-- Sidebar -->
         <div class="col-lg-4">
           <div class="sidebar">
-            <!-- EN VIVO promo -->
             <div class="sidebar-widget envivo-widget mb-4">
               <div class="evw-header">
                 <span class="envivo-dot"></span> TRANSMISIÓN EN VIVO
@@ -403,32 +402,28 @@
                 <i class="bi bi-play-circle-fill"></i> Ver transmisión
               </a>
             </div>
-
-            <!-- Publicidad lateral -->
             <div class="sidebar-widget ad-slot-side mb-4">
               <span class="ad-label">PUBLICIDAD</span>
               <div class="ad-placeholder-side">
                 <i class="bi bi-image"></i><br />300×250
               </div>
             </div>
-
-            <!-- Redes sociales -->
             <div class="sidebar-widget social-widget">
               <h6 class="widget-title">Síguenos</h6>
               <div class="social-counts">
-                <a href="https://www.facebook.com" target="_blank" class="sc-item sc-fb">
+                <a href="https://www.facebook.com/smbinrtv" target="_blank" class="sc-item sc-fb">
                   <i class="bi bi-facebook"></i>
                   <div><strong>Facebook</strong><small>Seguir</small></div>
                 </a>
-                <a href="https://www.youtube.com" target="_blank" class="sc-item sc-yt">
+                <a href="https://www.youtube.com/smbinrtv" target="_blank" class="sc-item sc-yt">
                   <i class="bi bi-youtube"></i>
                   <div><strong>YouTube</strong><small>Suscribirse</small></div>
                 </a>
-                <a href="https://www.instagram.com" target="_blank" class="sc-item sc-ig">
+                <a href="https://www.instagram.com/smbinrtv" target="_blank" class="sc-item sc-ig">
                   <i class="bi bi-instagram"></i>
                   <div><strong>Instagram</strong><small>Seguir</small></div>
                 </a>
-                <a href="https://wa.me/51973753796" target="_blank" class="sc-item sc-wa">
+                <a href="https://wa.me/51975367559" target="_blank" class="sc-item sc-wa">
                   <i class="bi bi-whatsapp"></i>
                   <div><strong>WhatsApp</strong><small>Contactar</small></div>
                 </a>
@@ -436,19 +431,17 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
-
+ 
 </main>
-
-<!-- ========== FOOTER ========== -->
+ 
+<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-top">
     <div class="container-fluid px-3">
       <div class="row g-4">
-
         <div class="col-lg-4">
           <div class="logo-wrap d-flex align-items-center gap-2 mb-3">
             <div class="logo-icon"><span class="logo-sm">SM</span></div>
@@ -459,13 +452,12 @@
           </div>
           <p class="footer-desc">Portal de noticias regional comprometido con la verdad, la investigación y la transparencia. Informamos con responsabilidad.</p>
           <div class="footer-socials">
-            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-            <a href="https://www.youtube.com" target="_blank" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-            <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
-            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/smbinrtv" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.youtube.com/smbinrtv" target="_blank" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://www.twitter.com/smbinrtv" target="_blank" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.instagram.com/smbinrtv" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
           </div>
         </div>
-
         <div class="col-lg-2 col-md-4">
           <h6 class="footer-heading">Secciones</h6>
           <ul class="footer-links">
@@ -477,7 +469,6 @@
             <li><a href="pages/galeria.html">Galería</a></li>
           </ul>
         </div>
-
         <div class="col-lg-2 col-md-4">
           <h6 class="footer-heading">Legal</h6>
           <ul class="footer-links">
@@ -488,17 +479,16 @@
             <li><a href="pages/denuncias.html">Denuncias</a></li>
           </ul>
         </div>
-
         <div class="col-lg-4 col-md-4">
           <h6 class="footer-heading">Contacto</h6>
           <div class="footer-contact">
-            <p><i class="bi bi-telephone-fill"></i> 973 753 796</p>
+            <p><i class="bi bi-telephone-fill"></i> 975 367 559</p>
             <p><i class="bi bi-envelope-fill"></i> smbinrtvcanalonline@gmail.com</p>
             <div class="d-flex gap-2 mt-3 flex-wrap">
-              <a href="https://wa.me/51973753796" class="btn-contact-footer" target="_blank">
+              <a href="https://wa.me/51975367559" class="btn-contact-footer" target="_blank">
                 <i class="bi bi-whatsapp"></i> WhatsApp
               </a>
-              <a href="tel:+51973753796" class="btn-contact-footer">
+              <a href="tel:+51975367559" class="btn-contact-footer">
                 <i class="bi bi-telephone"></i> Llamar
               </a>
               <a href="mailto:smbinrtvcanalonline@gmail.com" class="btn-contact-footer">
@@ -507,7 +497,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -517,12 +506,213 @@
     </div>
   </div>
 </footer>
-
-<!-- Bootstrap JS -->
+ 
+<!-- MODAL: Noticia propia -->
+<div class="modal-own" id="modalOwn" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="modal-own-box">
+    <h5><i class="bi bi-pencil-square"></i> Publicar mi noticia</h5>
+    <input type="text" id="own-titulo" placeholder="Titular de la noticia *" />
+    <select id="own-zona">
+      <option value="">Selecciona zona *</option>
+      <option value="Loreto / Iquitos">Loreto / Iquitos</option>
+      <option value="Nauta">Nauta</option>
+      <option value="Requena">Requena</option>
+      <option value="Yurimaguas">Yurimaguas</option>
+      <option value="Caballococha">Caballococha</option>
+      <option value="Contamana">Contamana</option>
+      <option value="Nacional">Nacional</option>
+      <option value="Lima">Lima</option>
+    </select>
+    <textarea id="own-cuerpo" placeholder="Escribe o pega la información que tienes sobre la noticia... *"></textarea>
+    <div class="d-flex gap-2">
+      <button class="btn-actualizar w-100" id="btnGenerarOwn" onclick="generarNoticiaPropia()">
+        <i class="bi bi-stars"></i> Generar con IA
+      </button>
+      <button class="btn-publicar-own" onclick="document.getElementById('modalOwn').classList.remove('show')">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
+ 
+<!-- MODAL: Ver noticia generada -->
+<div class="noticia-generada" id="modalNoticia" onclick="if(event.target===this)this.classList.remove('show')">
+  <div class="ng-box">
+    <div class="d-flex justify-content-between align-items-start mb-2">
+      <h4 id="ng-titulo">Noticia generada</h4>
+      <button onclick="document.getElementById('modalNoticia').classList.remove('show')" style="border:none;background:none;font-size:1.3rem;cursor:pointer;">×</button>
+    </div>
+    <div class="ng-body" id="ng-cuerpo">Cargando...</div>
+    <div class="ng-share" id="ng-share-btns"></div>
+  </div>
+</div>
+ 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Firebase SDK (preparado) -->
 <script type="module" src="js/firebase-config.js"></script>
-<!-- App JS -->
 <script src="js/app.js"></script>
+ 
+<script>
+// ===== DIARIO AUTOMATICO CON IA =====
+const PORTAL_URL = 'https://smbinrtv.vercel.app';
+const WA_NUMBER = '51975367559';
+ 
+const noticiasBase = [
+  { zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', titulo:'Gobierno anuncia nuevas medidas económicas para reducir la inflación en regiones', hace:'1h' },
+  { zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', titulo:'Congreso debate proyecto de ley sobre seguridad ciudadana en zonas rurales', hace:'3h' },
+  { zona:'nacional', cat:'SALUD', catClass:'cat-nacional', titulo:'Minsa reporta aumento de casos de dengue en 8 regiones del país', hace:'4h' },
+  { zona:'nacional', cat:'SEGURIDAD', catClass:'cat-nacional', titulo:'PNP desarticulan banda de extorsionadores en Lima y provincias', hace:'5h' },
+  { zona:'loreto', cat:'LORETO', catClass:'cat-loreto', titulo:'Crecida del río Amazonas afecta comunidades en provincias de Loreto', hace:'2h' },
+  { zona:'loreto', cat:'IQUITOS', catClass:'cat-loreto', titulo:'Municipalidad de Iquitos anuncia obras de pavimentación en 5 distritos', hace:'3h' },
+  { zona:'loreto', cat:'LORETO', catClass:'cat-loreto', titulo:'Detienen a presuntos narcotraficantes con cargamento en el río Ucayali', hace:'6h' },
+  { zona:'lima', cat:'LIMA', catClass:'cat-lima', titulo:'Caos en calles de Lima por paro de transportistas en avenidas principales', hace:'1h' },
+  { zona:'lima', cat:'POLÍTICA', catClass:'cat-lima', titulo:'Fiscalía investiga actos de corrupción en municipios de Lima Norte', hace:'4h' }
+];
+ 
+let noticiasActuales = [...noticiasBase];
+let filtroActual = 'todas';
+ 
+function compartirFB(titulo) {
+  window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(PORTAL_URL)+'&quote='+encodeURIComponent(titulo+' - SMBINRTV'),'_blank');
+}
+function compartirWA(titulo) {
+  window.open('https://wa.me/?text='+encodeURIComponent('📰 '+titulo+'\n\n🔴 Lee más en SMBINRTV: '+PORTAL_URL),'_blank');
+}
+function compartirTW(titulo) {
+  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('📰 '+titulo+' - @SMBINRTV'+'&url='+PORTAL_URL),'_blank');
+}
+function compartirIG(titulo) {
+  alert('Para compartir en Instagram:\n1. Copia el enlace: '+PORTAL_URL+'\n2. Pégalo en tu historia o bio de Instagram.\n\nNoticia: '+titulo);
+}
+ 
+function renderNoticias(lista) {
+  const grid = document.getElementById('diario-grid');
+  if (!lista.length) { grid.innerHTML = '<p class="text-muted text-center w-100 py-4">No hay noticias en esta categoría.</p>'; return; }
+  grid.innerHTML = lista.map((n,i) => `
+    <div class="d-news-card" data-zona="${n.zona}">
+      <span class="d-cat ${n.catClass}">${n.cat}</span>
+      <div class="d-title">${n.titulo}</div>
+      <div class="d-meta"><i class="bi bi-clock"></i> Hace ${n.hace} &nbsp;·&nbsp; <span class="ai-badge"><i class="bi bi-stars"></i> IA</span></div>
+      <a class="d-leer" href="#" onclick="verNoticia(${i});return false;"><i class="bi bi-book"></i> Leer noticia completa →</a>
+      <div class="d-share">
+        <button class="d-share-btn btn-fb" onclick="compartirFB(noticiasActuales[${i}].titulo)"><i class="bi bi-facebook"></i> Facebook</button>
+        <button class="d-share-btn btn-wa" onclick="compartirWA(noticiasActuales[${i}].titulo)"><i class="bi bi-whatsapp"></i> WhatsApp</button>
+        <button class="d-share-btn btn-tw" onclick="compartirTW(noticiasActuales[${i}].titulo)"><i class="bi bi-twitter-x"></i> X</button>
+        <button class="d-share-btn btn-ig" onclick="compartirIG(noticiasActuales[${i}].titulo)"><i class="bi bi-instagram"></i> IG</button>
+      </div>
+    </div>
+  `).join('');
+}
+ 
+function filtrarNoticias(zona, btn) {
+  filtroActual = zona;
+  document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const filtradas = zona === 'todas' ? noticiasActuales : noticiasActuales.filter(n=>n.zona===zona);
+  renderNoticias(filtradas);
+}
+ 
+async function verNoticia(idx) {
+  const n = noticiasActuales[idx];
+  document.getElementById('ng-titulo').textContent = n.titulo;
+  document.getElementById('ng-cuerpo').textContent = 'Generando noticia completa con IA...';
+  document.getElementById('ng-share-btns').innerHTML = '';
+  document.getElementById('modalNoticia').classList.add('show');
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6', max_tokens:700,
+        messages:[{role:'user', content:`Eres un periodista peruano profesional de SMBINRTV Canal Online. Redacta una noticia periodística completa sobre: "${n.titulo}". Zona: ${n.zona}. Incluye: entradilla impactante, 3 párrafos con detalles, fuentes probables y contexto regional. Estilo formal pero accesible. Sin mencionar que eres IA.`}]
+      })
+    });
+    const data = await res.json();
+    const texto = data.content?.[0]?.text || 'No se pudo generar la noticia.';
+    document.getElementById('ng-cuerpo').textContent = texto;
+  } catch(e) {
+    document.getElementById('ng-cuerpo').textContent = 'Error al generar. Verifica tu conexión.';
+  }
+  document.getElementById('ng-share-btns').innerHTML = `
+    <button class="d-share-btn btn-fb" onclick="compartirFB('${n.titulo.replace(/'/g,"\\'")}')"><i class="bi bi-facebook"></i> Facebook</button>
+    <button class="d-share-btn btn-wa" onclick="compartirWA('${n.titulo.replace(/'/g,"\\'")}')"><i class="bi bi-whatsapp"></i> WhatsApp</button>
+    <button class="d-share-btn btn-tw" onclick="compartirTW('${n.titulo.replace(/'/g,"\\'")}')"><i class="bi bi-twitter-x"></i> X</button>
+    <button class="d-share-btn btn-ig" onclick="compartirIG('${n.titulo.replace(/'/g,"\\'")}')"><i class="bi bi-instagram"></i> Instagram</button>
+  `;
+}
+ 
+async function generarNoticias() {
+  const btn = document.getElementById('btnActualizar');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Generando...';
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6', max_tokens:1000,
+        messages:[{role:'user', content:`Eres editor de SMBINRTV Canal Online, portal de noticias de Loreto, Perú. Genera exactamente 9 titulares de noticias actuales y reales de Perú: 4 nacionales, 3 de Loreto/Iquitos y sus provincias (Nauta, Requena, Yurimaguas, Caballococha, Contamana, Putumayo, Datem, Mariscal Ramón Castilla, Ucayali), 2 de Lima. Responde SOLO en JSON válido sin texto extra, sin markdown, con este formato exacto: [{"zona":"nacional","cat":"NACIONAL","catClass":"cat-nacional","titulo":"...","hace":"Xh"},{"zona":"loreto","cat":"LORETO","catClass":"cat-loreto","titulo":"...","hace":"Xh"},{"zona":"lima","cat":"LIMA","catClass":"cat-lima","titulo":"...","hace":"Xh"}]. Varía los tiempos entre 1h y 11h.`}]
+      })
+    });
+    const data = await res.json();
+    const texto = data.content?.[0]?.text || '[]';
+    const clean = texto.replace(/```json|```/g,'').trim();
+    const nuevas = JSON.parse(clean);
+    if (Array.isArray(nuevas) && nuevas.length > 0) {
+      noticiasActuales = nuevas;
+      const filtradas = filtroActual === 'todas' ? noticiasActuales : noticiasActuales.filter(n=>n.zona===filtroActual);
+      renderNoticias(filtradas);
+      document.getElementById('ultima-actualizacion').textContent = new Date().toLocaleTimeString('es-PE');
+    }
+  } catch(e) { alert('Error al actualizar. Intenta de nuevo.'); }
+  btn.disabled = false;
+  btn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Actualizar noticias';
+}
+ 
+async function generarNoticiaPropia() {
+  const titulo = document.getElementById('own-titulo').value.trim();
+  const zona = document.getElementById('own-zona').value;
+  const cuerpo = document.getElementById('own-cuerpo').value.trim();
+  if (!titulo || !cuerpo) { alert('Completa el titular y la información de la noticia.'); return; }
+  const btn = document.getElementById('btnGenerarOwn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Generando...';
+  document.getElementById('modalOwn').classList.remove('show');
+  document.getElementById('ng-titulo').textContent = titulo;
+  document.getElementById('ng-cuerpo').textContent = 'Generando tu noticia con IA...';
+  document.getElementById('ng-share-btns').innerHTML = '';
+  document.getElementById('modalNoticia').classList.add('show');
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6', max_tokens:700,
+        messages:[{role:'user', content:`Eres un periodista profesional de SMBINRTV Canal Online, portal de noticias de Loreto, Perú. Con la siguiente información, redacta una noticia periodística completa y profesional:\n\nTitular propuesto: ${titulo}\nZona: ${zona || 'Loreto'}\nInformación disponible: ${cuerpo}\n\nRedacta: titular mejorado, entradilla, 3 párrafos de cuerpo, cita textual inventada de alguna autoridad relacionada, y cierre. Estilo periódico regional serio.`}]
+      })
+    });
+    const data = await res.json();
+    const texto = data.content?.[0]?.text || 'No se pudo generar.';
+    document.getElementById('ng-cuerpo').textContent = texto;
+  } catch(e) {
+    document.getElementById('ng-cuerpo').textContent = 'Error al generar. Verifica tu conexión.';
+  }
+  document.getElementById('ng-share-btns').innerHTML = `
+    <button class="d-share-btn btn-fb" onclick="compartirFB('${titulo.replace(/'/g,"\\'")}')"><i class="bi bi-facebook"></i> Facebook</button>
+    <button class="d-share-btn btn-wa" onclick="compartirWA('${titulo.replace(/'/g,"\\'")}')"><i class="bi bi-whatsapp"></i> WhatsApp</button>
+    <button class="d-share-btn btn-tw" onclick="compartirTW('${titulo.replace(/'/g,"\\'")}')"><i class="bi bi-twitter-x"></i> X</button>
+    <button class="d-share-btn btn-ig" onclick="compartirIG('${titulo.replace(/'/g,"\\'")}')"><i class="bi bi-instagram"></i> Instagram</button>
+  `;
+  btn.disabled = false;
+  btn.innerHTML = '<i class="bi bi-stars"></i> Generar con IA';
+}
+ 
+// Iniciar
+document.getElementById('ultima-actualizacion').textContent = new Date().toLocaleTimeString('es-PE');
+renderNoticias(noticiasActuales);
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
+ 
+
+
