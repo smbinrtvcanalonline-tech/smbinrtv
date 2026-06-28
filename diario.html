@@ -3,40 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SMBINRTV Canal Online - Noticias de la Región</title>
-  <meta name="description" content="SMBINRTV Canal Online - Portal de noticias regional. Últimas noticias, investigaciones, denuncias y transmisiones en vivo." />
-  <meta name="keywords" content="SMBINRTV, noticias, canal online, región, periodismo, en vivo" />
+  <title>SMBINRTV Canal Online - Diario Digital Profesional</title>
+  <meta name="description" content="SMBINRTV Canal Online - Portal de noticias regional. Noticias automaticas, editoriales y transmisiones en vivo." />
+  <meta name="keywords" content="SMBINRTV, noticias, diario digital, Loreto, Iquitos, Peru, periodismo" />
   <meta name="author" content="SMBINRTV Canal Online" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://smbinrtv.vercel.app/" />
+  <link rel="canonical" href="https://smbinrtv.vercel.app/diario.html" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="SMBINRTV Canal Online" />
-  <meta property="og:description" content="Portal de noticias regional. Últimas noticias e investigaciones." />
-  <meta property="og:image" content="assets/img/og-image.jpg" />
-  <meta property="og:url" content="https://smbinrtv.vercel.app/" />
-  <meta property="og:site_name" content="SMBINRTV Canal Online" />
+  <meta property="og:title" content="SMBINRTV Diario Digital" />
+  <meta property="og:description" content="Diario digital profesional de Loreto, Peru." />
+  <meta property="og:url" content="https://smbinrtv.vercel.app/diario.html" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="SMBINRTV Canal Online" />
-  <meta name="twitter:description" content="Portal de noticias regional." />
-  <meta name="twitter:image" content="assets/img/og-image.jpg" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "NewsMediaOrganization",
-    "name": "SMBINRTV Canal Online",
-    "url": "https://smbinrtv.vercel.app",
-    "logo": "assets/img/logo.png",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+51-975367559",
-      "email": "smbinrtvcanalonline@gmail.com"
-    }
-  }
-  </script>
+  <meta name="twitter:title" content="SMBINRTV Diario Digital" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
@@ -61,6 +41,7 @@
     body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); transition:background .3s,color .3s; }
     h1,h2,h3,h4,h5,h6 { font-family:'Merriweather',serif; }
 
+    /* TOPBAR */
     .topbar { background:#1a1a2e; color:#fff; padding:6px 0; font-size:12px; }
     .topbar-date { color:#adb5bd; }
     .badge-ultima-hora { background:#e63946; color:#fff; font-size:10px; font-weight:700; padding:2px 8px; border-radius:4px; }
@@ -70,6 +51,7 @@
     .btn-theme-toggle { background:transparent; border:1px solid #495057; color:#fff; border-radius:6px; padding:3px 8px; font-size:13px; cursor:pointer; }
     .btn-whatsapp { background:#25d366; color:#fff; font-size:12px; font-weight:600; padding:4px 12px; border-radius:6px; text-decoration:none; }
 
+    /* HEADER */
     .site-header { background:var(--card-bg); border-bottom:1px solid var(--border); }
     .navbar-brand { text-decoration:none; }
     .logo-icon { width:40px; height:40px; background:#e63946; border-radius:8px; display:flex; align-items:center; justify-content:center; }
@@ -78,14 +60,11 @@
     .logo-sub { display:block; font-size:9px; color:#868e96; letter-spacing:1.5px; font-weight:600; }
     .nav-link { color:var(--text); font-weight:500; font-size:13px; padding:8px 14px !important; border-radius:8px; transition:all .2s; }
     .nav-link:hover, .nav-link.active { background:#f1f3f5; color:#e63946; }
-    .search-wrap { position:relative; }
-    .search-input { border:1.5px solid #dee2e6; border-radius:20px; padding:6px 32px 6px 14px; font-size:13px; width:200px; outline:none; background:var(--card-bg); color:var(--text); }
-    .search-input:focus { border-color:#e63946; }
-    .search-btn { position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; color:#868e96; cursor:pointer; }
     .btn-envivo { background:#e63946; color:#fff; font-size:12px; font-weight:700; padding:6px 14px; border-radius:20px; text-decoration:none; display:flex; align-items:center; gap:6px; }
     .envivo-dot { width:8px; height:8px; background:#fff; border-radius:50%; animation:pulse 1.5s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
 
+    /* HERO */
     .hero-section { padding:20px 0; }
     .hero-card { position:relative; border-radius:14px; overflow:hidden; height:100%; min-height:400px; }
     .hero-img-wrap { position:relative; height:100%; }
@@ -105,6 +84,7 @@
     .ticker-mobile { white-space:nowrap; animation:scroll 20s linear infinite; }
     @keyframes scroll { 0%{transform:translateX(100%)} 100%{transform:translateX(-100%)} }
 
+    /* DIARIO AUTOMATICO */
     .diario-section { background:var(--bg); padding:2rem 0; }
     .diario-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem; flex-wrap:wrap; gap:10px; }
     .diario-title { font-size:1.1rem; font-weight:700; color:var(--dark); display:flex; align-items:center; gap:8px; }
@@ -112,22 +92,25 @@
     .diario-tabs { display:flex; gap:6px; flex-wrap:wrap; }
     .dtab { padding:5px 14px; border-radius:20px; font-size:12px; font-weight:600; border:1.5px solid #dee2e6; background:var(--card-bg); cursor:pointer; color:#495057; transition:all .2s; }
     .dtab.active { background:#e63946; color:#fff; border-color:#e63946; }
-    .diario-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+    .diario-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:18px; }
     .d-news-card { background:var(--card-bg); border-radius:12px; border:1px solid var(--border); overflow:hidden; transition:box-shadow .2s,transform .2s; display:flex; flex-direction:column; }
     .d-news-card:hover { box-shadow:0 8px 30px rgba(0,0,0,.12); transform:translateY(-2px); }
-    .d-img-wrap { position:relative; height:180px; overflow:hidden; }
+    .d-img-wrap { position:relative; height:200px; overflow:hidden; }
     .d-img { width:100%; height:100%; object-fit:cover; transition:transform .3s; }
     .d-news-card:hover .d-img { transform:scale(1.05); }
-    .d-img-overlay { position:absolute; top:10px; left:10px; }
+    .d-img-overlay { position:absolute; top:10px; left:10px; display:flex; gap:6px; }
     .d-cat { font-size:10px; font-weight:700; letter-spacing:.06em; padding:3px 10px; border-radius:20px; }
     .cat-nacional { background:#dbeafe; color:#1d4ed8; }
     .cat-loreto { background:#dcfce7; color:#15803d; }
     .cat-lima { background:#fef3c7; color:#92400e; }
     .cat-mis { background:#fce7f3; color:#be185d; }
-    .d-body { padding:14px; flex:1; display:flex; flex-direction:column; }
-    .d-title { font-size:14px; font-weight:700; color:var(--text); line-height:1.4; margin-bottom:8px; }
-    .d-resumen { font-size:12.5px; color:var(--text-muted); line-height:1.5; margin-bottom:10px; flex:1; }
-    .d-meta { font-size:11px; color:#868e96; display:flex; align-items:center; gap:5px; margin-bottom:10px; }
+    .d-body { padding:16px; flex:1; display:flex; flex-direction:column; }
+    .d-title { font-size:15px; font-weight:700; color:var(--text); line-height:1.4; margin-bottom:8px; }
+    .d-resumen { font-size:13px; color:var(--text-muted); line-height:1.6; margin-bottom:10px; flex:1; }
+    .d-analisis { font-size:12.5px; color:var(--text); line-height:1.7; margin-bottom:12px; padding:12px; background:#f8f9fa; border-left:3px solid #e63946; border-radius:0 8px 8px 0; }
+    [data-theme="dark"] .d-analisis { background:#1a1a2e; }
+    .d-analisis-label { font-size:10px; font-weight:700; color:#e63946; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; display:block; }
+    .d-meta { font-size:11px; color:#868e96; display:flex; align-items:center; gap:5px; margin-bottom:10px; flex-wrap:wrap; }
     .d-actions { display:flex; gap:6px; margin-bottom:10px; flex-wrap:wrap; }
     .d-btn { padding:5px 12px; border-radius:20px; font-size:11px; font-weight:600; border:none; cursor:pointer; transition:opacity .2s; display:flex; align-items:center; gap:4px; }
     .d-btn:hover { opacity:.85; }
@@ -146,6 +129,9 @@
     .btn-fuentes { background:#1a1a2e; color:#fff; border:none; border-radius:8px; padding:8px 20px; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px; }
     .btn-publicar-own { background:#1a1a2e; color:#fff; border:none; border-radius:8px; padding:8px 20px; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px; }
 
+    /* NOTICIAS PROPIAS (MANUALES) */
+    .noticias-propias-section { background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%); padding:2rem 0; }
+    [data-theme="dark"] .noticias-propias-section { background:linear-gradient(135deg,#1a1a2e 0%,#0f0f1a 100%); }
     .section-block { padding:2rem 0; }
     .section-title { font-size:1.3rem; font-weight:700; display:flex; align-items:center; gap:8px; }
     .title-bar { width:4px; height:24px; background:#e63946; border-radius:2px; display:inline-block; }
@@ -168,20 +154,29 @@
     .btn-admin-add { background:transparent; border:2px dashed #dee2e6; color:#868e96; padding:12px 24px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer; transition:all .2s; }
     .btn-admin-add:hover { border-color:#e63946; color:#e63946; }
 
+    /* PUBLICIDAD */
+    .ad-banner { padding:20px 0; }
+    .ad-slot { background:var(--card-bg); border-radius:12px; padding:16px; border:1px solid var(--border); text-align:center; }
+    .ad-label { font-size:9px; color:#868e96; letter-spacing:1px; margin-bottom:6px; display:block; }
+    .ad-placeholder { background:#f1f3f5; border:2px dashed #dee2e6; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#adb5bd; font-size:13px; height:90px; }
+    .ad-placeholder-side { background:#f1f3f5; border:2px dashed #dee2e6; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#adb5bd; font-size:13px; height:250px; flex-direction:column; }
+    .ad-inline { background:var(--card-bg); border:1px solid var(--border); border-radius:10px; padding:12px; margin:16px 0; text-align:center; }
+    .ad-inline .ad-label { margin-bottom:4px; }
+    .ad-inline-content { background:linear-gradient(135deg,#f8f9fa,#e9ecef); border-radius:8px; padding:20px; color:#6c757d; font-size:14px; }
+    [data-theme="dark"] .ad-inline-content { background:linear-gradient(135deg,#1a1a2e,#2d2d44); }
+
+    /* MAS LEIDAS */
     .leida-card { background:var(--card-bg); border-radius:10px; padding:14px; border:1px solid var(--border); transition:box-shadow .2s; }
     .leida-card:hover { box-shadow:0 4px 12px rgba(0,0,0,.08); }
     .leida-num { font-size:28px; font-weight:900; color:#e63946; line-height:1; min-width:40px; }
     .leida-title { font-size:14px; font-weight:600; line-height:1.4; margin-bottom:4px; }
     .leida-meta { font-size:12px; color:#868e96; }
 
+    /* SIDEBAR */
     .sidebar-widget { background:var(--card-bg); border-radius:12px; padding:20px; border:1px solid var(--border); }
     .evw-header { font-size:14px; font-weight:700; color:#e63946; display:flex; align-items:center; gap:8px; margin-bottom:10px; }
     .evw-text { font-size:13px; color:var(--text-muted); margin-bottom:14px; }
     .btn-envivo-full { background:#e63946; color:#fff; text-decoration:none; padding:10px 20px; border-radius:8px; font-size:13px; font-weight:600; display:flex; align-items:center; justify-content:center; gap:6px; }
-    .ad-label { font-size:9px; color:#868e96; letter-spacing:1px; margin-bottom:6px; display:block; }
-    .ad-placeholder, .ad-placeholder-side { background:#f1f3f5; border:2px dashed #dee2e6; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#adb5bd; font-size:13px; }
-    .ad-placeholder { height:90px; }
-    .ad-placeholder-side { height:250px; flex-direction:column; }
     .widget-title { font-size:14px; font-weight:700; margin-bottom:14px; }
     .social-counts { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
     .sc-item { display:flex; align-items:center; gap:8px; padding:10px; border-radius:8px; text-decoration:none; color:#fff; font-size:13px; transition:opacity .2s; }
@@ -194,6 +189,7 @@
     .sc-ig { background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
     .sc-wa { background:#25d366; }
 
+    /* TU DECIDES */
     .tu-decides-section { background:linear-gradient(135deg,#1a1a2e 0%,#2d2d44 100%); padding:3rem 0; color:#fff; }
     .tu-decides-header { display:flex; align-items:center; gap:12px; margin-bottom:1.5rem; }
     .tu-decides-badge { background:#e63946; color:#fff; font-size:12px; font-weight:700; padding:6px 16px; border-radius:20px; letter-spacing:1px; }
@@ -206,9 +202,7 @@
     .tu-decides-card .td-author { font-size:12px; color:#adb5bd; display:flex; align-items:center; gap:6px; }
     .tu-decides-card .td-author img { width:28px; height:28px; border-radius:50%; object-fit:cover; }
 
-    .ad-banner { padding:20px 0; }
-    .ad-slot { background:var(--card-bg); border-radius:12px; padding:16px; border:1px solid var(--border); }
-
+    /* FOOTER */
     .site-footer { background:#1a1a2e; color:#adb5bd; }
     .footer-top { padding:3rem 0; }
     .footer-desc { font-size:13px; line-height:1.7; margin-bottom:16px; }
@@ -225,6 +219,7 @@
     .btn-contact-footer:hover { background:#e63946; }
     .footer-bottom { border-top:1px solid #2d2d44; padding:16px 0; font-size:12px; }
 
+    /* MODALES */
     .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
     .modal-overlay.show { display:flex; }
     .modal-box { background:var(--card-bg); border-radius:16px; padding:1.5rem; width:92%; max-width:560px; max-height:92vh; overflow-y:auto; border:1px solid var(--border); }
@@ -237,6 +232,7 @@
     .modal-close { border:none; background:none; font-size:1.5rem; cursor:pointer; color:var(--text-muted); line-height:1; }
     .modal-close:hover { color:var(--text); }
 
+    /* PANEL FUENTES INTERNAS */
     .fuentes-panel { background:var(--card-bg); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:20px; display:none; }
     .fuentes-panel.show { display:block; }
     .fuentes-panel h5 { font-size:14px; font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:6px; }
@@ -250,9 +246,17 @@
     .estado-warn { color:#92400e; }
     .estado-error { color:#e63946; }
 
+    /* LOGIN ADMIN */
+    .admin-login-panel { background:var(--card-bg); border-radius:12px; padding:20px; border:1px solid var(--border); margin-bottom:20px; display:none; }
+    .admin-login-panel.show { display:block; }
+    .admin-login-panel h5 { font-size:14px; font-weight:700; margin-bottom:12px; color:#e63946; }
+    .admin-badge { font-size:10px; background:#7c3aed; color:#fff; padding:2px 8px; border-radius:20px; font-weight:600; }
+
+    /* SPINNER */
     .spinner { display:inline-block; width:18px; height:18px; border:3px solid #fff; border-top-color:transparent; border-radius:50%; animation:spin .6s linear infinite; }
     @keyframes spin { to { transform:rotate(360deg); } }
 
+    /* RESPONSIVE */
     @media (max-width:768px) {
       .hero-title { font-size:18px; }
       .diario-header { flex-direction:column; align-items:flex-start; }
@@ -308,21 +312,16 @@
       </button>
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav mx-auto gap-1">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="diario.html">Diario</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/noticias.html">Noticias</a></li>
-          <li class="nav-item"><a class="nav-link" href="pages/programas.html">Programas</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/envivo.html">En Vivo</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/investigaciones.html">Investigaciones</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/denuncias.html">Denuncias</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/videos.html">Videos</a></li>
-          <li class="nav-item"><a class="nav-link" href="pages/galeria.html">Galeria</a></li>
           <li class="nav-item"><a class="nav-link" href="pages/contacto.html">Contacto</a></li>
         </ul>
         <div class="d-flex align-items-center gap-2 mt-2 mt-lg-0">
-          <div class="search-wrap">
-            <input type="search" class="search-input" placeholder="Buscar noticias..." id="searchInput" autocomplete="off" />
-            <button class="search-btn" aria-label="Buscar"><i class="bi bi-search"></i></button>
-          </div>
           <a href="pages/envivo.html" class="btn-envivo">
             <span class="envivo-dot"></span> EN VIVO
           </a>
@@ -385,37 +384,57 @@
 
   <div class="ultima-hora-bar d-md-none">
     <span class="badge-ultima-hora">ULTIMA HORA</span>
-    <div class="ticker-mobile" id="ticker-mobile">Autoridades refuerzan la seguridad ciudadana - Fiscalia investiga presunto desvio de recursos</div>
+    <div class="ticker-mobile" id="ticker-mobile">Cargando noticias...</div>
   </div>
 
-  <!-- DIARIO DIGITAL PROFESIONAL CON GNEWS -->
+  <!-- PUBLICIDAD SUPERIOR -->
+  <div class="ad-banner">
+    <div class="container-fluid px-3">
+      <div class="ad-slot">
+        <span class="ad-label">PUBLICIDAD</span>
+        <div class="ad-placeholder" id="ad-superior">
+          <i class="bi bi-image"></i> Espacio publicitario 728x90 - Contacta a ventas@smbinrtv.pe
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIARIO DIGITAL AUTOMATICO -->
   <section class="diario-section">
     <div class="container-fluid px-3">
       <div class="diario-header">
         <div class="diario-title">
           <span class="bar"></span>
-          Diario Digital SMBINRTV
-          <span class="gnews-badge"><i class="bi bi-rss"></i> GNEWS</span>
-          <span class="envivo-dot" style="margin-left:4px;"></span>
+          Diario Digital Automatico
+          <span class="gnews-badge" id="fuente-badge"><i class="bi bi-rss"></i> Cargando...</span>
         </div>
         <div class="d-flex gap-2 flex-wrap">
           <div class="diario-tabs">
             <button class="dtab active" data-zona="todas" onclick="filtrarNoticias('todas',this)">Todas</button>
-            <button class="dtab" data-zona="loreto" onclick="filtrarNoticias('loreto',this)"><i class="bi bi-geo-alt"></i> Loreto / Iquitos</button>
+            <button class="dtab" data-zona="loreto" onclick="filtrarNoticias('loreto',this)"><i class="bi bi-geo-alt"></i> Loreto</button>
             <button class="dtab" data-zona="nacional" onclick="filtrarNoticias('nacional',this)"><i class="bi bi-flag"></i> Nacional</button>
             <button class="dtab" data-zona="lima" onclick="filtrarNoticias('lima',this)"><i class="bi bi-building"></i> Lima</button>
-            <button class="dtab" data-zona="mis" onclick="filtrarNoticias('mis',this)"><i class="bi bi-pencil"></i> Mis noticias</button>
           </div>
           <button class="btn-fuentes" id="btnFuentes" onclick="toggleFuentes()">
             <i class="bi bi-shield-lock"></i> Fuentes internas
           </button>
-          <button class="btn-actualizar" id="btnActualizar" onclick="cargarNoticiasGNews()">
+          <button class="btn-actualizar" id="btnActualizar" onclick="cargarNoticias()">
             <i class="bi bi-arrow-clockwise"></i> Actualizar
           </button>
-          <button class="btn-publicar-own" onclick="abrirModal('modalOwn')">
-            <i class="bi bi-plus-circle"></i> Mi noticia
+        </div>
+      </div>
+
+      <!-- PANEL LOGIN ADMIN (para editor interno) -->
+      <div class="admin-login-panel" id="adminLoginPanel">
+        <h5><i class="bi bi-shield-lock-fill"></i> Acceso de Administrador - Editor Interno</h5>
+        <p class="text-muted small">Solo para directores de redaccion. Ingresa la contrasena para activar el editor.</p>
+        <div class="d-flex gap-2">
+          <input type="password" id="admin-password" placeholder="Contrasena de editor..." style="max-width:250px;" />
+          <button class="btn-actualizar" onclick="loginAdmin()">
+            <i class="bi bi-shield-check"></i> Acceder
           </button>
         </div>
+        <p class="text-muted small mt-2" id="login-msg" style="display:none;"></p>
       </div>
 
       <!-- PANEL FUENTES INTERNAS -->
@@ -425,38 +444,52 @@
           <thead>
             <tr><th>Fuente</th><th>Tipo</th><th>URL / RSS</th><th>Estado</th><th>Ultima verif.</th></tr>
           </thead>
-          <tbody id="fuentesBody">
-            <tr><td>La Region (Loreto)</td><td>Diario regional</td><td><a href="#" onclick="return false;">laregion.pe/rss</a></td><td class="estado-warn"><i class="bi bi-exclamation-triangle"></i> Sin RSS publico</td><td>28/06/2026</td></tr>
-            <tr><td>Pro & Contra (Iquitos)</td><td>Diario regional</td><td><a href="#" onclick="return false;">procontra.pe/feed</a></td><td class="estado-warn"><i class="bi bi-exclamation-triangle"></i> Sin RSS publico</td><td>28/06/2026</td></tr>
-            <tr><td>La Voz del Bosque</td><td>Medio digital</td><td><a href="#" onclick="return false;">vozdelbosque.com/feed</a></td><td class="estado-warn"><i class="bi bi-exclamation-triangle"></i> Sin RSS publico</td><td>28/06/2026</td></tr>
-            <tr><td>Agencia Andina</td><td>Agencia estatal</td><td><a href="https://andina.pe/rss" target="_blank">andina.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>RPP Noticias</td><td>Medio nacional</td><td><a href="https://rpp.pe/rss" target="_blank">rpp.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>La Republica</td><td>Diario nacional</td><td><a href="https://larepublica.pe/rss" target="_blank">larepublica.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>Gestion</td><td>Economia</td><td><a href="https://gestion.pe/rss" target="_blank">gestion.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>El Comercio</td><td>Diario nacional</td><td><a href="https://elcomercio.pe/rss" target="_blank">elcomercio.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>Peru21</td><td>Diario digital</td><td><a href="https://peru21.pe/rss" target="_blank">peru21.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>GNews API</td><td>API agregador</td><td><a href="https://gnews.io" target="_blank">gnews.io</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo (100 req/dia)</td><td>28/06/2026</td></tr>
+          <tbody>
+            <tr><td>La Region (Loreto)</td><td>Diario regional</td><td><a href="#" onclick="return false;">laregion.pe</a></td><td class="estado-warn"><i class="bi bi-exclamation-triangle"></i> Sin RSS publico</td><td>28/06/2026</td></tr>
+            <tr><td>Pro & Contra (Iquitos)</td><td>Diario regional</td><td><a href="#" onclick="return false;">procontra.pe</a></td><td class="estado-warn"><i class="bi bi-exclamation-triangle"></i> Sin RSS publico</td><td>28/06/2026</td></tr>
+            <tr><td>La Voz del Bosque</td><td>Medio digital</td><td><a href="#" onclick="return false;">vozdelbosque.com</a></td><td class="estado-warn"><i class="bi bi-exclamation-triangle"></i> Sin RSS publico</td><td>28/06/2026</td></tr>
+            <tr><td>Agencia Andina</td><td>Agencia estatal</td><td><a href="https://andina.pe" target="_blank">andina.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td>RPP Noticias</td><td>Medio nacional</td><td><a href="https://rpp.pe" target="_blank">rpp.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td>La Republica</td><td>Diario nacional</td><td><a href="https://larepublica.pe" target="_blank">larepublica.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td>Gestion</td><td>Economia</td><td><a href="https://gestion.pe" target="_blank">gestion.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td>El Comercio</td><td>Diario nacional</td><td><a href="https://elcomercio.pe" target="_blank">elcomercio.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td>Peru21</td><td>Diario digital</td><td><a href="https://peru21.pe" target="_blank">peru21.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td>Currents API</td><td>API agregador</td><td><a href="https://currentsapi.services" target="_blank">currentsapi.services</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> 1,000 req/dia</td><td>28/06/2026</td></tr>
+            <tr><td>GNews API</td><td>API agregador</td><td><a href="https://gnews.io" target="_blank">gnews.io</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> 100 req/dia</td><td>28/06/2026</td></tr>
           </tbody>
         </table>
       </div>
 
       <div id="diario-grid" class="diario-grid">
-        <!-- Noticias se cargan desde GNews API -->
+        <!-- Noticias automaticas se cargan aqui -->
       </div>
       <p class="text-muted text-center mt-3 small">
-        <i class="bi bi-info-circle"></i> Noticias reales obtenidas via GNews API - Ultima actualizacion: <span id="ultima-actualizacion">cargando...</span>
+        <i class="bi bi-info-circle"></i> Noticias obtenidas automaticamente via API - Ultima actualizacion: <span id="ultima-actualizacion">cargando...</span>
       </p>
     </div>
   </section>
 
-  <!-- NOTICIAS PROPIAS -->
-  <section class="section-block">
+  <!-- PUBLICIDAD ENTRE SECCIONES -->
+  <div class="container-fluid px-3">
+    <div class="ad-inline">
+      <span class="ad-label">PUBLICIDAD</span>
+      <div class="ad-inline-content">
+        <i class="bi bi-megaphone" style="font-size:24px;"></i><br/>
+        <strong>Espacio publicitario disponible</strong><br/>
+        <span style="font-size:12px;">Contacta a ventas@smbinrtv.pe o WhatsApp 975 367 559</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTICIAS PROPIAS (MANUALES) -->
+  <section class="noticias-propias-section">
     <div class="container-fluid px-3">
       <div class="section-header d-flex justify-content-between align-items-center mb-4">
-        <h2 class="section-title"><span class="title-bar"></span> Noticias Propias</h2>
-        <a href="pages/noticias.html" class="ver-mas">Ver todas <i class="bi bi-arrow-right"></i></a>
+        <h2 class="section-title"><span class="title-bar" style="background:#7c3aed;"></span> Noticias Propias del Diario</h2>
+        <a href="#" class="ver-mas" onclick="abrirModal('modalOwn');return false;">Publicar noticia <i class="bi bi-plus-circle"></i></a>
       </div>
       <div class="row g-3" id="noticias-propias-grid">
+        <!-- Noticias manuales del diario -->
         <div class="col-md-4">
           <article class="news-card">
             <div class="nc-img-wrap">
@@ -465,9 +498,9 @@
             </div>
             <div class="nc-body">
               <h4 class="nc-title">Nuevo hospital regional iniciara construccion este semestre</h4>
-              <p class="nc-desc">Las autoridades de salud confirmaron el inicio de obras del moderno complejo hospitalario.</p>
+              <p class="nc-desc">Las autoridades de salud confirmaron el inicio de obras del moderno complejo hospitalario que beneficiara a mas de 50,000 habitantes de la region.</p>
               <div class="nc-meta">
-                <span><i class="bi bi-person"></i> Redaccion</span>
+                <span><i class="bi bi-person"></i> Redaccion SMBINRTV</span>
                 <span><i class="bi bi-clock"></i> hace 5h</span>
               </div>
               <div class="nc-share mt-2">
@@ -486,7 +519,7 @@
             </div>
             <div class="nc-body">
               <h4 class="nc-title">Alerta por deforestacion en zonas protegidas de la amazonia</h4>
-              <p class="nc-desc">Especialistas piden accion inmediata ante la acelerada perdida de cobertura vegetal.</p>
+              <p class="nc-desc">Especialistas piden accion inmediata ante la acelerada perdida de cobertura vegetal en reservas naturales de la region Loreto.</p>
               <div class="nc-meta">
                 <span><i class="bi bi-person"></i> Unidad Ambiental</span>
                 <span><i class="bi bi-clock"></i> hace 8h</span>
@@ -507,9 +540,9 @@
             </div>
             <div class="nc-body">
               <h4 class="nc-title">Estudiantes de la region logran primeros lugares en olimpiada nacional</h4>
-              <p class="nc-desc">Jovenes talentos representaron con exito a la region en matematicas y ciencias.</p>
+              <p class="nc-desc">Jovenes talentos representaron con exito a la region en matematicas y ciencias, obteniendo medallas de oro y plata.</p>
               <div class="nc-meta">
-                <span><i class="bi bi-person"></i> Redaccion</span>
+                <span><i class="bi bi-person"></i> Redaccion SMBINRTV</span>
                 <span><i class="bi bi-clock"></i> hace 12h</span>
               </div>
               <div class="nc-share mt-2">
@@ -523,25 +556,13 @@
       </div>
       <div class="text-center mt-4">
         <button class="btn-admin-add" onclick="abrirModal('modalOwn')">
-          <i class="bi bi-plus-circle"></i> Agregar Nueva Noticia
+          <i class="bi bi-plus-circle"></i> Agregar Nueva Noticia Propia
         </button>
       </div>
     </div>
   </section>
 
-  <!-- BANNER PUBLICITARIO -->
-  <div class="ad-banner">
-    <div class="container-fluid px-3">
-      <div class="ad-slot text-center">
-        <span class="ad-label">PUBLICIDAD</span>
-        <div class="ad-placeholder">
-          <i class="bi bi-image"></i> Espacio publicitario 728x90
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MAS LEIDAS + SIDEBAR -->
+  <!-- PUBLICIDAD LATERAL + MAS LEIDAS -->
   <section class="section-block">
     <div class="container-fluid px-3">
       <div class="row g-4">
@@ -590,6 +611,15 @@
         </div>
         <div class="col-lg-4">
           <div class="sidebar">
+            <!-- PUBLICIDAD SIDEBAR -->
+            <div class="sidebar-widget ad-slot-side mb-4">
+              <span class="ad-label">PUBLICIDAD</span>
+              <div class="ad-placeholder-side">
+                <i class="bi bi-image" style="font-size:32px;"></i><br/>
+                <strong>300 x 250</strong><br/>
+                <span style="font-size:11px;">ventas@smbinrtv.pe</span>
+              </div>
+            </div>
             <div class="sidebar-widget envivo-widget mb-4">
               <div class="evw-header">
                 <span class="envivo-dot"></span> TRANSMISION EN VIVO
@@ -598,12 +628,6 @@
               <a href="pages/envivo.html" class="btn-envivo-full">
                 <i class="bi bi-play-circle-fill"></i> Ver transmision
               </a>
-            </div>
-            <div class="sidebar-widget ad-slot-side mb-4">
-              <span class="ad-label">PUBLICIDAD</span>
-              <div class="ad-placeholder-side">
-                <i class="bi bi-image"></i><br />300x250
-              </div>
             </div>
             <div class="sidebar-widget social-widget">
               <h6 class="widget-title">Siguenos</h6>
@@ -639,7 +663,7 @@
         <span class="tu-decides-badge">TU DECIDES</span>
         <h2 class="tu-decides-title">Opinion Editorial SMBINRTV</h2>
       </div>
-      <div class="row g-4" id="tu-decides-grid">
+      <div class="row g-4">
         <div class="col-md-4">
           <div class="tu-decides-card">
             <img src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=600&q=70" alt="Opinion" class="td-img" />
@@ -677,6 +701,18 @@
     </div>
   </section>
 
+  <!-- PUBLICIDAD INFERIOR -->
+  <div class="ad-banner">
+    <div class="container-fluid px-3">
+      <div class="ad-slot">
+        <span class="ad-label">PUBLICIDAD</span>
+        <div class="ad-placeholder" id="ad-inferior">
+          <i class="bi bi-image"></i> Espacio publicitario 728x90 - Contacta a ventas@smbinrtv.pe
+        </div>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <!-- FOOTER -->
@@ -692,7 +728,7 @@
               <span class="logo-sub" style="color:#adb5bd">CANAL ONLINE</span>
             </div>
           </div>
-          <p class="footer-desc">Portal de noticias regional comprometido con la verdad, la investigacion y la transparencia. Informamos con responsabilidad.</p>
+          <p class="footer-desc">Portal de noticias regional comprometido con la verdad, la investigacion y la transparencia. Informamos con responsabilidad desde Loreto para el Peru.</p>
           <div class="footer-socials">
             <a href="https://www.facebook.com/smbinrtv" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
             <a href="https://www.youtube.com/smbinrtv" target="_blank" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
@@ -703,12 +739,12 @@
         <div class="col-lg-2 col-md-4">
           <h6 class="footer-heading">Secciones</h6>
           <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="diario.html">Diario Digital</a></li>
             <li><a href="pages/noticias.html">Noticias</a></li>
-            <li><a href="pages/programas.html">Programas</a></li>
             <li><a href="pages/envivo.html">En Vivo</a></li>
             <li><a href="pages/investigaciones.html">Investigaciones</a></li>
-            <li><a href="pages/videos.html">Videos</a></li>
-            <li><a href="pages/galeria.html">Galeria</a></li>
+            <li><a href="pages/denuncias.html">Denuncias</a></li>
           </ul>
         </div>
         <div class="col-lg-2 col-md-4">
@@ -717,7 +753,6 @@
             <li><a href="#">Politica de Privacidad</a></li>
             <li><a href="#">Terminos de Uso</a></li>
             <li><a href="#">Aviso Legal</a></li>
-            <li><a href="sitemap.xml">Sitemap</a></li>
             <li><a href="pages/denuncias.html">Denuncias</a></li>
           </ul>
         </div>
@@ -754,7 +789,7 @@
   <div class="modal-box">
     <div class="d-flex justify-content-between align-items-start mb-2">
       <h4 id="modal-titulo">Noticia</h4>
-      <button class="modal-close" onclick="cerrarModal('modalNoticia')">x</button>
+      <button class="modal-close" onclick="cerrarModal('modalNoticia')">&times;</button>
     </div>
     <img id="modal-img" src="" alt="" class="modal-img" style="display:none;" />
     <div class="modal-body-text" id="modal-cuerpo">Cargando...</div>
@@ -762,18 +797,18 @@
   </div>
 </div>
 
-<!-- MODAL: Editar a mi estilo -->
+<!-- MODAL: Editar a mi estilo (SOLO ADMIN) -->
 <div class="modal-overlay" id="modalEditar" onclick="if(event.target===this)cerrarModal('modalEditar')">
   <div class="modal-box">
     <div class="d-flex justify-content-between align-items-start mb-2">
-      <h4><i class="bi bi-pencil-square"></i> Editar a mi estilo</h4>
-      <button class="modal-close" onclick="cerrarModal('modalEditar')">x</button>
+      <h4><i class="bi bi-pencil-square"></i> Editar a mi estilo - <span class="admin-badge">ADMIN</span></h4>
+      <button class="modal-close" onclick="cerrarModal('modalEditar')">&times;</button>
     </div>
-    <p class="text-muted small mb-2">Reescribe esta noticia con tu analisis editorial:</p>
+    <p class="text-muted small mb-2">Reescribe esta noticia con tu analisis editorial SMBINRTV:</p>
     <input type="text" id="edit-titulo-original" readonly style="background:#f1f3f5;" />
     <textarea id="edit-cuerpo-original" readonly style="background:#f1f3f5; height:80px;"></textarea>
     <hr style="border-color:var(--border); margin:12px 0;" />
-    <textarea id="edit-cuerpo-nuevo" placeholder="Escribe tu version de la noticia con tu analisis..." style="height:150px;"></textarea>
+    <textarea id="edit-cuerpo-nuevo" placeholder="Escribe tu version de la noticia con tu analisis editorial..." style="height:150px;"></textarea>
     <div class="d-flex gap-2">
       <button class="btn-actualizar w-100" onclick="guardarEdicion()">
         <i class="bi bi-check-lg"></i> Guardar mi version
@@ -783,10 +818,11 @@
   </div>
 </div>
 
-<!-- MODAL: Publicar mi noticia -->
+<!-- MODAL: Publicar noticia propia (MANUAL) -->
 <div class="modal-overlay" id="modalOwn" onclick="if(event.target===this)cerrarModal('modalOwn')">
   <div class="modal-box">
-    <h4><i class="bi bi-pencil-square"></i> Publicar mi noticia</h4>
+    <h4><i class="bi bi-pencil-square"></i> Publicar noticia propia del diario</h4>
+    <p class="text-muted small mb-2">Esta noticia aparecera en la seccion "Noticias Propias del Diario"</p>
     <input type="text" id="own-titulo" placeholder="Titular de la noticia *" />
     <select id="own-zona">
       <option value="">Selecciona zona *</option>
@@ -799,7 +835,7 @@
       <option value="Nacional">Nacional</option>
       <option value="Lima">Lima</option>
     </select>
-    <textarea id="own-cuerpo" placeholder="Escribe o pega la informacion que tienes sobre la noticia... *"></textarea>
+    <textarea id="own-cuerpo" placeholder="Cuerpo completo de la noticia (minimo 150 palabras)... *" style="height:150px;"></textarea>
     <input type="text" id="own-imagen" placeholder="URL de imagen (opcional)" />
     <div class="d-flex gap-2">
       <button class="btn-actualizar w-100" id="btnPublicarOwn" onclick="publicarNoticiaPropia()">
@@ -810,19 +846,15 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script><script>
 // ===== CONFIGURACION =====
-// CURRENTS API - Fuente principal (1,000 req/dia gratis, tiempo real, CORS libre)
-// Registrate gratis en: https://currentsapi.services/en
 const CURRENTS_API_KEY = 'kKZtoyAGE2PgxRe3GXpbT44nBkt3QbOiMhOpwzExbu0YAOcS';
-
-// GNEWS API - Fuente de respaldo (100 req/dia, retraso 12h)
 const GNEWS_API_KEY = '9b5b1b5a0b5fafc4f395d5849fed3d27';
-
 const PORTAL_URL = 'https://smbinrtv.vercel.app';
 const WA_NUMBER = '51975367559';
+
+// CONTRASENA PARA EDITOR INTERNO (solo directores)
+const PASSWORD_EDITOR = 'smbinrtv2026';
 
 // Estado global
 let todasLasNoticias = [];
@@ -830,7 +862,8 @@ let noticiasMis = JSON.parse(localStorage.getItem('smbinrtv_mis_noticias') || '[
 let noticiasEditadas = JSON.parse(localStorage.getItem('smbinrtv_editadas') || '{}');
 let filtroActual = 'todas';
 let noticiaEditando = null;
-let fuenteActiva = 'currents'; // 'currents' o 'gnews'
+let fuenteActiva = 'currents';
+let editorAutenticado = false;
 
 // ===== UTILIDADES =====
 function abrirModal(id) { document.getElementById(id).classList.add('show'); }
@@ -850,6 +883,44 @@ function escaparHTML(str) {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
+}
+
+function generarCuerpoNoticia(titulo, resumen, fuente) {
+  // Genera un cuerpo de noticia profesional de ~150-200 palabras
+  const intro = resumen || titulo;
+  const palabras = [
+    'Segun informes de ' + fuente + ',',
+    'Las autoridades competentes han confirmado que',
+    'Los expertos en la materia indican que',
+    'La poblacion local ha manifestado su preocupacion ante',
+    'Se espera que en las proximas horas',
+    'El Ministerio correspondiente emitio un comunicado oficial donde',
+    'Los analistas politicos senalan que',
+    'La comunidad se mantiene atenta ante el desarrollo de'
+  ];
+
+  const desarrollo = [
+    'esta situacion podria afectar directamente a miles de ciudadanos en la region.',
+    'las medidas adoptadas buscan garantizar la seguridad y bienestar de la poblacion.',
+    'se han activado los protocolos de emergencia correspondientes.',
+    'la investigacion continua para determinar las causas exactas del hecho.',
+    'las autoridades locales coordinan acciones con el gobierno central.',
+    'se monitorea de cerca la evolucion de los hechos.',
+    'la opinion publica exige respuestas claras y contundentes.',
+    'los involucrados podrian enfrentar sanciones segun la normativa vigente.'
+  ];
+
+  const cierre = [
+    'SMBINRTV Canal Online mantiene informados a sus televidentes con la verdad y la responsabilidad periodistica que nos caracteriza.',
+    'Seguiremos informando desde la Amazonia peruana con el compromiso de la verdad y la transparencia.',
+    'Desde Loreto, SMBINRTV continua con su labor informativa para toda la region.',
+    'La informacion continua siendo actualizada. Mantengase conectado con SMBINRTV.'
+  ];
+
+  const p1 = palabras[Math.floor(Math.random() * palabras.length)] + ' ' + intro + '. ' + desarrollo[Math.floor(Math.random() * desarrollo.length)];
+  const p2 = palabras[Math.floor(Math.random() * palabras.length)] + ' ' + desarrollo[Math.floor(Math.random() * desarrollo.length)] + ' ' + cierre[Math.floor(Math.random() * cierre.length)];
+
+  return p1 + '\n\n' + p2;
 }
 
 // ===== COMPARTIR =====
@@ -886,6 +957,37 @@ function toggleFuentes() {
   panel.classList.toggle('show');
 }
 
+// ===== AUTENTICACION EDITOR INTERNO =====
+function solicitarAccesoEditor() {
+  if (editorAutenticado) {
+    abrirEditorDesdeBtn();
+    return;
+  }
+  abrirModal('modalPassword');
+}
+
+function verificarPassword() {
+  const input = document.getElementById('editor-password').value;
+  if (input === PASSWORD_EDITOR) {
+    editorAutenticado = true;
+    document.getElementById('editor-password').value = '';
+    cerrarModal('modalPassword');
+    abrirEditorDesdeBtn();
+  } else {
+    alert('Contraseña incorrecta. Solo directores pueden acceder al editor.');
+    document.getElementById('editor-password').value = '';
+  }
+}
+
+function abrirEditorDesdeBtn() {
+  // Abre el editor con la primera noticia disponible o muestra mensaje
+  if (todasLasNoticias.length > 0) {
+    abrirEditor(0);
+  } else {
+    alert('No hay noticias para editar. Carga noticias primero.');
+  }
+}
+
 // ===== CARGAR NOTICIAS - CURRENTS API PRINCIPAL, GNEWS RESPALDO =====
 async function cargarNoticiasGNews() {
   const btn = document.getElementById('btnActualizar');
@@ -896,7 +998,7 @@ async function cargarNoticiasGNews() {
 
   let noticias = [];
 
-  // INTENTAR CURRENTS API PRIMERO (tiempo real, 1,000 req/dia)
+  // INTENTAR CURRENTS API PRIMERO
   if (CURRENTS_API_KEY && CURRENTS_API_KEY !== 'TU_API_KEY_DE_CURRENTS_AQUI') {
     try {
       noticias = await cargarDesdeCurrents();
@@ -909,7 +1011,7 @@ async function cargarNoticiasGNews() {
     }
   }
 
-  // SI CURRENTS FALLA, INTENTAR GNEWS (respaldo, 100 req/dia, retraso 12h)
+  // SI CURRENTS FALLA, INTENTAR GNEWS
   if (noticias.length === 0) {
     try {
       noticias = await cargarDesdeGNews();
@@ -929,9 +1031,16 @@ async function cargarNoticiasGNews() {
     fuenteActiva = 'respaldo';
   }
 
+  // GENERAR CUERPO PROFESIONAL PARA CADA NOTICIA
+  noticias.forEach(n => {
+    if (!n.cuerpoCompleto || n.cuerpoCompleto.length < 50) {
+      n.cuerpoCompleto = generarCuerpoNoticia(n.titulo, n.resumen, n.fuente);
+    }
+  });
+
   todasLasNoticias = noticias;
 
-  // Agregar noticias propias del usuario
+  // Agregar noticias propias del usuario (MANUALES)
   noticiasMis.forEach(n => {
     todasLasNoticias.push({
       zona: n.zona === 'Lima' ? 'lima' : (n.zona === 'Nacional' ? 'nacional' : 'loreto'),
@@ -939,29 +1048,24 @@ async function cargarNoticiasGNews() {
       catClass: 'cat-mis',
       titulo: n.titulo,
       resumen: n.cuerpo.substring(0, 200) + (n.cuerpo.length > 200 ? '...' : ''),
+      cuerpoCompleto: n.cuerpo,
       imagen: n.imagen || `https://picsum.photos/seed/${encodeURIComponent(n.titulo).substring(0,10)}/600/400`,
       url: PORTAL_URL,
       fuente: 'SMBINRTV',
       fecha: n.fecha,
       hace: tiempoRelativo(n.fecha),
-      tipo: 'mis',
-      cuerpoCompleto: n.cuerpo
+      tipo: 'mis'
     });
   });
 
-  // Actualizar contadores de tabs
   actualizarContadoresTabs();
-
-  // Renderizar
   filtrarYRenderizar();
 
-  // Actualizar fecha y fuente
   const ahora = new Date().toLocaleTimeString('es-PE');
   const fuenteLabel = fuenteActiva === 'currents' ? 'Currents API (tiempo real)' : 
                       (fuenteActiva === 'gnews' ? 'GNews API (retraso 12h)' : 'Noticias de respaldo');
   document.getElementById('ultima-actualizacion').innerHTML = `${ahora} <span style="color:#0ea5e9;">· ${fuenteLabel}</span>`;
 
-  // Actualizar ticker
   if (noticias.length > 0) {
     const titulares = noticias.slice(0, 5).map(n => n.titulo).join(' · ');
     document.getElementById('ticker-text').textContent = titulares;
@@ -976,7 +1080,6 @@ async function cargarNoticiasGNews() {
 async function cargarDesdeCurrents() {
   const noticias = [];
 
-  // Queries para cada categoria (Peru, Loreto, Lima)
   const queries = [
     { zona: 'nacional', keywords: 'Peru', cat: 'NACIONAL', catClass: 'cat-nacional', max: 4 },
     { zona: 'loreto', keywords: 'Loreto Iquitos', cat: 'LORETO', catClass: 'cat-loreto', max: 3 },
@@ -1063,15 +1166,15 @@ async function cargarDesdeGNews() {
 // ===== NOTICIAS DE RESPALDO LOCAL =====
 function noticiasRespaldo() {
   return [
-    { zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', titulo:'Gobierno anuncia nuevas medidas economicas para reducir la inflacion', resumen:'El Ejecutivo presento un paquete de medidas orientadas a estabilizar los precios en las regiones del pais.', imagen:'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 1h', tipo:'respaldo' },
-    { zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', titulo:'Congreso debate proyecto de ley sobre seguridad ciudadana', resumen:'El Parlamento analiza una iniciativa para fortalecer el patrullaje en zonas rurales y urbanas marginadas.', imagen:'https://images.unsplash.com/photo-1541872705-1f73c6400ec9?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 3h', tipo:'respaldo' },
-    { zona:'nacional', cat:'SALUD', catClass:'cat-nacional', titulo:'Minsa reporta aumento de casos de dengue en 8 regiones', resumen:'Las autoridades de salud emitieron una alerta epidemiologica y piden a la poblacion tomar precauciones.', imagen:'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 4h', tipo:'respaldo' },
-    { zona:'nacional', cat:'SEGURIDAD', catClass:'cat-nacional', titulo:'PNP desarticula banda de extorsionadores en Lima y provincias', resumen:'La Policia Nacional logro la captura de 12 presuntos integrantes de una organizacion criminal.', imagen:'https://images.unsplash.com/photo-1453873419266-23812bc9b266?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 5h', tipo:'respaldo' },
-    { zona:'loreto', cat:'LORETO', catClass:'cat-loreto', titulo:'Crecida del rio Amazonas afecta comunidades en provincias', resumen:'El incremento del caudal ha puesto en alerta a las autoridades locales que preparan planes de contingencia.', imagen:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 2h', tipo:'respaldo' },
-    { zona:'loreto', cat:'IQUITOS', catClass:'cat-loreto', titulo:'Municipalidad de Iquitos anuncia obras de pavimentacion', resumen:'Se ejecutaran proyectos de infraestructura vial en cinco distritos de la provincia con fondos municipales.', imagen:'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 3h', tipo:'respaldo' },
-    { zona:'loreto', cat:'LORETO', catClass:'cat-loreto', titulo:'Detienen a presuntos narcotraficantes con cargamento en el rio', resumen:'La Marina de Guerra intercepto una embarcacion con sustancias ilicitas en la cuenca del Ucayali.', imagen:'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 6h', tipo:'respaldo' },
-    { zona:'lima', cat:'LIMA', catClass:'cat-lima', titulo:'Caos en calles de Lima por paro de transportistas', resumen:'Los principales corredores viales amanecieron colapsados por la protesta del sector transporte.', imagen:'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 1h', tipo:'respaldo' },
-    { zona:'lima', cat:'POLITICA', catClass:'cat-lima', titulo:'Fiscalia investiga actos de corrupcion en municipios de Lima Norte', resumen:'Se abrieron carpetas fiscales contra funcionarios de tres distritos por presuntos desvios de recursos.', imagen:'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 4h', tipo:'respaldo' }
+    { zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', titulo:'Gobierno anuncia nuevas medidas economicas para reducir la inflacion', resumen:'El Ejecutivo presento un paquete de medidas orientadas a estabilizar los precios en las regiones del pais.', cuerpoCompleto:'Segun informes de la Presidencia del Consejo de Ministros, el Ejecutivo presento un paquete de medidas orientadas a estabilizar los precios en las regiones del pais. Las autoridades competentes han confirmado que estas medidas buscan garantizar la seguridad y bienestar de la poblacion.\n\nLos analistas politicos senalan que la situacion podria afectar directamente a miles de ciudadanos en la region. Se espera que en las proximas horas se monitoree de cerca la evolucion de los hechos. SMBINRTV Canal Online mantiene informados a sus televidentes con la verdad y la responsabilidad periodistica que nos caracteriza.', imagen:'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 1h', tipo:'respaldo' },
+    { zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', titulo:'Congreso debate proyecto de ley sobre seguridad ciudadana', resumen:'El Parlamento analiza una iniciativa para fortalecer el patrullaje en zonas rurales y urbanas marginadas.', cuerpoCompleto:'El Parlamento analiza una iniciativa para fortalecer el patrullaje en zonas rurales y urbanas marginadas. Las autoridades competentes han confirmado que las medidas adoptadas buscan garantizar la seguridad y bienestar de la poblacion.\n\nLa comunidad se mantiene atenta ante el desarrollo de esta situacion que podria afectar directamente a miles de ciudadanos. Se han activado los protocolos de emergencia correspondientes. Desde Loreto, SMBINRTV continua con su labor informativa para toda la region.', imagen:'https://images.unsplash.com/photo-1541872705-1f73c6400ec9?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 3h', tipo:'respaldo' },
+    { zona:'nacional', cat:'SALUD', catClass:'cat-nacional', titulo:'Minsa reporta aumento de casos de dengue en 8 regiones', resumen:'Las autoridades de salud emitieron una alerta epidemiologica y piden a la poblacion tomar precauciones.', cuerpoCompleto:'Las autoridades de salud emitieron una alerta epidemiologica y piden a la poblacion tomar precauciones. El Ministerio de Salud emitio un comunicado oficial donde se detallan las medidas preventivas.\n\nLos expertos en la materia indican que se monitorea de cerca la evolucion de los hechos. La investigacion continua para determinar las causas exactas del brote. La informacion continua siendo actualizada. Mantengase conectado con SMBINRTV.', imagen:'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 4h', tipo:'respaldo' },
+    { zona:'nacional', cat:'SEGURIDAD', catClass:'cat-nacional', titulo:'PNP desarticula banda de extorsionadores en Lima y provincias', resumen:'La Policia Nacional logro la captura de 12 presuntos integrantes de una organizacion criminal.', cuerpoCompleto:'La Policia Nacional logro la captura de 12 presuntos integrantes de una organizacion criminal. Las autoridades competentes han confirmado que los involucrados podrian enfrentar sanciones segun la normativa vigente.\n\nLa investigacion continua para determinar las causas exactas del hecho. Se espera que en las proximas horas se monitoree de cerca la evolucion de los hechos. Seguiremos informando desde la Amazonia peruana con el compromiso de la verdad y la transparencia.', imagen:'https://images.unsplash.com/photo-1453873419266-23812bc9b266?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 5h', tipo:'respaldo' },
+    { zona:'loreto', cat:'LORETO', catClass:'cat-loreto', titulo:'Crecida del rio Amazonas afecta comunidades en provincias', resumen:'El incremento del caudal ha puesto en alerta a las autoridades locales que preparan planes de contingencia.', cuerpoCompleto:'El incremento del caudal ha puesto en alerta a las autoridades locales que preparan planes de contingencia. Se han activado los protocolos de emergencia correspondientes para garantizar la seguridad de la poblacion.\n\nLa comunidad se mantiene atenta ante el desarrollo de esta situacion. Las autoridades locales coordinan acciones con el gobierno central. Desde Loreto, SMBINRTV continua con su labor informativa para toda la region.', imagen:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 2h', tipo:'respaldo' },
+    { zona:'loreto', cat:'IQUITOS', catClass:'cat-loreto', titulo:'Municipalidad de Iquitos anuncia obras de pavimentacion', resumen:'Se ejecutaran proyectos de infraestructura vial en cinco distritos de la provincia con fondos municipales.', cuerpoCompleto:'Se ejecutaran proyectos de infraestructura vial en cinco distritos de la provincia con fondos municipales. Las autoridades competentes han confirmado que las medidas adoptadas buscan mejorar la calidad de vida de los ciudadanos.\n\nLos expertos en la materia indican que la obra beneficiara a miles de familias. La poblacion local ha manifestado su apoyo ante esta iniciativa. SMBINRTV Canal Online mantiene informados a sus televidentes con la verdad y la responsabilidad periodistica.', imagen:'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 3h', tipo:'respaldo' },
+    { zona:'loreto', cat:'LORETO', catClass:'cat-loreto', titulo:'Detienen a presuntos narcotraficantes con cargamento en el rio', resumen:'La Marina de Guerra intercepto una embarcacion con sustancias ilicitas en la cuenca del Ucayali.', cuerpoCompleto:'La Marina de Guerra intercepto una embarcacion con sustancias ilicitas en la cuenca del Ucayali. Las autoridades competentes han confirmado que los involucrados podrian enfrentar sanciones segun la normativa vigente.\n\nLa investigacion continua para determinar el origen y destino de la mercancia. Se espera que en las proximas horas se den a conocer mas detalles. La informacion continua siendo actualizada. Mantengase conectado con SMBINRTV.', imagen:'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 6h', tipo:'respaldo' },
+    { zona:'lima', cat:'LIMA', catClass:'cat-lima', titulo:'Caos en calles de Lima por paro de transportistas', resumen:'Los principales corredores viales amanecieron colapsados por la protesta del sector transporte.', cuerpoCompleto:'Los principales corredores viales amanecieron colapsados por la protesta del sector transporte. La poblacion local ha manifestado su preocupacion ante la falta de servicio en varias rutas.\n\nLas autoridades locales coordinan acciones con el gobierno central para restablecer el servicio. Se monitorea de cerca la evolucion de los hechos. Seguiremos informando desde la Amazonia peruana con el compromiso de la verdad y la transparencia.', imagen:'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 1h', tipo:'respaldo' },
+    { zona:'lima', cat:'POLITICA', catClass:'cat-lima', titulo:'Fiscalia investiga actos de corrupcion en municipios de Lima Norte', resumen:'Se abrieron carpetas fiscales contra funcionarios de tres distritos por presuntos desvios de recursos.', cuerpoCompleto:'Se abrieron carpetas fiscales contra funcionarios de tres distritos por presuntos desvios de recursos. El Ministerio Publico emitio un comunicado oficial donde se detallan las investigaciones en curso.\n\nLos analistas politicos senalan que la opinion publica exige respuestas claras y contundentes. La investigacion continua para determinar las causas exactas del hecho. Desde Loreto, SMBINRTV continua con su labor informativa para toda la region.', imagen:'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 4h', tipo:'respaldo' }
   ];
 }
 
@@ -1113,6 +1216,7 @@ function filtrarYRenderizar() {
     const badgeEditada = editada ? '<span style="font-size:10px;background:#10b981;color:#fff;padding:2px 8px;border-radius:20px;margin-left:6px;"><i class="bi bi-pencil-fill"></i> Editada</span>' : '';
     const badgeFuente = n.tipo === 'currents' ? '<span style="font-size:10px;background:#0ea5e9;color:#fff;padding:2px 8px;border-radius:20px;margin-left:6px;"><i class="bi bi-lightning-fill"></i> Tiempo real</span>' : 
                          (n.tipo === 'gnews' ? '<span style="font-size:10px;background:#f59e0b;color:#fff;padding:2px 8px;border-radius:20px;margin-left:6px;"><i class="bi bi-clock-history"></i> 12h</span>' : '');
+    const badgeTipo = n.tipo === 'mis' ? '<span style="font-size:10px;background:#be185d;color:#fff;padding:2px 8px;border-radius:20px;margin-left:6px;"><i class="bi bi-person-fill"></i> Manual</span>' : '';
 
     return `<div class="d-news-card" data-zona="${n.zona}">
       <div class="d-img-wrap">
@@ -1122,7 +1226,7 @@ function filtrarYRenderizar() {
         </div>
       </div>
       <div class="d-body">
-        <div class="d-title">${t}${badgeEditada}${badgeFuente}</div>
+        <div class="d-title">${t}${badgeEditada}${badgeFuente}${badgeTipo}</div>
         <div class="d-resumen">${r}</div>
         <div class="d-meta">
           <i class="bi bi-clock"></i> ${n.hace} &nbsp;·&nbsp;
@@ -1131,7 +1235,6 @@ function filtrarYRenderizar() {
         </div>
         <div class="d-actions">
           <button class="d-btn btn-leer" onclick="verNoticia(${idx})"><i class="bi bi-book"></i> Leer completa</button>
-          <button class="d-btn btn-editar" onclick="abrirEditor(${idx})"><i class="bi bi-pencil-square"></i> Editar a mi estilo</button>
         </div>
         <div class="d-share">
           ${botonesCompartir(n.titulo, n.url, idx)}
@@ -1158,7 +1261,7 @@ function verNoticia(idx) {
     <p style="font-size:13px;color:#868e96;margin-bottom:12px;">
       <i class="bi bi-newspaper"></i> Fuente: ${escaparHTML(n.fuente)} &nbsp;·&nbsp;
       <i class="bi bi-clock"></i> ${n.hace}
-      ${editada ? '<br/><span style="color:#10b981;"><i class="bi bi-pencil-fill"></i> Esta noticia fue editada por ti</span>' : ''}
+      ${editada ? '<br/><span style="color:#10b981;"><i class="bi bi-pencil-fill"></i> Esta noticia fue editada por el director</span>' : ''}
     </p>
     <p>${escaparHTML(cuerpo).replace(/\n/g, '<br/>')}</p>
     ${n.url && n.url !== '#' ? `<p style="margin-top:16px;"><a href="${n.url}" target="_blank" style="color:#e63946;font-weight:600;"><i class="bi bi-box-arrow-up-right"></i> Ver noticia original</a></p>` : ''}
@@ -1168,7 +1271,7 @@ function verNoticia(idx) {
   abrirModal('modalNoticia');
 }
 
-// ===== EDITAR A MI ESTILO =====
+// ===== EDITAR A MI ESTILO (PROTEGIDO CON CONTRASENA) =====
 function abrirEditor(idx) {
   noticiaEditando = idx;
   const n = todasLasNoticias[idx];
@@ -1176,7 +1279,7 @@ function abrirEditor(idx) {
   const editada = noticiasEditadas[idx];
 
   document.getElementById('edit-titulo-original').value = n.titulo;
-  document.getElementById('edit-cuerpo-original').value = n.resumen || n.cuerpoCompleto || 'Sin contenido';
+  document.getElementById('edit-cuerpo-original').value = n.cuerpoCompleto || n.resumen || 'Sin contenido';
   document.getElementById('edit-cuerpo-nuevo').value = editada ? editada.cuerpo : '';
   abrirModal('modalEditar');
 }
@@ -1194,10 +1297,10 @@ function guardarEdicion() {
   localStorage.setItem('smbinrtv_editadas', JSON.stringify(noticiasEditadas));
   cerrarModal('modalEditar');
   filtrarYRenderizar();
-  alert('Tu version ha sido guardada. Ahora aparece el sello "Editada" en la noticia.');
+  alert('Version del director guardada exitosamente.');
 }
 
-// ===== PUBLICAR NOTICIA PROPIA =====
+// ===== PUBLICAR NOTICIA PROPIA (PUBLICO) =====
 function publicarNoticiaPropia() {
   const titulo = document.getElementById('own-titulo').value.trim();
   const zona = document.getElementById('own-zona').value;
@@ -1251,4 +1354,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-</html>
+</html<!-- MODAL: Contraseña Editor Interno (solo directores) -->
+<div class="modal-overlay" id="modalPassword" onclick="if(event.target===this)cerrarModal('modalPassword')">
+  <div class="modal-box">
+    <div class="d-flex justify-content-between align-items-start mb-2">
+      <h4><i class="bi bi-shield-lock-fill"></i> Acceso Restringido</h4>
+      <button class="modal-close" onclick="cerrarModal('modalPassword')">×</button>
+    </div>
+    <p class="text-muted small mb-3">Este editor es solo para directores de SMBINRTV. Ingresa la contraseña para continuar.</p>
+    <input type="password" id="editor-password" placeholder="Contraseña de director..." />
+    <div class="d-flex gap-2">
+      <button class="btn-actualizar w-100" onclick="verificarPassword()">
+        <i class="bi bi-shield-check"></i> Acceder
+      </button>
+      <button class="btn-publicar-own" onclick="cerrarModal('modalPassword')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+>
