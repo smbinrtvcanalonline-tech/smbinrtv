@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diario Automático - SMBINRTV</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #f4f6f9; }
+    .top-bar { background: #1a1a2e; color: #fff; padding: 10px 0; }
+    .top-bar a { color: #fff; text-decoration: none; margin: 0 8px; font-size: 13px; }
+    .page-header { background: #fff; border-bottom: 3px solid #e63946; padding: 1rem 0; margin-bottom: 1.5rem; }
+    .page-header h1 { font-size: 1.4rem; font-weight: 700; color: #1a1a2e; margin: 0; display: flex; align-items: center; gap: 10px; }
+    .ai-badge { font-size: 11px; background: #7c3aed; color: #fff; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
+    .live-badge { font-size: 11px; background: #e63946; color: #fff; padding: 3px 10px; border-radius: 20px; font-weight: 600; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.6} }
+
+    /* FORMULARIO INGRESAR NOTICIA */
+    .ingresar-card { background: #fff; border-radius: 14px; border: 1.5px solid #e9ecef; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .ingresar-card h5 { font-size: 1rem; font-weight: 700; color: #1a1a2e; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+    .form-label-sm { font-size: 12px; font-weight: 600; color: #495057; margin-bottom: 4px; }
+    .form-control-sm2 { width: 100%; border: 1.5px solid #dee2e6; border-radius: 8px; padding: 8px 12px; font-size: 13px; outline: none; font-family: 'Inter', sans-serif; background: #f8f9fa; }
+    .form-control-sm2:focus { border-color: #e63946; background: #fff; }
+    textarea.form-control-sm2 { height: 100px; resize: vertical; }
+    .fuente-nota { font-size: 11px; color: #868e96; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+    .btn-generar { background: #e63946; color: #fff; border: none; border-radius: 10px; padding: 10px 24px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; width: 100%; justify-content: center; margin-top: 1rem; }
+    .btn-generar:disabled { opacity: .6; cursor: not-allowed; }
+    .btn-auto { background: #1a1a2e; color: #fff; border: none; border-radius: 10px; padding: 10px 24px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+    .btn-auto:disabled { opacity: .6; }
+
+    /* NOTICIAS GRID */
+    .noticias-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
+    .noticia-card { background: #fff; border-radius: 14px; border: 1px solid #e9ecef; overflow: hidden; transition: box-shadow .2s; }
+    .noticia-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.10); }
+    .noticia-img { width: 100%; height: 200px; object-fit: cover; background: #dee2e6; display: block; }
+    .noticia-img-placeholder { width: 100%; height: 200px; background: linear-gradient(135deg, #1a1a2e, #e63946); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 2rem; }
+    .noticia-body { padding: 1rem; }
+    .noticia-cat { font-size: 10px; font-weight: 700; letter-spacing: .07em; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 8px; }
+    .cat-nacional { background: #dbeafe; color: #1d4ed8; }
+    .cat-loreto { background: #dcfce7; color: #15803d; }
+    .cat-lima { background: #fef3c7; color: #92400e; }
+    .cat-propia { background: #fce7f3; color: #9d174d; }
+    .noticia-titulo { font-size: 15px; font-weight: 700; color: #1a1a2e; line-height: 1.4; margin-bottom: 8px; font-family: 'Merriweather', serif; }
+    .noticia-resumen { font-size: 13px; color: #495057; line-height: 1.6; margin-bottom: 10px; }
+    .noticia-meta { font-size: 11px; color: #868e96; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .noticia-cuerpo { font-size: 13.5px; color: #333; line-height: 1.75; display: none; border-top: 1px solid #f1f3f5; padding-top: 10px; margin-top: 8px; white-space: pre-wrap; }
+    .noticia-cuerpo.visible { display: block; }
+    .btn-leer { font-size: 12px; color: #e63946; font-weight: 600; background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; gap: 4px; }
+    .noticia-share { display: flex; gap: 6px; flex-wrap: wrap; border-top: 1px solid #f1f3f5; padding-top: 10px; margin-top: 10px; }
+    .sh-btn { display: flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; border: none; cursor: pointer; transition: opacity .2s; color: #fff; }
+    .sh-btn:hover { opacity: .85; }
+    .sh-fb { background: #1877f2; }
+    .sh-wa { background: #25d366; }
+    .sh-tw { background: #000; }
+    .sh-ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+    .fuente-protegida { font-size: 10px; background: #f1f5f9; color: #64748b; padding: 3px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap-3px; margin-top: 6px; }
+
+    /* SKELETON */
+    .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* SPINNER */
+    .spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* FILTROS */
+    .filtros { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+    .ftab { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1.5px solid #dee2e6; background: #fff; cursor: pointer; color: #495057; transition: all .2s; }
+    .ftab.active { background: #e63946; color: #fff; border-color: #e63946; }
+    .contador { font-size: 12px; color: #868e96; margin-bottom: 1rem; }
+
+    /* SECCION AUTO */
+    .seccion-auto { background: #fff; border-radius: 14px; border: 1.5px solid #e9ecef; padding: 1.25rem; margin-bottom: 1.5rem; }
+    .seccion-auto h5 { font-size: .95rem; font-weight: 700; color: #1a1a2e; margin-bottom: .75rem; display: flex; align-items: center; gap: 8px; }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="container-fluid px-3 d-flex justify-content-between align-items-center">
+    <a href="index.html"><i class="bi bi-arrow-left"></i> Volver al portal</a>
+    <span style="font-size:13px;font-weight:600;">SMBINRTV · Panel de Noticias</span>
+    <span id="reloj" style="font-size:12px;"></span>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="container-fluid px-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <h1>
+      <i class="bi bi-newspaper"></i>
+      Diario Automático SMBINRTV
+      <span class="ai-badge"><i class="bi bi-stars"></i> IA</span>
+      <span class="live-badge">EN VIVO</span>
+    </h1>
+    <button class="btn-auto" id="btnAutoNoticias" onclick="generarNoticiasAuto()">
+      <i class="bi bi-arrow-clockwise"></i> Generar 9 noticias automáticas
+    </button>
+  </div>
+</div>
+
+<div class="container-fluid px-3">
+  <div class="row g-4">
+
+    <!-- COLUMNA IZQUIERDA: FORMULARIO -->
+    <div class="col-lg-4">
+
+      <!-- AUTO -->
+      <div class="seccion-auto">
+        <h5><i class="bi bi-robot"></i> Noticias automáticas</h5>
+        <p style="font-size:12px;color:#868e96;margin-bottom:.75rem;">Genera 9 noticias del día automáticamente: 4 nacionales, 3 de Loreto/Iquitos, 2 de Lima. La IA busca, analiza y redacta.</p>
+        <button class="btn-auto w-100" id="btnAutoNoticias2" onclick="generarNoticiasAuto()" style="justify-content:center;">
+          <i class="bi bi-arrow-clockwise"></i> Actualizar ahora
+        </button>
+        <p class="fuente-nota mt-2"><i class="bi bi-clock"></i> Última actualización: <span id="ultima-auto">—</span></p>
+      </div>
+
+      <!-- INGRESAR NOTICIA PROPIA -->
+      <div class="ingresar-card">
+        <h5><i class="bi bi-pencil-square text-danger"></i> Ingresar mi noticia</h5>
+
+        <div class="mb-2">
+          <div class="form-label-sm">Fuente de información <span style="color:#e63946">*</span></div>
+          <input class="form-control-sm2" id="inp-fuente" type="text" placeholder="URL, correo o nombre de la fuente..." />
+          <div class="fuente-nota"><i class="bi bi-shield-lock-fill" style="color:#e63946"></i> Confidencial — solo queda en nuestros registros, no se publica</div>
+        </div>
+
+        <div class="mb-2">
+          <div class="form-label-sm">Información / texto de la noticia <span style="color:#e63946">*</span></div>
+          <textarea class="form-control-sm2" id="inp-info" placeholder="Pega aquí el texto, correo, mensaje o información que tienes sobre la noticia..."></textarea>
+        </div>
+
+        <div class="mb-2">
+          <div class="form-label-sm">Zona</div>
+          <select class="form-control-sm2" id="inp-zona">
+            <option value="Loreto / Iquitos">Loreto / Iquitos</option>
+            <option value="Nauta">Nauta</option>
+            <option value="Requena">Requena</option>
+            <option value="Yurimaguas">Yurimaguas</option>
+            <option value="Caballococha">Caballococha</option>
+            <option value="Contamana">Contamana</option>
+            <option value="Putumayo">Putumayo</option>
+            <option value="Datem del Marañón">Datem del Marañón</option>
+            <option value="Mariscal Ramón Castilla">Mariscal Ramón Castilla</option>
+            <option value="Nacional">Nacional</option>
+            <option value="Lima">Lima</option>
+          </select>
+        </div>
+
+        <div class="mb-2">
+          <div class="form-label-sm">Categoría</div>
+          <select class="form-control-sm2" id="inp-cat">
+            <option value="LORETO">Loreto</option>
+            <option value="IQUITOS">Iquitos</option>
+            <option value="NACIONAL">Nacional</option>
+            <option value="POLÍTICA">Política</option>
+            <option value="SEGURIDAD">Seguridad</option>
+            <option value="SALUD">Salud</option>
+            <option value="EDUCACIÓN">Educación</option>
+            <option value="ECONOMÍA">Economía</option>
+            <option value="MEDIO AMBIENTE">Medio Ambiente</option>
+            <option value="SUCESOS">Sucesos</option>
+            <option value="DENUNCIA">Denuncia</option>
+          </select>
+        </div>
+
+        <button class="btn-generar" id="btnGenerar" onclick="generarNoticiaPropia()">
+          <i class="bi bi-stars"></i> Analizar y generar noticia
+        </button>
+
+        <div class="fuente-nota mt-2" style="background:#fff8e1;padding:8px;border-radius:8px;">
+          <i class="bi bi-info-circle-fill" style="color:#f59e0b"></i>
+          La IA analiza la información, verifica coherencia, genera titular propio y redacta el cuerpo completo. La fuente original queda protegida.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COLUMNA DERECHA: NOTICIAS -->
+    <div class="col-lg-8">
+      <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+        <div class="filtros" id="filtros">
+          <button class="ftab active" onclick="filtrar('todas',this)">Todas</button>
+          <button class="ftab" onclick="filtrar('loreto',this)">Loreto</button>
+          <button class="ftab" onclick="filtrar('nacional',this)">Nacional</button>
+          <button class="ftab" onclick="filtrar('lima',this)">Lima</button>
+          <button class="ftab" onclick="filtrar('propia',this)">Mis noticias</button>
+        </div>
+      </div>
+      <div class="contador" id="contador">0 noticias publicadas hoy</div>
+      <div class="noticias-grid" id="noticias-grid">
+        <div style="grid-column:1/-1;text-align:center;padding:3rem;color:#868e96;">
+          <i class="bi bi-newspaper" style="font-size:3rem;opacity:.3;"></i>
+          <p style="margin-top:1rem;">Haz clic en <strong>"Generar 9 noticias automáticas"</strong> para comenzar, o ingresa tu propia noticia.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const PORTAL_URL = 'https://smbinrtv.vercel.app';
+const WA = '51975367559';
+
+// Imágenes por categoría (Unsplash)
+const IMAGENES = {
+  'NACIONAL':    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=70',
+  'POLÍTICA':    'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600&q=70',
+  'SEGURIDAD':   'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&q=70',
+  'SALUD':       'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=70',
+  'EDUCACIÓN':   'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=70',
+  'ECONOMÍA':    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=70',
+  'MEDIO AMBIENTE': 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=70',
+  'LORETO':      'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=600&q=70',
+  'IQUITOS':     'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=600&q=70',
+  'LIMA':        'https://images.unsplash.com/photo-1531219432768-9f540ce91ef3?w=600&q=70',
+  'SUCESOS':     'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=600&q=70',
+  'DENUNCIA':    'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=70',
+  'DEFAULT':     'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=70'
+};
+
+// Registro interno de fuentes (solo en memoria del navegador)
+const registroFuentes = [];
+
+let noticias = [];
+let filtroActual = 'todas';
+
+// Reloj
+setInterval(() => {
+  document.getElementById('reloj').textContent = new Date().toLocaleString('es-PE');
+}, 1000);
+
+function getImagen(cat) {
+  return IMAGENES[cat] || IMAGENES['DEFAULT'];
+}
+
+function getCatClass(zona) {
+  if (zona === 'nacional') return 'cat-nacional';
+  if (zona === 'lima') return 'cat-lima';
+  if (zona === 'propia') return 'cat-propia';
+  return 'cat-loreto';
+}
+
+function compartirFB(t) { window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(PORTAL_URL)+'&quote='+encodeURIComponent('📰 '+t+' - SMBINRTV'),'_blank'); }
+function compartirWA(t) { window.open('https://wa.me/?text='+encodeURIComponent('📰 '+t+'\n\n🔴 SMBINRTV: '+PORTAL_URL),'_blank'); }
+function compartirTW(t) { window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent('📰 '+t+' - @SMBINRTV &url='+PORTAL_URL),'_blank'); }
+function compartirIG(t) { alert('Para Instagram:\n1. Copia: '+PORTAL_URL+'\n2. Pégalo en tu historia o bio.\n\nNoticia: '+t); }
+
+function toggleCuerpo(idx) {
+  const el = document.getElementById('cuerpo-'+idx);
+  const btn = document.getElementById('btn-leer-'+idx);
+  if (el.classList.contains('visible')) {
+    el.classList.remove('visible');
+    btn.innerHTML = '<i class="bi bi-book"></i> Leer noticia completa';
+  } else {
+    el.classList.add('visible');
+    btn.innerHTML = '<i class="bi bi-chevron-up"></i> Ocultar';
+  }
+}
+
+function renderNoticias() {
+  const grid = document.getElementById('noticias-grid');
+  const filtradas = filtroActual === 'todas' ? noticias : noticias.filter(n => n.zona === filtroActual);
+  document.getElementById('contador').textContent = filtradas.length + ' noticias publicadas hoy';
+
+  if (!filtradas.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:#868e96;"><i class="bi bi-search" style="font-size:2rem;opacity:.3;"></i><p style="margin-top:1rem;">No hay noticias en esta categoría.</p></div>';
+    return;
+  }
+
+  grid.innerHTML = filtradas.map((n, i) => {
+    const idx = noticias.indexOf(n);
+    const img = n.imagen || getImagen(n.cat);
+    const catClass = getCatClass(n.zona);
+    return `
+    <div class="noticia-card">
+      <img class="noticia-img" src="${img}" alt="${n.cat}" onerror="this.style.display='none'" loading="lazy" />
+      <div class="noticia-body">
+        <span class="noticia-cat ${catClass}">${n.cat}</span>
+        <div class="noticia-titulo">${n.titulo}</div>
+        <div class="noticia-resumen">${n.resumen || ''}</div>
+        <div class="noticia-meta">
+          <span><i class="bi bi-clock"></i> Hace ${n.hace}</span>
+          <span><i class="bi bi-geo-alt"></i> ${n.zona}</span>
+          <span class="ai-badge" style="font-size:9px;"><i class="bi bi-stars"></i> IA</span>
+          ${n.espropia ? '<span style="font-size:10px;background:#fce7f3;color:#9d174d;padding:2px 8px;border-radius:10px;font-weight:600;">MI NOTICIA</span>' : ''}
+        </div>
+        <button class="btn-leer" id="btn-leer-${idx}" onclick="toggleCuerpo(${idx})">
+          <i class="bi bi-book"></i> Leer noticia completa
+        </button>
+        <div class="noticia-cuerpo" id="cuerpo-${idx}">${n.cuerpo || 'Generando cuerpo...'}</div>
+        <div class="noticia-share">
+          <button class="sh-btn sh-fb" onclick="compartirFB('${n.titulo.replace(/'/g,"\\'")}')"><i class="bi bi-facebook"></i> Facebook</button>
+          <button class="sh-btn sh-wa" onclick="compartirWA('${n.titulo.replace(/'/g,"\\'")}')"><i class="bi bi-whatsapp"></i> WhatsApp</button>
+          <button class="sh-btn sh-tw" onclick="compartirTW('${n.titulo.replace(/'/g,"\\'")}')"><i class="bi bi-twitter-x"></i> X</button>
+          <button class="sh-btn sh-ig" onclick="compartirIG('${n.titulo.replace(/'/g,"\\'")}')"><i class="bi bi-instagram"></i> IG</button>
+        </div>
+        <div class="fuente-protegida"><i class="bi bi-shield-lock"></i> Fuente protegida · SMBINRTV</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filtrar(zona, btn) {
+  filtroActual = zona;
+  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderNoticias();
+}
+
+async function llamarIA(prompt, maxTokens) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: maxTokens,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  const data = await res.json();
+  return data.content?.[0]?.text || '';
+}
+
+async function generarNoticiasAuto() {
+  const btns = document.querySelectorAll('#btnAutoNoticias, #btnAutoNoticias2');
+  btns.forEach(b => { b.disabled = true; b.innerHTML = '<span class="spinner"></span> Generando...'; });
+
+  try {
+    // Paso 1: Generar titulares + resumen en JSON
+    const prompt = `Eres el editor jefe de SMBINRTV Canal Online, diario digital de Loreto, Perú. Hoy es ${new Date().toLocaleDateString('es-PE')}. 
+Genera exactamente 9 noticias reales y actuales de Perú con la siguiente distribución:
+- 4 noticias NACIONALES (todo Perú)
+- 3 noticias de LORETO/IQUITOS y sus 9 provincias (Nauta, Requena, Yurimaguas, Caballococha, Contamana, Putumayo, Datem del Marañón, Mariscal Ramón Castilla, Ucayali de Loreto)
+- 2 noticias de LIMA
+
+Para cada noticia genera:
+1. Un titular periodístico propio, claro e impactante
+2. Un resumen de 2 líneas
+3. El cuerpo completo de la noticia (4-5 párrafos periodísticos con contexto, datos, declaraciones probables de autoridades y cierre)
+4. La categoría (NACIONAL, LORETO, IQUITOS, LIMA, POLÍTICA, SEGURIDAD, SALUD, EDUCACIÓN, ECONOMÍA, MEDIO AMBIENTE, SUCESOS)
+
+Responde SOLO en JSON válido sin texto extra ni markdown:
+[
+  {
+    "zona": "nacional|loreto|lima",
+    "cat": "CATEGORÍA",
+    "titulo": "Titular periodístico propio",
+    "resumen": "Resumen de 2 líneas",
+    "cuerpo": "Cuerpo completo de 4-5 párrafos",
+    "hace": "Xh"
+  }
+]`;
+
+    const texto = await llamarIA(prompt, 3000);
+    const clean = texto.replace(/```json|```/g, '').trim();
+    const nuevas = JSON.parse(clean);
+
+    if (Array.isArray(nuevas) && nuevas.length > 0) {
+      // Agregar imágenes según categoría
+      const noticiasConImg = nuevas.map(n => ({
+        ...n,
+        imagen: getImagen(n.cat),
+        espropia: false
+      }));
+      // Mantener noticias propias, reemplazar automáticas
+      noticias = [...noticias.filter(n => n.espropia), ...noticiasConImg];
+      document.getElementById('ultima-auto').textContent = new Date().toLocaleTimeString('es-PE');
+      renderNoticias();
+    }
+  } catch(e) {
+    alert('Error al generar noticias. Verifica tu conexión e intenta de nuevo.');
+    console.error(e);
+  }
+
+  btns.forEach(b => { b.disabled = false; b.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Actualizar ahora'; });
+  document.getElementById('btnAutoNoticias').innerHTML = '<i class="bi bi-arrow-clockwise"></i> Generar 9 noticias automáticas';
+}
+
+async function generarNoticiaPropia() {
+  const fuente = document.getElementById('inp-fuente').value.trim();
+  const info = document.getElementById('inp-info').value.trim();
+  const zona = document.getElementById('inp-zona').value;
+  const cat = document.getElementById('inp-cat').value;
+
+  if (!info) { alert('Por favor ingresa la información de la noticia.'); return; }
+  if (!fuente) { alert('Por favor indica la fuente de información (quedará protegida).'); return; }
+
+  // Guardar fuente en registro interno (solo en memoria)
+  const registro = {
+    fecha: new Date().toISOString(),
+    fuente: fuente,
+    zona: zona,
+    infoOriginal: info.substring(0, 200) + '...'
+  };
+  registroFuentes.push(registro);
+  console.log('REGISTRO FUENTE (confidencial):', registro);
+
+  const btn = document.getElementById('btnGenerar');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Analizando y generando...';
+
+  try {
+    const prompt = `Eres el editor jefe de SMBINRTV Canal Online, diario digital de Loreto, Perú. 
+Has recibido la siguiente información de una fuente confidencial. Tu trabajo es:
+1. Analizar la información
+2. Verificar que sea coherente y tenga valor periodístico
+3. Generar un TITULAR PROPIO periodístico (no copiar el de la fuente)
+4. Redactar un RESUMEN de 2 líneas
+5. Redactar el CUERPO COMPLETO de la noticia (4-5 párrafos: entradilla impactante, desarrollo, contexto, declaración probable de autoridad, cierre)
+
+ZONA: ${zona}
+CATEGORÍA: ${cat}
+INFORMACIÓN RECIBIDA:
+${info}
+
+IMPORTANTE: 
+- NO menciones la fuente original en ningún momento
+- Genera tu propio titular periodístico
+- El cuerpo debe ser redacción periodística profesional
+- Incluye contexto regional de Loreto cuando aplique
+
+Responde SOLO en JSON válido:
+{
+  "titular": "Titular periodístico propio",
+  "resumen": "Resumen de 2 líneas",
+  "cuerpo": "Cuerpo completo de 4-5 párrafos"
+}`;
+
+    const texto = await llamarIA(prompt, 1200);
+    const clean = texto.replace(/```json|```/g, '').trim();
+    const resultado = JSON.parse(clean);
+
+    const nuevaNoticia = {
+      zona: zona.toLowerCase().includes('loreto') || zona.toLowerCase().includes('iquitos') || 
+            ['nauta','requena','yurimaguas','caballococha','contamana','putumayo','datem','mariscal'].some(p => zona.toLowerCase().includes(p)) 
+            ? 'loreto' : zona === 'Lima' ? 'lima' : zona === 'Nacional' ? 'nacional' : 'propia',
+      cat: cat,
+      titulo: resultado.titular,
+      resumen: resultado.resumen,
+      cuerpo: resultado.cuerpo,
+      imagen: getImagen(cat),
+      hace: 'unos minutos',
+      espropia: true
+    };
+
+    noticias.unshift(nuevaNoticia);
+    renderNoticias();
+
+    // Limpiar formulario
+    document.getElementById('inp-fuente').value = '';
+    document.getElementById('inp-info').value = '';
+
+    alert('✅ Noticia generada y publicada correctamente.\n\nLa fuente ha quedado registrada de forma confidencial.');
+  } catch(e) {
+    alert('Error al generar la noticia. Verifica tu conexión e intenta de nuevo.');
+    console.error(e);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="bi bi-stars"></i> Analizar y generar noticia';
+}
+</script>
+</body>
+</html>
