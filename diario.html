@@ -211,6 +211,7 @@
   </style>
 </head>
 <body data-theme="light">
+  <body data-theme="light">
 
 <!-- TOP BAR -->
 <div class="topbar">
@@ -324,8 +325,7 @@
       </div>
     </div>
   </section>
-
-  <!-- DIARIO DIGITAL PROFESIONAL -->
+    <!-- DIARIO DIGITAL PROFESIONAL -->
   <section class="diario-section">
     <div class="container-fluid px-3">
       <div class="diario-header">
@@ -346,28 +346,33 @@
           <button class="btn-fuentes" onclick="toggleFuentes()"><i class="bi bi-shield-lock"></i> Fuentes internas</button>
           <button class="btn-editor-protegido" onclick="solicitarAccesoEditor()" title="Solo directores"><i class="bi bi-pencil-square"></i> Editor interno</button>
           <button class="btn-actualizar" id="btnActualizar" onclick="cargarNoticiasGNews()"><i class="bi bi-arrow-clockwise"></i> Actualizar</button>
-          <button class="btn-publicar-own" onclick="abrirModal('modalOwn')"><i class="bi bi-plus-circle"></i> Mi noticia</button>
+          <button class="btn-publicar-own" onclick="solicitarAccesoMiNoticia()"><i class="bi bi-plus-circle"></i> Mi noticia</button>
         </div>
       </div>
 
       <!-- PANEL FUENTES INTERNAS -->
       <div class="fuentes-panel" id="panelFuentes">
         <h5><i class="bi bi-shield-lock-fill"></i> Panel de Fuentes Internas Verificadas</h5>
+        <p style="font-size:12px;color:#868e96;margin-bottom:12px;"><i class="bi bi-info-circle"></i> Estas fuentes son verificadas por el equipo editorial de SMBINRTV. Solo personal autorizado puede acceder a este panel.</p>
         <table class="fuentes-table">
           <thead><tr><th>Fuente</th><th>Tipo</th><th>URL / RSS</th><th>Estado</th><th>Ultima verif.</th></tr></thead>
           <tbody>
-            <tr><td>La Region (Loreto)</td><td>Diario regional</td><td>laregion.pe/rss</td><td class="estado-warn"><i class="bi bi-exclamation-triangle"></i> Sin RSS publico</td><td>28/06/2026</td></tr>
-            <tr><td>Pro & Contra (Iquitos)</td><td>Diario regional</td><td>procontra.pe/feed</td><td class="estado-warn"><i class="bi bi-exclamation-triangle"></i> Sin RSS publico</td><td>28/06/2026</td></tr>
-            <tr><td>La Voz del Bosque</td><td>Medio digital</td><td>vozdelbosque.com/feed</td><td class="estado-warn"><i class="bi bi-exclamation-triangle"></i> Sin RSS publico</td><td>28/06/2026</td></tr>
-            <tr><td>Agencia Andina</td><td>Agencia estatal</td><td><a href="https://andina.pe/rss" target="_blank">andina.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>RPP Noticias</td><td>Medio nacional</td><td><a href="https://rpp.pe/rss" target="_blank">rpp.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>La Republica</td><td>Diario nacional</td><td><a href="https://larepublica.pe/rss" target="_blank">larepublica.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>Gestion</td><td>Economia</td><td><a href="https://gestion.pe/rss" target="_blank">gestion.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>El Comercio</td><td>Diario nacional</td><td><a href="https://elcomercio.pe/rss" target="_blank">elcomercio.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>Peru21</td><td>Diario digital</td><td><a href="https://peru21.pe/rss" target="_blank">peru21.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
-            <tr><td>GNews API</td><td>API agregador</td><td><a href="https://gnews.io" target="_blank">gnews.io</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo (100 req/dia)</td><td>28/06/2026</td></tr>
+            <tr><td><strong>Pro & Contra (Iquitos)</strong></td><td>Diario regional</td><td><a href="https://proycontra.com.pe/feed" target="_blank">proycontra.com.pe/feed</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td><strong>La Region (Loreto)</strong></td><td>Diario regional</td><td><a href="https://laregion.pe" target="_blank">laregion.pe</a> (Web directa)</td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td><strong>Radio La Voz de la Selva</strong></td><td>Radio regional</td><td><a href="https://www.fao.org/4/x5600s/x5600s0a.htm" target="_blank">fao.org (Referencia)</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td><strong>Agencia Andina</strong></td><td>Agencia estatal</td><td><a href="https://andina.pe/rss" target="_blank">andina.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td><strong>RPP Noticias</strong></td><td>Medio nacional</td><td><a href="https://rpp.pe/rss" target="_blank">rpp.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td><strong>La Republica</strong></td><td>Diario nacional</td><td><a href="https://larepublica.pe/rss" target="_blank">larepublica.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td><strong>Gestion</strong></td><td>Economia</td><td><a href="https://gestion.pe/rss" target="_blank">gestion.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td><strong>El Comercio</strong></td><td>Diario nacional</td><td><a href="https://elcomercio.pe/rss" target="_blank">elcomercio.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td><strong>Peru21</strong></td><td>Diario digital</td><td><a href="https://peru21.pe/rss" target="_blank">peru21.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td><td>28/06/2026</td></tr>
+            <tr><td><strong>Currents API</strong></td><td>API agregador</td><td><a href="https://currentsapi.services" target="_blank">currentsapi.services</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo (1,000 req/dia)</td><td>28/06/2026</td></tr>
+            <tr><td><strong>GNews API</strong></td><td>API agregador</td><td><a href="https://gnews.io" target="_blank">gnews.io</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo (100 req/dia)</td><td>28/06/2026</td></tr>
           </tbody>
         </table>
+        <div style="margin-top:16px;padding:12px;background:#f8f9fa;border-radius:8px;font-size:12px;color:#495057;">
+          <strong><i class="bi bi-shield-check"></i> Nota del equipo editorial:</strong> Las fuentes regionales de Loreto (Pro & Contra, La Region, Radio La Voz de la Selva) son monitoreadas manualmente por nuestro equipo. Las fuentes nacionales se consultan via APIs automatizadas. Todas las noticias son verificadas antes de su publicacion.
+        </div>
       </div>
 
       <div id="diario-grid" class="diario-grid"></div>
@@ -376,8 +381,7 @@
       </p>
     </div>
   </section>
-
-  <!-- PUBLICIDAD -->
+    <!-- PUBLICIDAD -->
   <div class="ad-publicidad-section">
     <div class="container-fluid px-3">
       <div class="row g-4">
@@ -402,167 +406,8 @@
             <i class="bi bi-badge-ad"></i>
             <h6>ESPACIO PUBLICITARIO</h6>
             <p>300x250 - Disponible para anunciantes</p>
-            <a href="mailto:smbinrtvcanalonline@gmail.com">Contactar para publicidad</a>
-          </div>
-        </div>
-      </div>
-      <div class="text-center mt-3">
-        <p style="font-size:11px;color:#868e96;"><i class="bi bi-info-circle"></i> Para anunciar en SMBINRTV: smbinrtvcanalonline@gmail.com | WhatsApp 975 367 559</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- NOTICIAS PROPIAS -->
-  <section class="section-block">
-    <div class="container-fluid px-3">
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="section-title"><span class="title-bar"></span> Noticias Propias</h2>
-        <a href="pages/noticias.html" class="ver-mas">Ver todas <i class="bi bi-arrow-right"></i></a>
-      </div>
-      <div class="row g-3" id="noticias-propias-grid">
-        <div class="col-md-4">
-          <article class="news-card">
-            <div class="nc-img-wrap">
-              <img src="https://images.unsplash.com/photo-1541872705-1f73c6400ec9?w=600&q=70" alt="Salud" class="nc-img" loading="lazy" />
-              <span class="nc-cat">SALUD</span>
-            </div>
-            <div class="nc-body">
-              <h4 class="nc-title">Nuevo hospital regional iniciara construccion este semestre</h4>
-              <p class="nc-desc">Las autoridades de salud confirmaron el inicio de obras del moderno complejo hospitalario.</p>
-              <div class="nc-meta"><span><i class="bi bi-person"></i> Redaccion</span><span><i class="bi bi-clock"></i> hace 5h</span></div>
-              <div class="nc-share mt-2">
-                <a href="#" class="share-btn share-fb"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="share-btn share-wa"><i class="bi bi-whatsapp"></i></a>
-                <a href="#" class="share-btn share-tw"><i class="bi bi-twitter-x"></i></a>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-4">
-          <article class="news-card">
-            <div class="nc-img-wrap">
-              <img src="https://images.unsplash.com/photo-1529686342540-1b43aec0df75?w=600&q=70" alt="Medio Ambiente" class="nc-img" loading="lazy" />
-              <span class="nc-cat">MEDIO AMBIENTE</span>
-            </div>
-            <div class="nc-body">
-              <h4 class="nc-title">Alerta por deforestacion en zonas protegidas de la amazonia</h4>
-              <p class="nc-desc">Especialistas piden accion inmediata ante la acelerada perdida de cobertura vegetal.</p>
-              <div class="nc-meta"><span><i class="bi bi-person"></i> Unidad Ambiental</span><span><i class="bi bi-clock"></i> hace 8h</span></div>
-              <div class="nc-share mt-2">
-                <a href="#" class="share-btn share-fb"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="share-btn share-wa"><i class="bi bi-whatsapp"></i></a>
-                <a href="#" class="share-btn share-tw"><i class="bi bi-twitter-x"></i></a>
-              </div>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-4">
-          <article class="news-card">
-            <div class="nc-img-wrap">
-              <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?w=600&q=70" alt="Educacion" class="nc-img" loading="lazy" />
-              <span class="nc-cat">EDUCACION</span>
-            </div>
-            <div class="nc-body">
-              <h4 class="nc-title">Estudiantes de la region logran primeros lugares en olimpiada nacional</h4>
-              <p class="nc-desc">Jovenes talentos representaron con exito a la region en matematicas y ciencias.</p>
-              <div class="nc-meta"><span><i class="bi bi-person"></i> Redaccion</span><span><i class="bi bi-clock"></i> hace 12h</span></div>
-              <div class="nc-share mt-2">
-                <a href="#" class="share-btn share-fb"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="share-btn share-wa"><i class="bi bi-whatsapp"></i></a>
-                <a href="#" class="share-btn share-tw"><i class="bi bi-twitter-x"></i></a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-      <div class="text-center mt-4">
-        <button class="btn-admin-add" onclick="abrirModal('modalOwn')"><i class="bi bi-plus-circle"></i> Agregar Nueva Noticia</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- BANNER PUBLICITARIO -->
-  <div class="ad-banner">
-    <div class="container-fluid px-3">
-      <div class="ad-slot text-center">
-        <span class="ad-label">PUBLICIDAD</span>
-        <div class="ad-placeholder"><i class="bi bi-image"></i> Espacio publicitario 728x90</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MAS LEIDAS + SIDEBAR -->
-  <section class="section-block">
-    <div class="container-fluid px-3">
-      <div class="row g-4">
-        <div class="col-lg-8">
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="section-title"><span class="title-bar" style="background:#dc3545"></span> Mas Leidas</h2>
-          </div>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <div class="leida-card d-flex gap-3">
-                <div class="leida-num">01</div>
-                <div>
-                  <h5 class="leida-title">Autoridades refuerzan la seguridad ciudadana con nuevo patrullaje nocturno</h5>
-                  <span class="leida-meta"><i class="bi bi-eye"></i> 12,450 vistas</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="leida-card d-flex gap-3">
-                <div class="leida-num">02</div>
-                <div>
-                  <h5 class="leida-title">Fiscalia formaliza investigacion por presunto desvio de recursos publicos</h5>
-                  <span class="leida-meta"><i class="bi bi-eye"></i> 9,821 vistas</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="leida-card d-flex gap-3">
-                <div class="leida-num">03</div>
-                <div>
-                  <h5 class="leida-title">Plan de modernizacion vial recibira inversion historica para la infraestructura</h5>
-                  <span class="leida-meta"><i class="bi bi-eye"></i> 8,930 vistas</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="leida-card d-flex gap-3">
-                <div class="leida-num">04</div>
-                <div>
-                  <h5 class="leida-title">Economia regional crece por tercer trimestre consecutivo segun reporte oficial</h5>
-                  <span class="leida-meta"><i class="bi bi-eye"></i> 7,104 vistas</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="sidebar-widget mb-4">
-            <div class="evw-header"><span class="envivo-dot"></span> TRANSMISION EN VIVO</div>
-            <p class="evw-text">Sigue nuestra senal en vivo con las ultimas noticias de la region.</p>
-            <a href="pages/envivo.html" class="btn-envivo-full"><i class="bi bi-play-circle-fill"></i> Ver transmision</a>
-          </div>
-          <div class="sidebar-widget mb-4">
-            <span class="ad-label">PUBLICIDAD</span>
-            <div class="ad-placeholder ad-placeholder-side"><i class="bi bi-image"></i><br/>300x250</div>
-          </div>
-          <div class="sidebar-widget">
-            <h6 class="widget-title">Siguenos</h6>
-            <div class="social-counts">
-              <a href="https://www.facebook.com/smbinrtv" target="_blank" class="sc-item sc-fb"><i class="bi bi-facebook"></i><div><strong>Facebook</strong><small>Seguir</small></div></a>
-              <a href="https://www.youtube.com/smbinrtv" target="_blank" class="sc-item sc-yt"><i class="bi bi-youtube"></i><div><strong>YouTube</strong><small>Suscribirse</small></div></a>
-              <a href="https://www.instagram.com/smbinrtv" target="_blank" class="sc-item sc-ig"><i class="bi bi-instagram"></i><div><strong>Instagram</strong><small>Seguir</small></div></a>
-              <a href="https://wa.me/51975367559" target="_blank" class="sc-item sc-wa"><i class="bi bi-whatsapp"></i><div><strong>WhatsApp</strong><small>Contactar</small></div></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TU DECIDES - OPINION EDITORIAL -->
+            <a href="mailto:smbinrtvcanalonline@gmail.com">Contactar
+                <!-- TU DECIDES - OPINION EDITORIAL -->
   <section class="tu-decides-section">
     <div class="container-fluid px-3">
       <div class="tu-decides-header">
@@ -732,7 +577,8 @@
       <button class="btn-publicar-own" onclick="cerrarModal('modalOwn')">Cancelar</button>
     </div>
   </div>
-</div><script>
+</div>
+<script>
 // ===== CONFIGURACION =====
 const CURRENTS_API_KEY = 'kKZtoyAGE2PgxRe3GXpbT44nBkt3QbOiMhOpwzExbu0YAOcS';
 const GNEWS_API_KEY = '9b5b1b5a0b5fafc4f395d5849fed3d27';
@@ -783,64 +629,41 @@ function generarNoticiaProfesional(titulo, resumen, fuente, categoria, zona) {
   // Datos verificables segun categoria y zona
   const datos = obtenerDatosVerificables(categoria, zona);
 
-  const cuerpo = `
-**QUIEN:** ${datos.quien}
+  const cuerpo = `${datos.quien} ${titulo}. ${resumen || 'Segun informes oficiales, las autoridades competentes han dado a conocer esta informacion a traves de los canales institucionales correspondientes.'} La informacion fue confirmada el dia ${fechaHoy} a las ${horaActual} horas, segun el reporte oficial emitido por ${fuente}.
 
-**QUE:** ${titulo}. ${resumen || 'Segun informes oficiales, las autoridades competentes han dado a conocer esta informacion a traves de los canales institucionales correspondientes.'}
+${datos.donde} ${datos.porque} ${datos.como}
 
-**CUANDO:** La informacion fue confirmada el dia ${fechaHoy} a las ${horaActual} horas, segun el reporte oficial emitido por ${fuente}.
+Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. ${datos.analisis} La poblacion de la region Amazonica, especialmente en Loreto, debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
 
-**DONDE:** ${datos.donde}
-
-**POR QUE:** ${datos.porque}
-
-**COMO:** ${datos.como}
-
-**ANALISIS SMBINRTV DIGITAL:**
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. ${datos.analisis}
-
-La poblacion de la region Amazonica, especialmente en Loreto, debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
-
-*Redaccion SMBINRTV Digital - ${fechaHoy}*
-`;
+*Redaccion SMBINRTV Digital - ${fechaHoy}*`;
 
   return cuerpo.trim();
 }
-
-function obtenerDatosVerificables(categoria, zona) {
+  function obtenerDatosVerificables(categoria, zona) {
   const base = {
-    quien: 'Las autoridades correspondientes del Gobierno Regional de Loreto y entidades nacionales vinculadas.',
-    donde: 'La informacion afecta directamente a la region Loreto, con impacto en las provincias de Maynas, Alto Amazonas, Loreto, Requena, Ucayali y Datem del Marañon.',
-    porque: 'Esta decision responde a las necesidades urgentes de la poblacion y al cumplimiento de las politicas publicas establecidas por el Ejecutivo nacional.',
-    como: 'Las autoridades implementaran las medidas correspondientes a traves de los canales institucionales, con monitoreo continuo de los avances.',
+    quien: 'Las autoridades correspondientes del Gobierno Regional de Loreto y entidades nacionales vinculadas informaron que',
+    donde: 'La informacion afecta directamente a la region Loreto, con impacto en las provincias de Maynas, Alto Amazonas, Loreto, Requena, Ucayali y Datem del Marañon. Esta decision responde a las necesidades urgentes de la poblacion y al cumplimiento de las politicas publicas establecidas por el Ejecutivo nacional. Las autoridades implementaran las medidas correspondientes a traves de los canales institucionales, con monitoreo continuo de los avances.',
+    porque: '',
+    como: '',
     analisis: 'Es fundamental que la ciudadania se mantenga atenta a los comunicados oficiales y evite difundir informacion no verificada. La transparencia en la gestion publica es un pilar fundamental para el desarrollo de nuestra region.'
   };
 
   if (categoria === 'SALUD' || categoria.includes('salud')) {
-    base.quien = 'El Ministerio de Salud (Minsa), la Direccion Regional de Salud de Loreto (Diresa Loreto) y los establecimientos de salud de la region.';
-    base.donde = 'Los hospitales y centros de salud de Iquitos, Nauta, Requena, Yurimaguas y demas provincias de la region Loreto.';
-    base.porque = 'La alerta sanitaria responde al monitoreo epidemiologico permanente que realiza el Minsa en coordinacion con las autoridades locales.';
-    base.como = 'Se han activado los protocolos de emergencia sanitaria, con dotacion de medicamentos y personal especializado en los centros de salud afectados.';
-    base.analisis = 'La salud publica en Loreto requiere atencion prioritaria. La inversion en infraestructura hospitalaria y el acceso a medicamentos son temas pendientes que SMBINRTV seguira denunciando hasta obtener respuestas concretas del Estado.';
+    base.quien = 'El Ministerio de Salud (Minsa), a traves de la Direccion Regional de Salud de Loreto (Diresa Loreto), y los establecimientos de salud de la region confirmaron que';
+    base.donde = 'Los hospitales y centros de salud de Iquitos, Nauta, Requena, Yurimaguas y demas provincias de la region Loreto estan en alerta. La alerta sanitaria responde al monitoreo epidemiologico permanente que realiza el Minsa en coordinacion con las autoridades locales. Se han activado los protocolos de emergencia sanitaria, con dotacion de medicamentos y personal especializado en los centros de salud afectados.';
+    base.analisis = 'La salud publica en Loreto requiere atencion prioritaria. La inversion en infraestructura hospitalaria y el acceso a medicamentos son temas pendientes que SMBINRTV seguira denunciando hasta obtener respuestas concretas del Estado. La poblacion debe mantenerse informada a traves de canales oficiales y reportar cualquier sintoma a las autoridades sanitarias correspondientes.';
   } else if (categoria === 'SEGURIDAD' || categoria.includes('seguridad') || categoria.includes('corrupcion')) {
-    base.quien = 'La Policia Nacional del Peru (PNP), la Fiscalia de la Nacion y el Ministerio Publico, en coordinacion con las autoridades judiciales de la region.';
-    base.donde = 'Las operaciones se desarrollaron en diferentes puntos de la region Loreto, con apoyo de la Direccion de Investigacion Criminal (Dirincri) y la Diviac.';
-    base.porque = 'La intervencion obedece a denuncias ciudadanas y a la labor de inteligencia policial que venia monitoreando a los presuntos involucrados.';
-    base.como = 'Se ejecutaron operativos simultaneos con ordenes de allanamiento y detencion, garantizando el debido proceso y los derechos de los intervenidos.';
-    base.analisis = 'La seguridad ciudadana es una de las principales demandas de la poblacion lorena. La corrupcion y la delincuencia deben ser combatidas con firmeza, pero tambien con respeto a los derechos humanos y el debido proceso.';
+    base.quien = 'La Policia Nacional del Peru (PNP), la Fiscalia de la Nacion y el Ministerio Publico, en coordinacion con las autoridades judiciales de la region, informaron que';
+    base.donde = 'Las operaciones se desarrollaron en diferentes puntos de la region Loreto, con apoyo de la Direccion de Investigacion Criminal (Dirincri) y la Diviac. La intervencion obedece a denuncias ciudadanas y a la labor de inteligencia policial que venia monitoreando a los presuntos involucrados. Se ejecutaron operativos simultaneos con ordenes de allanamiento y detencion, garantizando el debido proceso y los derechos de los intervenidos.';
+    base.analisis = 'La seguridad ciudadana es una de las principales demandas de la poblacion lorena. La corrupcion y la delincuencia deben ser combatidas con firmeza, pero tambien con respeto a los derechos humanos y el debido proceso. SMBINRTV seguira monitoreando estos casos y exigiendo transparencia en las investigaciones.';
   } else if (categoria === 'ECONOMIA' || categoria.includes('economia')) {
-    base.quien = 'El Ministerio de Economia y Finanzas (MEF), el Gobierno Regional de Loreto y la Camara de Comercio de Iquitos.';
-    base.donde = 'El impacto economico se siente en los principales sectores productivos de Loreto: pesca, agricultura, turismo y comercio informal.';
-    base.porque = 'Las medidas responden a la necesidad de reactivar la economia regional tras los efectos de la pandemia y la crisis economica nacional.';
-    base.como = 'Se implementaran programas de capacitacion, creditos blandos para emprendedores y apoyo tecnico a los pequenos productores de la region.';
-    base.analisis = 'La economia de Loreto tiene un potencial enorme que no ha sido aprovechado. El turismo ecologico, la pesca artesanal y los productos amazonicos podrian generar miles de empleos si existiera una verdadera politica de desarrollo productivo.';
+    base.quien = 'El Ministerio de Economia y Finanzas (MEF), el Gobierno Regional de Loreto y la Camara de Comercio de Iquitos informaron que';
+    base.donde = 'El impacto economico se siente en los principales sectores productivos de Loreto: pesca, agricultura, turismo y comercio informal. Las medidas responden a la necesidad de reactivar la economia regional tras los efectos de la pandemia y la crisis economica nacional. Se implementaran programas de capacitacion, creditos blandos para emprendedores y apoyo tecnico a los pequenos productores de la region.';
+    base.analisis = 'La economia de Loreto tiene un potencial enorme que no ha sido aprovechado. El turismo ecologico, la pesca artesanal y los productos amazonicos podrian generar miles de empleos si existiera una verdadera politica de desarrollo productivo. SMBINRTV seguira exigiendo al Gobierno central politicas que beneficien directamente a los productores de la Amazonia peruana.';
   } else if (zona === 'lima' || zona === 'LIMA') {
-    base.quien = 'Las autoridades del Gobierno Central, la Municipalidad Metropolitana de Lima y los ministerios sectoriales correspondientes.';
-    base.donde = 'La capital del Peru, con repercusiones en las politicas nacionales que afectan directamente a las regiones del pais, incluyendo Loreto.';
-    base.porque = 'Las decisiones tomadas en Lima tienen impacto directo en el presupuesto y las politicas que se ejecutan en las regiones del Peru.';
-    base.como = 'A traves de la publicacion de normas legales, decretos supremos y resoluciones ministeriales en el portal del Estado Peruano.';
-    base.analisis = 'Desde la Amazonia peruana observamos con preocupacion como muchas decisiones se toman en Lima sin consultar a las regiones. La centralizacion del Estado peruano sigue siendo uno de los principales obstaculos para el desarrollo equitativo del pais.';
+    base.quien = 'Las autoridades del Gobierno Central, la Municipalidad Metropolitana de Lima y los ministerios sectoriales correspondientes informaron que';
+    base.donde = 'La capital del Peru es el escenario de esta informacion, con repercusiones en las politicas nacionales que afectan directamente a las regiones del pais, incluyendo Loreto. Las decisiones tomadas en Lima tienen impacto directo en el presupuesto y las politicas que se ejecutan en las regiones del Peru, a traves de la publicacion de normas legales, decretos supremos y resoluciones ministeriales en el portal del Estado Peruano.';
+    base.analisis = 'Desde la Amazonia peruana observamos con preocupacion como muchas decisiones se toman en Lima sin consultar a las regiones. La centralizacion del Estado peruano sigue siendo uno de los principales obstaculos para el desarrollo equitativo del pais. SMBINRTV seguira denunciando la exclusion de las regiones en las decisiones que las afectan directamente.';
   }
 
   return base;
@@ -874,10 +697,24 @@ function botonesCompartir(titulo, url, idx) {
 <button class="d-share-btn btn-ig" onclick="compartirIG('${t}')"><i class="bi bi-instagram"></i> IG</button>`;
 }
 
-// ===== PANEL FUENTES =====
+// ===== PANEL FUENTES INTERNAS - PROTEGIDO =====
+let fuentesAutenticado = false;
+
 function toggleFuentes() {
-  const panel = document.getElementById('panelFuentes');
-  panel.classList.toggle('show');
+  if (fuentesAutenticado) {
+    const panel = document.getElementById('panelFuentes');
+    panel.classList.toggle('show');
+    return;
+  }
+  // Pedir contraseña
+  const pass = prompt('🔒 ACCESO RESTRINGIDO\n\nPanel de Fuentes Internas Verificadas\nSolo personal autorizado de SMBINRTV\n\nIngrese la contraseña:');
+  if (pass === PASSWORD_EDITOR) {
+    fuentesAutenticado = true;
+    const panel = document.getElementById('panelFuentes');
+    panel.classList.toggle('show');
+  } else if (pass !== null) {
+    alert('❌ Contraseña incorrecta. Solo personal autorizado puede acceder al panel de fuentes internas.');
+  }
 }
 
 // ===== AUTENTICACION EDITOR INTERNO =====
@@ -909,8 +746,7 @@ function abrirEditorDesdeBtn() {
     alert('No hay noticias para editar. Carga noticias primero.');
   }
 }
-
-// ===== CARGAR NOTICIAS - CURRENTS API PRINCIPAL, GNEWS RESPALDO =====
+  // ===== CARGAR NOTICIAS - CURRENTS API PRINCIPAL, GNEWS RESPALDO =====
 async function cargarNoticiasGNews() {
   const btn = document.getElementById('btnActualizar');
   const grid = document.getElementById('diario-grid');
@@ -1087,8 +923,7 @@ async function cargarDesdeGNews() {
 
   return noticias;
 }
-
-// ===== NOTICIAS DE RESPALDO LOCAL PROFESIONALES =====
+  // ===== NOTICIAS DE RESPALDO LOCAL PROFESIONALES =====
 function noticiasRespaldo() {
   const fechaHoy = new Date().toLocaleDateString('es-PE', { day:'numeric', month:'long', year:'numeric' });
 
@@ -1097,27 +932,9 @@ function noticiasRespaldo() {
       zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', 
       titulo:'Gobierno anuncia nuevas medidas economicas para reducir la inflacion', 
       resumen:'El Ejecutivo presento un paquete de medidas orientadas a estabilizar los precios en las regiones del pais.',
-      cuerpoCompleto: `**QUIEN:** El presidente de la Republica, Dina Boluarte, junto al ministro de Economia, Jose Arista, y el presidente del Banco Central de Reserva, Julio Velarde.
+      cuerpoCompleto: `El presidente de la Republica, Dina Boluarte, junto al ministro de Economia, Jose Arista, y el presidente del Banco Central de Reserva, Julio Velarde, anunciaron un paquete de medidas economicas destinadas a reducir la inflacion y estabilizar los precios de los productos de primera necesidad en todo el territorio nacional, incluyendo la region Amazonica. La informacion fue confirmada el dia ${fechaHoy} durante una conferencia de prensa en Palacio de Gobierno, tras la sesion del Consejo de Ministros. Las medidas tendran aplicacion en todo el Peru, con especial atencion en las regiones mas vulnerables como Loreto, Ucayali, Madre de Dios y Amazonas. La inflacion acumulada en los ultimos meses ha afectado significativamente el poder adquisitivo de las familias peruanas, especialmente en las zonas rurales y urbanas marginadas donde los precios de los alimentos basicos se han incrementado por encima del promedio nacional. El Ejecutivo implementara un fondo de estabilizacion de precios, bonos alimentarios para familias de escasos recursos y un programa de compras estatales directas a productores agricolas para eliminar intermediarios.
 
-**QUE:** El Gobierno anuncio un paquete de medidas economicas destinadas a reducir la inflacion y estabilizar los precios de los productos de primera necesidad en todo el territorio nacional, incluyendo la region Amazonica.
-
-**CUANDO:** La informacion fue confirmada el dia ${fechaHoy} durante una conferencia de prensa en Palacio de Gobierno, tras la sesion del Consejo de Ministros.
-
-**DONDE:** Las medidas tendran aplicacion en todo el Peru, con especial atencion en las regiones mas vulnerables como Loreto, Ucayali, Madre de Dios y Amazonas.
-
-**POR QUE:** La inflacion acumulada en los ultimos meses ha afectado significativamente el poder adquisitivo de las familias peruanas, especialmente en las zonas rurales y urbanas marginadas donde los precios de los alimentos basicos se han incrementado por encima del promedio nacional.
-
-**COMO:** El Ejecutivo implementara un fondo de estabilizacion de precios, bonos alimentarios para familias de escasos recursos y un programa de compras estatales directas a productores agricolas para eliminar intermediarios.
-
-**ANALISIS SMBINRTV DIGITAL:**
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Si bien las medidas anunciadas son positivas en apariencia, la historia nos ha demostrado que muchos de estos programas no llegan a la poblacion que realmente lo necesita en la Amazonia peruana.
-
-La region Loreto historicamente ha sido olvidada en la distribucion de recursos economicos. Los bonos anunciados deben llegar a los pueblos indigenas, a los pescadores artesanales y a las madres de familia de los asentamientos humanos de Iquitos, Nauta, Requena y las demas provincias.
-
-Exigimos al Gobierno transparencia en la ejecucion de estos fondos. La poblacion de Loreto no puede seguir siendo espectadora de promesas que nunca se cumplen. Necesitamos hechos concretos, no discursos vacios.
-
-La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
+Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Si bien las medidas anunciadas son positivas en apariencia, la historia nos ha demostrado que muchos de estos programas no llegan a la poblacion que realmente lo necesita en la Amazonia peruana. La region Loreto historicamente ha sido olvidada en la distribucion de recursos economicos. Los bonos anunciados deben llegar a los pueblos indigenas, a los pescadores artesanales y a las madres de familia de los asentamientos humanos de Iquitos, Nauta, Requena y las demas provincias. Exigimos al Gobierno transparencia en la ejecucion de estos fondos. La poblacion de Loreto no puede seguir siendo espectadora de promesas que nunca se cumplen. Necesitamos hechos concretos, no discursos vacios. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
 
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`,
       imagen:'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=70', 
@@ -1127,27 +944,9 @@ La poblacion de la region Amazonica debe mantenerse informada a traves de medios
       zona:'nacional', cat:'SALUD', catClass:'cat-nacional', 
       titulo:'Minsa reporta aumento de casos de dengue en 8 regiones del pais', 
       resumen:'Las autoridades de salud emitieron una alerta epidemiologica y piden a la poblacion tomar precauciones.',
-      cuerpoCompleto: `**QUIEN:** El Ministerio de Salud (Minsa), a traves de la Direccion General de Epidemiologia, liderada por el doctor Cesar Munayco, y la Direccion Regional de Salud de Loreto (Diresa Loreto).
+      cuerpoCompleto: `El Ministerio de Salud (Minsa), a traves de la Direccion General de Epidemiologia, liderada por el doctor Cesar Munayco, y la Direccion Regional de Salud de Loreto (Diresa Loreto), reportaron un incremento significativo de casos de dengue en 8 regiones del Peru, incluyendo Loreto, Ucayali, Madre de Dios, San Martin, Amazonas, Cajamarca, Piura y Tumbes. Se emitio la alerta epidemiologica nivel naranja. El reporte fue presentado el dia ${fechaHoy} durante el balance semanal de la situacion sanitaria nacional, donde se confirmo que la temporada de lluvias ha incrementado los focos del vector transmisor. Los casos se concentran principalmente en las zonas de selva alta y baja, siendo Loreto una de las regiones mas afectadas con incrementos del 45% respecto al mismo periodo del año anterior. El aumento se debe a las intensas lluvias registradas en los ultimos meses, la acumulacion de agua estancada en viviendas y calles, y la falta de campanas de fumigacion preventivas en los sectores mas vulnerables. El Minsa ha desplegado brigadas de salud a las zonas afectadas, dotado de insecticidas a los establecimientos de salud y lanzado una campaña nacional de prevencion denominada "Juntos contra el Dengue".
 
-**QUE:** El Minsa reporto un incremento significativo de casos de dengue en 8 regiones del Peru, incluyendo Loreto, Ucayali, Madre de Dios, San Martin, Amazonas, Cajamarca, Piura y Tumbes. Se emitio la alerta epidemiologica nivel naranja.
-
-**CUANDO:** El reporte fue presentado el dia ${fechaHoy} durante el balance semanal de la situacion sanitaria nacional, donde se confirmo que la temporada de lluvias ha incrementado los focos del vector transmisor.
-
-**DONDE:** Los casos se concentran principalmente en las zonas de selva alta y baja, siendo Loreto una de las regiones mas afectadas con incrementos del 45% respecto al mismo periodo del año anterior.
-
-**POR QUE:** El aumento se debe a las intensas lluvias registradas en los ultimos meses, la acumulacion de agua estancada en viviendas y calles, y la falta de campanas de fumigacion preventivas en los sectores mas vulnerables.
-
-**COMO:** El Minsa ha desplegado brigadas de salud a las zonas afectadas, dotado de insecticidas a los establecimientos de salud y lanzado una campaña nacional de prevencion denominada "Juntos contra el Dengue".
-
-**ANALISIS SMBINRTV DIGITAL:**
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. La alerta sanitaria en Loreto es preocupante y evidencia una vez mas la fragilidad de nuestro sistema de salud publica.
-
-Los hospitales de la region ya operan al limite de su capacidad. El Hospital Regional de Loreto, el Hospital de Apoyo de Nauta y los centros de salud de las provincias carecen de medicamentos basicos para tratar casos de dengue hemorragico, que es la forma mas grave de la enfermedad.
-
-Exigimos a las autoridades de salud que no solo se limiten a emitir alertas, sino que garanticen la dotacion de sueros, medicamentos antipireticos y personal medico especializado en los hospitales de la region. La poblacion de Loreto no puede seguir siendo tratada como ciudadanos de segunda clase en materia de salud.
-
-La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
+Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. La alerta sanitaria en Loreto es preocupante y evidencia una vez mas la fragilidad de nuestro sistema de salud publica. Los hospitales de la region ya operan al limite de su capacidad. El Hospital Regional de Loreto, el Hospital de Apoyo de Nauta y los centros de salud de las provincias carecen de medicamentos basicos para tratar casos de dengue hemorragico, que es la forma mas grave de la enfermedad. Exigimos a las autoridades de salud que no solo se limiten a emitir alertas, sino que garanticen la dotacion de sueros, medicamentos antipireticos y personal medico especializado en los hospitales de la region. La poblacion de Loreto no puede seguir siendo tratada como ciudadanos de segunda clase en materia de salud. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
 
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`,
       imagen:'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&q=70', 
@@ -1157,57 +956,21 @@ La poblacion de la region Amazonica debe mantenerse informada a traves de medios
       zona:'loreto', cat:'LORETO', catClass:'cat-loreto', 
       titulo:'Crecida del rio Amazonas afecta comunidades en provincias de Loreto', 
       resumen:'El incremento del caudal ha puesto en alerta a las autoridades locales que preparan planes de contingencia.',
-      cuerpoCompleto: `**QUIEN:** El Gobierno Regional de Loreto, liderado por el gobernador regional, en coordinacion con el Instituto Nacional de Defensa Civil (Indeci), la Marina de Guerra del Peru y los alcaldes provinciales de Maynas, Alto Amazonas y Loreto.
+      cuerpoCompleto: `El Gobierno Regional de Loreto, liderado por el gobernador regional, en coordinacion con el Instituto Nacional de Defensa Civil (Indeci), la Marina de Guerra del Peru y los alcaldes provinciales de Maynas, Alto Amazonas y Loreto, reportaron una crecida extraordinaria del rio Amazonas y sus afluentes que ha afectado a mas de 15 comunidades nativas y asentamientos humanos en las provincias de Maynas, Alto Amazonas y Loreto. La alerta fue activada el dia ${fechaHoy} a las 06:00 horas, tras el monitoreo continuo que realiza el Servicio Nacional de Meteorologia e Hidrologia del Peru (Senamhi). Las zonas mas afectadas son las riberas del rio Amazonas en los distritos de Indiana, Mazan, Punchana, Belen y las comunidades nativas de la cuenca del rio Nanay y rio Itaya. La crecida se debe a las intensas lluvias registradas en la cuenca alta del Amazonas y el incremento de la evaporacion por las altas temperaturas, fenomeno que se agrava por el cambio climatico que afecta la region Amazonica. El Gobierno Regional ha activado el Centro de Operaciones de Emergencia Regional (COER) y desplegado maquinaria pesada para reforzar los diques de contencion. Se han instalado albergues temporales en colegios y centros comunitarios.
 
-**QUE:** Se registro una crecida extraordinaria del rio Amazonas y sus afluentes que ha afectado a mas de 15 comunidades nativas y asentamientos humanos en las provincias de Maynas, Alto Amazonas y Loreto.
-
-**CUANDO:** La alerta fue activada el dia ${fechaHoy} a las 06:00 horas, tras el monitoreo continuo que realiza el Servicio Nacional de Meteorologia e Hidrologia del Peru (Senamhi).
-
-**DONDE:** Las zonas mas afectadas son las riberas del rio Amazonas en los distritos de Indiana, Mazan, Punchana, Belen y las comunidades nativas de la cuenca del rio Nanay y rio Itaya.
-
-**POR QUE:** La crecida se debe a las intensas lluvias registradas en la cuenca alta del Amazonas y el incremento de la evaporacion por las altas temperaturas, fenomeno que se agrava por el cambio climatico que afecta la region Amazonica.
-
-**COMO:** El Gobierno Regional ha activado el Centro de Operaciones de Emergencia Regional (COER) y desplegado maquinaria pesada para reforzar los diques de contencion. Se han instalado albergues temporales en colegios y centros comunitarios.
-
-**ANALISIS SMBINRTV DIGITAL:**
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Las crecidas del Amazonas son un fenomeno ciclico que año tras año afecta a las mismas comunidades, y año tras año las autoridades responden con las mismas medidas paliativas.
-
-La pregunta que debemos hacernos es: ¿Por que no se invierte en infraestructura de prevencion? Los diques de Belen se rompen cada año. Las viviendas de Indiana y Mazan son inundadas sistematicamente. Y la respuesta siempre es la misma: albergues temporales y despensas.
-
-Exigimos al Gobierno Regional de Loreto un plan integral de prevencion de desastres que incluya reubicacion definitiva de las familias en zonas de riesgo, construccion de viviendas resilientes y un sistema de alerta temprana que realmente funcione. La poblacion de Loreto merece mas que promesas de campaña.
-
-La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
+Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Las crecidas del Amazonas son un fenomeno ciclico que año tras año afecta a las mismas comunidades, y año tras año las autoridades responden con las mismas medidas paliativas. La pregunta que debemos hacernos es: ¿Por que no se invierte en infraestructura de prevencion? Los diques de Belen se rompen cada año. Las viviendas de Indiana y Mazan son inundadas sistematicamente. Y la respuesta siempre es la misma: albergues temporales y despensas. Exigimos al Gobierno Regional de Loreto un plan integral de prevencion de desastres que incluya reubicacion definitiva de las familias en zonas de riesgo, construccion de viviendas resilientes y un sistema de alerta temprana que realmente funcione. La poblacion de Loreto merece mas que promesas de campaña. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
 
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`,
       imagen:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=70', 
       url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 2h', tipo:'respaldo' 
     },
-    { 
+        { 
       zona:'loreto', cat:'IQUITOS', catClass:'cat-loreto', 
       titulo:'Municipalidad de Iquitos anuncia obras de pavimentacion para cinco distritos', 
       resumen:'Se ejecutaran proyectos de infraestructura vial en cinco distritos de la provincia con fondos municipales.',
-      cuerpoCompleto: `**QUIEN:** La Municipalidad Provincial de Maynas, liderada por el alcalde de Iquitos, en coordinacion con el Ministerio de Vivienda, Construccion y Saneamiento (MVCS) y el Programa Nacional de Saneamiento Urbano.
+      cuerpoCompleto: `La Municipalidad Provincial de Maynas, liderada por el alcalde de Iquitos, en coordinacion con el Ministerio de Vivienda, Construccion y Saneamiento (MVCS) y el Programa Nacional de Saneamiento Urbano, anuncio el inicio de obras de pavimentacion de 25 kilometros de vias urbanas en cinco distritos de la provincia de Maynas: Iquitos, Punchana, Belen, San Juan Bautista y Indiana. El anuncio fue realizado el dia ${fechaHoy} durante una ceremonia protocolar en la Plaza de Armas de Iquitos, donde se presento el expediente tecnico aprobado por el MVCS. Las obras se ejecutaran en las principales avenidas y jironess de los cinco distritos, con especial enfasis en las zonas mas deterioradas que durante la temporada de lluvias se convierten en verdaderos pantanos. La infraestructura vial de Iquitos y sus distritos se encuentra en estado critico. El 65% de las calles no cuentan con pavimento adecuado, lo que genera problemas de salud, dificulta el transporte y afecta la economia local. La obra sera ejecutada mediante administracion directa de la municipalidad, con un presupuesto aprobado de 18 millones de soles, financiados con recursos del canon petrolero y fondos del MVCS.
 
-**QUE:** Se anuncio el inicio de obras de pavimentacion de 25 kilometros de vias urbanas en cinco distritos de la provincia de Maynas: Iquitos, Punchana, Belen, San Juan Bautista y Indiana.
-
-**CUANDO:** El anuncio fue realizado el dia ${fechaHoy} durante una ceremonia protocolar en la Plaza de Armas de Iquitos, donde se presento el expediente tecnico aprobado por el MVCS.
-
-**DONDE:** Las obras se ejecutaran en las principales avenidas y jironess de los cinco distritos, con especial enfasis en las zonas mas deterioradas que durante la temporada de lluvias se convierten en verdaderos pantanos.
-
-**POR QUE:** La infraestructura vial de Iquitos y sus distritos se encuentra en estado critico. El 65% de las calles no cuentan con pavimento adecuado, lo que genera problemas de salud, dificulta el transporte y afecta la economia local.
-
-**COMO:** La obra sera ejecutada mediante administracion directa de la municipalidad, con un presupuesto aprobado de 18 millones de soles, financiados con recursos del canon petrolero y fondos del MVCS.
-
-**ANALISIS SMBINRTV DIGITAL:**
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Anunciar obras en Iquitos es facil; ejecutarlas correctamente es otra historia. La ciudadania de Maynas ha sido testigo de innumerables anuncios de pavimentacion que nunca se concretan o que se ejecutan con calidad deficiente.
-
-Exigimos a la Municipalidad de Maynas transparencia total en la ejecucion de estas obras. La ciudadania debe conocer el cronograma detallado, las empresas contratistas, los montos exactos y el avance fisico mes a mes. No mas obras fantasmas.
-
-Recordemos que el canon petrolero de Loreto es uno de los mas altos del pais, y sin embargo las calles de Iquitos parecen pertenecer a una zona de guerra. ¿Donde estan los recursos? Esa es la pregunta que SMBINRTV seguira haciendo.
-
-La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
+Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Anunciar obras en Iquitos es facil; ejecutarlas correctamente es otra historia. La ciudadania de Maynas ha sido testigo de innumerables anuncios de pavimentacion que nunca se concretan o que se ejecutan con calidad deficiente. Exigimos a la Municipalidad de Maynas transparencia total en la ejecucion de estas obras. La ciudadania debe conocer el cronograma detallado, las empresas contratistas, los montos exactos y el avance fisico mes a mes. No mas obras fantasmas. Recordemos que el canon petrolero de Loreto es uno de los mas altos del pais, y sin embargo las calles de Iquitos parecen pertenecer a una zona de guerra. ¿Donde estan los recursos? Esa es la pregunta que SMBINRTV seguira haciendo. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
 
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`,
       imagen:'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=70', 
@@ -1217,27 +980,9 @@ La poblacion de la region Amazonica debe mantenerse informada a traves de medios
       zona:'lima', cat:'LIMA', catClass:'cat-lima', 
       titulo:'Caos en calles de Lima por paro de transportistas', 
       resumen:'Los principales corredores viales amanecieron colapsados por la protesta del sector transporte.',
-      cuerpoCompleto: `**QUIEN:** La Confederacion Nacional de Transportistas del Peru, liderada por su presidente, junto a gremios de transporte urbano e interprovincial de Lima y Callao.
+      cuerpoCompleto: `La Confederacion Nacional de Transportistas del Peru, liderada por su presidente, junto a gremios de transporte urbano e interprovincial de Lima y Callao, realizaron un paro nacional de 48 horas que paralizo el 70% del servicio de transporte publico en Lima y Callao, generando caos vehicular y afectando a mas de 2 millones de ciudadanos. El paro inicio el dia ${fechaHoy} a las 00:00 horas, tras el fracaso de las negociaciones con el Ministerio de Transportes y Comunicaciones (MTC) la noche anterior. Los principales puntos de concentracion fueron la Panamericana Norte, la Panamericana Sur, la Carretera Central, la Avenida Javier Prado y los terminales terrestres de Lima Norte, Sur y Este. Los transportistas exigen la derogatoria de la Ley 32108, que establece nuevas multas y sanciones para el transporte informal, ademas de exigir subsidio al combustible y reajuste de tarifas. La protesta se desarrollo con bloqueos intermittentes de vias, caravanas de vehiculos a baja velocidad y la suspension total del servicio en las rutas mas conflictivas. La Policia Nacional desplego 5,000 efectivos para mantener el orden.
 
-**QUE:** Los transportistas realizaron un paro nacional de 48 horas que paralizo el 70% del servicio de transporte publico en Lima y Callao, generando caos vehicular y afectando a mas de 2 millones de ciudadanos.
-
-**CUANDO:** El paro inicio el dia ${fechaHoy} a las 00:00 horas, tras el fracaso de las negociaciones con el Ministerio de Transportes y Comunicaciones (MTC) la noche anterior.
-
-**DONDE:** Los principales puntos de concentracion fueron la Panamericana Norte, la Panamericana Sur, la Carretera Central, la Avenida Javier Prado y los terminales terrestres de Lima Norte, Sur y Este.
-
-**POR QUE:** Los transportistas exigen la derogatoria de la Ley 32108, que establece nuevas multas y sanciones para el transporte informal, ademas de exigir subsidio al combustible y reajuste de tarifas.
-
-**COMO:** La protesta se desarrollo con bloqueos intermittentes de vias, caravanas de vehiculos a baja velocidad y la suspension total del servicio en las rutas mas conflictivas. La Policia Nacional desplego 5,000 efectivos para mantener el orden.
-
-**ANALISIS SMBINRTV DIGITAL:**
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. El paro de transportistas en Lima tiene repercusiones directas en Loreto y todas las regiones del pais. Los productos que llegan a Iquitos, Nauta, Requena y las demas provincias dependen del transporte terrestre que conecta con los puertos fluviales.
-
-Cada dia de paro en Lima significa retrasos en la llegada de medicamentos, alimentos procesados, combustible y otros productos esenciales para la Amazonia. El centralismo limeño una vez mas demuestra como las decisiones tomadas en la capital afectan la vida de millones de peruanos en las regiones.
-
-Exigimos al Gobierno central que escuche las demandas del sector transporte, pero tambien exigimos a los transportistas que no utilicen la protesta como arma de presion contra la poblacion civil. El dialogo debe ser la via principal de solucion.
-
-La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
+Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. El paro de transportistas en Lima tiene repercusiones directas en Loreto y todas las regiones del pais. Los productos que llegan a Iquitos, Nauta, Requena y las demas provincias dependen del transporte terrestre que conecta con los puertos fluviales. Cada dia de paro en Lima significa retrasos en la llegada de medicamentos, alimentos procesados, combustible y otros productos esenciales para la Amazonia. El centralismo limeño una vez mas demuestra como las decisiones tomadas en la capital afectan la vida de millones de peruanos en las regiones. Exigimos al Gobierno central que escuche las demandas del sector transporte, pero tambien exigimos a los transportistas que no utilicen la protesta como arma de presion contra la poblacion civil. El dialogo debe ser la via principal de solucion. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
 
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`,
       imagen:'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=70', 
@@ -1247,27 +992,9 @@ La poblacion de la region Amazonica debe mantenerse informada a traves de medios
       zona:'lima', cat:'POLITICA', catClass:'cat-lima', 
       titulo:'Fiscalia investiga actos de corrupcion en municipios de Lima Norte', 
       resumen:'Se abrieron carpetas fiscales contra funcionarios de tres distritos por presuntos desvios de recursos.',
-      cuerpoCompleto: `**QUIEN:** La Fiscalia de la Nacion, a traves de la Fiscalia Especializada en Delitos de Corrupcion de Funcionarios, liderada por la fiscal provincial Marita Barreto, y el Equipo Especial de Fiscales contra la Corrupcion del Poder (EFICCOP).
+      cuerpoCompleto: `La Fiscalia de la Nacion, a traves de la Fiscalia Especializada en Delitos de Corrupcion de Funcionarios, liderada por la fiscal provincial Marita Barreto, y el Equipo Especial de Fiscales contra la Corrupcion del Poder (EFICCOP), abrio carpetas de investigacion preliminar contra funcionarios y exfuncionarios de tres municipalidades de Lima Norte: Comas, Independencia y San Martin de Porres, por presuntos delitos de peculado, colusion y trafico de influencias. Las investigaciones fueron anunciadas el dia ${fechaHoy}, tras meses de trabajo de inteligencia financiera y seguimiento de movimientos bancarios sospechosos detectados por la Unidad de Inteligencia Financiera (UIF). Los presuntos actos de corrupcion ocurrieron en las municipalidades de Comas, Independencia y San Martin de Porres, durante el periodo 2020-2024, con desvios estimados en 45 millones de soles. Las investigaciones se iniciaron tras denuncias ciudadanas y el analisis de contratos irregulares en obras de infraestructura, adquisicion de bienes y servicios, y nombramientos de personal. La Fiscalia realizo allanamientos simultaneos en 15 inmuebles, incluyendo oficinas municipales, domicilios de los investigados y empresas vinculadas. Se incauto documentacion, equipos electronicos y evidencia financiera.
 
-**QUE:** La Fiscalia abrio carpetas de investigacion preliminar contra funcionarios y exfuncionarios de tres municipalidades de Lima Norte: Comas, Independencia y San Martin de Porres, por presuntos delitos de peculado, colusion y trafico de influencias.
-
-**CUANDO:** Las investigaciones fueron anunciadas el dia ${fechaHoy}, tras meses de trabajo de inteligencia financiera y seguimiento de movimientos bancarios sospechosos detectados por la Unidad de Inteligencia Financiera (UIF).
-
-**DONDE:** Los presuntos actos de corrupcion ocurrieron en las municipalidades de Comas, Independencia y San Martin de Porres, durante el periodo 2020-2024, con desvios estimados en 45 millones de soles.
-
-**POR QUE:** Las investigaciones se iniciaron tras denuncias ciudadanas y el analisis de contratos irregulares en obras de infraestructura, adquisicion de bienes y servicios, y nombramientos de personal.
-
-**COMO:** La Fiscalia realizo allanamientos simultaneos en 15 inmuebles, incluyendo oficinas municipales, domicilios de los investigados y empresas vinculadas. Se incauto documentacion, equipos electronicos y evidencia financiera.
-
-**ANALISIS SMBINRTV DIGITAL:**
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. La corrupcion en las municipalidades no es exclusiva de Lima. En Loreto tambien existen denuncias similares que lamentablemente no reciben la misma atencion mediatica ni fiscal.
-
-En la region Loreto, los fondos del canon petrolero, los recursos del FONAVI y los proyectos de inversión publica han sido objeto de investigaciones que avanzan a paso lento. La Fiscalia de Loreto carece de recursos humanos y tecnologicos para investigar con la misma eficiencia que sus homologas de Lima.
-
-Exigimos paridad en la lucha contra la corrupcion. Los funcionarios corruptos de Loreto deben ser investigados con el mismo rigor que los de Lima. La poblacion de la Amazonia merece que sus recursos sean administrados con honestidad y transparencia.
-
-La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
+Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. La corrupcion en las municipalidades no es exclusiva de Lima. En Loreto tambien existen denuncias similares que lamentablemente no reciben la misma atencion mediatica ni fiscal. En la region Loreto, los fondos del canon petrolero, los recursos del FONAVI y los proyectos de inversion publica han sido objeto de investigaciones que avanzan a paso lento. La Fiscalia de Loreto carece de recursos humanos y tecnologicos para investigar con la misma eficiencia que sus homologas de Lima. Exigimos paridad en la lucha contra la corrupcion. Los funcionarios corruptos de Loreto deben ser investigados con el mismo rigor que los de Lima. La poblacion de la Amazonia merece que sus recursos sean administrados con honestidad y transparencia. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
 
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`,
       imagen:'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=70', 
@@ -1275,8 +1002,7 @@ La poblacion de la region Amazonica debe mantenerse informada a traves de medios
     }
   ];
 }
-
-// ===== FILTRAR Y RENDERIZAR =====
+  // ===== FILTRAR Y RENDERIZAR =====
 function actualizarContadoresTabs() {
   const conteos = { todas: 0, nacional: 0, loreto: 0, lima: 0, mis: 0 };
   todasLasNoticias.forEach(n => { conteos.todas++; if (conteos[n.zona] !== undefined) conteos[n.zona]++; });
@@ -1355,14 +1081,8 @@ function verNoticia(idx) {
   if (n.imagen) { imgEl.src = n.imagen; imgEl.style.display = 'block'; }
   else { imgEl.style.display = 'none'; }
 
-  // Formatear el cuerpo con negritas para QUIEN, QUE, CUANDO, etc.
+  // Formatear el cuerpo - texto fluido sin labels
   let cuerpoFormateado = escaparHTML(cuerpo)
-    .replace(/\*\*QUIEN:\*\*/g, '<strong style="color:#e63946;">QUIEN:</strong>')
-    .replace(/\*\*QUE:\*\*/g, '<strong style="color:#e63946;">QUE:</strong>')
-    .replace(/\*\*CUANDO:\*\*/g, '<strong style="color:#e63946;">CUANDO:</strong>')
-    .replace(/\*\*DONDE:\*\*/g, '<strong style="color:#e63946;">DONDE:</strong>')
-    .replace(/\*\*POR QUE:\*\*/g, '<strong style="color:#e63946;">POR QUE:</strong>')
-    .replace(/\*\*COMO:\*\*/g, '<strong style="color:#e63946;">COMO:</strong>')
     .replace(/\*\*ANALISIS SMBINRTV DIGITAL:\*\*/g, '<strong style="color:#1a1a2e;background:#e63946;color:#fff;padding:4px 12px;border-radius:4px;display:inline-block;margin:16px 0 8px 0;">📰 ANALISIS SMBINRTV DIGITAL</strong>');
 
   document.getElementById('modal-cuerpo').innerHTML = `
@@ -1408,7 +1128,23 @@ function guardarEdicion() {
   alert('Version del director guardada exitosamente.');
 }
 
-// ===== PUBLICAR NOTICIA PROPIA (PUBLICO) =====
+// ===== PUBLICAR NOTICIA PROPIA - PROTEGIDO =====
+let miNoticiaAutenticado = false;
+
+function solicitarAccesoMiNoticia() {
+  if (miNoticiaAutenticado) {
+    abrirModal('modalOwn');
+    return;
+  }
+  const pass = prompt('🔒 ACCESO RESTRINGIDO\n\nPublicar Noticia Propia\nSolo equipo editorial de SMBINRTV\n\nIngrese la contraseña:');
+  if (pass === PASSWORD_EDITOR) {
+    miNoticiaAutenticado = true;
+    abrirModal('modalOwn');
+  } else if (pass !== null) {
+    alert('❌ Contraseña incorrecta. Solo el equipo editorial autorizado puede publicar noticias.');
+  }
+}
+
 function publicarNoticiaPropia() {
   const titulo = document.getElementById('own-titulo').value.trim();
   const zona = document.getElementById('own-zona').value;
@@ -1455,8 +1191,7 @@ document.getElementById('themeToggle').addEventListener('click', () => {
 const opciones = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
 document.getElementById('topbar-date').textContent = new Date().toLocaleDateString('es-PE', opciones);
 document.getElementById('footer-year').textContent = new Date().getFullYear();
-
-// ===== INICIALIZAR =====
+  // ===== INICIALIZAR =====
 document.addEventListener('DOMContentLoaded', () => {
   cargarNoticiasGNews();
 });
