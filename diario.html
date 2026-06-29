@@ -446,6 +446,12 @@
       transition:all .3s;
     }
     .ad-slot:hover { background:rgba(255,255,255,.08); border-color:var(--primary); }
+    .ad-slot img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:8px;
+    }
     .ad-slot i { font-size:2.5rem; color:var(--primary); margin-bottom:12px; }
     .ad-slot h6 { font-size:14px; font-weight:700; margin-bottom:6px; }
     .ad-slot p { font-size:12px; color:rgba(255,255,255,.6); margin-bottom:12px; }
@@ -638,6 +644,31 @@
     .spinner { display:inline-block; width:18px; height:18px; border:3px solid #fff; border-top-color:transparent; border-radius:50%; animation:spin .6s linear infinite; }
     @keyframes spin { to { transform:rotate(360deg); } }
 
+    /* BOTON ADMIN FLOTANTE */
+    .admin-float {
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:var(--primary);
+      color:#fff;
+      padding:12px 20px;
+      border-radius:50px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:13px;
+      box-shadow:0 4px 15px rgba(230,57,70,.4);
+      z-index:1000;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      transition:all .3s;
+    }
+    .admin-float:hover {
+      color:#fff;
+      transform:scale(1.05);
+      box-shadow:0 6px 20px rgba(230,57,70,.6);
+    }
+
     @media (max-width:768px) {
       .hero-overlay { padding:24px; }
       .hero-title { font-size:24px; }
@@ -792,7 +823,8 @@
       <span style="font-size:11px;color:rgba(255,255,255,.5);letter-spacing:3px;text-transform:uppercase;font-weight:600;">Espacio Publicitario</span>
       <h3 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:#fff;margin-top:8px;">Publicidad SMBINRTV</h3>
     </div>
-    <div class="ad-grid">
+    <div class="ad-grid" id="adGrid">
+      <!-- Se llena dinamicamente desde el panel admin -->
       <div class="ad-slot">
         <i class="bi bi-badge-ad"></i>
         <h6>ESPACIO DISPONIBLE</h6>
@@ -822,7 +854,8 @@
       <span class="opinion-badge">TU DECIDES</span>
       <h2 class="opinion-title">Opinion Editorial</h2>
     </div>
-    <div class="row g-4">
+    <div class="row g-4" id="opinionGrid">
+      <!-- Se llena dinamicamente desde el panel admin -->
       <div class="col-md-4">
         <div class="opinion-card">
           <img src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=600&q=70" alt="Opinion" />
@@ -1021,6 +1054,12 @@
     </div>
   </div>
 </div>
+
+<!-- BOTON FLOTANTE PARA IR AL ADMIN -->
+<a href="admin.html" class="admin-float" title="Panel de Administracion">
+  <i class="bi bi-gear-fill"></i> Admin
+</a>
+
 <script>
 // ===== CONFIGURACION =====
 const CURRENTS_API_KEY = 'kKZtoyAGE2PgxRe3GXpbT44nBkt3QbOiMhOpwzExbu0YAOcS';
@@ -1037,6 +1076,79 @@ let noticiaEditando = null;
 let fuenteActiva = 'currents';
 let editorAutenticado = false;
 let imagenBase64 = '';
+
+// ===== FUNCIONES DEL PANEL ADMIN =====
+
+function getAdminData() {
+  const data = localStorage.getItem('smbinrtv_data');
+  return data ? JSON.parse(data) : { news: [], ads: [], opinions: [] };
+}
+
+function renderPublicidadAdmin() {
+  const data = getAdminData();
+  const container = document.getElementById('adGrid');
+  const activeAds = data.ads.filter(a => a.active !== false).sort((a,b) => a.position - b.position);
+  
+  const slots = [0, 1, 2];
+  let html = '';
+
+  slots.forEach(pos => {
+    const ad = activeAds.find(a => a.position === pos);
+    if (ad && ad.image) {
+      html += `
+        <div class="ad-slot" style="padding:0;overflow:hidden;">
+          <a href="${ad.link || '#'}" target="_blank" style="display:block;width:100%;height:100%;">
+            <img src="${ad.image}" alt="${ad.name || 'Publicidad'}" style="width:100%;height:100%;object-fit:cover;" />
+          </a>
+        </div>
+      `;
+    } else if (ad) {
+      html += `
+        <div class="ad-slot">
+          <i class="bi bi-badge-ad"></i>
+          <h6>${ad.name || 'PUBLICIDAD'}</h6>
+          <p><a href="${ad.link || '#'}" target="_blank" style="color:var(--primary);">Visitar sitio</a></p>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="ad-slot">
+          <i class="bi bi-badge-ad"></i>
+          <h6>ESPACIO DISPONIBLE</h6>
+          <p>300x250 px - ${pos === 0 ? 'Banner principal' : (pos === 1 ? 'Banner secundario' : 'Banner sidebar')}</p>
+          <a href="mailto:smbinrtvcanalonline@gmail.com"><i class="bi bi-envelope"></i> Contactar</a>
+        </div>
+      `;
+    }
+  });
+
+  container.innerHTML = html;
+}
+
+function renderOpinionAdmin() {
+  const data = getAdminData();
+  const container = document.getElementById('opinionGrid');
+  const activeOpinions = data.opinions.filter(o => o.active !== false).slice(0, 3);
+
+  if (activeOpinions.length === 0) {
+    // Mantener las opiniones por defecto si no hay en el admin
+    return;
+  }
+
+  container.innerHTML = activeOpinions.map(item => `
+    <div class="col-md-4">
+      <div class="opinion-card">
+        <img src="${item.image || 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=600&q=70'}" alt="${item.title}" />
+        <h4>${item.title}</h4>
+        <p>${item.excerpt}</p>
+        <div class="opinion-author">
+          <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(item.author || 'Editorial')}&background=${(item.color || '#e63946').replace('#','')}&color=fff" alt="${item.author}" />
+          <span><strong>${item.author || 'Editorial SMBINRTV'}</strong> - ${item.initials || 'Opinion'}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
 
 // ===== UTILIDADES =====
 function abrirModal(id) { document.getElementById(id).classList.add('show'); }
@@ -1159,6 +1271,7 @@ function botonesCompartir(titulo, url, idx) {
   const u = url ? escaparHTML(url).replace(/'/g, "\\'") : '';
   return `<button class="btn-nc btn-share-fb" onclick="compartirFB('${t}','${u}')"><i class="bi bi-facebook"></i></button>
 <button class="btn-nc btn-share-wa" onclick="compartirWA('${t}','${u}')"><i class="bi bi-whatsapp"></i></button>
+<button class="btn-nc btn-share-x" onclick="compartirTW('${t}','${u}')"><i class
 <button class="btn-nc btn-share-x" onclick="compartirTW('${t}','${u}')"><i class="bi bi-twitter-x"></i></button>`;
 }
 
@@ -1286,7 +1399,8 @@ function publicarNoticiaPropia() {
   cargarNoticiasGNews();
   alert('✅ Tu noticia ha sido publicada exitosamente en la seccion "Mis Noticias".');
 }
-  // ===== CARGAR NOTICIAS - CURRENTS PRINCIPAL, GNEWS RESPALDO =====
+
+// ===== CARGAR NOTICIAS - CURRENTS PRINCIPAL, GNEWS RESPALDO =====
 async function cargarNoticiasGNews() {
   const btn = document.getElementById('btnActualizar');
   const grid = document.getElementById('diario-grid');
@@ -1433,7 +1547,8 @@ async function cargarDesdeGNews() {
   }
   return noticias;
 }
-  // ===== NOTICIAS DE RESPALDO LOCAL =====
+
+// ===== NOTICIAS DE RESPALDO LOCAL =====
 function noticiasRespaldo() {
   const fechaHoy = new Date().toLocaleDateString('es-PE', { day:'numeric', month:'long', year:'numeric' });
   return [
@@ -1587,6 +1702,11 @@ document.getElementById('footer-year').textContent = new Date().getFullYear();
 
 // ===== INICIALIZAR =====
 document.addEventListener('DOMContentLoaded', () => {
+  // Renderizar publicidad y opinion desde el panel admin
+  renderPublicidadAdmin();
+  renderOpinionAdmin();
+  
+  // Cargar noticias
   cargarNoticiasGNews();
 });
 </script>
