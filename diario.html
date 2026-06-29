@@ -803,7 +803,6 @@
         </span>
         <div class="tabs-modern">
           <button class="tab-modern active" data-zona="todas" onclick="filtrarNoticias('todas',this)"><i class="bi bi-grid"></i> Todas</button>
-          <button class="tab-modern" data-zona="destacadas" onclick="filtrarNoticias('destacadas',this)"><i class="bi bi-star-fill"></i> Destacadas</button>
           <button class="tab-modern" data-zona="loreto" onclick="filtrarNoticias('loreto',this)"><i class="bi bi-geo-alt"></i> Loreto</button>
           <button class="tab-modern" data-zona="nacional" onclick="filtrarNoticias('nacional',this)"><i class="bi bi-flag"></i> Nacional</button>
           <button class="tab-modern" data-zona="lima" onclick="filtrarNoticias('lima',this)"><i class="bi bi-building"></i> Lima</button>
@@ -1129,114 +1128,6 @@ function getAdminData() {
   return data ? JSON.parse(data) : { news: [], ads: [], opinions: [] };
 }
 
-// ===== CARGAR NOTICIAS DESTACADAS DEL ADMIN =====
-function cargarNoticiasDestacadasAdmin() {
-  const data = getAdminData();
-  const destacadas = data.news.filter(n => n.active !== false).map(n => {
-    const zonaKey = n.category === 'Nacional' ? 'nacional' : 
-                    (n.category === 'Internacional' ? 'nacional' : 'loreto');
-    return {
-      id: 'dest_' + n.id,
-      zona: 'destacadas',
-      cat: n.category ? n.category.toUpperCase() : 'DESTACADA',
-      catClass: 'cat-destacada',
-      titulo: n.title,
-      resumen: n.excerpt || n.content?.substring(0, 200) + '...' || 'Sin descripción',
-      cuerpoCompleto: n.content || n.excerpt || 'Sin contenido',
-      imagen: n.image || `https://picsum.photos/seed/${n.id}/600/400`,
-      url: n.link || PORTAL_URL,
-      fuente: 'SMBINRTV Editorial',
-      fecha: n.date ? new Date(n.date.split('/').reverse().join('-')).toISOString() : new Date().toISOString(),
-      hace: 'Destacada del Admin',
-      tipo: 'destacada',
-      adminId: n.id,
-      edited: n.edited || false
-    };
-  });
-  return destacadas;
-}
-
-function editarNoticiaDestacada(adminId) {
-  if (!editorAutenticado) {
-    window._pendingDestacadaId = adminId;
-    abrirModal('modalPassword');
-    return;
-  }
-  abrirEditorDestacada(adminId);
-}
-
-function abrirEditorDestacada(adminId) {
-  const data = getAdminData();
-  const item = data.news.find(n => n.id === adminId);
-  if (!item) return;
-  
-  // Usar el modal de editor existente pero adaptado
-  noticiaEditando = -1; // Marcador especial para destacadas
-  window._editandoDestacadaId = adminId;
-  
-  document.getElementById('edit-titulo-original').value = item.title;
-  document.getElementById('edit-titulo-nuevo').value = item.title;
-  document.getElementById('edit-cuerpo-original').value = item.content || item.excerpt || 'Sin contenido';
-  document.getElementById('edit-cuerpo-nuevo').value = item.content || '';
-  abrirModal('modalEditar');
-}
-
-function guardarEdicion() {
-  if (noticiaEditando === null) return;
-  
-  // Si estamos editando una noticia destacada del admin
-  if (window._editandoDestacadaId) {
-    const adminId = window._editandoDestacadaId;
-    const nuevoTitulo = document.getElementById('edit-titulo-nuevo').value.trim();
-    const nuevoCuerpo = document.getElementById('edit-cuerpo-nuevo').value.trim();
-    
-    if (!nuevoCuerpo) { alert('Escribe tu version de la noticia.'); return; }
-    
-    const data = getAdminData();
-    const item = data.news.find(n => n.id === adminId);
-    if (item) {
-      item.title = nuevoTitulo || item.title;
-      item.content = nuevoCuerpo;
-      item.excerpt = nuevoCuerpo.substring(0, 200) + (nuevoCuerpo.length > 200 ? '...' : '');
-      item.edited = true;
-      item.editDate = new Date().toISOString();
-      localStorage.setItem('smbinrtv_data', JSON.stringify(data));
-    }
-    
-    window._editandoDestacadaId = null;
-    cerrarModal('modalEditar');
-    filtrarYRenderizar();
-    alert('✅ Noticia destacada actualizada. Los cambios se reflejan en admin.html también.');
-    return;
-  }
-  
-  // Edición normal de noticias automáticas
-  const n = todasLasNoticias[noticiaEditando];
-  if (!n) return;
-  
-  const nuevoTitulo = document.getElementById('edit-titulo-nuevo').value.trim();
-  const nuevoCuerpo = document.getElementById('edit-cuerpo-nuevo').value.trim();
-  
-  if (!nuevoCuerpo) { alert('Escribe tu version de la noticia.'); return; }
-  
-  if (!n.id) {
-    n.id = generarIdNoticia(n.titulo, n.fuente, n.fecha);
-  }
-  
-  noticiasEditadas[n.id] = {
-    titulo: nuevoTitulo || n.titulo,
-    cuerpo: nuevoCuerpo,
-    fechaEdicion: new Date().toISOString(),
-    editor: 'Director SMBINRTV',
-    originalId: n.id
-  };
-  
-  localStorage.setItem('smbinrtv_editadas_v2', JSON.stringify(noticiasEditadas));
-  cerrarModal('modalEditar');
-  filtrarYRenderizar();
-  alert('✅ Version del director guardada exitosamente. La noticia aparecera marcada como "Editada".');
-}
-
 function renderPublicidadAdmin() {
   const data = getAdminData();
   const container = document.getElementById('adGrid');
@@ -1448,23 +1339,6 @@ function verificarPassword() {
     editorAutenticado = true;
     document.getElementById('editor-password').value = '';
     cerrarModal('modalPassword');
-    
-    // Si hay una edicion de destacada pendiente
-    if (window._pendingDestacadaId) {
-      const id = window._pendingDestacadaId;
-      window._pendingDestacadaId = null;
-      abrirEditorDestacada(id);
-      return;
-    }
-    
-    // Si hay una edicion normal pendiente
-    if (window._pendingEditIndex !== undefined) {
-      const idx = window._pendingEditIndex;
-      window._pendingEditIndex = undefined;
-      abrirEditor(idx);
-      return;
-    }
-    
     abrirEditorDesdeBtn();
   } else {
     alert('Contrasena incorrecta. Solo directores pueden acceder al editor.');
@@ -1701,10 +1575,6 @@ async function cargarNoticiasGNews() {
 
   todasLasNoticias = noticias;
 
-  // AGREGAR NOTICIAS DESTACADAS DEL ADMIN
-  const destacadas = cargarNoticiasDestacadasAdmin();
-  todasLasNoticias = todasLasNoticias.concat(destacadas);
-
   // AGREGAR NOTICIAS PROPIAS DEL USUARIO
   noticiasMis.forEach(n => {
     const zonaKey = n.zona === 'Lima' ? 'lima' : (n.zona === 'Nacional' ? 'nacional' : 'loreto');
@@ -1872,7 +1742,7 @@ function noticiasRespaldo() {
 
 // ===== FILTRAR Y RENDERIZAR =====
 function actualizarContadoresTabs() {
-  const conteos = { todas: 0, destacadas: 0, nacional: 0, loreto: 0, lima: 0, mis: 0 };
+  const conteos = { todas: 0, nacional: 0, loreto: 0, lima: 0, mis: 0 };
   todasLasNoticias.forEach(n => { conteos.todas++; if (conteos[n.zona] !== undefined) conteos[n.zona]++; });
   document.querySelectorAll('.tab-modern').forEach(tab => {
     const z = tab.dataset.zona;
@@ -1892,7 +1762,7 @@ function filtrarNoticias(zona, btn) {
 
 function filtrarYRenderizar() {
   const grid = document.getElementById('diario-grid');
-  let filtradas = filtroActual === 'todas' ? todasLasNoticias : todasLasNoticias.filter(n => n.zona === filtroActual);
+  const filtradas = filtroActual === 'todas' ? todasLasNoticias : todasLasNoticias.filter(n => n.zona === filtroActual);
 
   if (filtradas.length === 0) {
     grid.innerHTML = '<p class="text-center w-100 py-5" style="color:var(--text-muted);"><i class="bi bi-inbox" style="font-size:3rem;"></i><br/><br/>No hay noticias en esta categoria.</p>';
@@ -1905,19 +1775,12 @@ function filtrarYRenderizar() {
     const r = escaparHTML(n.resumen || '');
     const img = n.imagen || `https://picsum.photos/seed/${i}/600/400`;
     const editada = n.id ? noticiasEditadas[n.id] : null;
-    const badgeEditada = editada ? '<span style="font-size:10px;background:var(--success);color:#fff;padding:3px 10px;border-radius:20px;margin-left:6px;font-weight:600;"><i class="bi bi-pencil-fill"></i> Editada</span>' : 
-                          (n.edited ? '<span style="font-size:10px;background:var(--success);color:#fff;padding:3px 10px;border-radius:20px;margin-left:6px;font-weight:600;"><i class="bi bi-pencil-fill"></i> Editada</span>' : '');
+    const badgeEditada = editada ? '<span style="font-size:10px;background:var(--success);color:#fff;padding:3px 10px;border-radius:20px;margin-left:6px;font-weight:600;"><i class="bi bi-pencil-fill"></i> Editada</span>' : '';
     const badgeFuente = n.tipo === 'newsapi' ? '<span class="source-badge badge-currents"><i class="bi bi-lightning-fill"></i> NewsAPI</span>' :
                          (n.tipo === 'currents' ? '<span class="source-badge badge-currents"><i class="bi bi-lightning-fill"></i> Tiempo real</span>' : 
                          (n.tipo === 'gnews' ? '<span class="source-badge badge-gnews"><i class="bi bi-clock-history"></i> 12h</span>' : 
                          (n.tipo === 'mis' ? '<span class="source-badge badge-manual"><i class="bi bi-person-fill"></i> Editorial</span>' : 
-                         (n.tipo === 'destacada' ? '<span class="source-badge badge-manual"><i class="bi bi-star-fill"></i> Destacada</span>' :
-                         '<span class="source-badge badge-respaldo"><i class="bi bi-shield-fill"></i> SMBINRTV</span>')))));
-
-    // Botón de editar especial para destacadas del admin
-    const btnEditar = n.tipo === 'destacada' && n.adminId 
-      ? `<button class="btn-edit" onclick="editarNoticiaDestacada(${n.adminId})" title="Editar noticia destacada"><i class="bi bi-pencil-fill"></i> Editar</button>`
-      : `<button class="btn-edit" onclick="editarNoticiaDesdeTarjeta(${idx})" title="Editar noticia"><i class="bi bi-pencil-fill"></i> Editar</button>`;
+                         '<span class="source-badge badge-respaldo"><i class="bi bi-shield-fill"></i> SMBINRTV</span>')));
 
     return `<div class="news-card-main" data-zona="${n.zona}">
       <div class="nc-img-wrap">
@@ -1935,7 +1798,7 @@ function filtrarYRenderizar() {
         <div class="nc-actions">
           <button class="btn-nc btn-read" onclick="verNoticia(${idx})"><i class="bi bi-book"></i> Leer completa</button>
           ${botonesCompartir(n.titulo, n.url, idx)}
-          ${btnEditar}
+          <button class="btn-edit" onclick="editarNoticiaDesdeTarjeta(${idx})" title="Editar noticia"><i class="bi bi-pencil-fill"></i> Editar</button>
         </div>
       </div>
     </div>`;
@@ -1964,17 +1827,11 @@ function verNoticia(idx) {
   let cuerpoFormateado = escaparHTML(cuerpo)
     .replace(/\*\*ANALISIS SMBINRTV DIGITAL:\*\*/g, '<strong style="color:var(--primary);font-size:16px;display:block;margin:20px 0 10px;padding-bottom:8px;border-bottom:2px solid var(--primary);">📰 ANALISIS SMBINRTV DIGITAL</strong>');
 
-  // Badge especial para destacadas del admin
-  const badgeDestacada = n.tipo === 'destacada' 
-    ? '<br/><span style="color:var(--accent);font-weight:600;"><i class="bi bi-star-fill"></i> Noticia Destacada del Panel Admin</span>' 
-    : '';
-
   document.getElementById('modal-cuerpo').innerHTML = `
     <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">
       <i class="bi bi-newspaper"></i> Fuente: ${escaparHTML(n.fuente)} &nbsp;·&nbsp;
       <i class="bi bi-clock"></i> ${n.hace}
       ${editada ? '<br/><span style="color:var(--success);font-weight:600;"><i class="bi bi-pencil-fill"></i> Esta noticia fue editada por el director editorial el ' + new Date(editada.fechaEdicion).toLocaleDateString('es-PE') + '</span>' : ''}
-      ${badgeDestacada}
     </p>
     <div style="line-height:1.8;font-size:15.5px;color:var(--text);">${cuerpoFormateado.replace(/\n/g, '<br/>')}</div>
     ${n.url && n.url !== '#' ? `<p style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);"><a href="${n.url}" target="_blank" style="color:var(--primary);font-weight:700;font-size:14px;text-decoration:none;"><i class="bi bi-box-arrow-up-right"></i> Ver noticia original en la fuente</a></p>` : ''}
@@ -2021,15 +1878,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window._pendingEditIndex = undefined;
     if (editorAutenticado) {
       abrirEditor(idx);
-    }
-  }
-
-  // Si hay una edicion de destacada pendiente despues de autenticar
-  if (window._pendingDestacadaId) {
-    const id = window._pendingDestacadaId;
-    window._pendingDestacadaId = null;
-    if (editorAutenticado) {
-      abrirEditorDestacada(id);
     }
   }
 });
