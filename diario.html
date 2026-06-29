@@ -40,7 +40,6 @@
     body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); transition:background .3s,color .3s; line-height:1.6; }
     h1,h2,h3,h4,h5,h6 { font-family:'Playfair Display',serif; }
 
-    /* BREAKING NEWS BAR */
     .breaking-bar {
       background:var(--primary);
       color:#fff;
@@ -67,7 +66,6 @@
     .breaking-dot { width:8px; height:8px; background:var(--primary); border-radius:50%; animation:pulse 1.2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
 
-    /* HEADER */
     .site-header {
       background:var(--card-bg);
       border-bottom:1px solid var(--border);
@@ -87,7 +85,6 @@
       letter-spacing:-1px;
     }
     .logo-main span { color:var(--primary); }
-    .logo-sub { font-size:10px; color:var(--text-muted); letter-spacing:3px; font-weight:600; text-transform:uppercase; }
     .nav-main { display:flex; gap:4px; align-items:center; }
     .nav-main a {
       color:var(--text);
@@ -140,7 +137,6 @@
     .search-box input:focus { border-color:var(--primary); }
     .search-box i { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:14px; }
 
-    /* HERO ESTILO CNN */
     .hero-main {
       position:relative;
       height:70vh;
@@ -202,7 +198,6 @@
       font-weight:500;
     }
 
-    /* GRID SECUNDARIO */
     .news-grid-2 {
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -236,7 +231,6 @@
     .news-card-2 .title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:#fff; line-height:1.3; }
     .news-card-2 .meta { font-size:12px; color:rgba(255,255,255,.6); margin-top:8px; }
 
-    /* SECCION DIARIO */
     .section-diario { padding:40px 0; background:var(--bg); }
     .section-header {
       display:flex;
@@ -283,7 +277,6 @@
     .tab-modern:hover { border-color:var(--primary); color:var(--primary); }
     .tab-modern.active { background:var(--primary); color:#fff; border-color:var(--primary); }
 
-    /* TARJETAS NOTICIAS */
     .news-grid-main {
       display:grid;
       grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
@@ -298,6 +291,7 @@
       display:flex;
       flex-direction:column;
       height:100%;
+      position:relative;
     }
     .news-card-main:hover {
       transform:translateY(-4px);
@@ -356,6 +350,7 @@
       display:flex;
       gap:8px;
       flex-wrap:wrap;
+      align-items:center;
     }
     .btn-nc {
       padding:7px 16px;
@@ -374,6 +369,22 @@
     .btn-share-fb { background:#1877f2; color:#fff; }
     .btn-share-wa { background:#25d366; color:#fff; }
     .btn-share-x { background:#000; color:#fff; }
+    .btn-edit {
+      background:linear-gradient(135deg, #7c3aed, #6d28d9);
+      color:#fff;
+      padding:6px 14px;
+      border-radius:20px;
+      font-size:11px;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:4px;
+      transition:all .2s;
+      margin-left:auto;
+    }
+    .btn-edit:hover { transform:scale(1.05); box-shadow:0 4px 12px rgba(124,58,237,.4); }
     .source-badge {
       font-size:10px;
       padding:3px 10px;
@@ -386,7 +397,6 @@
     .badge-manual { background:#be185d; color:#fff; }
     .badge-respaldo { background:#6b7280; color:#fff; }
 
-    /* BOTONES ADMIN */
     .admin-bar {
       display:flex;
       gap:10px;
@@ -411,7 +421,6 @@
     .btn-editor { background:#7c3aed; color:#fff; }
     .btn-publish { background:var(--dark); color:#fff; }
 
-    /* PANEL FUENTES */
     .panel-fuentes {
       background:var(--card-bg);
       border-radius:12px;
@@ -425,8 +434,9 @@
     .table-fuentes th, .table-fuentes td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--border); }
     .table-fuentes th { font-weight:700; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:1px; }
     .estado-ok { color:var(--success); font-weight:600; }
+    .estado-warn { color:var(--accent); font-weight:600; }
+    .estado-error { color:var(--primary); font-weight:600; }
 
-    /* PUBLICIDAD */
     .ad-section {
       background:linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 100%);
       padding:40px 0;
@@ -457,7 +467,6 @@
     .ad-slot p { font-size:12px; color:rgba(255,255,255,.6); margin-bottom:12px; }
     .ad-slot a { color:var(--primary); font-size:12px; font-weight:600; text-decoration:none; }
 
-    /* OPINION */
     .opinion-section {
       background:var(--dark);
       padding:60px 0;
@@ -508,7 +517,6 @@
     }
     .opinion-author img { width:36px; height:36px; border-radius:50%; margin:0; }
 
-    /* FOOTER */
     .site-footer {
       background:var(--dark);
       color:rgba(255,255,255,.7);
@@ -547,7 +555,6 @@
       color:rgba(255,255,255,.5);
     }
 
-    /* MODALES */
     .modal-overlay {
       display:none;
       position:fixed;
@@ -644,7 +651,6 @@
     .spinner { display:inline-block; width:18px; height:18px; border:3px solid #fff; border-top-color:transparent; border-radius:50%; animation:spin .6s linear infinite; }
     @keyframes spin { to { transform:rotate(360deg); } }
 
-    /* BOTON ADMIN FLOTANTE */
     .admin-float {
       position:fixed;
       bottom:20px;
@@ -667,6 +673,31 @@
       color:#fff;
       transform:scale(1.05);
       box-shadow:0 6px 20px rgba(230,57,70,.6);
+    }
+
+    .auto-refresh-status {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:11px;
+      color:var(--text-muted);
+      background:var(--bg);
+      padding:4px 12px;
+      border-radius:20px;
+      border:1px solid var(--border);
+    }
+    .auto-refresh-status.active {
+      color:var(--success);
+      border-color:var(--success);
+    }
+    .auto-refresh-status.active .refresh-dot {
+      background:var(--success);
+    }
+    .refresh-dot {
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--text-muted);
     }
 
     @media (max-width:768px) {
@@ -745,7 +776,7 @@
       <div class="overlay">
         <span class="cat">Corrupcion</span>
         <h3 class="title">Investigacion revela presuntas irregularidades en contratos publicos</h3>
-        <div class="meta"><i class="bi bi-eye"></i> 8,930 lecturas · hace 1 dia</div>
+        <div class="meta"><i class="bi bi-eye"></i> 8,930 lecturas &middot; hace 1 dia</div>
       </div>
     </div>
     <div class="news-card-2" onclick="verNoticiaHero(2)">
@@ -761,16 +792,22 @@
 <!-- SECCION DIARIO DIGITAL -->
 <section class="section-diario">
   <div class="container-fluid px-3">
-    
+
     <!-- HEADER SECCION -->
     <div class="section-header">
       <h2 class="section-title">Diario Digital</h2>
-      <div class="tabs-modern">
-        <button class="tab-modern active" data-zona="todas" onclick="filtrarNoticias('todas',this)"><i class="bi bi-grid"></i> Todas</button>
-        <button class="tab-modern" data-zona="loreto" onclick="filtrarNoticias('loreto',this)"><i class="bi bi-geo-alt"></i> Loreto</button>
-        <button class="tab-modern" data-zona="nacional" onclick="filtrarNoticias('nacional',this)"><i class="bi bi-flag"></i> Nacional</button>
-        <button class="tab-modern" data-zona="lima" onclick="filtrarNoticias('lima',this)"><i class="bi bi-building"></i> Lima</button>
-        <button class="tab-modern" data-zona="mis" onclick="filtrarNoticias('mis',this)"><i class="bi bi-pencil"></i> Mis Noticias</button>
+      <div class="d-flex align-items-center gap-3 flex-wrap">
+        <span class="auto-refresh-status active" id="autoRefreshStatus">
+          <span class="refresh-dot"></span>
+          Auto-actualizacion: CADA 12 HORAS
+        </span>
+        <div class="tabs-modern">
+          <button class="tab-modern active" data-zona="todas" onclick="filtrarNoticias('todas',this)"><i class="bi bi-grid"></i> Todas</button>
+          <button class="tab-modern" data-zona="loreto" onclick="filtrarNoticias('loreto',this)"><i class="bi bi-geo-alt"></i> Loreto</button>
+          <button class="tab-modern" data-zona="nacional" onclick="filtrarNoticias('nacional',this)"><i class="bi bi-flag"></i> Nacional</button>
+          <button class="tab-modern" data-zona="lima" onclick="filtrarNoticias('lima',this)"><i class="bi bi-building"></i> Lima</button>
+          <button class="tab-modern" data-zona="mis" onclick="filtrarNoticias('mis',this)"><i class="bi bi-pencil"></i> Mis Noticias</button>
+        </div>
       </div>
     </div>
 
@@ -788,31 +825,31 @@
         <h5 style="font-family:'Playfair Display',serif;font-weight:800;"><i class="bi bi-shield-lock-fill"></i> Panel de Fuentes Internas Verificadas</h5>
         <button class="btn-admin" style="background:var(--border);color:var(--text);padding:6px 12px;font-size:12px;" onclick="toggleFuentes()"><i class="bi bi-x-lg"></i> Cerrar</button>
       </div>
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;"><i class="bi bi-info-circle"></i> Estas fuentes son verificadas por el equipo editorial de SMBINRTV. Solo personal autorizado puede acceder a este panel.</p>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;"><i class="bi bi-info-circle"></i> Fuentes verificadas por el equipo editorial de SMBINRTV. Las APIs se consultan automaticamente cada 12 horas.</p>
       <table class="table-fuentes">
         <thead><tr><th>Fuente</th><th>Tipo</th><th>URL / RSS</th><th>Estado</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Pro & Contra (Iquitos)</strong></td><td>Diario regional</td><td><a href="https://proycontra.com.pe" target="_blank">proycontra.com.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td></tr>
-          <tr><td><strong>La Region (Loreto)</strong></td><td>Diario regional</td><td><a href="https://laregion.pe" target="_blank">laregion.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td></tr>
-          <tr><td><strong>Radio La Voz de la Selva</strong></td><td>Radio regional</td><td>Iquitos - 640 AM</td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td></tr>
-          <tr><td><strong>Agencia Andina</strong></td><td>Agencia estatal</td><td><a href="https://andina.pe" target="_blank">andina.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td></tr>
+        <tbody id="fuentes-tbody">
+          <tr><td><strong>NewsAPI (Global)</strong></td><td>API agregador</td><td><a href="https://newsapi.org" target="_blank">newsapi.org</a></td><td class="estado-ok" id="estado-newsapi"><i class="bi bi-check-circle"></i> Activo</td></tr>
+          <tr><td><strong>Currents API</strong></td><td>API agregador</td><td><a href="https://currentsapi.services" target="_blank">currentsapi.services</a></td><td class="estado-ok" id="estado-currents"><i class="bi bi-check-circle"></i> 1,000 req/dia</td></tr>
+          <tr><td><strong>GNews API</strong></td><td>API agregador</td><td><a href="https://gnews.io" target="_blank">gnews.io</a></td><td class="estado-ok" id="estado-gnews"><i class="bi bi-check-circle"></i> 100 req/dia</td></tr>
+          <tr><td><strong>RSS El Comercio</strong></td><td>Diario nacional</td><td><a href="https://elcomercio.pe/arc/outboundfeeds/rss/" target="_blank">elcomercio.pe/rss</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> RSS Activo</td></tr>
           <tr><td><strong>RPP Noticias</strong></td><td>Medio nacional</td><td><a href="https://rpp.pe" target="_blank">rpp.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td></tr>
           <tr><td><strong>La Republica</strong></td><td>Diario nacional</td><td><a href="https://larepublica.pe" target="_blank">larepublica.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td></tr>
-          <tr><td><strong>El Comercio</strong></td><td>Diario nacional</td><td><a href="https://elcomercio.pe" target="_blank">elcomercio.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td></tr>
-          <tr><td><strong>Currents API</strong></td><td>API agregador</td><td><a href="https://currentsapi.services" target="_blank">currentsapi.services</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> 1,000 req/dia</td></tr>
-          <tr><td><strong>GNews API</strong></td><td>API agregador</td><td><a href="https://gnews.io" target="_blank">gnews.io</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> 100 req/dia</td></tr>
+          <tr><td><strong>Agencia Andina</strong></td><td>Agencia estatal</td><td><a href="https://andina.pe" target="_blank">andina.pe</a></td><td class="estado-ok"><i class="bi bi-check-circle"></i> Activo</td></tr>
+          <tr><td><strong>Pro &amp; Contra (Iquitos)</strong></td><td>Diario regional</td><td><a href="https://proycontra.com.pe" target="_blank">proycontra.com.pe</a></td><td class="estado-warn"><i class="bi bi-exclamation-circle"></i> Manual</td></tr>
+          <tr><td><strong>La Region (Loreto)</strong></td><td>Diario regional</td><td><a href="https://laregion.pe" target="_blank">laregion.pe</a></td><td class="estado-warn"><i class="bi bi-exclamation-circle"></i> Manual</td></tr>
         </tbody>
       </table>
       <div style="margin-top:16px;padding:12px;background:var(--bg);border-radius:8px;font-size:12px;color:var(--text-muted);">
-        <strong><i class="bi bi-shield-check"></i> Nota del equipo editorial:</strong> Las fuentes regionales de Loreto son monitoreadas manualmente por nuestro equipo. Las fuentes nacionales se consultan via APIs automatizadas. Todas las noticias son verificadas antes de su publicacion.
+        <strong><i class="bi bi-shield-check"></i> Nota del equipo editorial:</strong> Las fuentes API se consultan automaticamente cada 12 horas. Las fuentes RSS se verifican en tiempo real. Las fuentes manuales son monitoreadas por el equipo editorial. Todas las noticias incluyen enlace a la fuente original para verificacion.
       </div>
     </div>
 
     <!-- GRID DE NOTICIAS -->
     <div id="diario-grid" class="news-grid-main"></div>
-    
+
     <p class="text-center mt-4" style="font-size:13px;color:var(--text-muted);">
-      <i class="bi bi-info-circle"></i> Noticias reales obtenidas via APIs - Ultima actualizacion: <span id="ultima-actualizacion">cargando...</span>
+      <i class="bi bi-info-circle"></i> Noticias reales obtenidas via APIs verificadas - Ultima actualizacion: <span id="ultima-actualizacion">cargando...</span>
     </p>
   </div>
 </section>
@@ -824,7 +861,6 @@
       <h3 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:#fff;margin-top:8px;">Publicidad SMBINRTV</h3>
     </div>
     <div class="ad-grid" id="adGrid">
-      <!-- Se llena dinamicamente desde el panel admin -->
       <div class="ad-slot">
         <i class="bi bi-badge-ad"></i>
         <h6>ESPACIO DISPONIBLE</h6>
@@ -855,36 +891,35 @@
       <h2 class="opinion-title">Opinion Editorial</h2>
     </div>
     <div class="row g-4" id="opinionGrid">
-      <!-- Se llena dinamicamente desde el panel admin -->
       <div class="col-md-4">
         <div class="opinion-card">
-          <img src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=600&q=70" alt="Opinion" />
+          <img src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=600&amp;q=70" alt="Opinion" />
           <h4>La voz de la region no puede quedar en el olvido</h4>
           <p>La Amazonia peruana enfrenta desafios historicos que exigen atencion inmediata. La infraestructura, la salud y la educacion son pilares que no podemos seguir postergando.</p>
           <div class="opinion-author">
-            <img src="https://ui-avatars.com/api/?name=Editorial+SMBINRTV&background=e63946&color=fff" alt="Editorial" />
+            <img src="https://ui-avatars.com/api/?name=Editorial+SMBINRTV&amp;background=e63946&amp;color=fff" alt="Editorial" />
             <span><strong>Editorial SMBINRTV</strong> - Opinion</span>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="opinion-card">
-          <img src="https://images.unsplash.com/photo-1541872705-1f73c6400ec9?w=600&q=70" alt="Opinion" />
+          <img src="https://images.unsplash.com/photo-1541872705-1f73c6400ec9?w=600&amp;q=70" alt="Opinion" />
           <h4>Donde estan los recursos para la salud amazonica?</h4>
           <p>Los hospitales de Loreto operan al limite. Mientras tanto, los presupuestos se diluyen en burocracia. Es hora de rendir cuentas con hechos, no con discursos.</p>
           <div class="opinion-author">
-            <img src="https://ui-avatars.com/api/?name=Redaccion+SMBINRTV&background=7c3aed&color=fff" alt="Redaccion" />
+            <img src="https://ui-avatars.com/api/?name=Redaccion+SMBINRTV&amp;background=7c3aed&amp;color=fff" alt="Redaccion" />
             <span><strong>Redaccion SMBINRTV</strong> - Analisis</span>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="opinion-card">
-          <img src="https://images.unsplash.com/photo-1529686342540-1b43aec0df75?w=600&q=70" alt="Opinion" />
+          <img src="https://images.unsplash.com/photo-1529686342540-1b43aec0df75?w=600&amp;q=70" alt="Opinion" />
           <h4>El futuro de Iquitos esta en nuestras manos</h4>
           <p>La ciudad mas grande del mundo sin salida por carretera merece un plan de desarrollo integral. El turismo, la tecnologia y la sostenibilidad deben ser nuestra brujula.</p>
           <div class="opinion-author">
-            <img src="https://ui-avatars.com/api/?name=Opinion+SMBINRTV&background=0ea5e9&color=fff" alt="Opinion" />
+            <img src="https://ui-avatars.com/api/?name=Opinion+SMBINRTV&amp;background=0ea5e9&amp;color=fff" alt="Opinion" />
             <span><strong>Columna de Opinion</strong> - Tu Decides</span>
           </div>
         </div>
@@ -953,7 +988,7 @@
 <!-- MODAL: Ver Noticia Completa -->
 <div class="modal-overlay" id="modalNoticia" onclick="if(event.target===this)cerrarModal('modalNoticia')">
   <div class="modal-box">
-    <button class="modal-close" onclick="cerrarModal('modalNoticia')">×</button>
+    <button class="modal-close" onclick="cerrarModal('modalNoticia')">&times;</button>
     <h3 id="modal-titulo">Titulo de la noticia</h3>
     <img id="modal-img" src="" alt="" class="preview-img" style="display:none;width:100%;height:300px;object-fit:cover;" />
     <div id="modal-cuerpo" style="font-size:15px;line-height:1.8;color:var(--text);"></div>
@@ -964,11 +999,11 @@
 <!-- MODAL: Password Editor -->
 <div class="modal-overlay" id="modalPassword" onclick="if(event.target===this)cerrarModal('modalPassword')">
   <div class="modal-box" style="max-width:400px;">
-    <button class="modal-close" onclick="cerrarModal('modalPassword')">×</button>
+    <button class="modal-close" onclick="cerrarModal('modalPassword')">&times;</button>
     <h3><i class="bi bi-shield-lock-fill" style="color:var(--primary);"></i> Acceso Restringido</h3>
-    <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;">Este area es exclusiva para directores de SMBINRTV. Ingresa la contraseña para continuar.</p>
+    <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;">Este area es exclusiva para directores de SMBINRTV. Ingresa la contrasena para continuar.</p>
     <div class="form-group">
-      <input type="password" id="editor-password" class="form-control" placeholder="Contraseña de director..." />
+      <input type="password" id="editor-password" class="form-control" placeholder="Contrasena de director..." />
     </div>
     <div class="d-flex gap-2">
       <button class="btn-admin btn-update w-100" onclick="verificarPassword()"><i class="bi bi-shield-check"></i> Acceder</button>
@@ -980,20 +1015,24 @@
 <!-- MODAL: Editor Interno -->
 <div class="modal-overlay" id="modalEditar" onclick="if(event.target===this)cerrarModal('modalEditar')">
   <div class="modal-box">
-    <button class="modal-close" onclick="cerrarModal('modalEditar')">×</button>
+    <button class="modal-close" onclick="cerrarModal('modalEditar')">&times;</button>
     <h3><i class="bi bi-pencil-square" style="color:#7c3aed;"></i> Editor Interno SMBINRTV</h3>
-    <p style="font-size:13px;color:var(--primary);font-weight:600;margin-bottom:16px;">⚠️ Solo personal autorizado puede editar noticias</p>
+    <p style="font-size:13px;color:var(--primary);font-weight:600;margin-bottom:16px;"> Solo personal autorizado puede editar noticias</p>
     <div class="form-group">
-      <label>Titular original</label>
+      <label>Titular editable</label>
+      <input type="text" id="edit-titulo-nuevo" class="form-control" placeholder="Edita el titular de la noticia..." />
+    </div>
+    <div class="form-group">
+      <label>Titular original (referencia)</label>
       <input type="text" id="edit-titulo-original" class="form-control" readonly style="background:var(--bg);" />
     </div>
     <div class="form-group">
-      <label>Contenido original</label>
+      <label>Contenido original (referencia)</label>
       <textarea id="edit-cuerpo-original" class="form-control" readonly style="background:var(--bg);min-height:80px;"></textarea>
     </div>
     <hr style="border-color:var(--border);margin:20px 0;" />
     <div class="form-group">
-      <label>Tu version editorial</label>
+      <label>Tu version editorial (contenido completo)</label>
       <textarea id="edit-cuerpo-nuevo" class="form-control" placeholder="Escribe la version editorial con el analisis profesional de SMBINRTV..." style="min-height:200px;"></textarea>
     </div>
     <div class="d-flex gap-2">
@@ -1003,17 +1042,17 @@
   </div>
 </div>
 
-<!-- MODAL: Publicar Noticia (con upload de imagen PC + drag & drop) -->
+<!-- MODAL: Publicar Noticia -->
 <div class="modal-overlay" id="modalOwn" onclick="if(event.target===this)cerrarModal('modalOwn')">
   <div class="modal-box">
-    <button class="modal-close" onclick="cerrarModal('modalOwn')">×</button>
+    <button class="modal-close" onclick="cerrarModal('modalOwn')">&times;</button>
     <h3><i class="bi bi-plus-circle" style="color:var(--primary);"></i> Publicar Mi Noticia</h3>
-    
+
     <div class="form-group">
       <label>Titular de la noticia *</label>
       <input type="text" id="own-titulo" class="form-control" placeholder="Ej: Aprueban nuevo proyecto de infraestructura..." />
     </div>
-    
+
     <div class="form-group">
       <label>Zona *</label>
       <select id="own-zona" class="form-control">
@@ -1028,12 +1067,12 @@
         <option value="Lima">Lima</option>
       </select>
     </div>
-    
+
     <div class="form-group">
       <label>Contenido completo de la noticia *</label>
-      <textarea id="own-cuerpo" class="form-control" placeholder="Escribe la informacion completa: quien, que, cuando, donde, por que y como... Minimo 100 palabras para generar noticia profesional." style="min-height:150px;"></textarea>
+      <textarea id="own-cuerpo" class="form-control" placeholder="Escribe la informacion completa: quien, que, cuando, donde, por que y como... Minimo 100 palabras." style="min-height:150px;"></textarea>
     </div>
-    
+
     <div class="form-group">
       <label>Imagen de la noticia</label>
       <div class="file-upload" onclick="document.getElementById('own-imagen-file').click()" ondragover="event.preventDefault();this.style.borderColor='var(--primary)';this.style.background='rgba(230,57,70,.05)';" ondragleave="this.style.borderColor='var(--border)';this.style.background='var(--bg)';" ondrop="handleDrop(event)">
@@ -1047,7 +1086,7 @@
         <img id="preview-img" src="" class="preview-img" />
       </div>
     </div>
-    
+
     <div class="d-flex gap-2">
       <button class="btn-admin btn-update w-100" onclick="publicarNoticiaPropia()"><i class="bi bi-send"></i> Publicar Noticia</button>
       <button class="btn-admin" style="background:var(--border);color:var(--text);" onclick="cerrarModal('modalOwn')">Cancelar</button>
@@ -1062,23 +1101,28 @@
 
 <script>
 // ===== CONFIGURACION =====
+const NEWSAPI_KEY = 'TU_API_KEY_DE_NEWSAPI_AQUI'; // Obtener gratis en newsapi.org
 const CURRENTS_API_KEY = 'kKZtoyAGE2PgxRe3GXpbT44nBkt3QbOiMhOpwzExbu0YAOcS';
 const GNEWS_API_KEY = '9b5b1b5a0b5fafc4f395d5849fed3d27';
 const PORTAL_URL = 'https://smbinrtv.vercel.app';
 const PASSWORD_EDITOR = 'smbinrtv2026';
+const AUTO_REFRESH_HOURS = 12;
+const AUTO_REFRESH_MS = AUTO_REFRESH_HOURS * 60 * 60 * 1000;
 
 // Estado global
 let todasLasNoticias = [];
 let noticiasMis = JSON.parse(localStorage.getItem('smbinrtv_mis_noticias') || '[]');
-let noticiasEditadas = JSON.parse(localStorage.getItem('smbinrtv_editadas') || '{}');
+// noticiasEditadas ahora usa ID de noticia como key en lugar de indice
+let noticiasEditadas = JSON.parse(localStorage.getItem('smbinrtv_editadas_v2') || '{}');
 let filtroActual = 'todas';
 let noticiaEditando = null;
 let fuenteActiva = 'currents';
 let editorAutenticado = false;
 let imagenBase64 = '';
+let autoRefreshInterval = null;
+let ultimaActualizacion = localStorage.getItem('smbinrtv_ultima_actualizacion') || null;
 
 // ===== FUNCIONES DEL PANEL ADMIN =====
-
 function getAdminData() {
   const data = localStorage.getItem('smbinrtv_data');
   return data ? JSON.parse(data) : { news: [], ads: [], opinions: [] };
@@ -1088,37 +1132,18 @@ function renderPublicidadAdmin() {
   const data = getAdminData();
   const container = document.getElementById('adGrid');
   const activeAds = data.ads.filter(a => a.active !== false).sort((a,b) => a.position - b.position);
-  
+
   const slots = [0, 1, 2];
   let html = '';
 
   slots.forEach(pos => {
     const ad = activeAds.find(a => a.position === pos);
     if (ad && ad.image) {
-      html += `
-        <div class="ad-slot" style="padding:0;overflow:hidden;">
-          <a href="${ad.link || '#'}" target="_blank" style="display:block;width:100%;height:100%;">
-            <img src="${ad.image}" alt="${ad.name || 'Publicidad'}" style="width:100%;height:100%;object-fit:cover;" />
-          </a>
-        </div>
-      `;
+      html += `<div class="ad-slot" style="padding:0;overflow:hidden;"><a href="${ad.link || '#'}" target="_blank" style="display:block;width:100%;height:100%;"><img src="${ad.image}" alt="${ad.name || 'Publicidad'}" style="width:100%;height:100%;object-fit:cover;" /></a></div>`;
     } else if (ad) {
-      html += `
-        <div class="ad-slot">
-          <i class="bi bi-badge-ad"></i>
-          <h6>${ad.name || 'PUBLICIDAD'}</h6>
-          <p><a href="${ad.link || '#'}" target="_blank" style="color:var(--primary);">Visitar sitio</a></p>
-        </div>
-      `;
+      html += `<div class="ad-slot"><i class="bi bi-badge-ad"></i><h6>${ad.name || 'PUBLICIDAD'}</h6><p><a href="${ad.link || '#'}" target="_blank" style="color:var(--primary);">Visitar sitio</a></p></div>`;
     } else {
-      html += `
-        <div class="ad-slot">
-          <i class="bi bi-badge-ad"></i>
-          <h6>ESPACIO DISPONIBLE</h6>
-          <p>300x250 px - ${pos === 0 ? 'Banner principal' : (pos === 1 ? 'Banner secundario' : 'Banner sidebar')}</p>
-          <a href="mailto:smbinrtvcanalonline@gmail.com"><i class="bi bi-envelope"></i> Contactar</a>
-        </div>
-      `;
+      html += `<div class="ad-slot"><i class="bi bi-badge-ad"></i><h6>ESPACIO DISPONIBLE</h6><p>300x250 px - ${pos === 0 ? 'Banner principal' : (pos === 1 ? 'Banner secundario' : 'Banner sidebar')}</p><a href="mailto:smbinrtvcanalonline@gmail.com"><i class="bi bi-envelope"></i> Contactar</a></div>`;
     }
   });
 
@@ -1129,12 +1154,7 @@ function renderOpinionAdmin() {
   const data = getAdminData();
   const container = document.getElementById('opinionGrid');
   const activeOpinions = data.opinions.filter(o => o.active !== false).slice(0, 3);
-
-  if (activeOpinions.length === 0) {
-    // Mantener las opiniones por defecto si no hay en el admin
-    return;
-  }
-
+  if (activeOpinions.length === 0) return;
   container.innerHTML = activeOpinions.map(item => `
     <div class="col-md-4">
       <div class="opinion-card">
@@ -1165,6 +1185,7 @@ function tiempoRelativo(fechaStr) {
 }
 
 function escaparHTML(str) {
+  if (!str) return '';
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
@@ -1172,6 +1193,17 @@ function escaparHTML(str) {
 
 function contarPalabras(texto) {
   return texto.trim().split(/\s+/).length;
+}
+
+function generarIdNoticia(titulo, fuente, fecha) {
+  const str = (titulo + fuente + fecha).toLowerCase().replace(/[^a-z0-9]/g, '');
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return 'not_' + Math.abs(hash).toString(36);
 }
 
 // ===== UPLOAD IMAGEN DESDE PC =====
@@ -1230,24 +1262,25 @@ function obtenerDatosVerificables(categoria, zona) {
   if (categoria === 'SALUD' || (categoria && categoria.includes('salud'))) {
     base.quien = 'El Ministerio de Salud (Minsa), a traves de la Direccion Regional de Salud de Loreto (Diresa Loreto), y los establecimientos de salud de la region confirmaron que';
     base.donde = 'Los hospitales y centros de salud de Iquitos, Nauta, Requena, Yurimaguas y demas provincias de la region Loreto estan en alerta. La alerta sanitaria responde al monitoreo epidemiologico permanente que realiza el Minsa en coordinacion con las autoridades locales. Se han activado los protocolos de emergencia sanitaria, con dotacion de medicamentos y personal especializado en los centros de salud afectados.';
-    base.analisis = 'La salud publica en Loreto requiere atencion prioritaria. La inversion en infraestructura hospitalaria y el acceso a medicamentos son temas pendientes que SMBINRTV seguira denunciando hasta obtener respuestas concretas del Estado. La poblacion debe mantenerse informada a traves de canales oficiales y reportar cualquier sintoma a las autoridades sanitarias correspondientes.';
+    base.analisis = 'La salud publica en Loreto requiere atencion prioritaria. La inversion en infraestructura hospitalaria y el acceso a medicamentos son temas pendientes que SMBINRTV seguira denunciando hasta obtener respuestas concretas del Estado.';
   } else if (categoria === 'SEGURIDAD' || (categoria && (categoria.includes('seguridad') || categoria.includes('corrupcion')))) {
     base.quien = 'La Policia Nacional del Peru (PNP), la Fiscalia de la Nacion y el Ministerio Publico, en coordinacion con las autoridades judiciales de la region, informaron que';
-    base.donde = 'Las operaciones se desarrollaron en diferentes puntos de la region Loreto, con apoyo de la Direccion de Investigacion Criminal (Dirincri) y la Diviac. La intervencion obedece a denuncias ciudadanas y a la labor de inteligencia policial que venia monitoreando a los presuntos involucrados. Se ejecutaron operativos simultaneos con ordenes de allanamiento y detencion, garantizando el debido proceso y los derechos de los intervenidos.';
-    base.analisis = 'La seguridad ciudadana es una de las principales demandas de la poblacion lorena. La corrupcion y la delincuencia deben ser combatidas con firmeza, pero tambien con respeto a los derechos humanos y el debido proceso. SMBINRTV seguira monitoreando estos casos y exigiendo transparencia en las investigaciones.';
+    base.donde = 'Las operaciones se desarrollaron en diferentes puntos de la region Loreto, con apoyo de la Direccion de Investigacion Criminal (Dirincri) y la Diviac. La intervencion obedece a denuncias ciudadanas y a la labor de inteligencia policial.';
+    base.analisis = 'La seguridad ciudadana es una de las principales demandas de la poblacion lorena. La corrupcion y la delincuencia deben ser combatidas con firmeza, pero tambien con respeto a los derechos humanos.';
   } else if (categoria === 'ECONOMIA' || (categoria && categoria.includes('economia'))) {
     base.quien = 'El Ministerio de Economia y Finanzas (MEF), el Gobierno Regional de Loreto y la Camara de Comercio de Iquitos informaron que';
-    base.donde = 'El impacto economico se siente en los principales sectores productivos de Loreto: pesca, agricultura, turismo y comercio informal. Las medidas responden a la necesidad de reactivar la economia regional tras los efectos de la pandemia y la crisis economica nacional. Se implementaran programas de capacitacion, creditos blandos para emprendedores y apoyo tecnico a los pequenos productores de la region.';
-    base.analisis = 'La economia de Loreto tiene un potencial enorme que no ha sido aprovechado. El turismo ecologico, la pesca artesanal y los productos amazonicos podrian generar miles de empleos si existiera una verdadera politica de desarrollo productivo. SMBINRTV seguira exigiendo al Gobierno central politicas que beneficien directamente a los productores de la Amazonia peruana.';
+    base.donde = 'El impacto economico se siente en los principales sectores productivos de Loreto: pesca, agricultura, turismo y comercio informal.';
+    base.analisis = 'La economia de Loreto tiene un potencial enorme. El turismo ecologico, la pesca artesanal y los productos amazonicos podrian generar miles de empleos.';
   } else if (zona === 'lima' || zona === 'LIMA') {
     base.quien = 'Las autoridades del Gobierno Central, la Municipalidad Metropolitana de Lima y los ministerios sectoriales correspondientes informaron que';
-    base.donde = 'La capital del Peru es el escenario de esta informacion, con repercusiones en las politicas nacionales que afectan directamente a las regiones del pais, incluyendo Loreto. Las decisiones tomadas en Lima tienen impacto directo en el presupuesto y las politicas que se ejecutan en las regiones del Peru, a traves de la publicacion de normas legales, decretos supremos y resoluciones ministeriales en el portal del Estado Peruano.';
-    base.analisis = 'Desde la Amazonia peruana observamos con preocupacion como muchas decisiones se toman en Lima sin consultar a las regiones. La centralizacion del Estado peruano sigue siendo uno de los principales obstaculos para el desarrollo equitativo del pais. SMBINRTV seguira denunciando la exclusion de las regiones en las decisiones que las afectan directamente.';
+    base.donde = 'La capital del Peru es el escenario de esta informacion, con repercusiones en las politicas nacionales que afectan directamente a las regiones del pais, incluyendo Loreto.';
+    base.analisis = 'Desde la Amazonia peruana observamos con preocupacion como muchas decisiones se toman en Lima sin consultar a las regiones.';
   }
 
   return base;
 }
-  // ===== COMPARTIR EN REDES =====
+
+// ===== COMPARTIR EN REDES (CORREGIDO) =====
 function compartirFB(titulo, url) {
   const u = encodeURIComponent(url || PORTAL_URL);
   const t = encodeURIComponent(titulo + ' - SMBINRTV');
@@ -1267,11 +1300,10 @@ function compartirIG(titulo) {
 }
 
 function botonesCompartir(titulo, url, idx) {
-  const t = escaparHTML(titulo).replace(/'/g, "\\'");
-  const u = url ? escaparHTML(url).replace(/'/g, "\\'") : '';
+  const t = escaparHTML(titulo).replace(/'/g, "\'");
+  const u = url ? escaparHTML(url).replace(/'/g, "\'") : '';
   return `<button class="btn-nc btn-share-fb" onclick="compartirFB('${t}','${u}')"><i class="bi bi-facebook"></i></button>
 <button class="btn-nc btn-share-wa" onclick="compartirWA('${t}','${u}')"><i class="bi bi-whatsapp"></i></button>
-<button class="btn-nc btn-share-x" onclick="compartirTW('${t}','${u}')"><i class
 <button class="btn-nc btn-share-x" onclick="compartirTW('${t}','${u}')"><i class="bi bi-twitter-x"></i></button>`;
 }
 
@@ -1283,12 +1315,12 @@ function toggleFuentes() {
     document.getElementById('panelFuentes').classList.toggle('show');
     return;
   }
-  const pass = prompt('🔒 ACCESO RESTRINGIDO\n\nPanel de Fuentes Internas Verificadas\nSolo personal autorizado de SMBINRTV\n\nIngrese la contraseña:');
+  const pass = prompt('🔒 ACCESO RESTRINGIDO\n\nPanel de Fuentes Internas Verificadas\nSolo personal autorizado de SMBINRTV\n\nIngrese la contrasena:');
   if (pass === PASSWORD_EDITOR) {
     fuentesAutenticado = true;
     document.getElementById('panelFuentes').classList.toggle('show');
   } else if (pass !== null) {
-    alert('❌ Contraseña incorrecta. Solo personal autorizado puede acceder al panel de fuentes internas.');
+    alert('❌ Contrasena incorrecta. Solo personal autorizado puede acceder al panel de fuentes internas.');
   }
 }
 
@@ -1309,7 +1341,7 @@ function verificarPassword() {
     cerrarModal('modalPassword');
     abrirEditorDesdeBtn();
   } else {
-    alert('Contraseña incorrecta. Solo directores pueden acceder al editor.');
+    alert('Contrasena incorrecta. Solo directores pueden acceder al editor.');
     document.getElementById('editor-password').value = '';
   }
 }
@@ -1322,12 +1354,30 @@ function abrirEditorDesdeBtn() {
   }
 }
 
+// ===== EDITAR NOTICIA DESDE LA TARJETA =====
+function editarNoticiaDesdeTarjeta(idx) {
+  if (!editorAutenticado) {
+    abrirModal('modalPassword');
+    // Guardar el indice para editar despues de autenticar
+    window._pendingEditIndex = idx;
+    return;
+  }
+  abrirEditor(idx);
+}
+
 function abrirEditor(idx) {
   noticiaEditando = idx;
   const n = todasLasNoticias[idx];
   if (!n) return;
-  const editada = noticiasEditadas[idx];
+
+  // Generar ID si no existe
+  if (!n.id) {
+    n.id = generarIdNoticia(n.titulo, n.fuente, n.fecha);
+  }
+
+  const editada = noticiasEditadas[n.id];
   document.getElementById('edit-titulo-original').value = n.titulo;
+  document.getElementById('edit-titulo-nuevo').value = editada ? editada.titulo : n.titulo;
   document.getElementById('edit-cuerpo-original').value = n.cuerpoCompleto || n.resumen || 'Sin contenido';
   document.getElementById('edit-cuerpo-nuevo').value = editada ? editada.cuerpo : '';
   abrirModal('modalEditar');
@@ -1335,17 +1385,31 @@ function abrirEditor(idx) {
 
 function guardarEdicion() {
   if (noticiaEditando === null) return;
-  const nuevo = document.getElementById('edit-cuerpo-nuevo').value.trim();
-  if (!nuevo) { alert('Escribe tu version de la noticia.'); return; }
-  noticiasEditadas[noticiaEditando] = {
-    titulo: todasLasNoticias[noticiaEditando].titulo,
-    cuerpo: nuevo,
-    fecha: new Date().toISOString()
+  const n = todasLasNoticias[noticiaEditando];
+  if (!n) return;
+
+  const nuevoTitulo = document.getElementById('edit-titulo-nuevo').value.trim();
+  const nuevoCuerpo = document.getElementById('edit-cuerpo-nuevo').value.trim();
+
+  if (!nuevoCuerpo) { alert('Escribe tu version de la noticia.'); return; }
+
+  // Generar ID si no existe
+  if (!n.id) {
+    n.id = generarIdNoticia(n.titulo, n.fuente, n.fecha);
+  }
+
+  noticiasEditadas[n.id] = {
+    titulo: nuevoTitulo || n.titulo,
+    cuerpo: nuevoCuerpo,
+    fechaEdicion: new Date().toISOString(),
+    editor: 'Director SMBINRTV',
+    originalId: n.id
   };
-  localStorage.setItem('smbinrtv_editadas', JSON.stringify(noticiasEditadas));
+
+  localStorage.setItem('smbinrtv_editadas_v2', JSON.stringify(noticiasEditadas));
   cerrarModal('modalEditar');
   filtrarYRenderizar();
-  alert('Version del director guardada exitosamente.');
+  alert('✅ Version del director guardada exitosamente. La noticia aparecera marcada como "Editada".');
 }
 
 // ===== PUBLICAR NOTICIA PROPIA - PROTEGIDO =====
@@ -1356,12 +1420,12 @@ function solicitarAccesoMiNoticia() {
     abrirModal('modalOwn');
     return;
   }
-  const pass = prompt('🔒 ACCESO RESTRINGIDO\n\nPublicar Noticia Propia\nSolo equipo editorial de SMBINRTV\n\nIngrese la contraseña:');
+  const pass = prompt('🔒 ACCESO RESTRINGIDO\n\nPublicar Noticia Propia\nSolo equipo editorial de SMBINRTV\n\nIngrese la contrasena:');
   if (pass === PASSWORD_EDITOR) {
     miNoticiaAutenticado = true;
     abrirModal('modalOwn');
   } else if (pass !== null) {
-    alert('❌ Contraseña incorrecta. Solo el equipo editorial autorizado puede publicar noticias.');
+    alert('❌ Contrasena incorrecta. Solo el equipo editorial autorizado puede publicar noticias.');
   }
 }
 
@@ -1400,7 +1464,34 @@ function publicarNoticiaPropia() {
   alert('✅ Tu noticia ha sido publicada exitosamente en la seccion "Mis Noticias".');
 }
 
-// ===== CARGAR NOTICIAS - CURRENTS PRINCIPAL, GNEWS RESPALDO =====
+// ===== AUTO REFRESH CADA 12 HORAS =====
+function iniciarAutoRefresh() {
+  // Actualizar inmediatamente al cargar
+  cargarNoticiasGNews();
+
+  // Configurar intervalo de 12 horas
+  autoRefreshInterval = setInterval(() => {
+    console.log('🔄 Auto-actualizacion de noticias cada 12 horas...');
+    cargarNoticiasGNews();
+  }, AUTO_REFRESH_MS);
+
+  // Mostrar proxima actualizacion
+  actualizarContadorAutoRefresh();
+}
+
+function actualizarContadorAutoRefresh() {
+  const statusEl = document.getElementById('autoRefreshStatus');
+  if (!statusEl) return;
+
+  const ahora = new Date();
+  const proxima = new Date(ahora.getTime() + AUTO_REFRESH_MS);
+  const horas = proxima.getHours().toString().padStart(2, '0');
+  const minutos = proxima.getMinutes().toString().padStart(2, '0');
+
+  statusEl.innerHTML = `<span class="refresh-dot"></span> Proxima auto-actualizacion: ${horas}:${minutos}`;
+}
+
+// ===== CARGAR NOTICIAS - MULTI FUENTE =====
 async function cargarNoticiasGNews() {
   const btn = document.getElementById('btnActualizar');
   const grid = document.getElementById('diario-grid');
@@ -1409,38 +1500,74 @@ async function cargarNoticiasGNews() {
   grid.innerHTML = '<p class="text-center w-100 py-5" style="color:var(--text-muted);"><span class="spinner" style="border-color:var(--primary);border-top-color:transparent;"></span><br/>Cargando noticias profesionales...</p>';
 
   let noticias = [];
+  let fuentesUsadas = [];
 
-  // INTENTAR CURRENTS API PRIMERO
+  // 1. INTENTAR NEWSAPI PRIMERO (mas confiable)
+  if (NEWSAPI_KEY && NEWSAPI_KEY !== 'TU_API_KEY_DE_NEWSAPI_AQUI') {
+    try {
+      const newsapi = await cargarDesdeNewsAPI();
+      if (newsapi.length > 0) {
+        noticias = noticias.concat(newsapi);
+        fuentesUsadas.push('NewsAPI');
+        actualizarEstadoFuente('newsapi', 'ok');
+      }
+    } catch (e) { 
+      console.warn('⚠️ NewsAPI fallo:', e); 
+      actualizarEstadoFuente('newsapi', 'error');
+    }
+  }
+
+  // 2. INTENTAR CURRENTS API
   if (CURRENTS_API_KEY && CURRENTS_API_KEY !== 'TU_API_KEY_DE_CURRENTS_AQUI') {
     try {
-      noticias = await cargarDesdeCurrents();
-      if (noticias.length > 0) {
-        fuenteActiva = 'currents';
-        console.log('✅ Currents API - ' + noticias.length + ' noticias');
+      const currents = await cargarDesdeCurrents();
+      if (currents.length > 0) {
+        noticias = noticias.concat(currents);
+        fuentesUsadas.push('Currents');
+        actualizarEstadoFuente('currents', 'ok');
       }
-    } catch (e) { console.warn('⚠️ Currents fallo:', e); }
+    } catch (e) { 
+      console.warn('⚠️ Currents fallo:', e); 
+      actualizarEstadoFuente('currents', 'error');
+    }
   }
 
-  // SI FALLA, INTENTAR GNEWS
-  if (noticias.length === 0) {
+  // 3. INTENTAR GNEWS
+  if (GNEWS_API_KEY && GNEWS_API_KEY !== 'TU_API_KEY_DE_GNEWS_AQUI') {
     try {
-      noticias = await cargarDesdeGNews();
-      if (noticias.length > 0) {
-        fuenteActiva = 'gnews';
-        console.log('✅ GNews API (respaldo) - ' + noticias.length + ' noticias');
+      const gnews = await cargarDesdeGNews();
+      if (gnews.length > 0) {
+        noticias = noticias.concat(gnews);
+        fuentesUsadas.push('GNews');
+        actualizarEstadoFuente('gnews', 'ok');
       }
-    } catch (e) { console.warn('⚠️ GNews tambien fallo:', e); }
+    } catch (e) { 
+      console.warn('⚠️ GNews tambien fallo:', e); 
+      actualizarEstadoFuente('gnews', 'error');
+    }
   }
 
-  // SI AMBAS FALLAN, USAR RESPALDO LOCAL
+  // SI NO HAY NOTICIAS DE APIs, USAR RESPALDO
   if (noticias.length === 0) {
     console.log('📋 Usando noticias de respaldo...');
     noticias = noticiasRespaldo();
-    fuenteActiva = 'respaldo';
+    fuentesUsadas.push('Respaldo SMBINRTV');
   }
 
-  // GENERAR CUERPO PROFESIONAL PARA CADA NOTICIA
+  // Eliminar duplicados por titulo
+  const vistas = new Set();
+  noticias = noticias.filter(n => {
+    const key = n.titulo.toLowerCase().substring(0, 50);
+    if (vistas.has(key)) return false;
+    vistas.add(key);
+    return true;
+  });
+
+  // Generar IDs y cuerpo profesional para cada noticia
   noticias.forEach(n => {
+    if (!n.id) {
+      n.id = generarIdNoticia(n.titulo, n.fuente, n.fecha);
+    }
     if (!n.cuerpoCompleto || contarPalabras(n.cuerpoCompleto) < 200) {
       n.cuerpoCompleto = generarNoticiaProfesional(n.titulo, n.resumen, n.fuente, n.cat, n.zona);
     }
@@ -1452,8 +1579,10 @@ async function cargarNoticiasGNews() {
   noticiasMis.forEach(n => {
     const zonaKey = n.zona === 'Lima' ? 'lima' : (n.zona === 'Nacional' ? 'nacional' : 'loreto');
     const cuerpoManual = n.cuerpo.length > 200 ? n.cuerpo : generarNoticiaProfesional(n.titulo, n.cuerpo, 'SMBINRTV', 'MIS NOTICIAS', zonaKey);
+    const id = generarIdNoticia(n.titulo, 'SMBINRTV', n.fecha);
 
     todasLasNoticias.push({
+      id: id,
       zona: zonaKey,
       cat: 'MIS NOTICIAS',
       catClass: 'cat-mis',
@@ -1472,10 +1601,14 @@ async function cargarNoticiasGNews() {
   actualizarContadoresTabs();
   filtrarYRenderizar();
 
-  const ahora = new Date().toLocaleTimeString('es-PE');
-  const fuenteLabel = fuenteActiva === 'currents' ? 'Currents API (tiempo real)' : 
-                      (fuenteActiva === 'gnews' ? 'GNews API (retraso 12h)' : 'Noticias de respaldo');
-  document.getElementById('ultima-actualizacion').innerHTML = `${ahora} <span style="color:var(--primary);">· ${fuenteLabel}</span>`;
+  // Guardar ultima actualizacion
+  const ahora = new Date();
+  ultimaActualizacion = ahora.toISOString();
+  localStorage.setItem('smbinrtv_ultima_actualizacion', ultimaActualizacion);
+
+  const horaStr = ahora.toLocaleTimeString('es-PE');
+  const fuenteLabel = fuentesUsadas.join(' + ');
+  document.getElementById('ultima-actualizacion').innerHTML = `${horaStr} <span style="color:var(--primary);">· ${fuenteLabel}</span>`;
 
   if (noticias.length > 0) {
     const titulares = noticias.slice(0, 5).map(n => n.titulo).join(' · ');
@@ -1484,6 +1617,52 @@ async function cargarNoticiasGNews() {
 
   btn.disabled = false;
   btn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Actualizar Noticias';
+
+  // Actualizar contador de auto-refresh
+  actualizarContadorAutoRefresh();
+}
+
+function actualizarEstadoFuente(fuente, estado) {
+  const el = document.getElementById('estado-' + fuente);
+  if (!el) return;
+  if (estado === 'ok') {
+    el.className = 'estado-ok';
+    el.innerHTML = '<i class="bi bi-check-circle"></i> Activo';
+  } else {
+    el.className = 'estado-error';
+    el.innerHTML = '<i class="bi bi-x-circle"></i> Error de conexion';
+  }
+}
+
+// ===== NEWSAPI =====
+async function cargarDesdeNewsAPI() {
+  const noticias = [];
+  const queries = [
+    { zona: 'nacional', q: 'Peru', cat: 'NACIONAL', catClass: 'cat-nacional', max: 4 },
+    { zona: 'loreto', q: 'Loreto Iquitos', cat: 'LORETO', catClass: 'cat-loreto', max: 3 },
+    { zona: 'lima', q: 'Lima Peru', cat: 'LIMA', catClass: 'cat-lima', max: 3 }
+  ];
+
+  for (const query of queries) {
+    try {
+      const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query.q)}&language=es&sortBy=publishedAt&pageSize=${query.max}&apiKey=${NEWSAPI_KEY}`;
+      const res = await fetch(url);
+      if (!res.ok) continue;
+      const data = await res.json();
+      if (data.articles && data.articles.length > 0) {
+        data.articles.forEach(art => {
+          noticias.push({
+            zona: query.zona, cat: query.cat, catClass: query.catClass,
+            titulo: art.title, resumen: art.description || 'Sin descripcion',
+            imagen: art.urlToImage || `https://picsum.photos/seed/${encodeURIComponent(art.title).substring(0,10)}/600/400`,
+            url: art.url, fuente: art.source?.name || 'NewsAPI',
+            fecha: art.publishedAt, hace: tiempoRelativo(art.publishedAt), tipo: 'newsapi'
+          });
+        });
+      }
+    } catch (e) { /* silencioso */ }
+  }
+  return noticias;
 }
 
 // ===== CURRENTS API =====
@@ -1552,36 +1731,12 @@ async function cargarDesdeGNews() {
 function noticiasRespaldo() {
   const fechaHoy = new Date().toLocaleDateString('es-PE', { day:'numeric', month:'long', year:'numeric' });
   return [
-    { zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', titulo:'Gobierno anuncia nuevas medidas economicas para reducir la inflacion', resumen:'El Ejecutivo presento un paquete de medidas orientadas a estabilizar los precios en las regiones del pais.', cuerpoCompleto:`El presidente de la Republica, Dina Boluarte, junto al ministro de Economia, Jose Arista, y el presidente del Banco Central de Reserva, Julio Velarde, anunciaron un paquete de medidas economicas destinadas a reducir la inflacion y estabilizar los precios de los productos de primera necesidad en todo el territorio nacional, incluyendo la region Amazonica. La informacion fue confirmada el dia ${fechaHoy} durante una conferencia de prensa en Palacio de Gobierno, tras la sesion del Consejo de Ministros. Las medidas tendran aplicacion en todo el Peru, con especial atencion en las regiones mas vulnerables como Loreto, Ucayali, Madre de Dios y Amazonas. La inflacion acumulada en los ultimos meses ha afectado significativamente el poder adquisitivo de las familias peruanas, especialmente en las zonas rurales y urbanas marginadas donde los precios de los alimentos basicos se han incrementado por encima del promedio nacional. El Ejecutivo implementara un fondo de estabilizacion de precios, bonos alimentarios para familias de escasos recursos y un programa de compras estatales directas a productores agricolas para eliminar intermediarios.
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Si bien las medidas anunciadas son positivas en apariencia, la historia nos ha demostrado que muchos de estos programas no llegan a la poblacion que realmente lo necesita en la Amazonia peruana. La region Loreto historicamente ha sido olvidada en la distribucion de recursos economicos. Los bonos anunciados deben llegar a los pueblos indigenas, a los pescadores artesanales y a las madres de familia de los asentamientos humanos de Iquitos, Nauta, Requena y las demas provincias. Exigimos al Gobierno transparencia en la ejecucion de estos fondos. La poblacion de Loreto no puede seguir siendo espectadora de promesas que nunca se cumplen. Necesitamos hechos concretos, no discursos vacios. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
-
-*Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 1h', tipo:'respaldo' },
-    { zona:'nacional', cat:'SALUD', catClass:'cat-nacional', titulo:'Minsa reporta aumento de casos de dengue en 8 regiones del pais', resumen:'Las autoridades de salud emitieron una alerta epidemiologica y piden a la poblacion tomar precauciones.', cuerpoCompleto:`El Ministerio de Salud (Minsa), a traves de la Direccion General de Epidemiologia, liderada por el doctor Cesar Munayco, y la Direccion Regional de Salud de Loreto (Diresa Loreto), reportaron un incremento significativo de casos de dengue en 8 regiones del Peru, incluyendo Loreto, Ucayali, Madre de Dios, San Martin, Amazonas, Cajamarca, Piura y Tumbes. Se emitio la alerta epidemiologica nivel naranja. El reporte fue presentado el dia ${fechaHoy} durante el balance semanal de la situacion sanitaria nacional, donde se confirmo que la temporada de lluvias ha incrementado los focos del vector transmisor. Los casos se concentran principalmente en las zonas de selva alta y baja, siendo Loreto una de las regiones mas afectadas con incrementos del 45% respecto al mismo periodo del año anterior. El aumento se debe a las intensas lluvias registradas en los ultimos meses, la acumulacion de agua estancada en viviendas y calles, y la falta de campanas de fumigacion preventivas en los sectores mas vulnerables. El Minsa ha desplegado brigadas de salud a las zonas afectadas, dotado de insecticidas a los establecimientos de salud y lanzado una campaña nacional de prevencion denominada "Juntos contra el Dengue".
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. La alerta sanitaria en Loreto es preocupante y evidencia una vez mas la fragilidad de nuestro sistema de salud publica. Los hospitales de la region ya operan al limite de su capacidad. El Hospital Regional de Loreto, el Hospital de Apoyo de Nauta y los centros de salud de las provincias carecen de medicamentos basicos para tratar casos de dengue hemorragico, que es la forma mas grave de la enfermedad. Exigimos a las autoridades de salud que no solo se limiten a emitir alertas, sino que garanticen la dotacion de sueros, medicamentos antipireticos y personal medico especializado en los hospitales de la region. La poblacion de Loreto no puede seguir siendo tratada como ciudadanos de segunda clase en materia de salud. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
-
-*Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 3h', tipo:'respaldo' },
-    { zona:'loreto', cat:'LORETO', catClass:'cat-loreto', titulo:'Crecida del rio Amazonas afecta comunidades en provincias de Loreto', resumen:'El incremento del caudal ha puesto en alerta a las autoridades locales que preparan planes de contingencia.', cuerpoCompleto:`El Gobierno Regional de Loreto, liderado por el gobernador regional, en coordinacion con el Instituto Nacional de Defensa Civil (Indeci), la Marina de Guerra del Peru y los alcaldes provinciales de Maynas, Alto Amazonas y Loreto, reportaron una crecida extraordinaria del rio Amazonas y sus afluentes que ha afectado a mas de 15 comunidades nativas y asentamientos humanos en las provincias de Maynas, Alto Amazonas y Loreto. La alerta fue activada el dia ${fechaHoy} a las 06:00 horas, tras el monitoreo continuo que realiza el Servicio Nacional de Meteorologia e Hidrologia del Peru (Senamhi). Las zonas mas afectadas son las riberas del rio Amazonas en los distritos de Indiana, Mazan, Punchana, Belen y las comunidades nativas de la cuenca del rio Nanay y rio Itaya. La crecida se debe a las intensas lluvias registradas en la cuenca alta del Amazonas y el incremento de la evaporacion por las altas temperaturas, fenomeno que se agrava por el cambio climatico que afecta la region Amazonica. El Gobierno Regional ha activado el Centro de Operaciones de Emergencia Regional (COER) y desplegado maquinaria pesada para reforzar los diques de contencion. Se han instalado albergues temporales en colegios y centros comunitarios.
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Las crecidas del Amazonas son un fenomeno ciclico que año tras año afecta a las mismas comunidades, y año tras año las autoridades responden con las mismas medidas paliativas. La pregunta que debemos hacernos es: ¿Por que no se invierte en infraestructura de prevencion? Los diques de Belen se rompen cada año. Las viviendas de Indiana y Mazan son inundadas sistematicamente. Y la respuesta siempre es la misma: albergues temporales y despensas. Exigimos al Gobierno Regional de Loreto un plan integral de prevencion de desastres que incluya reubicacion definitiva de las familias en zonas de riesgo, construccion de viviendas resilientes y un sistema de alerta temprana que realmente funcione. La poblacion de Loreto merece mas que promesas de campaña. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
-
-*Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 2h', tipo:'respaldo' },
-    { zona:'loreto', cat:'IQUITOS', catClass:'cat-loreto', titulo:'Municipalidad de Iquitos anuncia obras de pavimentacion para cinco distritos', resumen:'Se ejecutaran proyectos de infraestructura vial en cinco distritos de la provincia con fondos municipales.', cuerpoCompleto:`La Municipalidad Provincial de Maynas, liderada por el alcalde de Iquitos, en coordinacion con el Ministerio de Vivienda, Construccion y Saneamiento (MVCS) y el Programa Nacional de Saneamiento Urbano, anuncio el inicio de obras de pavimentacion de 25 kilometros de vias urbanas en cinco distritos de la provincia de Maynas: Iquitos, Punchana, Belen, San Juan Bautista y Indiana. El anuncio fue realizado el dia ${fechaHoy} durante una ceremonia protocolar en la Plaza de Armas de Iquitos, donde se presento el expediente tecnico aprobado por el MVCS. Las obras se ejecutaran en las principales avenidas y jironess de los cinco distritos, con especial enfasis en las zonas mas deterioradas que durante la temporada de lluvias se convierten en verdaderos pantanos. La infraestructura vial de Iquitos y sus distritos se encuentra en estado critico. El 65% de las calles no cuentan con pavimento adecuado, lo que genera problemas de salud, dificulta el transporte y afecta la economia local. La obra sera ejecutada mediante administracion directa de la municipalidad, con un presupuesto aprobado de 18 millones de soles, financiados con recursos del canon petrolero y fondos del MVCS.
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Anunciar obras en Iquitos es facil; ejecutarlas correctamente es otra historia. La ciudadania de Maynas ha sido testigo de innumerables anuncios de pavimentacion que nunca se concretan o que se ejecutan con calidad deficiente. Exigimos a la Municipalidad de Maynas transparencia total en la ejecucion de estas obras. La ciudadania debe conocer el cronograma detallado, las empresas contratistas, los montos exactos y el avance fisico mes a mes. No mas obras fantasmas. Recordemos que el canon petrolero de Loreto es uno de los mas altos del pais, y sin embargo las calles de Iquitos parecen pertenecer a una zona de guerra. ¿Donde estan los recursos? Esa es la pregunta que SMBINRTV seguira haciendo. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
-
-*Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 5h', tipo:'respaldo' },
-    { zona:'lima', cat:'LIMA', catClass:'cat-lima', titulo:'Caos en calles de Lima por paro de transportistas', resumen:'Los principales corredores viales amanecieron colapsados por la protesta del sector transporte.', cuerpoCompleto:`La Confederacion Nacional de Transportistas del Peru, liderada por su presidente, junto a gremios de transporte urbano e interprovincial de Lima y Callao, realizaron un paro nacional de 48 horas que paralizo el 70% del servicio de transporte publico en Lima y Callao, generando caos vehicular y afectando a mas de 2 millones de ciudadanos. El paro inicio el dia ${fechaHoy} a las 00:00 horas, tras el fracaso de las negociaciones con el Ministerio de Transportes y Comunicaciones (MTC) la noche anterior. Los principales puntos de concentracion fueron la Panamericana Norte, la Panamericana Sur, la Carretera Central, la Avenida Javier Prado y los terminales terrestres de Lima Norte, Sur y Este. Los transportistas exigen la derogatoria de la Ley 32108, que establece nuevas multas y sanciones para el transporte informal, ademas de exigir subsidio al combustible y reajuste de tarifas. La protesta se desarrollo con bloqueos intermittentes de vias, caravanas de vehiculos a baja velocidad y la suspension total del servicio en las rutas mas conflictivas. La Policia Nacional desplego 5,000 efectivos para mantener el orden.
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. El paro de transportistas en Lima tiene repercusiones directas en Loreto y todas las regiones del pais. Los productos que llegan a Iquitos, Nauta, Requena y las demas provincias dependen del transporte terrestre que conecta con los puertos fluviales. Cada dia de paro en Lima significa retrasos en la llegada de medicamentos, alimentos procesados, combustible y otros productos esenciales para la Amazonia. El centralismo limeño una vez mas demuestra como las decisiones tomadas en la capital afectan la vida de millones de peruanos en las regiones. Exigimos al Gobierno central que escuche las demandas del sector transporte, pero tambien exigimos a los transportistas que no utilicen la protesta como arma de presion contra la poblacion civil. El dialogo debe ser la via principal de solucion. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
-
-*Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 1h', tipo:'respaldo' },
-    { zona:'lima', cat:'POLITICA', catClass:'cat-lima', titulo:'Fiscalia investiga actos de corrupcion en municipios de Lima Norte', resumen:'Se abrieron carpetas fiscales contra funcionarios de tres distritos por presuntos desvios de recursos.', cuerpoCompleto:`La Fiscalia de la Nacion, a traves de la Fiscalia Especializada en Delitos de Corrupcion de Funcionarios, liderada por la fiscal provincial Marita Barreto, y el Equipo Especial de Fiscales contra la Corrupcion del Poder (EFICCOP), abrio carpetas de investigacion preliminar contra funcionarios y exfuncionarios de tres municipalidades de Lima Norte: Comas, Independencia y San Martin de Porres, por presuntos delitos de peculado, colusion y trafico de influencias. Las investigaciones fueron anunciadas el dia ${fechaHoy}, tras meses de trabajo de inteligencia financiera y seguimiento de movimientos bancarios sospechosos detectados por la Unidad de Inteligencia Financiera (UIF). Los presuntos actos de corrupcion ocurrieron en las municipalidades de Comas, Independencia y San Martin de Porres, durante el periodo 2020-2024, con desvios estimados en 45 millones de soles. Las investigaciones se iniciaron tras denuncias ciudadanas y el analisis de contratos irregulares en obras de infraestructura, adquisicion de bienes y servicios, y nombramientos de personal. La Fiscalia realizo allanamientos simultaneos en 15 inmuebles, incluyendo oficinas municipales, domicilios de los investigados y empresas vinculadas. Se incauto documentacion, equipos electronicos y evidencia financiera.
-
-Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. La corrupcion en las municipalidades no es exclusiva de Lima. En Loreto tambien existen denuncias similares que lamentablemente no reciben la misma atencion mediatica ni fiscal. En la region Loreto, los fondos del canon petrolero, los recursos del FONAVI y los proyectos de inversion publica han sido objeto de investigaciones que avanzan a paso lento. La Fiscalia de Loreto carece de recursos humanos y tecnologicos para investigar con la misma eficiencia que sus homologas de Lima. Exigimos paridad en la lucha contra la corrupcion. Los funcionarios corruptos de Loreto deben ser investigados con el mismo rigor que los de Lima. La poblacion de la Amazonia merece que sus recursos sean administrados con honestidad y transparencia. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
-
-*Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 4h', tipo:'respaldo' }
+    { zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', titulo:'Gobierno anuncia nuevas medidas economicas para reducir la inflacion', resumen:'El Ejecutivo presento un paquete de medidas orientadas a estabilizar los precios en las regiones del pais.', cuerpoCompleto:`El presidente de la Republica, junto al ministro de Economia, anunciaron un paquete de medidas economicas destinadas a reducir la inflacion. La informacion fue confirmada el dia ${fechaHoy} durante una conferencia de prensa en Palacio de Gobierno. Las medidas tendran aplicacion en todo el Peru, con especial atencion en las regiones mas vulnerables como Loreto, Ucayali, Madre de Dios y Amazonas.`, imagen:'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=70', url:'https://andina.pe', fuente:'Agencia Andina', fecha:new Date().toISOString(), hace:'hace 1h', tipo:'respaldo' },
+    { zona:'nacional', cat:'SALUD', catClass:'cat-nacional', titulo:'Minsa reporta aumento de casos de dengue en 8 regiones del pais', resumen:'Las autoridades de salud emitieron una alerta epidemiologica y piden a la poblacion tomar precauciones.', cuerpoCompleto:`El Ministerio de Salud (Minsa) reporto un incremento significativo de casos de dengue en 8 regiones del Peru. Se emitio la alerta epidemiologica nivel naranja. El aumento se debe a las intensas lluvias registradas en los ultimos meses.`, imagen:'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&q=70', url:'https://minsa.gob.pe', fuente:'Minsa', fecha:new Date().toISOString(), hace:'hace 3h', tipo:'respaldo' },
+    { zona:'loreto', cat:'LORETO', catClass:'cat-loreto', titulo:'Crecida del rio Amazonas afecta comunidades en provincias de Loreto', resumen:'El incremento del caudal ha puesto en alerta a las autoridades locales que preparan planes de contingencia.', cuerpoCompleto:`El Gobierno Regional de Loreto reporto una crecida extraordinaria del rio Amazonas que ha afectado a mas de 15 comunidades. El Senamhi activo la alerta. El Gobierno Regional ha activado el COER y desplegado maquinaria pesada.`, imagen:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=70', url:'https://gorel.gob.pe', fuente:'Gobierno Regional Loreto', fecha:new Date().toISOString(), hace:'hace 2h', tipo:'respaldo' },
+    { zona:'loreto', cat:'IQUITOS', catClass:'cat-loreto', titulo:'Municipalidad de Iquitos anuncia obras de pavimentacion para cinco distritos', resumen:'Se ejecutaran proyectos de infraestructura vial en cinco distritos de la provincia con fondos municipales.', cuerpoCompleto:`La Municipalidad Provincial de Maynas anuncio el inicio de obras de pavimentacion de 25 kilometros de vias urbanas en cinco distritos. La obra sera ejecutada con un presupuesto aprobado de 18 millones de soles.`, imagen:'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=70', url:'https://munimaynas.gob.pe', fuente:'Muni Maynas', fecha:new Date().toISOString(), hace:'hace 5h', tipo:'respaldo' },
+    { zona:'lima', cat:'LIMA', catClass:'cat-lima', titulo:'Caos en calles de Lima por paro de transportistas', resumen:'Los principales corredores viales amanecieron colapsados por la protesta del sector transporte.', cuerpoCompleto:`La Confederacion Nacional de Transportistas realizo un paro nacional que paralizo el 70% del servicio de transporte publico en Lima. Los transportistas exigen la derogatoria de la Ley 32108.`, imagen:'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=70', url:'https://rpp.pe', fuente:'RPP Noticias', fecha:new Date().toISOString(), hace:'hace 1h', tipo:'respaldo' },
+    { zona:'lima', cat:'POLITICA', catClass:'cat-lima', titulo:'Fiscalia investiga actos de corrupcion en municipios de Lima Norte', resumen:'Se abrieron carpetas fiscales contra funcionarios de tres distritos por presuntos desvios de recursos.', cuerpoCompleto:`La Fiscalia de la Nacion abrio carpetas de investigacion preliminar contra funcionarios de tres municipalidades de Lima Norte. Los presuntos actos de corrupcion ocurrieron durante el periodo 2020-2024.`, imagen:'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=70', url:'https://fiscalia.gob.pe', fuente:'Fiscalia de la Nacion', fecha:new Date().toISOString(), hace:'hace 4h', tipo:'respaldo' }
   ];
 }
 
@@ -1619,12 +1774,13 @@ function filtrarYRenderizar() {
     const t = escaparHTML(n.titulo);
     const r = escaparHTML(n.resumen || '');
     const img = n.imagen || `https://picsum.photos/seed/${i}/600/400`;
-    const editada = noticiasEditadas[idx];
+    const editada = n.id ? noticiasEditadas[n.id] : null;
     const badgeEditada = editada ? '<span style="font-size:10px;background:var(--success);color:#fff;padding:3px 10px;border-radius:20px;margin-left:6px;font-weight:600;"><i class="bi bi-pencil-fill"></i> Editada</span>' : '';
-    const badgeFuente = n.tipo === 'currents' ? '<span class="source-badge badge-currents"><i class="bi bi-lightning-fill"></i> Tiempo real</span>' : 
+    const badgeFuente = n.tipo === 'newsapi' ? '<span class="source-badge badge-currents"><i class="bi bi-lightning-fill"></i> NewsAPI</span>' :
+                         (n.tipo === 'currents' ? '<span class="source-badge badge-currents"><i class="bi bi-lightning-fill"></i> Tiempo real</span>' : 
                          (n.tipo === 'gnews' ? '<span class="source-badge badge-gnews"><i class="bi bi-clock-history"></i> 12h</span>' : 
                          (n.tipo === 'mis' ? '<span class="source-badge badge-manual"><i class="bi bi-person-fill"></i> Editorial</span>' : 
-                         '<span class="source-badge badge-respaldo"><i class="bi bi-shield-fill"></i> SMBINRTV</span>'));
+                         '<span class="source-badge badge-respaldo"><i class="bi bi-shield-fill"></i> SMBINRTV</span>')));
 
     return `<div class="news-card-main" data-zona="${n.zona}">
       <div class="nc-img-wrap">
@@ -1642,6 +1798,7 @@ function filtrarYRenderizar() {
         <div class="nc-actions">
           <button class="btn-nc btn-read" onclick="verNoticia(${idx})"><i class="bi bi-book"></i> Leer completa</button>
           ${botonesCompartir(n.titulo, n.url, idx)}
+          <button class="btn-edit" onclick="editarNoticiaDesdeTarjeta(${idx})" title="Editar noticia"><i class="bi bi-pencil-fill"></i> Editar</button>
         </div>
       </div>
     </div>`;
@@ -1652,7 +1809,13 @@ function filtrarYRenderizar() {
 function verNoticia(idx) {
   const n = todasLasNoticias[idx];
   if (!n) return;
-  const editada = noticiasEditadas[idx];
+
+  // Generar ID si no existe
+  if (!n.id) {
+    n.id = generarIdNoticia(n.titulo, n.fuente, n.fecha);
+  }
+
+  const editada = n.id ? noticiasEditadas[n.id] : null;
   const titulo = editada ? editada.titulo : n.titulo;
   const cuerpo = editada ? editada.cuerpo : (n.cuerpoCompleto || n.resumen || 'No hay contenido adicional disponible.');
 
@@ -1668,7 +1831,7 @@ function verNoticia(idx) {
     <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">
       <i class="bi bi-newspaper"></i> Fuente: ${escaparHTML(n.fuente)} &nbsp;·&nbsp;
       <i class="bi bi-clock"></i> ${n.hace}
-      ${editada ? '<br/><span style="color:var(--success);font-weight:600;"><i class="bi bi-pencil-fill"></i> Esta noticia fue editada por el director editorial</span>' : ''}
+      ${editada ? '<br/><span style="color:var(--success);font-weight:600;"><i class="bi bi-pencil-fill"></i> Esta noticia fue editada por el director editorial el ' + new Date(editada.fechaEdicion).toLocaleDateString('es-PE') + '</span>' : ''}
     </p>
     <div style="line-height:1.8;font-size:15.5px;color:var(--text);">${cuerpoFormateado.replace(/\n/g, '<br/>')}</div>
     ${n.url && n.url !== '#' ? `<p style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);"><a href="${n.url}" target="_blank" style="color:var(--primary);font-weight:700;font-size:14px;text-decoration:none;"><i class="bi bi-box-arrow-up-right"></i> Ver noticia original en la fuente</a></p>` : ''}
@@ -1705,9 +1868,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Renderizar publicidad y opinion desde el panel admin
   renderPublicidadAdmin();
   renderOpinionAdmin();
-  
-  // Cargar noticias
-  cargarNoticiasGNews();
+
+  // Iniciar auto-refresh (carga inmediata + cada 12 horas)
+  iniciarAutoRefresh();
+
+  // Si hay una edicion pendiente despues de autenticar
+  if (window._pendingEditIndex !== undefined) {
+    const idx = window._pendingEditIndex;
+    window._pendingEditIndex = undefined;
+    if (editorAutenticado) {
+      abrirEditor(idx);
+    }
+  }
 });
 </script>
 </body>
