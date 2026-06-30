@@ -11,6 +11,9 @@
   <meta property="og:image" content="https://smbinrtv.vercel.app/assets/og-image.jpg" />
   <meta property="og:url" content="https://smbinrtv.vercel.app/diario.html" />
   <link rel="canonical" href="https://smbinrtv.vercel.app/diario.html" />
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -749,6 +752,7 @@
       <button class="btn-admin btn-sources" onclick="toggleFuentes()"><i class="bi bi-shield-lock"></i> Fuentes Internas</button>
       <button class="btn-admin btn-editor" onclick="solicitarAccesoEditor()"><i class="bi bi-pencil-square"></i> Editor Interno</button>
       <button class="btn-admin btn-publish" onclick="solicitarAccesoMiNoticia()"><i class="bi bi-plus-circle"></i> Publicar Noticia</button>
+      <button class="btn-admin" style="background:#e67e22;color:#fff;" onclick="abrirPublicadorRapido()"><i class="bi bi-lightning-fill"></i> ⚡ PUBLICAR RÁPIDO</button>
     </div>
 
     <!-- PANEL FUENTES INTERNAS PROTEGIDO -->
@@ -1021,9 +1025,6 @@
     </div>
   </div>
 </div>
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script>
 // ===== CONFIGURACION =====
 const CURRENTS_API_KEY = 'kKZtoyAGE2PgxRe3GXpbT44nBkt3QbOiMhOpwzExbu0YAOcS';
@@ -1646,6 +1647,134 @@ document.getElementById('footer-year').textContent = new Date().getFullYear();
 document.addEventListener('DOMContentLoaded', () => {
   cargarNoticiasGNews();
 });
+</script>
+<!-- MODAL PUBLICADOR RÁPIDO FIREBASE -->
+<div class="modal-overlay" id="modalRapido" onclick="if(event.target===this)cerrarModal('modalRapido')" style="z-index:9999;">
+  <div class="modal-box" style="max-width:600px;">
+    <button class="modal-close" onclick="cerrarModal('modalRapido')">×</button>
+    <h3 style="color:#e67e22;"><i class="bi bi-lightning-fill"></i> Publicar Noticia Rápido</h3>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">Se guarda en tu base de datos y aparece en el diario al instante.</p>
+
+    <div id="rapido-login" style="display:block;">
+      <div class="form-group">
+        <label>🔒 Contraseña editorial</label>
+        <input type="password" id="rapido-pass" class="form-control" placeholder="Ingresa tu contraseña..." onkeydown="if(event.key==='Enter')verificarRapido()" />
+      </div>
+      <button class="btn-admin btn-update w-100" onclick="verificarRapido()"><i class="bi bi-unlock"></i> Ingresar</button>
+    </div>
+
+    <div id="rapido-form" style="display:none;">
+      <div class="form-group">
+        <label>Título *</label>
+        <input type="text" id="r-titulo" class="form-control" placeholder="Título de la noticia..." />
+      </div>
+      <div class="form-group">
+        <label>Categoría *</label>
+        <select id="r-categoria" class="form-control">
+          <option value="Locales">Locales</option>
+          <option value="Política">Política</option>
+          <option value="Policiales">Policiales</option>
+          <option value="Deportes">Deportes</option>
+          <option value="Economía">Economía</option>
+          <option value="Salud">Salud</option>
+          <option value="Nacional">Nacional</option>
+          <option value="Internacional">Internacional</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Resumen (portada) *</label>
+        <textarea id="r-resumen" class="form-control" rows="3" placeholder="Resumen corto que aparece en la portada..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Noticia completa *</label>
+        <textarea id="r-cuerpo" class="form-control" style="min-height:120px;" placeholder="Texto completo de la noticia..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>URL de imagen <small style="color:var(--text-muted);">(opcional — pega un enlace de foto)</small></label>
+        <input type="text" id="r-imagen" class="form-control" placeholder="https://... (copia la dirección de una imagen de internet)" />
+        <p style="font-size:11px;color:var(--text-muted);margin-top:6px;"><i class="bi bi-info-circle"></i> Click derecho en cualquier imagen de internet → "Copiar dirección de imagen" → pégala aquí</p>
+      </div>
+      <div class="form-group">
+        <label>Autor</label>
+        <input type="text" id="r-autor" class="form-control" value="Redacción SMBINRTV" />
+      </div>
+      <div id="rapido-msg" style="display:none;padding:12px;border-radius:8px;font-weight:600;text-align:center;margin-bottom:12px;"></div>
+      <button class="btn-admin btn-update w-100" id="btn-rapido-pub" onclick="publicarRapido()" style="font-size:16px;padding:14px;"><i class="bi bi-send-fill"></i> PUBLICAR AHORA</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== PUBLICADOR RÁPIDO =====
+let rapidoAuth = false;
+
+function abrirPublicadorRapido() {
+  abrirModal('modalRapido');
+  if (rapidoAuth) {
+    document.getElementById('rapido-login').style.display = 'none';
+    document.getElementById('rapido-form').style.display = 'block';
+  } else {
+    document.getElementById('rapido-login').style.display = 'block';
+    document.getElementById('rapido-form').style.display = 'none';
+  }
+}
+
+function verificarRapido() {
+  const pass = document.getElementById('rapido-pass').value;
+  if (pass === PASSWORD_EDITOR) {
+    rapidoAuth = true;
+    document.getElementById('rapido-login').style.display = 'none';
+    document.getElementById('rapido-form').style.display = 'block';
+  } else {
+    alert('❌ Contraseña incorrecta');
+  }
+}
+
+async function publicarRapido() {
+  const titulo   = document.getElementById('r-titulo').value.trim();
+  const cat      = document.getElementById('r-categoria').value;
+  const resumen  = document.getElementById('r-resumen').value.trim();
+  const cuerpo   = document.getElementById('r-cuerpo').value.trim();
+  const imagen   = document.getElementById('r-imagen').value.trim();
+  const autor    = document.getElementById('r-autor').value.trim() || 'Redacción SMBINRTV';
+
+  if (!titulo || !resumen || !cuerpo) {
+    mostrarMsgRapido('⚠️ Completa título, resumen y noticia.', '#e67e22'); return;
+  }
+
+  const btn = document.getElementById('btn-rapido-pub');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ Guardando...';
+
+  try {
+    await db.collection('noticias').add({
+      titulo, categoria: cat, resumen, cuerpo, autor,
+      mediaURL: imagen, mediaType: imagen ? 'image/jpeg' : '',
+      fecha: firebase.firestore.FieldValue.serverTimestamp(),
+      activa: true, vistas: 0
+    });
+    mostrarMsgRapido('✅ ¡Noticia publicada!', '#27ae60');
+    // Limpiar
+    ['r-titulo','r-resumen','r-cuerpo','r-imagen'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('r-autor').value = 'Redacción SMBINRTV';
+    // Recargar noticias
+    setTimeout(() => { cerrarModal('modalRapido'); cargarNoticiasGNews(); }, 1500);
+  } catch(e) {
+    mostrarMsgRapido('❌ Error: ' + e.message, '#e74c3c');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="bi bi-send-fill"></i> PUBLICAR AHORA';
+  }
+}
+
+function mostrarMsgRapido(txt, color) {
+  const m = document.getElementById('rapido-msg');
+  m.textContent = txt;
+  m.style.display = 'block';
+  m.style.background = color + '22';
+  m.style.border = '1px solid ' + color;
+  m.style.color = color;
+}
 </script>
 </body>
 </html>
