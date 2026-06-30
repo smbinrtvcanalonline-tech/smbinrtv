@@ -1086,6 +1086,7 @@ async function cargarDesdeFirebase() {
         fuente: d.autor || 'Redacción SMBINRTV',
         fecha: fechaObj.toISOString(),
         hace: tiempoRelativo(fechaObj.toISOString()),
+        destacada: !!d.destacada,
         tipo: 'mis'
       };
     });
@@ -2061,31 +2062,34 @@ document.addEventListener('DOMContentLoaded', () => {
 async function cargarDestacadaHero() {
   if (!firebaseOK) return;
   try {
+    // Consulta simple (sin índice compuesto) + filtro en el navegador
     const snap = await db.collection('noticias')
-      .where('destacada', '==', true)
       .orderBy('fecha', 'desc')
-      .limit(1)
+      .limit(20)
       .get();
-    if (!snap.empty) {
-      const heroDoc = snap.docs[0];
-      const d = heroDoc.data();
-      actualizarHero(d.titulo, d.resumen, d.mediaURL);
-      const catEl = document.querySelector('.hero-category');
-      if (catEl) catEl.textContent = d.categoria || 'DESTACADA';
+    if (snap.empty) return;
 
-      const heroOverlay = document.querySelector('.hero-overlay');
-      let heroDelBtn = document.getElementById('hero-delete-btn');
-      if (editorAutenticado) {
-        if (!heroDelBtn && heroOverlay) {
-          heroOverlay.insertAdjacentHTML('beforeend', `<button id="hero-delete-btn" style="margin-top:14px;background:#c0392b;color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;"><i class="bi bi-trash-fill"></i> Quitar de Destacadas</button>`);
-          heroDelBtn = document.getElementById('hero-delete-btn');
-        }
-        if (heroDelBtn) {
-          heroDelBtn.onclick = (ev) => eliminarNoticia(heroDoc.id, ev);
-        }
-      } else if (heroDelBtn) {
-        heroDelBtn.remove();
+    const destacadaDoc = snap.docs.find(doc => doc.data().destacada === true);
+    if (!destacadaDoc) return;
+
+    const heroDoc = destacadaDoc;
+    const d = heroDoc.data();
+    actualizarHero(d.titulo, d.resumen, d.mediaURL);
+    const catEl = document.querySelector('.hero-category');
+    if (catEl) catEl.textContent = d.categoria || 'DESTACADA';
+
+    const heroOverlay = document.querySelector('.hero-overlay');
+    let heroDelBtn = document.getElementById('hero-delete-btn');
+    if (editorAutenticado) {
+      if (!heroDelBtn && heroOverlay) {
+        heroOverlay.insertAdjacentHTML('beforeend', `<button id="hero-delete-btn" style="margin-top:14px;background:#c0392b;color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;"><i class="bi bi-trash-fill"></i> Quitar de Destacadas</button>`);
+        heroDelBtn = document.getElementById('hero-delete-btn');
       }
+      if (heroDelBtn) {
+        heroDelBtn.onclick = (ev) => eliminarNoticia(heroDoc.id, ev);
+      }
+    } else if (heroDelBtn) {
+      heroDelBtn.remove();
     }
   } catch(e) { console.log('Hero:', e.message); }
 }
