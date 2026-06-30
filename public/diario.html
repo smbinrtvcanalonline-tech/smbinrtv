@@ -746,14 +746,20 @@
       </div>
     </div>
 
-    <!-- BARRA DE ADMINISTRACION -->
-    <div class="admin-bar">
+    <!-- ACCESO EDITORIAL (discreto, visible para todo el público) -->
+    <div style="text-align:right;padding:6px 0;">
+      <button id="btnAccesoEditor" class="btn-admin" style="background:transparent;border:1px solid var(--border);color:var(--text-muted);font-size:12px;padding:5px 14px;" onclick="accederModoEditor()"><i class="bi bi-lock-fill"></i> Acceso Editorial</button>
+    </div>
+
+    <!-- BARRA DE ADMINISTRACION (solo visible tras ingresar la clave) -->
+    <div class="admin-bar" id="adminBar" style="display:none;">
       <button class="btn-admin btn-update" id="btnActualizar" onclick="cargarNoticiasGNews()"><i class="bi bi-arrow-clockwise"></i> Actualizar Noticias</button>
       <button class="btn-admin btn-sources" onclick="toggleFuentes()"><i class="bi bi-shield-lock"></i> Fuentes Internas</button>
       <button class="btn-admin btn-editor" onclick="solicitarAccesoEditor()"><i class="bi bi-pencil-square"></i> Editor Interno</button>
       <button class="btn-admin btn-publish" onclick="solicitarAccesoMiNoticia()"><i class="bi bi-plus-circle"></i> Publicar Noticia</button>
       <button class="btn-admin" style="background:#e67e22;color:#fff;" onclick="abrirPublicadorRapido()"><i class="bi bi-lightning-fill"></i> ⚡ PUBLICAR RÁPIDO</button>
       <button class="btn-admin" style="background:#8e44ad;color:#fff;" onclick="abrirPublicidad()"><i class="bi bi-badge-ad"></i> MI PUBLICIDAD</button>
+      <button class="btn-admin" style="background:#555;color:#fff;" onclick="salirModoEditor()"><i class="bi bi-box-arrow-right"></i> Salir del modo editor</button>
     </div>
 
     <!-- PANEL FUENTES INTERNAS PROTEGIDO -->
@@ -1056,6 +1062,7 @@ async function cargarDesdeFirebase() {
       const d = doc.data();
       const fechaObj = d.fecha ? d.fecha.toDate() : new Date();
       return {
+        firebaseId: doc.id,
         zona: mapearCategoria(d.categoria),
         cat: (d.categoria || 'SMBINRTV').toUpperCase(),
         catClass: 'cat-mis',
@@ -1091,7 +1098,47 @@ let noticiasEditadas = JSON.parse(localStorage.getItem('smbinrtv_editadas') || '
 let filtroActual = 'todas';
 let noticiaEditando = null;
 let fuenteActiva = 'currents';
-let editorAutenticado = false;
+let editorAutenticado = sessionStorage.getItem('smbinrtv_editor') === '1';
+
+function accederModoEditor() {
+  if (editorAutenticado) return;
+  const pass = prompt('🔒 ACCESO EDITORIAL\n\nIngresa la clave para administrar el diario:');
+  if (pass === null) return;
+  if (pass !== PASSWORD_EDITOR) { alert('❌ Clave incorrecta.'); return; }
+  editorAutenticado = true;
+  sessionStorage.setItem('smbinrtv_editor', '1');
+  aplicarModoEditorUI();
+  filtrarYRenderizar();
+  cargarDestacadaHero();
+}
+
+function salirModoEditor() {
+  editorAutenticado = false;
+  sessionStorage.removeItem('smbinrtv_editor');
+  aplicarModoEditorUI();
+  filtrarYRenderizar();
+  cargarDestacadaHero();
+}
+
+function aplicarModoEditorUI() {
+  const bar = document.getElementById('adminBar');
+  const btn = document.getElementById('btnAccesoEditor');
+  if (editorAutenticado) {
+    bar.style.display = 'flex';
+    btn.innerHTML = '<i class="bi bi-unlock-fill"></i> Modo editor activo';
+    btn.style.color = '#27ae60';
+    btn.style.borderColor = '#27ae60';
+  } else {
+    bar.style.display = 'none';
+    btn.innerHTML = '<i class="bi bi-lock-fill"></i> Acceso Editorial';
+    btn.style.color = 'var(--text-muted)';
+    btn.style.borderColor = 'var(--border)';
+    const heroBtn = document.getElementById('hero-delete-btn');
+    if (heroBtn) heroBtn.remove();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', aplicarModoEditorUI);
 let imagenBase64 = '';
 
 // ===== UTILIDADES =====
@@ -1586,10 +1633,29 @@ function filtrarYRenderizar() {
         <div class="nc-actions">
           <button class="btn-nc btn-read" onclick="verNoticia(${idx})"><i class="bi bi-book"></i> Leer completa</button>
           ${botonesCompartir(n.titulo, n.url, idx)}
+          ${n.firebaseId && editorAutenticado ? `<button class="btn-nc" style="background:#c0392b;color:#fff;" onclick="eliminarNoticia('${n.firebaseId}', event)" title="Eliminar esta noticia"><i class="bi bi-trash-fill"></i> Eliminar</button>` : ''}
         </div>
       </div>
     </div>`;
   }).join('');
+}
+
+// ===== ELIMINAR NOTICIA (solo con clave) =====
+async function eliminarNoticia(firebaseId, event) {
+  if (event) event.stopPropagation();
+  const pass = prompt('🔒 Para eliminar esta noticia, ingresa la clave editorial:');
+  if (pass === null) return;
+  if (pass !== PASSWORD_EDITOR) { alert('❌ Clave incorrecta. No se eliminó la noticia.'); return; }
+  if (!confirm('¿Seguro que quieres eliminar esta noticia? Esta acción no se puede deshacer.')) return;
+
+  try {
+    await db.collection('noticias').doc(firebaseId).delete();
+    alert('✅ Noticia eliminada correctamente.');
+    cargarNoticiasGNews();
+    cargarDestacadaHero();
+  } catch (e) {
+    alert('❌ Error al eliminar: ' + e.message);
+  }
 }
 
 // ===== VER NOTICIA COMPLETA =====
@@ -1963,7 +2029,7 @@ function aplicarPublicidad(pub) {
     if (!slot || !p || !p.nombre) return;
     const linkHref = p.link || (p.tel ? 'https://wa.me/51'+p.tel : '#');
     slot.innerHTML = `
-      ${p.imagen ? '<img src="'+p.imagen+'" style="width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:10px;" onerror="this.style.display='none'">' : '<i class="bi bi-badge-ad" style="font-size:2.5rem;color:#8e44ad;margin-bottom:12px;display:block;"></i>'}
+      ${p.imagen ? '<img src="'+p.imagen+'" style="width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:10px;" onerror="this.style.display=\'none\'">' : '<i class="bi bi-badge-ad" style="font-size:2.5rem;color:#8e44ad;margin-bottom:12px;display:block;"></i>'}
       <h6 style="font-size:15px;font-weight:700;margin-bottom:6px;">${p.nombre}</h6>
       ${p.tel ? '<p style="font-size:13px;color:rgba(255,255,255,.8);margin-bottom:8px;"><i class="bi bi-whatsapp"></i> '+p.tel+'</p>' : ''}
       <a href="${linkHref}" target="_blank" style="background:#8e44ad;color:#fff;padding:8px 20px;border-radius:20px;text-decoration:none;font-size:13px;font-weight:700;">Ver más</a>
@@ -1986,10 +2052,25 @@ async function cargarDestacadaHero() {
       .limit(1)
       .get();
     if (!snap.empty) {
-      const d = snap.docs[0].data();
+      const heroDoc = snap.docs[0];
+      const d = heroDoc.data();
       actualizarHero(d.titulo, d.resumen, d.mediaURL);
       const catEl = document.querySelector('.hero-category');
       if (catEl) catEl.textContent = d.categoria || 'DESTACADA';
+
+      const heroOverlay = document.querySelector('.hero-overlay');
+      let heroDelBtn = document.getElementById('hero-delete-btn');
+      if (editorAutenticado) {
+        if (!heroDelBtn && heroOverlay) {
+          heroOverlay.insertAdjacentHTML('beforeend', `<button id="hero-delete-btn" style="margin-top:14px;background:#c0392b;color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;"><i class="bi bi-trash-fill"></i> Quitar de Destacadas</button>`);
+          heroDelBtn = document.getElementById('hero-delete-btn');
+        }
+        if (heroDelBtn) {
+          heroDelBtn.onclick = (ev) => eliminarNoticia(heroDoc.id, ev);
+        }
+      } else if (heroDelBtn) {
+        heroDelBtn.remove();
+      }
     }
   } catch(e) { console.log('Hero:', e.message); }
 }
