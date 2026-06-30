@@ -753,6 +753,7 @@
       <button class="btn-admin btn-editor" onclick="solicitarAccesoEditor()"><i class="bi bi-pencil-square"></i> Editor Interno</button>
       <button class="btn-admin btn-publish" onclick="solicitarAccesoMiNoticia()"><i class="bi bi-plus-circle"></i> Publicar Noticia</button>
       <button class="btn-admin" style="background:#e67e22;color:#fff;" onclick="abrirPublicadorRapido()"><i class="bi bi-lightning-fill"></i> ⚡ PUBLICAR RÁPIDO</button>
+      <button class="btn-admin" style="background:#8e44ad;color:#fff;" onclick="abrirPublicidad()"><i class="bi bi-badge-ad"></i> MI PUBLICIDAD</button>
     </div>
 
     <!-- PANEL FUENTES INTERNAS PROTEGIDO -->
@@ -1698,6 +1699,18 @@ document.addEventListener('DOMContentLoaded', () => {
         <label>Autor</label>
         <input type="text" id="r-autor" class="form-control" value="Redacción SMBINRTV" />
       </div>
+      <div class="form-group">
+        <label>📷 Imagen desde tu PC <small style="color:var(--text-muted);">(opcional)</small></label>
+        <input type="file" id="r-imagen-pc" accept="image/*,video/*" class="form-control" style="padding:8px;" onchange="previsualizarRapido(this)" />
+        <div id="r-preview" style="display:none;margin-top:8px;"><img id="r-preview-img" style="max-width:100%;max-height:150px;border-radius:8px;border:1px solid var(--border);" /></div>
+      </div>
+      <div class="form-group" style="background:rgba(230,57,70,.08);border:1.5px solid var(--primary);border-radius:10px;padding:14px;">
+        <label style="color:var(--primary);font-weight:700;font-size:14px;">⭐ ¿Noticia Destacada?</label>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
+          <input type="checkbox" id="r-destacada" style="width:20px;height:20px;cursor:pointer;" />
+          <span style="font-size:13px;">Aparece en el <strong>banner principal</strong> de la portada</span>
+        </div>
+      </div>
       <div id="rapido-msg" style="display:none;padding:12px;border-radius:8px;font-weight:600;text-align:center;margin-bottom:12px;"></div>
       <button class="btn-admin btn-update w-100" id="btn-rapido-pub" onclick="publicarRapido()" style="font-size:16px;padding:14px;"><i class="bi bi-send-fill"></i> PUBLICAR AHORA</button>
     </div>
@@ -1730,13 +1743,26 @@ function verificarRapido() {
   }
 }
 
+function previsualizarRapido(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('r-preview-img').src = e.target.result;
+    document.getElementById('r-preview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
 async function publicarRapido() {
-  const titulo   = document.getElementById('r-titulo').value.trim();
-  const cat      = document.getElementById('r-categoria').value;
-  const resumen  = document.getElementById('r-resumen').value.trim();
-  const cuerpo   = document.getElementById('r-cuerpo').value.trim();
-  const imagen   = document.getElementById('r-imagen').value.trim();
-  const autor    = document.getElementById('r-autor').value.trim() || 'Redacción SMBINRTV';
+  const titulo    = document.getElementById('r-titulo').value.trim();
+  const cat       = document.getElementById('r-categoria').value;
+  const resumen   = document.getElementById('r-resumen').value.trim();
+  const cuerpo    = document.getElementById('r-cuerpo').value.trim();
+  const imagenURL = document.getElementById('r-imagen').value.trim();
+  const autor     = document.getElementById('r-autor').value.trim() || 'Redacción SMBINRTV';
+  const destacada = document.getElementById('r-destacada').checked;
+  const archivoPC = document.getElementById('r-imagen-pc').files[0];
 
   if (!titulo || !resumen || !cuerpo) {
     mostrarMsgRapido('⚠️ Completa título, resumen y noticia.', '#e67e22'); return;
@@ -1747,23 +1773,68 @@ async function publicarRapido() {
   btn.innerHTML = '⏳ Guardando...';
 
   try {
+    let mediaURL = imagenURL;
+
+    // Si hay imagen desde PC, convertir a base64 comprimida
+    if (archivoPC) {
+      mostrarMsgRapido('⏳ Procesando imagen...', '#e67e22');
+      mediaURL = await comprimirImagen(archivoPC, 800);
+    }
+
     await db.collection('noticias').add({
       titulo, categoria: cat, resumen, cuerpo, autor,
-      mediaURL: imagen, mediaType: imagen ? 'image/jpeg' : '',
+      mediaURL: mediaURL || '',
+      mediaType: archivoPC ? archivoPC.type : (imagenURL ? 'image/jpeg' : ''),
       fecha: firebase.firestore.FieldValue.serverTimestamp(),
-      activa: true, vistas: 0
+      activa: true, destacada: destacada, vistas: 0
     });
+
+    // Si es destacada, actualizar hero
+    if (destacada) actualizarHero(titulo, resumen, mediaURL);
+
     mostrarMsgRapido('✅ ¡Noticia publicada!', '#27ae60');
-    // Limpiar
     ['r-titulo','r-resumen','r-cuerpo','r-imagen'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('r-autor').value = 'Redacción SMBINRTV';
-    // Recargar noticias
+    document.getElementById('r-destacada').checked = false;
+    document.getElementById('r-imagen-pc').value = '';
+    document.getElementById('r-preview').style.display = 'none';
     setTimeout(() => { cerrarModal('modalRapido'); cargarNoticiasGNews(); }, 1500);
   } catch(e) {
     mostrarMsgRapido('❌ Error: ' + e.message, '#e74c3c');
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<i class="bi bi-send-fill"></i> PUBLICAR AHORA';
+  }
+}
+
+// Comprimir imagen en el navegador antes de guardar
+function comprimirImagen(file, maxWidth) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ratio = Math.min(maxWidth / img.width, 1);
+        canvas.width  = img.width  * ratio;
+        canvas.height = img.height * ratio;
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', 0.75));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function actualizarHero(titulo, resumen, imagen) {
+  const el = document.getElementById('hero-title-main');
+  const er = document.getElementById('hero-excerpt-main');
+  if (el) el.textContent = titulo;
+  if (er) er.textContent = resumen;
+  if (imagen) {
+    const heroImg = document.querySelector('.hero-main img');
+    if (heroImg) heroImg.src = imagen;
   }
 }
 
@@ -1775,6 +1846,157 @@ function mostrarMsgRapido(txt, color) {
   m.style.border = '1px solid ' + color;
   m.style.color = color;
 }
+</script>
+<!-- MODAL PUBLICIDAD -->
+<div class="modal-overlay" id="modalPublicidad" onclick="if(event.target===this)cerrarModal('modalPublicidad')" style="z-index:9999;">
+  <div class="modal-box" style="max-width:700px;">
+    <button class="modal-close" onclick="cerrarModal('modalPublicidad')">×</button>
+    <h3 style="color:#8e44ad;"><i class="bi bi-badge-ad"></i> Mi Publicidad</h3>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">Administra los espacios publicitarios de tu portal.</p>
+
+    <div id="pub-login" style="display:block;">
+      <div class="form-group">
+        <label>🔒 Contraseña</label>
+        <input type="password" id="pub-pass" class="form-control" placeholder="Contraseña editorial..." onkeydown="if(event.key==='Enter')verificarPub()" />
+      </div>
+      <button class="btn-admin btn-update w-100" onclick="verificarPub()">Ingresar</button>
+    </div>
+
+    <div id="pub-form" style="display:none;">
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">Llena los datos de cada anunciante. Deja vacío lo que no uses.</p>
+
+      <div style="display:grid;gap:16px;">
+        <!-- PUBLICIDAD 1 -->
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <h6 style="color:#8e44ad;margin-bottom:12px;"><i class="bi bi-1-circle-fill"></i> Banner Principal (grande)</h6>
+          <div class="form-group"><label>Nombre del anunciante</label><input type="text" id="pub1-nombre" class="form-control" placeholder="Ej: Farmacia San Juan" /></div>
+          <div class="form-group"><label>URL de imagen del banner</label><input type="text" id="pub1-imagen" class="form-control" placeholder="https://..." /></div>
+          <div class="form-group"><label>Enlace al hacer clic</label><input type="text" id="pub1-link" class="form-control" placeholder="https://..." /></div>
+          <div class="form-group"><label>Teléfono/WhatsApp</label><input type="text" id="pub1-tel" class="form-control" placeholder="Ej: 975123456" /></div>
+        </div>
+
+        <!-- PUBLICIDAD 2 -->
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <h6 style="color:#8e44ad;margin-bottom:12px;"><i class="bi bi-2-circle-fill"></i> Banner Secundario</h6>
+          <div class="form-group"><label>Nombre del anunciante</label><input type="text" id="pub2-nombre" class="form-control" placeholder="Ej: Restaurante El Río" /></div>
+          <div class="form-group"><label>URL de imagen del banner</label><input type="text" id="pub2-imagen" class="form-control" placeholder="https://..." /></div>
+          <div class="form-group"><label>Enlace al hacer clic</label><input type="text" id="pub2-link" class="form-control" placeholder="https://..." /></div>
+          <div class="form-group"><label>Teléfono/WhatsApp</label><input type="text" id="pub2-tel" class="form-control" placeholder="Ej: 975123456" /></div>
+        </div>
+
+        <!-- PUBLICIDAD 3 -->
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px;">
+          <h6 style="color:#8e44ad;margin-bottom:12px;"><i class="bi bi-3-circle-fill"></i> Banner Lateral</h6>
+          <div class="form-group"><label>Nombre del anunciante</label><input type="text" id="pub3-nombre" class="form-control" placeholder="Ej: Hotel Amazonas" /></div>
+          <div class="form-group"><label>URL de imagen del banner</label><input type="text" id="pub3-imagen" class="form-control" placeholder="https://..." /></div>
+          <div class="form-group"><label>Enlace al hacer clic</label><input type="text" id="pub3-link" class="form-control" placeholder="https://..." /></div>
+          <div class="form-group"><label>Teléfono/WhatsApp</label><input type="text" id="pub3-tel" class="form-control" placeholder="Ej: 975123456" /></div>
+        </div>
+      </div>
+
+      <div id="pub-msg" style="display:none;padding:12px;border-radius:8px;font-weight:600;text-align:center;margin:12px 0;"></div>
+      <button class="btn-admin w-100" style="background:#8e44ad;color:#fff;font-size:16px;padding:14px;" onclick="guardarPublicidad()"><i class="bi bi-save"></i> GUARDAR PUBLICIDAD</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let pubAuth = false;
+
+function abrirPublicidad() {
+  abrirModal('modalPublicidad');
+  if (pubAuth) {
+    document.getElementById('pub-login').style.display = 'none';
+    document.getElementById('pub-form').style.display = 'block';
+    cargarPublicidadForm();
+  }
+}
+
+function verificarPub() {
+  const pass = document.getElementById('pub-pass').value;
+  if (pass === PASSWORD_EDITOR) {
+    pubAuth = true;
+    document.getElementById('pub-login').style.display = 'none';
+    document.getElementById('pub-form').style.display = 'block';
+    cargarPublicidadForm();
+  } else { alert('❌ Contraseña incorrecta'); }
+}
+
+function cargarPublicidadForm() {
+  const pub = JSON.parse(localStorage.getItem('smbinrtv_publicidad') || '{}');
+  [1,2,3].forEach(i => {
+    const p = pub[i] || {};
+    ['nombre','imagen','link','tel'].forEach(f => {
+      const el = document.getElementById('pub'+i+'-'+f);
+      if (el) el.value = p[f] || '';
+    });
+  });
+  aplicarPublicidad(pub);
+}
+
+function guardarPublicidad() {
+  const pub = {};
+  [1,2,3].forEach(i => {
+    pub[i] = {
+      nombre: document.getElementById('pub'+i+'-nombre').value.trim(),
+      imagen: document.getElementById('pub'+i+'-imagen').value.trim(),
+      link:   document.getElementById('pub'+i+'-link').value.trim(),
+      tel:    document.getElementById('pub'+i+'-tel').value.trim()
+    };
+  });
+  localStorage.setItem('smbinrtv_publicidad', JSON.stringify(pub));
+  aplicarPublicidad(pub);
+  const m = document.getElementById('pub-msg');
+  m.textContent = '✅ ¡Publicidad guardada y aplicada!';
+  m.style.display = 'block';
+  m.style.background = 'rgba(39,174,96,.15)';
+  m.style.border = '1px solid #27ae60';
+  m.style.color = '#27ae60';
+  setTimeout(() => { m.style.display = 'none'; cerrarModal('modalPublicidad'); }, 2000);
+}
+
+function aplicarPublicidad(pub) {
+  const slots = document.querySelectorAll('.ad-slot');
+  [1,2,3].forEach((i,idx) => {
+    const p = pub[i];
+    const slot = slots[idx];
+    if (!slot || !p || !p.nombre) return;
+    const linkHref = p.link || (p.tel ? 'https://wa.me/51'+p.tel : '#');
+    slot.innerHTML = `
+      ${p.imagen ? '<img src="'+p.imagen+'" style="width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:10px;" onerror="this.style.display='none'">' : '<i class="bi bi-badge-ad" style="font-size:2.5rem;color:#8e44ad;margin-bottom:12px;display:block;"></i>'}
+      <h6 style="font-size:15px;font-weight:700;margin-bottom:6px;">${p.nombre}</h6>
+      ${p.tel ? '<p style="font-size:13px;color:rgba(255,255,255,.8);margin-bottom:8px;"><i class="bi bi-whatsapp"></i> '+p.tel+'</p>' : ''}
+      <a href="${linkHref}" target="_blank" style="background:#8e44ad;color:#fff;padding:8px 20px;border-radius:20px;text-decoration:none;font-size:13px;font-weight:700;">Ver más</a>
+    `;
+  });
+}
+
+// Cargar publicidad al iniciar
+document.addEventListener('DOMContentLoaded', () => {
+  const pub = JSON.parse(localStorage.getItem('smbinrtv_publicidad') || '{}');
+  if (Object.keys(pub).length) aplicarPublicidad(pub);
+});
+
+// Cargar noticia destacada en hero desde Firebase
+async function cargarDestacadaHero() {
+  try {
+    const snap = await db.collection('noticias')
+      .where('destacada', '==', true)
+      .orderBy('fecha', 'desc')
+      .limit(1)
+      .get();
+    if (!snap.empty) {
+      const d = snap.docs[0].data();
+      actualizarHero(d.titulo, d.resumen, d.mediaURL);
+      const catEl = document.querySelector('.hero-category');
+      if (catEl) catEl.textContent = d.categoria || 'DESTACADA';
+    }
+  } catch(e) { console.log('Hero:', e.message); }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  cargarDestacadaHero();
+});
 </script>
 </body>
 </html>
