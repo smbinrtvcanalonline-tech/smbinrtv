@@ -1021,12 +1021,67 @@
     </div>
   </div>
 </div>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script>
 // ===== CONFIGURACION =====
 const CURRENTS_API_KEY = 'kKZtoyAGE2PgxRe3GXpbT44nBkt3QbOiMhOpwzExbu0YAOcS';
 const GNEWS_API_KEY = '9b5b1b5a0b5fafc4f395d5849fed3d27';
 const PORTAL_URL = 'https://smbinrtv.vercel.app';
 const PASSWORD_EDITOR = 'smbinrtv2026';
+
+// ===== FIREBASE INIT =====
+const firebaseConfig = {
+  apiKey: "AIzaSyAMKZ1an2qj7i1Imb6QK2GY_zbxb6aTqSg",
+  authDomain: "smbinrtv-diario.firebaseapp.com",
+  projectId: "smbinrtv-diario",
+  storageBucket: "smbinrtv-diario.firebasestorage.app",
+  messagingSenderId: "893568788949",
+  appId: "1:893568788949:web:07f06830a9a4f3716e355c"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+async function cargarDesdeFirebase() {
+  try {
+    const snap = await db.collection('noticias')
+      .where('activa', '==', true)
+      .orderBy('fecha', 'desc')
+      .limit(20)
+      .get();
+    if (snap.empty) return [];
+    return snap.docs.map(doc => {
+      const d = doc.data();
+      const fechaObj = d.fecha ? d.fecha.toDate() : new Date();
+      return {
+        zona: mapearCategoria(d.categoria),
+        cat: (d.categoria || 'SMBINRTV').toUpperCase(),
+        catClass: 'cat-mis',
+        titulo: d.titulo || '',
+        resumen: d.resumen || '',
+        cuerpoCompleto: d.cuerpo || d.resumen || '',
+        imagen: d.mediaURL || '',
+        url: PORTAL_URL,
+        fuente: d.autor || 'Redacción SMBINRTV',
+        fecha: fechaObj.toISOString(),
+        hace: tiempoRelativo(fechaObj.toISOString()),
+        tipo: 'mis'
+      };
+    });
+  } catch(e) {
+    console.warn('Firebase error:', e);
+    return [];
+  }
+}
+
+function mapearCategoria(cat) {
+  if (!cat) return 'loreto';
+  const c = cat.toLowerCase();
+  if (c.includes('nacional') || c.includes('política') || c.includes('economia')) return 'nacional';
+  if (c.includes('lima')) return 'lima';
+  return 'loreto';
+}
 
 // Estado global
 let todasLasNoticias = [];
@@ -1296,6 +1351,9 @@ async function cargarNoticiasGNews() {
 
   let noticias = [];
 
+  // CARGAR NOTICIAS DE FIREBASE PRIMERO
+  const noticiasFirebase = await cargarDesdeFirebase();
+
   // INTENTAR CURRENTS API PRIMERO
   if (CURRENTS_API_KEY && CURRENTS_API_KEY !== 'TU_API_KEY_DE_CURRENTS_AQUI') {
     try {
@@ -1332,7 +1390,7 @@ async function cargarNoticiasGNews() {
     }
   });
 
-  todasLasNoticias = noticias;
+  todasLasNoticias = [...noticiasFirebase, ...noticias];
 
   // AGREGAR NOTICIAS PROPIAS DEL USUARIO
   noticiasMis.forEach(n => {
