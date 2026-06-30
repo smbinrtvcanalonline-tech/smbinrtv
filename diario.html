@@ -39,7 +39,7 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); transition:background .3s,color .3s; line-height:1.6; }
     h1,h2,h3,h4,h5,h6 { font-family:'Playfair Display',serif; }
- 
+
     /* BREAKING NEWS BAR */
     .breaking-bar {
       background:var(--primary);
@@ -66,7 +66,7 @@
     }
     .breaking-dot { width:8px; height:8px; background:var(--primary); border-radius:50%; animation:pulse 1.2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
- 
+
     /* HEADER */
     .site-header {
       background:var(--card-bg);
@@ -139,7 +139,7 @@
     }
     .search-box input:focus { border-color:var(--primary); }
     .search-box i { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:14px; }
- 
+
     /* HERO ESTILO CNN */
     .hero-main {
       position:relative;
@@ -201,7 +201,7 @@
       font-size:13px;
       font-weight:500;
     }
- 
+
     /* GRID SECUNDARIO */
     .news-grid-2 {
       display:grid;
@@ -235,7 +235,7 @@
     .news-card-2 .cat { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:var(--primary); margin-bottom:8px; }
     .news-card-2 .title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:#fff; line-height:1.3; }
     .news-card-2 .meta { font-size:12px; color:rgba(255,255,255,.6); margin-top:8px; }
- 
+
     /* SECCION DIARIO */
     .section-diario { padding:40px 0; background:var(--bg); }
     .section-header {
@@ -282,7 +282,7 @@
     }
     .tab-modern:hover { border-color:var(--primary); color:var(--primary); }
     .tab-modern.active { background:var(--primary); color:#fff; border-color:var(--primary); }
- 
+
     /* TARJETAS NOTICIAS */
     .news-grid-main {
       display:grid;
@@ -385,7 +385,7 @@
     .badge-gnews { background:#f59e0b; color:#fff; }
     .badge-manual { background:#be185d; color:#fff; }
     .badge-respaldo { background:#6b7280; color:#fff; }
- 
+
     /* BOTONES ADMIN */
     .admin-bar {
       display:flex;
@@ -410,7 +410,7 @@
     .btn-sources { background:var(--dark); color:#fff; }
     .btn-editor { background:#7c3aed; color:#fff; }
     .btn-publish { background:var(--dark); color:#fff; }
- 
+
     /* PANEL FUENTES */
     .panel-fuentes {
       background:var(--card-bg);
@@ -425,7 +425,7 @@
     .table-fuentes th, .table-fuentes td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--border); }
     .table-fuentes th { font-weight:700; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:1px; }
     .estado-ok { color:var(--success); font-weight:600; }
- 
+
     /* PUBLICIDAD */
     .ad-section {
       background:linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 100%);
@@ -450,7 +450,7 @@
     .ad-slot h6 { font-size:14px; font-weight:700; margin-bottom:6px; }
     .ad-slot p { font-size:12px; color:rgba(255,255,255,.6); margin-bottom:12px; }
     .ad-slot a { color:var(--primary); font-size:12px; font-weight:600; text-decoration:none; }
- 
+
     /* OPINION */
     .opinion-section {
       background:var(--dark);
@@ -501,7 +501,7 @@
       color:rgba(255,255,255,.5);
     }
     .opinion-author img { width:36px; height:36px; border-radius:50%; margin:0; }
- 
+
     /* FOOTER */
     .site-footer {
       background:var(--dark);
@@ -540,7 +540,7 @@
       font-size:13px;
       color:rgba(255,255,255,.5);
     }
- 
+
     /* MODALES */
     .modal-overlay {
       display:none;
@@ -634,10 +634,10 @@
       margin-top:12px;
       border:1px solid var(--border);
     }
- 
+
     .spinner { display:inline-block; width:18px; height:18px; border:3px solid #fff; border-top-color:transparent; border-radius:50%; animation:spin .6s linear infinite; }
     @keyframes spin { to { transform:rotate(360deg); } }
- 
+
     @media (max-width:768px) {
       .hero-overlay { padding:24px; }
       .hero-title { font-size:24px; }
@@ -660,7 +660,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- HEADER PROFESIONAL -->
 <header class="site-header">
   <div class="container-fluid px-3">
@@ -688,9 +688,9 @@
     </div>
   </div>
 </header>
- 
+
 <main>
- 
+
 <!-- HERO PRINCIPAL ESTILO CNN/BBC -->
 <section class="hero-main" onclick="verNoticiaHero(0)">
   <img src="escandalo-capitania-iquitos.jpg" alt="Escándalo en la Capitanía de Puerto de Iquitos" id="hero-img-main" />
@@ -705,7 +705,7 @@
     </div>
   </div>
 </section>
- 
+
 <!-- GRID SECUNDARIO ESTILO INFOBAE -->
 <section>
   <div class="news-grid-2">
@@ -742,7 +742,7 @@
         <button class="tab-modern" data-zona="mis" onclick="filtrarNoticias('mis',this)"><i class="bi bi-pencil"></i> Mis Noticias</button>
       </div>
     </div>
- 
+
     <!-- BARRA DE ADMINISTRACION -->
     <div class="admin-bar">
       <button class="btn-admin btn-update" id="btnActualizar" onclick="cargarNoticiasGNews()"><i class="bi bi-arrow-clockwise"></i> Actualizar Noticias</button>
@@ -750,7 +750,7 @@
       <button class="btn-admin btn-editor" onclick="solicitarAccesoEditor()"><i class="bi bi-pencil-square"></i> Editor Interno</button>
       <button class="btn-admin btn-publish" onclick="solicitarAccesoMiNoticia()"><i class="bi bi-plus-circle"></i> Publicar Noticia</button>
     </div>
- 
+
     <!-- PANEL FUENTES INTERNAS PROTEGIDO -->
     <div class="panel-fuentes" id="panelFuentes">
       <div class="d-flex justify-content-between align-items-center mb-3">
@@ -776,7 +776,7 @@
         <strong><i class="bi bi-shield-check"></i> Nota del equipo editorial:</strong> Las fuentes regionales de Loreto son monitoreadas manualmente por nuestro equipo. Las fuentes nacionales se consultan via APIs automatizadas. Todas las noticias son verificadas antes de su publicacion.
       </div>
     </div>
- 
+
     <!-- GRID DE NOTICIAS -->
     <div id="diario-grid" class="news-grid-main"></div>
     
@@ -814,7 +814,7 @@
     </div>
   </div>
 </section>
- 
+
 <!-- OPINION EDITORIAL -->
 <section class="opinion-section">
   <div class="container-fluid px-3">
@@ -859,9 +859,9 @@
     </div>
   </div>
 </section>
- 
+
 </main>
- 
+
 <!-- FOOTER PROFESIONAL -->
 <footer class="site-footer">
   <div class="container-fluid px-3">
@@ -916,7 +916,7 @@
     </div>
   </div>
 </footer>
- 
+
 <!-- MODAL: Ver Noticia Completa -->
 <div class="modal-overlay" id="modalNoticia" onclick="if(event.target===this)cerrarModal('modalNoticia')">
   <div class="modal-box">
@@ -927,7 +927,7 @@
     <div class="d-flex gap-2 mt-3 flex-wrap" id="modal-share-btns"></div>
   </div>
 </div>
- 
+
 <!-- MODAL: Password Editor -->
 <div class="modal-overlay" id="modalPassword" onclick="if(event.target===this)cerrarModal('modalPassword')">
   <div class="modal-box" style="max-width:400px;">
@@ -943,7 +943,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL: Editor Interno -->
 <div class="modal-overlay" id="modalEditar" onclick="if(event.target===this)cerrarModal('modalEditar')">
   <div class="modal-box">
@@ -969,7 +969,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL: Publicar Noticia (con upload de imagen PC + drag & drop) -->
 <div class="modal-overlay" id="modalOwn" onclick="if(event.target===this)cerrarModal('modalOwn')">
   <div class="modal-box">
@@ -1027,7 +1027,7 @@ const CURRENTS_API_KEY = 'kKZtoyAGE2PgxRe3GXpbT44nBkt3QbOiMhOpwzExbu0YAOcS';
 const GNEWS_API_KEY = '9b5b1b5a0b5fafc4f395d5849fed3d27';
 const PORTAL_URL = 'https://smbinrtv.vercel.app';
 const PASSWORD_EDITOR = 'smbinrtv2026';
- 
+
 // Estado global
 let todasLasNoticias = [];
 let noticiasMis = JSON.parse(localStorage.getItem('smbinrtv_mis_noticias') || '[]');
@@ -1037,11 +1037,11 @@ let noticiaEditando = null;
 let fuenteActiva = 'currents';
 let editorAutenticado = false;
 let imagenBase64 = '';
- 
+
 // ===== UTILIDADES =====
 function abrirModal(id) { document.getElementById(id).classList.add('show'); }
 function cerrarModal(id) { document.getElementById(id).classList.remove('show'); }
- 
+
 function tiempoRelativo(fechaStr) {
   const fecha = new Date(fechaStr);
   const ahora = new Date();
@@ -1051,17 +1051,17 @@ function tiempoRelativo(fechaStr) {
   if (diff < 86400) return 'hace ' + Math.floor(diff/3600) + 'h';
   return 'hace ' + Math.floor(diff/86400) + ' dias';
 }
- 
+
 function escaparHTML(str) {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
 }
- 
+
 function contarPalabras(texto) {
   return texto.trim().split(/\s+/).length;
 }
- 
+
 // ===== UPLOAD IMAGEN DESDE PC =====
 function previewImagenPC(input) {
   const file = input.files[0];
@@ -1075,7 +1075,7 @@ function previewImagenPC(input) {
   };
   reader.readAsDataURL(file);
 }
- 
+
 function handleDrop(e) {
   e.preventDefault();
   e.stopPropagation();
@@ -1088,24 +1088,24 @@ function handleDrop(e) {
   e.target.style.borderColor = 'var(--border)';
   e.target.style.background = 'var(--bg)';
 }
- 
+
 // ===== GENERAR NOTICIA PROFESIONAL 250+ PALABRAS =====
 function generarNoticiaProfesional(titulo, resumen, fuente, categoria, zona) {
   const fechaHoy = new Date().toLocaleDateString('es-PE', { day:'numeric', month:'long', year:'numeric' });
   const horaActual = new Date().toLocaleTimeString('es-PE', { hour:'2-digit', minute:'2-digit' });
   const datos = obtenerDatosVerificables(categoria, zona);
- 
+
   const cuerpo = `${datos.quien} ${titulo}. ${resumen || 'Segun informes oficiales, las autoridades competentes han dado a conocer esta informacion a traves de los canales institucionales correspondientes.'} La informacion fue confirmada el dia ${fechaHoy} a las ${horaActual} horas, segun el reporte oficial emitido por ${fuente}.
- 
+
 ${datos.donde} ${datos.porque} ${datos.como}
- 
+
 Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. ${datos.analisis} La poblacion de la region Amazonica, especialmente en Loreto, debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
- 
+
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`;
- 
+
   return cuerpo.trim();
 }
- 
+
 function obtenerDatosVerificables(categoria, zona) {
   const base = {
     quien: 'Las autoridades correspondientes del Gobierno Regional de Loreto y entidades nacionales vinculadas informaron que',
@@ -1114,7 +1114,7 @@ function obtenerDatosVerificables(categoria, zona) {
     como: '',
     analisis: 'Es fundamental que la ciudadania se mantenga atenta a los comunicados oficiales y evite difundir informacion no verificada. La transparencia en la gestion publica es un pilar fundamental para el desarrollo de nuestra region.'
   };
- 
+
   if (categoria === 'SALUD' || (categoria && categoria.includes('salud'))) {
     base.quien = 'El Ministerio de Salud (Minsa), a traves de la Direccion Regional de Salud de Loreto (Diresa Loreto), y los establecimientos de salud de la region confirmaron que';
     base.donde = 'Los hospitales y centros de salud de Iquitos, Nauta, Requena, Yurimaguas y demas provincias de la region Loreto estan en alerta. La alerta sanitaria responde al monitoreo epidemiologico permanente que realiza el Minsa en coordinacion con las autoridades locales. Se han activado los protocolos de emergencia sanitaria, con dotacion de medicamentos y personal especializado en los centros de salud afectados.';
@@ -1132,7 +1132,7 @@ function obtenerDatosVerificables(categoria, zona) {
     base.donde = 'La capital del Peru es el escenario de esta informacion, con repercusiones en las politicas nacionales que afectan directamente a las regiones del pais, incluyendo Loreto. Las decisiones tomadas en Lima tienen impacto directo en el presupuesto y las politicas que se ejecutan en las regiones del Peru, a traves de la publicacion de normas legales, decretos supremos y resoluciones ministeriales en el portal del Estado Peruano.';
     base.analisis = 'Desde la Amazonia peruana observamos con preocupacion como muchas decisiones se toman en Lima sin consultar a las regiones. La centralizacion del Estado peruano sigue siendo uno de los principales obstaculos para el desarrollo equitativo del pais. SMBINRTV seguira denunciando la exclusion de las regiones en las decisiones que las afectan directamente.';
   }
- 
+
   return base;
 }
   // ===== COMPARTIR EN REDES =====
@@ -1153,7 +1153,7 @@ function compartirTW(titulo, url) {
 function compartirIG(titulo) {
   alert('Para compartir en Instagram:\n1. Copia el enlace: ' + PORTAL_URL + '\n2. Pegalo en tu historia o bio.\n\nNoticia: ' + titulo);
 }
- 
+
 function botonesCompartir(titulo, url, idx) {
   const t = escaparHTML(titulo).replace(/'/g, "\\'");
   const u = url ? escaparHTML(url).replace(/'/g, "\\'") : '';
@@ -1161,10 +1161,10 @@ function botonesCompartir(titulo, url, idx) {
 <button class="btn-nc btn-share-wa" onclick="compartirWA('${t}','${u}')"><i class="bi bi-whatsapp"></i></button>
 <button class="btn-nc btn-share-x" onclick="compartirTW('${t}','${u}')"><i class="bi bi-twitter-x"></i></button>`;
 }
- 
+
 // ===== PANEL FUENTES INTERNAS - PROTEGIDO =====
 let fuentesAutenticado = false;
- 
+
 function toggleFuentes() {
   if (fuentesAutenticado) {
     document.getElementById('panelFuentes').classList.toggle('show');
@@ -1178,7 +1178,7 @@ function toggleFuentes() {
     alert('❌ Contraseña incorrecta. Solo personal autorizado puede acceder al panel de fuentes internas.');
   }
 }
- 
+
 // ===== AUTENTICACION EDITOR INTERNO =====
 function solicitarAccesoEditor() {
   if (editorAutenticado) {
@@ -1187,7 +1187,7 @@ function solicitarAccesoEditor() {
   }
   abrirModal('modalPassword');
 }
- 
+
 function verificarPassword() {
   const input = document.getElementById('editor-password').value;
   if (input === PASSWORD_EDITOR) {
@@ -1200,7 +1200,7 @@ function verificarPassword() {
     document.getElementById('editor-password').value = '';
   }
 }
- 
+
 function abrirEditorDesdeBtn() {
   if (todasLasNoticias.length > 0) {
     abrirEditor(0);
@@ -1208,7 +1208,7 @@ function abrirEditorDesdeBtn() {
     alert('No hay noticias para editar. Carga noticias primero.');
   }
 }
- 
+
 function abrirEditor(idx) {
   noticiaEditando = idx;
   const n = todasLasNoticias[idx];
@@ -1219,7 +1219,7 @@ function abrirEditor(idx) {
   document.getElementById('edit-cuerpo-nuevo').value = editada ? editada.cuerpo : '';
   abrirModal('modalEditar');
 }
- 
+
 function guardarEdicion() {
   if (noticiaEditando === null) return;
   const nuevo = document.getElementById('edit-cuerpo-nuevo').value.trim();
@@ -1234,10 +1234,10 @@ function guardarEdicion() {
   filtrarYRenderizar();
   alert('Version del director guardada exitosamente.');
 }
- 
+
 // ===== PUBLICAR NOTICIA PROPIA - PROTEGIDO =====
 let miNoticiaAutenticado = false;
- 
+
 function solicitarAccesoMiNoticia() {
   if (miNoticiaAutenticado) {
     abrirModal('modalOwn');
@@ -1251,18 +1251,18 @@ function solicitarAccesoMiNoticia() {
     alert('❌ Contraseña incorrecta. Solo el equipo editorial autorizado puede publicar noticias.');
   }
 }
- 
+
 function publicarNoticiaPropia() {
   const titulo = document.getElementById('own-titulo').value.trim();
   const zona = document.getElementById('own-zona').value;
   const cuerpo = document.getElementById('own-cuerpo').value.trim();
   const urlImagen = document.getElementById('own-imagen-url').value.trim();
- 
+
   if (!titulo || !cuerpo) { alert('Completa el titular y la informacion de la noticia.'); return; }
- 
+
   const zonaKey = zona === 'Lima' ? 'lima' : (zona === 'Nacional' ? 'nacional' : 'loreto');
   const cuerpoFinal = cuerpo.length > 200 ? cuerpo : generarNoticiaProfesional(titulo, cuerpo, 'SMBINRTV', 'MIS NOTICIAS', zonaKey);
- 
+
   const noticia = {
     titulo: titulo,
     zona: zona || 'Loreto / Iquitos',
@@ -1270,10 +1270,10 @@ function publicarNoticiaPropia() {
     imagen: imagenBase64 || urlImagen || '',
     fecha: new Date().toISOString()
   };
- 
+
   noticiasMis.unshift(noticia);
   localStorage.setItem('smbinrtv_mis_noticias', JSON.stringify(noticiasMis));
- 
+
   document.getElementById('own-titulo').value = '';
   document.getElementById('own-zona').value = '';
   document.getElementById('own-cuerpo').value = '';
@@ -1281,7 +1281,7 @@ function publicarNoticiaPropia() {
   document.getElementById('own-imagen-file').value = '';
   document.getElementById('preview-container').style.display = 'none';
   imagenBase64 = '';
- 
+
   cerrarModal('modalOwn');
   cargarNoticiasGNews();
   alert('✅ Tu noticia ha sido publicada exitosamente en la seccion "Mis Noticias".');
@@ -1293,9 +1293,9 @@ async function cargarNoticiasGNews() {
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Cargando...';
   grid.innerHTML = '<p class="text-center w-100 py-5" style="color:var(--text-muted);"><span class="spinner" style="border-color:var(--primary);border-top-color:transparent;"></span><br/>Cargando noticias profesionales...</p>';
- 
+
   let noticias = [];
- 
+
   // INTENTAR CURRENTS API PRIMERO
   if (CURRENTS_API_KEY && CURRENTS_API_KEY !== 'TU_API_KEY_DE_CURRENTS_AQUI') {
     try {
@@ -1306,7 +1306,7 @@ async function cargarNoticiasGNews() {
       }
     } catch (e) { console.warn('⚠️ Currents fallo:', e); }
   }
- 
+
   // SI FALLA, INTENTAR GNEWS
   if (noticias.length === 0) {
     try {
@@ -1317,28 +1317,28 @@ async function cargarNoticiasGNews() {
       }
     } catch (e) { console.warn('⚠️ GNews tambien fallo:', e); }
   }
- 
+
   // SI AMBAS FALLAN, USAR RESPALDO LOCAL
   if (noticias.length === 0) {
     console.log('📋 Usando noticias de respaldo...');
     noticias = noticiasRespaldo();
     fuenteActiva = 'respaldo';
   }
- 
+
   // GENERAR CUERPO PROFESIONAL PARA CADA NOTICIA
   noticias.forEach(n => {
     if (!n.cuerpoCompleto || contarPalabras(n.cuerpoCompleto) < 200) {
       n.cuerpoCompleto = generarNoticiaProfesional(n.titulo, n.resumen, n.fuente, n.cat, n.zona);
     }
   });
- 
+
   todasLasNoticias = noticias;
- 
+
   // AGREGAR NOTICIAS PROPIAS DEL USUARIO
   noticiasMis.forEach(n => {
     const zonaKey = n.zona === 'Lima' ? 'lima' : (n.zona === 'Nacional' ? 'nacional' : 'loreto');
     const cuerpoManual = n.cuerpo.length > 200 ? n.cuerpo : generarNoticiaProfesional(n.titulo, n.cuerpo, 'SMBINRTV', 'MIS NOTICIAS', zonaKey);
- 
+
     todasLasNoticias.push({
       zona: zonaKey,
       cat: 'MIS NOTICIAS',
@@ -1354,24 +1354,24 @@ async function cargarNoticiasGNews() {
       tipo: 'mis'
     });
   });
- 
+
   actualizarContadoresTabs();
   filtrarYRenderizar();
- 
+
   const ahora = new Date().toLocaleTimeString('es-PE');
   const fuenteLabel = fuenteActiva === 'currents' ? 'Currents API (tiempo real)' : 
                       (fuenteActiva === 'gnews' ? 'GNews API (retraso 12h)' : 'Noticias de respaldo');
   document.getElementById('ultima-actualizacion').innerHTML = `${ahora} <span style="color:var(--primary);">· ${fuenteLabel}</span>`;
- 
+
   if (noticias.length > 0) {
     const titulares = noticias.slice(0, 5).map(n => n.titulo).join(' · ');
     document.getElementById('ticker-text').textContent = titulares;
   }
- 
+
   btn.disabled = false;
   btn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Actualizar Noticias';
 }
- 
+
 // ===== CURRENTS API =====
 async function cargarDesdeCurrents() {
   const noticias = [];
@@ -1380,7 +1380,7 @@ async function cargarDesdeCurrents() {
     { zona: 'loreto', keywords: 'Loreto Iquitos', cat: 'LORETO', catClass: 'cat-loreto', max: 3 },
     { zona: 'lima', keywords: 'Lima Peru', cat: 'LIMA', catClass: 'cat-lima', max: 3 }
   ];
- 
+
   for (const query of queries) {
     try {
       const url = `https://api.currentsapi.services/v1/search?keywords=${encodeURIComponent(query.keywords)}&language=es&country=PE&limit=${query.max}`;
@@ -1402,7 +1402,7 @@ async function cargarDesdeCurrents() {
   }
   return noticias;
 }
- 
+
 // ===== GNEWS API =====
 async function cargarDesdeGNews() {
   const noticias = [];
@@ -1411,7 +1411,7 @@ async function cargarDesdeGNews() {
     { zona: 'loreto', q: 'Loreto Iquitos noticias', cat: 'LORETO', catClass: 'cat-loreto', max: 3 },
     { zona: 'lima', q: 'Lima Peru noticias', cat: 'LIMA', catClass: 'cat-lima', max: 3 }
   ];
- 
+
   for (const query of queries) {
     try {
       const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(query.q)}&lang=es&country=pe&max=${query.max}&apikey=${GNEWS_API_KEY}`;
@@ -1438,53 +1438,53 @@ function noticiasRespaldo() {
   const fechaHoy = new Date().toLocaleDateString('es-PE', { day:'numeric', month:'long', year:'numeric' });
   return [
     { zona:'loreto', cat:'DENUNCIA', catClass:'cat-loreto', titulo:'¡ESCÁNDALO EN LA CAPITANÍA DE PUERTO DE IQUITOS!', resumen:'Los señalamientos apuntan a la presunta responsabilidad de altos mandos vinculados a la institución, entre ellos el Vicealmirante Oscar Alejandro Torrico Infantas y el Capitán Harold Ritter Camino.', cuerpoCompleto:`¡LA VIDA DE LOS LORETANOS ESTÁ EN RIESGO! DRTC DESTAPA PRESUNTAS GRAVES IRREGULARIDADES EN EL PUERTO LAO MIENTRAS LAS AUTORIDADES COMPETENTES ESTARÍAN MIRANDO HACIA OTRO LADO
- 
+
 Una preocupante realidad quedó al descubierto durante una intervención realizada en el puerto LAO de Iquitos. El Inspector de transporte acuático de la Dirección Regional de Transportes y Comunicaciones (DRTC) del Gobierno Regional de Loreto, Segundo Guadalupe Torrejón, fue testigo de las presuntas graves deficiencias con las que vienen operando algunas embarcaciones dedicadas al transporte fluvial, poniendo en riesgo la vida de cientos de pasajeros que utilizan este servicio todos los días.
- 
+
 Durante la inspección se evidenció que varias embarcaciones aparentemente no cuentan con los implementos mínimos de seguridad exigidos por la normativa. Entre las principales observaciones destacan la presunta ausencia de chalecos salvavidas suficientes, la falta de extintores, equipos indispensables para responder ante una emergencia, y la aparente existencia de permisos de operación no actualizados.
- 
+
 Asimismo, durante la intervención también se detectó una balsa flotante que, aparentemente, estaría operando sin la autorización correspondiente. De confirmarse esta situación, la supervisión y control recaería en la Capitanía de Puertos, entidad responsable de fiscalizar el transporte fluvial y garantizar que las embarcaciones cumplan con todos los requisitos legales antes de prestar servicio.
- 
+
 Estos hechos generan serios cuestionamientos sobre la labor de fiscalización. La aparente permanencia de embarcaciones y balsas operando en condiciones irregulares hace que la población se pregunte si los controles realmente se están realizando con la rigurosidad que exige la protección de la vida humana en los ríos amazónicos.
- 
+
 Resulta inaceptable que, mientras miles de ciudadanos confían diariamente su seguridad al transporte fluvial, todavía existan operadores que presuntamente incumplen las normas básicas y continúan prestando servicio sin que estas situaciones sean corregidas de manera oportuna.
- 
+
 La ciudadanía exige acciones inmediatas, fiscalizaciones permanentes y sanciones ejemplares contra quienes incumplan la ley. La seguridad de los pasajeros no puede quedar a merced de la informalidad ni de una eventual falta de control. Antes de lamentar una tragedia, las autoridades competentes deben actuar con firmeza y hacer cumplir la normativa vigente.
- 
+
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'escandalo-capitania-iquitos.jpg', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 30min', tipo:'mis' },
     { zona:'nacional', cat:'NACIONAL', catClass:'cat-nacional', titulo:'Gobierno anuncia nuevas medidas economicas para reducir la inflacion', resumen:'El Ejecutivo presento un paquete de medidas orientadas a estabilizar los precios en las regiones del pais.', cuerpoCompleto:`El presidente de la Republica, Dina Boluarte, junto al ministro de Economia, Jose Arista, y el presidente del Banco Central de Reserva, Julio Velarde, anunciaron un paquete de medidas economicas destinadas a reducir la inflacion y estabilizar los precios de los productos de primera necesidad en todo el territorio nacional, incluyendo la region Amazonica. La informacion fue confirmada el dia ${fechaHoy} durante una conferencia de prensa en Palacio de Gobierno, tras la sesion del Consejo de Ministros. Las medidas tendran aplicacion en todo el Peru, con especial atencion en las regiones mas vulnerables como Loreto, Ucayali, Madre de Dios y Amazonas. La inflacion acumulada en los ultimos meses ha afectado significativamente el poder adquisitivo de las familias peruanas, especialmente en las zonas rurales y urbanas marginadas donde los precios de los alimentos basicos se han incrementado por encima del promedio nacional. El Ejecutivo implementara un fondo de estabilizacion de precios, bonos alimentarios para familias de escasos recursos y un programa de compras estatales directas a productores agricolas para eliminar intermediarios.
- 
+
 Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Si bien las medidas anunciadas son positivas en apariencia, la historia nos ha demostrado que muchos de estos programas no llegan a la poblacion que realmente lo necesita en la Amazonia peruana. La region Loreto historicamente ha sido olvidada en la distribucion de recursos economicos. Los bonos anunciados deben llegar a los pueblos indigenas, a los pescadores artesanales y a las madres de familia de los asentamientos humanos de Iquitos, Nauta, Requena y las demas provincias. Exigimos al Gobierno transparencia en la ejecucion de estos fondos. La poblacion de Loreto no puede seguir siendo espectadora de promesas que nunca se cumplen. Necesitamos hechos concretos, no discursos vacios. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
- 
+
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 1h', tipo:'respaldo' },
     { zona:'nacional', cat:'SALUD', catClass:'cat-nacional', titulo:'Minsa reporta aumento de casos de dengue en 8 regiones del pais', resumen:'Las autoridades de salud emitieron una alerta epidemiologica y piden a la poblacion tomar precauciones.', cuerpoCompleto:`El Ministerio de Salud (Minsa), a traves de la Direccion General de Epidemiologia, liderada por el doctor Cesar Munayco, y la Direccion Regional de Salud de Loreto (Diresa Loreto), reportaron un incremento significativo de casos de dengue en 8 regiones del Peru, incluyendo Loreto, Ucayali, Madre de Dios, San Martin, Amazonas, Cajamarca, Piura y Tumbes. Se emitio la alerta epidemiologica nivel naranja. El reporte fue presentado el dia ${fechaHoy} durante el balance semanal de la situacion sanitaria nacional, donde se confirmo que la temporada de lluvias ha incrementado los focos del vector transmisor. Los casos se concentran principalmente en las zonas de selva alta y baja, siendo Loreto una de las regiones mas afectadas con incrementos del 45% respecto al mismo periodo del año anterior. El aumento se debe a las intensas lluvias registradas en los ultimos meses, la acumulacion de agua estancada en viviendas y calles, y la falta de campanas de fumigacion preventivas en los sectores mas vulnerables. El Minsa ha desplegado brigadas de salud a las zonas afectadas, dotado de insecticidas a los establecimientos de salud y lanzado una campaña nacional de prevencion denominada "Juntos contra el Dengue".
- 
+
 Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. La alerta sanitaria en Loreto es preocupante y evidencia una vez mas la fragilidad de nuestro sistema de salud publica. Los hospitales de la region ya operan al limite de su capacidad. El Hospital Regional de Loreto, el Hospital de Apoyo de Nauta y los centros de salud de las provincias carecen de medicamentos basicos para tratar casos de dengue hemorragico, que es la forma mas grave de la enfermedad. Exigimos a las autoridades de salud que no solo se limiten a emitir alertas, sino que garanticen la dotacion de sueros, medicamentos antipireticos y personal medico especializado en los hospitales de la region. La poblacion de Loreto no puede seguir siendo tratada como ciudadanos de segunda clase en materia de salud. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
- 
+
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 3h', tipo:'respaldo' },
     { zona:'loreto', cat:'LORETO', catClass:'cat-loreto', titulo:'Crecida del rio Amazonas afecta comunidades en provincias de Loreto', resumen:'El incremento del caudal ha puesto en alerta a las autoridades locales que preparan planes de contingencia.', cuerpoCompleto:`El Gobierno Regional de Loreto, liderado por el gobernador regional, en coordinacion con el Instituto Nacional de Defensa Civil (Indeci), la Marina de Guerra del Peru y los alcaldes provinciales de Maynas, Alto Amazonas y Loreto, reportaron una crecida extraordinaria del rio Amazonas y sus afluentes que ha afectado a mas de 15 comunidades nativas y asentamientos humanos en las provincias de Maynas, Alto Amazonas y Loreto. La alerta fue activada el dia ${fechaHoy} a las 06:00 horas, tras el monitoreo continuo que realiza el Servicio Nacional de Meteorologia e Hidrologia del Peru (Senamhi). Las zonas mas afectadas son las riberas del rio Amazonas en los distritos de Indiana, Mazan, Punchana, Belen y las comunidades nativas de la cuenca del rio Nanay y rio Itaya. La crecida se debe a las intensas lluvias registradas en la cuenca alta del Amazonas y el incremento de la evaporacion por las altas temperaturas, fenomeno que se agrava por el cambio climatico que afecta la region Amazonica. El Gobierno Regional ha activado el Centro de Operaciones de Emergencia Regional (COER) y desplegado maquinaria pesada para reforzar los diques de contencion. Se han instalado albergues temporales en colegios y centros comunitarios.
- 
+
 Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Las crecidas del Amazonas son un fenomeno ciclico que año tras año afecta a las mismas comunidades, y año tras año las autoridades responden con las mismas medidas paliativas. La pregunta que debemos hacernos es: ¿Por que no se invierte en infraestructura de prevencion? Los diques de Belen se rompen cada año. Las viviendas de Indiana y Mazan son inundadas sistematicamente. Y la respuesta siempre es la misma: albergues temporales y despensas. Exigimos al Gobierno Regional de Loreto un plan integral de prevencion de desastres que incluya reubicacion definitiva de las familias en zonas de riesgo, construccion de viviendas resilientes y un sistema de alerta temprana que realmente funcione. La poblacion de Loreto merece mas que promesas de campaña. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
- 
+
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 2h', tipo:'respaldo' },
     { zona:'loreto', cat:'IQUITOS', catClass:'cat-loreto', titulo:'Municipalidad de Iquitos anuncia obras de pavimentacion para cinco distritos', resumen:'Se ejecutaran proyectos de infraestructura vial en cinco distritos de la provincia con fondos municipales.', cuerpoCompleto:`La Municipalidad Provincial de Maynas, liderada por el alcalde de Iquitos, en coordinacion con el Ministerio de Vivienda, Construccion y Saneamiento (MVCS) y el Programa Nacional de Saneamiento Urbano, anuncio el inicio de obras de pavimentacion de 25 kilometros de vias urbanas en cinco distritos de la provincia de Maynas: Iquitos, Punchana, Belen, San Juan Bautista y Indiana. El anuncio fue realizado el dia ${fechaHoy} durante una ceremonia protocolar en la Plaza de Armas de Iquitos, donde se presento el expediente tecnico aprobado por el MVCS. Las obras se ejecutaran en las principales avenidas y jironess de los cinco distritos, con especial enfasis en las zonas mas deterioradas que durante la temporada de lluvias se convierten en verdaderos pantanos. La infraestructura vial de Iquitos y sus distritos se encuentra en estado critico. El 65% de las calles no cuentan con pavimento adecuado, lo que genera problemas de salud, dificulta el transporte y afecta la economia local. La obra sera ejecutada mediante administracion directa de la municipalidad, con un presupuesto aprobado de 18 millones de soles, financiados con recursos del canon petrolero y fondos del MVCS.
- 
+
 Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. Anunciar obras en Iquitos es facil; ejecutarlas correctamente es otra historia. La ciudadania de Maynas ha sido testigo de innumerables anuncios de pavimentacion que nunca se concretan o que se ejecutan con calidad deficiente. Exigimos a la Municipalidad de Maynas transparencia total en la ejecucion de estas obras. La ciudadania debe conocer el cronograma detallado, las empresas contratistas, los montos exactos y el avance fisico mes a mes. No mas obras fantasmas. Recordemos que el canon petrolero de Loreto es uno de los mas altos del pais, y sin embargo las calles de Iquitos parecen pertenecer a una zona de guerra. ¿Donde estan los recursos? Esa es la pregunta que SMBINRTV seguira haciendo. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
- 
+
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 5h', tipo:'respaldo' },
     { zona:'lima', cat:'LIMA', catClass:'cat-lima', titulo:'Caos en calles de Lima por paro de transportistas', resumen:'Los principales corredores viales amanecieron colapsados por la protesta del sector transporte.', cuerpoCompleto:`La Confederacion Nacional de Transportistas del Peru, liderada por su presidente, junto a gremios de transporte urbano e interprovincial de Lima y Callao, realizaron un paro nacional de 48 horas que paralizo el 70% del servicio de transporte publico en Lima y Callao, generando caos vehicular y afectando a mas de 2 millones de ciudadanos. El paro inicio el dia ${fechaHoy} a las 00:00 horas, tras el fracaso de las negociaciones con el Ministerio de Transportes y Comunicaciones (MTC) la noche anterior. Los principales puntos de concentracion fueron la Panamericana Norte, la Panamericana Sur, la Carretera Central, la Avenida Javier Prado y los terminales terrestres de Lima Norte, Sur y Este. Los transportistas exigen la derogatoria de la Ley 32108, que establece nuevas multas y sanciones para el transporte informal, ademas de exigir subsidio al combustible y reajuste de tarifas. La protesta se desarrollo con bloqueos intermittentes de vias, caravanas de vehiculos a baja velocidad y la suspension total del servicio en las rutas mas conflictivas. La Policia Nacional desplego 5,000 efectivos para mantener el orden.
- 
+
 Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. El paro de transportistas en Lima tiene repercusiones directas en Loreto y todas las regiones del pais. Los productos que llegan a Iquitos, Nauta, Requena y las demas provincias dependen del transporte terrestre que conecta con los puertos fluviales. Cada dia de paro en Lima significa retrasos en la llegada de medicamentos, alimentos procesados, combustible y otros productos esenciales para la Amazonia. El centralismo limeño una vez mas demuestra como las decisiones tomadas en la capital afectan la vida de millones de peruanos en las regiones. Exigimos al Gobierno central que escuche las demandas del sector transporte, pero tambien exigimos a los transportistas que no utilicen la protesta como arma de presion contra la poblacion civil. El dialogo debe ser la via principal de solucion. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
- 
+
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 1h', tipo:'respaldo' },
     { zona:'lima', cat:'POLITICA', catClass:'cat-lima', titulo:'Fiscalia investiga actos de corrupcion en municipios de Lima Norte', resumen:'Se abrieron carpetas fiscales contra funcionarios de tres distritos por presuntos desvios de recursos.', cuerpoCompleto:`La Fiscalia de la Nacion, a traves de la Fiscalia Especializada en Delitos de Corrupcion de Funcionarios, liderada por la fiscal provincial Marita Barreto, y el Equipo Especial de Fiscales contra la Corrupcion del Poder (EFICCOP), abrio carpetas de investigacion preliminar contra funcionarios y exfuncionarios de tres municipalidades de Lima Norte: Comas, Independencia y San Martin de Porres, por presuntos delitos de peculado, colusion y trafico de influencias. Las investigaciones fueron anunciadas el dia ${fechaHoy}, tras meses de trabajo de inteligencia financiera y seguimiento de movimientos bancarios sospechosos detectados por la Unidad de Inteligencia Financiera (UIF). Los presuntos actos de corrupcion ocurrieron en las municipalidades de Comas, Independencia y San Martin de Porres, durante el periodo 2020-2024, con desvios estimados en 45 millones de soles. Las investigaciones se iniciaron tras denuncias ciudadanas y el analisis de contratos irregulares en obras de infraestructura, adquisicion de bienes y servicios, y nombramientos de personal. La Fiscalia realizo allanamientos simultaneos en 15 inmuebles, incluyendo oficinas municipales, domicilios de los investigados y empresas vinculadas. Se incauto documentacion, equipos electronicos y evidencia financiera.
- 
+
 Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad periodistica que nos caracteriza. La corrupcion en las municipalidades no es exclusiva de Lima. En Loreto tambien existen denuncias similares que lamentablemente no reciben la misma atencion mediatica ni fiscal. En la region Loreto, los fondos del canon petrolero, los recursos del FONAVI y los proyectos de inversion publica han sido objeto de investigaciones que avanzan a paso lento. La Fiscalia de Loreto carece de recursos humanos y tecnologicos para investigar con la misma eficiencia que sus homologas de Lima. Exigimos paridad en la lucha contra la corrupcion. Los funcionarios corruptos de Loreto deben ser investigados con el mismo rigor que los de Lima. La poblacion de la Amazonia merece que sus recursos sean administrados con honestidad y transparencia. La poblacion de la region Amazonica debe mantenerse informada a traves de medios oficiales y verificados. En SMBINRTV nos comprometemos a traer la verdad con datos confirmados y fuentes verificables.
- 
+
 *Redaccion SMBINRTV Digital - ${fechaHoy}*`, imagen:'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=70', url:'#', fuente:'SMBINRTV', fecha:new Date().toISOString(), hace:'hace 4h', tipo:'respaldo' }
   ];
 }
- 
+
 // ===== FILTRAR Y RENDERIZAR =====
 function actualizarContadoresTabs() {
   const conteos = { todas: 0, nacional: 0, loreto: 0, lima: 0, mis: 0 };
@@ -1497,23 +1497,23 @@ function actualizarContadoresTabs() {
     }
   });
 }
- 
+
 function filtrarNoticias(zona, btn) {
   filtroActual = zona;
   document.querySelectorAll('.tab-modern').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   filtrarYRenderizar();
 }
- 
+
 function filtrarYRenderizar() {
   const grid = document.getElementById('diario-grid');
   const filtradas = filtroActual === 'todas' ? todasLasNoticias : todasLasNoticias.filter(n => n.zona === filtroActual);
- 
+
   if (filtradas.length === 0) {
     grid.innerHTML = '<p class="text-center w-100 py-5" style="color:var(--text-muted);"><i class="bi bi-inbox" style="font-size:3rem;"></i><br/><br/>No hay noticias en esta categoria.</p>';
     return;
   }
- 
+
   grid.innerHTML = filtradas.map((n, i) => {
     const idx = todasLasNoticias.indexOf(n);
     const t = escaparHTML(n.titulo);
@@ -1525,7 +1525,7 @@ function filtrarYRenderizar() {
                          (n.tipo === 'gnews' ? '<span class="source-badge badge-gnews"><i class="bi bi-clock-history"></i> 12h</span>' : 
                          (n.tipo === 'mis' ? '<span class="source-badge badge-manual"><i class="bi bi-person-fill"></i> Editorial</span>' : 
                          '<span class="source-badge badge-respaldo"><i class="bi bi-shield-fill"></i> SMBINRTV</span>'));
- 
+
     return `<div class="news-card-main" data-zona="${n.zona}">
       <div class="nc-img-wrap">
         <img src="${img}" alt="${t}" loading="lazy" onerror="this.src='https://picsum.photos/seed/${i}/600/400'" />
@@ -1547,7 +1547,7 @@ function filtrarYRenderizar() {
     </div>`;
   }).join('');
 }
- 
+
 // ===== VER NOTICIA COMPLETA =====
 function verNoticia(idx) {
   const n = todasLasNoticias[idx];
@@ -1555,15 +1555,15 @@ function verNoticia(idx) {
   const editada = noticiasEditadas[idx];
   const titulo = editada ? editada.titulo : n.titulo;
   const cuerpo = editada ? editada.cuerpo : (n.cuerpoCompleto || n.resumen || 'No hay contenido adicional disponible.');
- 
+
   document.getElementById('modal-titulo').textContent = titulo;
   const imgEl = document.getElementById('modal-img');
   if (n.imagen) { imgEl.src = n.imagen; imgEl.style.display = 'block'; }
   else { imgEl.style.display = 'none'; }
- 
+
   let cuerpoFormateado = escaparHTML(cuerpo)
     .replace(/\*\*ANALISIS SMBINRTV DIGITAL:\*\*/g, '<strong style="color:var(--primary);font-size:16px;display:block;margin:20px 0 10px;padding-bottom:8px;border-bottom:2px solid var(--primary);">📰 ANALISIS SMBINRTV DIGITAL</strong>');
- 
+
   document.getElementById('modal-cuerpo').innerHTML = `
     <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">
       <i class="bi bi-newspaper"></i> Fuente: ${escaparHTML(n.fuente)} &nbsp;·&nbsp;
@@ -1573,17 +1573,17 @@ function verNoticia(idx) {
     <div style="line-height:1.8;font-size:15.5px;color:var(--text);">${cuerpoFormateado.replace(/\n/g, '<br/>')}</div>
     ${n.url && n.url !== '#' ? `<p style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);"><a href="${n.url}" target="_blank" style="color:var(--primary);font-weight:700;font-size:14px;text-decoration:none;"><i class="bi bi-box-arrow-up-right"></i> Ver noticia original en la fuente</a></p>` : ''}
   `;
- 
+
   document.getElementById('modal-share-btns').innerHTML = botonesCompartir(titulo, n.url, idx);
   abrirModal('modalNoticia');
 }
- 
+
 function verNoticiaHero(idx) {
   if (idx < todasLasNoticias.length) {
     verNoticia(idx);
   }
 }
- 
+
 // ===== TEMA OSCURO/CLARO =====
 document.getElementById('themeToggle').addEventListener('click', () => {
   const body = document.body;
@@ -1596,10 +1596,10 @@ document.getElementById('themeToggle').addEventListener('click', () => {
     icon.className = 'bi bi-sun-fill';
   }
 });
- 
+
 // ===== FECHA =====
 document.getElementById('footer-year').textContent = new Date().getFullYear();
- 
+
 // ===== INICIALIZAR =====
 document.addEventListener('DOMContentLoaded', () => {
   cargarNoticiasGNews();
@@ -1607,4 +1607,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
- 
