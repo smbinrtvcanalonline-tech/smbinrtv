@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMBINRTV — Panel de Noticias</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; min-height: 100vh; }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #c0392b, #922b21);
+    padding: 16px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(192,57,43,0.4);
+  }
+  header h1 { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+  header span { font-size: 13px; opacity: 0.8; background: rgba(255,255,255,0.15); padding: 5px 14px; border-radius: 20px; }
+
+  /* LAYOUT */
+  .container { max-width: 860px; margin: 40px auto; padding: 0 20px; }
+
+  /* FORM CARD */
+  .card {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 36px;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+  .card h2 { font-size: 20px; margin-bottom: 28px; color: #e74c3c; display: flex; align-items: center; gap: 10px; }
+
+  /* CAMPOS */
+  .campo { margin-bottom: 22px; }
+  .campo label { display: block; font-size: 13px; font-weight: 600; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .campo input, .campo textarea, .campo select {
+    width: 100%;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 13px 16px;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .campo input:focus, .campo textarea:focus, .campo select:focus { border-color: #e74c3c; }
+  .campo textarea { min-height: 140px; resize: vertical; line-height: 1.6; }
+  .campo select option { background: #1a1a1a; }
+
+  /* UPLOAD MEDIA */
+  .upload-area {
+    border: 2px dashed #333;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .upload-area:hover { border-color: #e74c3c; background: rgba(231,76,60,0.05); }
+  .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .upload-area .icon { font-size: 40px; margin-bottom: 10px; }
+  .upload-area p { color: #888; font-size: 14px; }
+  .upload-area p span { color: #e74c3c; font-weight: 600; }
+  #preview-container { margin-top: 16px; display: none; }
+  #preview-container img, #preview-container video {
+    max-width: 100%; max-height: 200px;
+    border-radius: 10px; border: 1px solid #333;
+  }
+  #nombre-archivo { margin-top: 8px; font-size: 13px; color: #e74c3c; }
+
+  /* BOTÓN */
+  .btn-publicar {
+    width: 100%;
+    background: linear-gradient(135deg, #c0392b, #e74c3c);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+  .btn-publicar:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(231,76,60,0.4); }
+  .btn-publicar:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* PROGRESO */
+  .progreso-bar {
+    display: none;
+    background: #111;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 16px;
+    height: 8px;
+  }
+  .progreso-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #c0392b, #e74c3c);
+    border-radius: 10px;
+    transition: width 0.3s;
+    width: 0%;
+  }
+
+  /* MENSAJE */
+  .mensaje {
+    display: none;
+    margin-top: 20px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .mensaje.ok { background: rgba(39,174,96,0.15); border: 1px solid #27ae60; color: #2ecc71; }
+  .mensaje.error { background: rgba(231,76,60,0.15); border: 1px solid #e74c3c; color: #e74c3c; }
+
+  /* LISTA NOTICIAS */
+  .card-lista { margin-top: 40px; }
+  .card-lista h2 { font-size: 18px; color: #e74c3c; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .noticia-item {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .noticia-thumb {
+    width: 70px; height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #222;
+  }
+  .noticia-info h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .noticia-info p { font-size: 12px; color: #888; }
+  .noticia-badge {
+    font-size: 11px; padding: 3px 10px;
+    border-radius: 20px; background: rgba(231,76,60,0.2);
+    color: #e74c3c; font-weight: 600;
+    margin-left: auto; white-space: nowrap;
+  }
+  .sin-noticias { color: #555; text-align: center; padding: 30px; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📡 SMBINRTV</h1>
+  <span>Panel de Noticias</span>
+</header>
+
+<div class="container">
+
+  <!-- FORMULARIO -->
+  <div class="card">
+    <h2>📝 Publicar nueva noticia</h2>
+
+    <div class="campo">
+      <label>Título de la noticia *</label>
+      <input type="text" id="titulo" placeholder="Escribe el título aquí..." />
+    </div>
+
+    <div class="campo">
+      <label>Categoría *</label>
+      <select id="categoria">
+        <option value="">— Selecciona una categoría —</option>
+        <option value="Locales">Locales</option>
+        <option value="Política">Política</option>
+        <option value="Policiales">Policiales</option>
+        <option value="Deportes">Deportes</option>
+        <option value="Economía">Economía</option>
+        <option value="Salud">Salud</option>
+        <option value="Educación">Educación</option>
+        <option value="Cultura">Cultura</option>
+        <option value="Nacional">Nacional</option>
+        <option value="Internacional">Internacional</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Resumen (se muestra en la portada) *</label>
+      <textarea id="resumen" rows="3" placeholder="Escribe un resumen corto de la noticia..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label>Cuerpo completo de la noticia *</label>
+      <textarea id="cuerpo" placeholder="Escribe aquí el texto completo de la noticia..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label>Autor</label>
+      <input type="text" id="autor" placeholder="Ej: Redacción SMBINRTV" value="Redacción SMBINRTV" />
+    </div>
+
+    <div class="campo">
+      <label>Imagen o Video de la noticia</label>
+      <div class="upload-area" id="upload-area">
+        <input type="file" id="archivo-media" accept="image/*,video/mp4,video/webm" />
+        <div class="icon">📷</div>
+        <p>Arrastra tu imagen o video aquí<br>o <span>haz clic para seleccionar</span></p>
+        <p style="margin-top:8px; font-size:12px; color:#555;">JPG, PNG, GIF, MP4 — máx. 50MB</p>
+      </div>
+      <div id="preview-container">
+        <img id="preview-img" style="display:none" />
+        <video id="preview-video" controls style="display:none"></video>
+        <p id="nombre-archivo"></p>
+      </div>
+    </div>
+
+    <button class="btn-publicar" id="btn-publicar" onclick="publicarNoticia()">
+      🚀 Publicar Noticia
+    </button>
+
+    <div class="progreso-bar" id="progreso-bar">
+      <div class="progreso-fill" id="progreso-fill"></div>
+    </div>
+
+    <div class="mensaje" id="mensaje"></div>
+  </div>
+
+  <!-- LISTA DE NOTICIAS -->
+  <div class="card card-lista">
+    <h2>📰 Noticias publicadas</h2>
+    <div id="lista-noticias">
+      <p class="sin-noticias">Cargando noticias...</p>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, orderBy, query, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+// ── Firebase config ──
+const firebaseConfig = {
+  apiKey: "AIzaSyAMKZ1an2qj7i1Imb6QK2GY_zbxb6aTqSg",
+  authDomain: "smbinrtv-diario.firebaseapp.com",
+  projectId: "smbinrtv-diario",
+  storageBucket: "smbinrtv-diario.firebasestorage.app",
+  messagingSenderId: "893568788949",
+  appId: "1:893568788949:web:07f06830a9a4f3716e355c"
+};
+const app     = initializeApp(firebaseConfig);
+const db      = getFirestore(app);
+const storage = getStorage(app);
+
+// ── Preview de imagen/video ──
+document.getElementById('archivo-media').addEventListener('change', function() {
+  const archivo = this.files[0];
+  if (!archivo) return;
+  const previewContainer = document.getElementById('preview-container');
+  const previewImg   = document.getElementById('preview-img');
+  const previewVideo = document.getElementById('preview-video');
+  previewContainer.style.display = 'block';
+  document.getElementById('nombre-archivo').textContent = '📎 ' + archivo.name;
+  if (archivo.type.startsWith('image/')) {
+    previewImg.src = URL.createObjectURL(archivo);
+    previewImg.style.display = 'block';
+    previewVideo.style.display = 'none';
+  } else {
+    previewVideo.src = URL.createObjectURL(archivo);
+    previewVideo.style.display = 'block';
+    previewImg.style.display = 'none';
+  }
+});
+
+// ── Publicar noticia ──
+window.publicarNoticia = async function() {
+  const titulo    = document.getElementById('titulo').value.trim();
+  const categoria = document.getElementById('categoria').value;
+  const resumen   = document.getElementById('resumen').value.trim();
+  const cuerpo    = document.getElementById('cuerpo').value.trim();
+  const autor     = document.getElementById('autor').value.trim() || 'Redacción SMBINRTV';
+  const archivo   = document.getElementById('archivo-media').files[0];
+
+  if (!titulo || !categoria || !resumen || !cuerpo) {
+    mostrarMensaje('⚠️ Completa todos los campos obligatorios.', 'error');
+    return;
+  }
+
+  const btn = document.getElementById('btn-publicar');
+  btn.disabled = true;
+  btn.textContent = '⏳ Publicando...';
+  document.getElementById('progreso-bar').style.display = 'block';
+
+  try {
+    let mediaURL  = '';
+    let mediaType = '';
+
+    if (archivo) {
+      // Subir imagen/video a Firebase Storage
+      const storageRef = ref(storage, `noticias/${Date.now()}_${archivo.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, archivo);
+
+      await new Promise((resolve, reject) => {
+        uploadTask.on('state_changed',
+          (snap) => {
+            const pct = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
+            document.getElementById('progreso-fill').style.width = pct + '%';
+          },
+          reject,
+          async () => {
+            mediaURL  = await getDownloadURL(uploadTask.snapshot.ref);
+            mediaType = archivo.type;
+            resolve();
+          }
+        );
+      });
+    }
+
+    // Guardar noticia en Firestore
+    await addDoc(collection(db, 'noticias'), {
+      titulo, categoria, resumen, cuerpo, autor,
+      mediaURL, mediaType,
+      fecha: serverTimestamp(),
+      activa: true,
+      vistas: 0
+    });
+
+    mostrarMensaje('✅ ¡Noticia publicada exitosamente!', 'ok');
+    limpiarFormulario();
+    cargarNoticias();
+
+  } catch (err) {
+    console.error(err);
+    mostrarMensaje('❌ Error al publicar: ' + err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '🚀 Publicar Noticia';
+    document.getElementById('progreso-fill').style.width = '0%';
+  }
+};
+
+// ── Cargar noticias ──
+async function cargarNoticias() {
+  const lista = document.getElementById('lista-noticias');
+  try {
+    const q    = query(collection(db, 'noticias'), orderBy('fecha', 'desc'));
+    const snap = await getDocs(q);
+    if (snap.empty) {
+      lista.innerHTML = '<p class="sin-noticias">Aún no hay noticias publicadas.</p>';
+      return;
+    }
+    lista.innerHTML = snap.docs.map(doc => {
+      const d   = doc.data();
+      const img = d.mediaURL && d.mediaType && d.mediaType.startsWith('image/')
+        ? `<img class="noticia-thumb" src="${d.mediaURL}" alt="">`
+        : `<div class="noticia-thumb" style="display:flex;align-items:center;justify-content:center;font-size:22px;">📰</div>`;
+      const fecha = d.fecha ? new Date(d.fecha.seconds * 1000).toLocaleDateString('es-PE', { day:'2-digit', month:'short', year:'numeric' }) : 'Sin fecha';
+      return `
+        <div class="noticia-item">
+          ${img}
+          <div class="noticia-info">
+            <h3>${d.titulo}</h3>
+            <p>${fecha} · ${d.autor}</p>
+          </div>
+          <span class="noticia-badge">${d.categoria}</span>
+        </div>`;
+    }).join('');
+  } catch (e) {
+    lista.innerHTML = '<p class="sin-noticias">Error al cargar noticias.</p>';
+  }
+}
+
+function limpiarFormulario() {
+  ['titulo','resumen','cuerpo'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('categoria').value = '';
+  document.getElementById('autor').value = 'Redacción SMBINRTV';
+  document.getElementById('archivo-media').value = '';
+  document.getElementById('preview-container').style.display = 'none';
+}
+
+function mostrarMensaje(texto, tipo) {
+  const m = document.getElementById('mensaje');
+  m.textContent = texto;
+  m.className   = 'mensaje ' + tipo;
+  m.style.display = 'block';
+  setTimeout(() => m.style.display = 'none', 5000);
+}
+
+cargarNoticias();
+</script>
+</body>
+</html>
