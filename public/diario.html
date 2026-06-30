@@ -1048,10 +1048,22 @@ const firebaseConfig = {
   messagingSenderId: "893568788949",
   appId: "1:893568788949:web:07f06830a9a4f3716e355c"
 };
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+var db = null;
+var firebaseOK = false;
+try {
+  if (typeof firebase === 'undefined') {
+    throw new Error('La librería de Firebase no se cargó (revisa tu conexión o un bloqueador de anuncios/scripts).');
+  }
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+  firebaseOK = true;
+} catch (e) {
+  console.error('⚠️ Firebase no se pudo inicializar:', e.message);
+  firebaseOK = false;
+}
 
 async function cargarDesdeFirebase() {
+  if (!firebaseOK) { console.warn('Firebase no disponible, omitiendo carga de noticias propias.'); return []; }
   try {
     const snap = await db.collection('noticias')
       .orderBy('fecha', 'desc')
@@ -1643,6 +1655,7 @@ function filtrarYRenderizar() {
 // ===== ELIMINAR NOTICIA (solo con clave) =====
 async function eliminarNoticia(firebaseId, event) {
   if (event) event.stopPropagation();
+  if (!firebaseOK) { alert('⚠️ No se pudo conectar con la base de datos. Recarga la página e intenta de nuevo.'); return; }
   const pass = prompt('🔒 Para eliminar esta noticia, ingresa la clave editorial:');
   if (pass === null) return;
   if (pass !== PASSWORD_EDITOR) { alert('❌ Clave incorrecta. No se eliminó la noticia.'); return; }
@@ -1821,6 +1834,7 @@ function previsualizarRapido(input) {
 }
 
 async function publicarRapido() {
+  if (!firebaseOK) { alert('⚠️ No se pudo conectar con la base de datos. Recarga la página e intenta de nuevo.'); return; }
   const titulo    = document.getElementById('r-titulo').value.trim();
   const cat       = document.getElementById('r-categoria').value;
   const resumen   = document.getElementById('r-resumen').value.trim();
@@ -2045,6 +2059,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Cargar noticia destacada en hero desde Firebase
 async function cargarDestacadaHero() {
+  if (!firebaseOK) return;
   try {
     const snap = await db.collection('noticias')
       .where('destacada', '==', true)
