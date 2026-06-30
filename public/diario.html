@@ -1046,7 +1046,6 @@ const db = firebase.firestore();
 async function cargarDesdeFirebase() {
   try {
     const snap = await db.collection('noticias')
-      .where('activa', '==', true)
       .orderBy('fecha', 'desc')
       .limit(20)
       .get();
