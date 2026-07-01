@@ -377,8 +377,6 @@
     .btn-share-fb { background:#1877f2; color:#fff; }
     .btn-share-wa { background:#25d366; color:#fff; }
     .btn-share-x { background:#000; color:#fff; }
-    .btn-share-all { background:var(--accent); color:#000; font-weight:600; border:none; }
-    .btn-share-all:hover { opacity:.9; transform:scale(1.05); }
     .source-badge {
       font-size:10px;
       padding:3px 10px;
@@ -1255,76 +1253,22 @@ function obtenerDatosVerificables(categoria, zona) {
   return base;
 }
   // ===== COMPARTIR EN REDES =====
-// ===== FUNCIONES DE COMPARTIR - REDES VERIFICADAS =====
-// Solo las redes que REALMENTE funcionan para compartir noticias
-
 function compartirFB(titulo, url) {
   const u = encodeURIComponent(url || PORTAL_URL);
   const t = encodeURIComponent(titulo + ' - SMBINRTV');
   window.open('https://www.facebook.com/sharer/sharer.php?u=' + u + '&quote=' + t, '_blank');
 }
-
 function compartirWA(titulo, url) {
   const txt = encodeURIComponent('📰 ' + titulo + '\n\n🔴 Lee mas en SMBINRTV: ' + (url || PORTAL_URL));
   window.open('https://wa.me/?text=' + txt, '_blank');
 }
-
 function compartirTW(titulo, url) {
   const t = encodeURIComponent('📰 ' + titulo + ' - @SMBINRTV');
   const u = encodeURIComponent(url || PORTAL_URL);
   window.open('https://twitter.com/intent/tweet?text=' + t + '&url=' + u, '_blank');
 }
-
-// Copiar al portapapeles
-function copiarAlPortapapeles(texto, btn) {
-  navigator.clipboard.writeText(texto).then(() => {
-    const original = btn.innerHTML;
-    btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> ¡Copiado!';
-    btn.style.background = 'var(--success)';
-    setTimeout(() => {
-      btn.innerHTML = original;
-      btn.style.background = '';
-    }, 2000);
-  }).catch(err => {
-    alert('Error al copiar: ' + err);
-  });
-}
-
-// Modal de compartir - SOLO REDES VERIFICADAS
-function abrirModalCompartirTodo(titulo, url, idx) {
-  document.getElementById('compartir-titulo-modal').textContent = titulo;
-  document.getElementById('compartir-url-modal').value = url || PORTAL_URL;
-  document.getElementById('compartir-preview').innerHTML = `
-    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px;">
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;"><i class="bi bi-link-45deg"></i> Vista previa:</p>
-      <div style="background:var(--bg);padding:12px;border-radius:6px;border-left:4px solid var(--primary);">
-        <p style="font-weight:600;margin-bottom:8px;color:var(--text);">${escaparHTML(titulo)}</p>
-        <p style="font-size:12px;color:var(--text-muted);">${url || PORTAL_URL}</p>
-      </div>
-    </div>
-  `;
-  
-  document.getElementById('botones-compartir-modal').innerHTML = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
-      <button class="btn btn-primary" onclick="compartirFB('${titulo.replace(/'/g, "\\'")}','${(url || PORTAL_URL).replace(/'/g, "\\'")}')">
-        <i class="bi bi-facebook"></i> Facebook
-      </button>
-      <button class="btn btn-success" onclick="compartirWA('${titulo.replace(/'/g, "\\'")}','${(url || PORTAL_URL).replace(/'/g, "\\'")}')">
-        <i class="bi bi-whatsapp"></i> WhatsApp
-      </button>
-      <button class="btn btn-dark" onclick="compartirTW('${titulo.replace(/'/g, "\\'")}','${(url || PORTAL_URL).replace(/'/g, "\\'")}')">
-        <i class="bi bi-twitter-x"></i> X/Twitter
-      </button>
-      <button class="btn" style="background:#2980b9;color:#fff;" onclick="copiarAlPortapapeles('${(url || PORTAL_URL).replace(/'/g, "\\'")}',${"this"})">
-        <i class="bi bi-clipboard-check"></i> Copiar Link
-      </button>
-    </div>
-    <p style="font-size:12px;color:var(--text-muted);text-align:center;padding:12px;background:var(--bg);border-radius:6px;">
-      <i class="bi bi-info-circle"></i> Haz clic en tu red favorita — se abrirá con el texto ya listo para publicar
-    </p>
-  `;
-  
-  abrirModal('modalCompartirTodo');
+function compartirIG(titulo) {
+  alert('Para compartir en Instagram:\n1. Copia el enlace: ' + PORTAL_URL + '\n2. Pegalo en tu historia o bio.\n\nNoticia: ' + titulo);
 }
 
 function botonesCompartir(titulo, url, idx) {
@@ -1332,8 +1276,7 @@ function botonesCompartir(titulo, url, idx) {
   const u = url ? escaparHTML(url).replace(/'/g, "\\'") : '';
   return `<button class="btn-nc btn-share-fb" onclick="compartirFB('${t}','${u}')"><i class="bi bi-facebook"></i></button>
 <button class="btn-nc btn-share-wa" onclick="compartirWA('${t}','${u}')"><i class="bi bi-whatsapp"></i></button>
-<button class="btn-nc btn-share-x" onclick="compartirTW('${t}','${u}')"><i class="bi bi-twitter-x"></i></button>
-<button class="btn-nc btn-share-all" onclick="abrirModalCompartirTodo('${t}','${u}',${idx})" style="background:var(--accent);color:#000;"><i class="bi bi-share-fill"></i></button>`;
+<button class="btn-nc btn-share-x" onclick="compartirTW('${t}','${u}')"><i class="bi bi-twitter-x"></i></button>`;
 }
 
 // ===== PANEL FUENTES INTERNAS - PROTEGIDO =====
@@ -2313,43 +2256,6 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
     <div id="ed-msg" style="display:none;padding:12px;border-radius:8px;font-weight:600;text-align:center;margin:12px 0;"></div>
     <button class="btn-admin w-100" id="btn-ed-guardar" style="background:#2980b9;color:#fff;font-size:16px;padding:14px;" onclick="guardarEdicionNoticia()"><i class="bi bi-save"></i> GUARDAR CAMBIOS</button>
-  </div>
-</div>
-
-<!-- MODAL: COMPARTIR EN REDES SOCIALES -->
-<div class="modal-overlay" id="modalCompartirTodo" onclick="if(event.target===this)cerrarModal('modalCompartirTodo')" style="z-index:9999;">
-  <div class="modal-box" style="max-width:600px;">
-    <button class="modal-close" onclick="cerrarModal('modalCompartirTodo')">×</button>
-    <h3 style="color:var(--primary);">
-      <i class="bi bi-share2"></i> Compartir en Redes Sociales
-    </h3>
-    
-    <div style="padding:16px;background:var(--bg);border-radius:8px;margin-bottom:16px;">
-      <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;"><i class="bi bi-pin-fill"></i> <strong>Noticia:</strong></p>
-      <h4 id="compartir-titulo-modal" style="margin:0;font-size:15px;line-height:1.4;"></h4>
-    </div>
-    
-    <div id="compartir-preview"></div>
-    
-    <div style="background:var(--bg);padding:12px;border-radius:8px;margin-bottom:16px;">
-      <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;"><i class="bi bi-link-45deg"></i> <strong>Enlace:</strong></p>
-      <div style="display:flex;gap:8px;">
-        <input type="text" id="compartir-url-modal" class="form-control" readonly style="font-size:12px;" />
-        <button class="btn btn-sm btn-success" onclick="copiarAlPortapapeles(document.getElementById('compartir-url-modal').value,this)">
-          <i class="bi bi-clipboard-check"></i> Copiar
-        </button>
-      </div>
-    </div>
-    
-    <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;text-align:center;">
-      <i class="bi bi-star-fill" style="color:var(--accent);"></i> Haz clic para compartir directamente en cada red
-    </p>
-    
-    <div id="botones-compartir-modal"></div>
-    
-    <button class="btn btn-outline-secondary w-100 mt-2" onclick="cerrarModal('modalCompartirTodo')">
-      Cerrar
-    </button>
   </div>
 </div>
 
