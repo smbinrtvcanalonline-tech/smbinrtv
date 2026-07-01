@@ -1411,86 +1411,103 @@ async function cargarNoticiasGNews() {
   btn.innerHTML = '<span class="spinner"></span> Cargando...';
   grid.innerHTML = '<p class="text-center w-100 py-5" style="color:var(--text-muted);"><span class="spinner" style="border-color:var(--primary);border-top-color:transparent;"></span><br/>Cargando noticias profesionales...</p>';
 
+  // Siempre vuelve a mostrar "Todas" para no quedar atascado en una categoria vacia
+  filtroActual = 'todas';
+  document.querySelectorAll('.tab-modern').forEach(t => t.classList.remove('active'));
+  const tabTodas = document.querySelector('.tab-modern[data-zona="todas"]');
+  if (tabTodas) tabTodas.classList.add('active');
+
   let noticias = [];
 
-  // CARGAR NOTICIAS DE FIREBASE PRIMERO
-  const noticiasFirebase = await cargarDesdeFirebase();
+  try {
+    // CARGAR NOTICIAS DE FIREBASE PRIMERO
+    let noticiasFirebase = await cargarDesdeFirebase();
+    // Descartar cualquier documento sin titulo (registros danados/incompletos)
+    noticiasFirebase = noticiasFirebase.filter(n => n && n.titulo && n.titulo.trim().length > 0);
 
-  // INTENTAR CURRENTS API PRIMERO
-  if (CURRENTS_API_KEY && CURRENTS_API_KEY !== 'TU_API_KEY_DE_CURRENTS_AQUI') {
-    try {
-      noticias = await cargarDesdeCurrents();
-      if (noticias.length > 0) {
-        fuenteActiva = 'currents';
-        console.log('✅ Currents API - ' + noticias.length + ' noticias');
-      }
-    } catch (e) { console.warn('⚠️ Currents fallo:', e); }
-  }
-
-  // SI FALLA, INTENTAR GNEWS
-  if (noticias.length === 0) {
-    try {
-      noticias = await cargarDesdeGNews();
-      if (noticias.length > 0) {
-        fuenteActiva = 'gnews';
-        console.log('✅ GNews API (respaldo) - ' + noticias.length + ' noticias');
-      }
-    } catch (e) { console.warn('⚠️ GNews tambien fallo:', e); }
-  }
-
-  // SI AMBAS FALLAN, USAR RESPALDO LOCAL
-  if (noticias.length === 0) {
-    console.log('📋 Usando noticias de respaldo...');
-    noticias = noticiasRespaldo();
-    fuenteActiva = 'respaldo';
-  }
-
-  // GENERAR CUERPO PROFESIONAL PARA CADA NOTICIA
-  noticias.forEach(n => {
-    if (!n.cuerpoCompleto || contarPalabras(n.cuerpoCompleto) < 200) {
-      n.cuerpoCompleto = generarNoticiaProfesional(n.titulo, n.resumen, n.fuente, n.cat, n.zona);
+    // INTENTAR CURRENTS API PRIMERO
+    if (CURRENTS_API_KEY && CURRENTS_API_KEY !== 'TU_API_KEY_DE_CURRENTS_AQUI') {
+      try {
+        noticias = await cargarDesdeCurrents();
+        if (noticias.length > 0) {
+          fuenteActiva = 'currents';
+          console.log('✅ Currents API - ' + noticias.length + ' noticias');
+        }
+      } catch (e) { console.warn('⚠️ Currents fallo:', e); }
     }
-  });
 
-  todasLasNoticias = [...noticiasFirebase, ...noticias];
+    // SI FALLA, INTENTAR GNEWS
+    if (noticias.length === 0) {
+      try {
+        noticias = await cargarDesdeGNews();
+        if (noticias.length > 0) {
+          fuenteActiva = 'gnews';
+          console.log('✅ GNews API (respaldo) - ' + noticias.length + ' noticias');
+        }
+      } catch (e) { console.warn('⚠️ GNews tambien fallo:', e); }
+    }
 
-  // AGREGAR NOTICIAS PROPIAS DEL USUARIO
-  noticiasMis.forEach(n => {
-    const zonaKey = n.zona === 'Lima' ? 'lima' : (n.zona === 'Nacional' ? 'nacional' : 'loreto');
-    const cuerpoManual = n.cuerpo.length > 200 ? n.cuerpo : generarNoticiaProfesional(n.titulo, n.cuerpo, 'SMBINRTV', 'MIS NOTICIAS', zonaKey);
+    // SI AMBAS FALLAN, USAR RESPALDO LOCAL
+    if (noticias.length === 0) {
+      console.log('📋 Usando noticias de respaldo...');
+      noticias = noticiasRespaldo();
+      fuenteActiva = 'respaldo';
+    }
 
-    todasLasNoticias.push({
-      zona: zonaKey,
-      cat: 'MIS NOTICIAS',
-      catClass: 'cat-mis',
-      titulo: n.titulo,
-      resumen: n.cuerpo.substring(0, 200) + (n.cuerpo.length > 200 ? '...' : ''),
-      cuerpoCompleto: cuerpoManual,
-      imagen: n.imagen || `https://picsum.photos/seed/${encodeURIComponent(n.titulo).substring(0,10)}/600/400`,
-      url: PORTAL_URL,
-      fuente: 'SMBINRTV',
-      fecha: n.fecha,
-      hace: tiempoRelativo(n.fecha),
-      tipo: 'mis'
+    // GENERAR CUERPO PROFESIONAL PARA CADA NOTICIA
+    noticias.forEach(n => {
+      if (!n.cuerpoCompleto || contarPalabras(n.cuerpoCompleto) < 200) {
+        n.cuerpoCompleto = generarNoticiaProfesional(n.titulo, n.resumen, n.fuente, n.cat, n.zona);
+      }
     });
-  });
 
-  actualizarContadoresTabs();
-  filtrarYRenderizar();
+    todasLasNoticias = [...noticiasFirebase, ...noticias];
 
-  const ahora = new Date().toLocaleTimeString('es-PE');
-  const fuenteLabel = fuenteActiva === 'currents' ? 'Currents API (tiempo real)' : 
-                      (fuenteActiva === 'gnews' ? 'GNews API (retraso 12h)' : 'Noticias de respaldo');
-  document.getElementById('ultima-actualizacion').innerHTML = `${ahora} <span style="color:var(--primary);">· ${fuenteLabel}</span>`;
+    // AGREGAR NOTICIAS PROPIAS DEL USUARIO (sistema antiguo local, si existiera)
+    noticiasMis.forEach(n => {
+      const zonaKey = n.zona === 'Lima' ? 'lima' : (n.zona === 'Nacional' ? 'nacional' : 'loreto');
+      const cuerpoManual = n.cuerpo.length > 200 ? n.cuerpo : generarNoticiaProfesional(n.titulo, n.cuerpo, 'SMBINRTV', 'MIS NOTICIAS', zonaKey);
 
-  if (noticias.length > 0) {
-    const titulares = noticias.slice(0, 5).map(n => n.titulo).join(' · ');
-    document.getElementById('ticker-text').textContent = titulares;
+      todasLasNoticias.push({
+        zona: zonaKey,
+        cat: 'MIS NOTICIAS',
+        catClass: 'cat-mis',
+        titulo: n.titulo,
+        resumen: n.cuerpo.substring(0, 200) + (n.cuerpo.length > 200 ? '...' : ''),
+        cuerpoCompleto: cuerpoManual,
+        imagen: n.imagen || `https://picsum.photos/seed/${encodeURIComponent(n.titulo).substring(0,10)}/600/400`,
+        url: PORTAL_URL,
+        fuente: 'SMBINRTV',
+        fecha: n.fecha,
+        hace: tiempoRelativo(n.fecha),
+        tipo: 'mis'
+      });
+    });
+
+    actualizarContadoresTabs();
+    filtrarYRenderizar();
+
+    const ahora = new Date().toLocaleTimeString('es-PE');
+    const fuenteLabel = fuenteActiva === 'currents' ? 'Currents API (tiempo real)' :
+                        (fuenteActiva === 'gnews' ? 'GNews API (retraso 12h)' : 'Noticias de respaldo');
+    document.getElementById('ultima-actualizacion').innerHTML = `${ahora} <span style="color:var(--primary);">· ${fuenteLabel}</span>`;
+
+    if (noticias.length > 0) {
+      const titulares = noticias.slice(0, 5).map(n => n.titulo).join(' · ');
+      document.getElementById('ticker-text').textContent = titulares;
+    }
+  } catch (e) {
+    console.error('❌ Error inesperado cargando noticias:', e);
+    // Red de seguridad: nunca dejar la pantalla en blanco
+    todasLasNoticias = noticiasRespaldo();
+    filtroActual = 'todas';
+    filtrarYRenderizar();
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Actualizar Noticias';
   }
-
-  btn.disabled = false;
-  btn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Actualizar Noticias';
 }
+
 
 // ===== CURRENTS API =====
 async function cargarDesdeCurrents() {
@@ -1591,17 +1608,26 @@ Desde SMBINRTV Canal Online analizamos esta informacion con la responsabilidad p
 }
 
 // ===== FILTRAR Y RENDERIZAR =====
+const TAB_LABELS = {
+  todas: { icon: 'bi-grid', text: 'Todas' },
+  loreto: { icon: 'bi-geo-alt', text: 'Loreto' },
+  nacional: { icon: 'bi-flag', text: 'Nacional' },
+  lima: { icon: 'bi-building', text: 'Lima' },
+  mis: { icon: 'bi-pencil', text: 'Mis Noticias' }
+};
+
 function actualizarContadoresTabs() {
   const conteos = { todas: 0, nacional: 0, loreto: 0, lima: 0, mis: 0 };
   todasLasNoticias.forEach(n => { conteos.todas++; if (conteos[n.zona] !== undefined) conteos[n.zona]++; });
   document.querySelectorAll('.tab-modern').forEach(tab => {
     const z = tab.dataset.zona;
-    if (z && conteos[z] !== undefined) {
-      const baseText = tab.innerHTML.split('<')[0].trim();
-      tab.innerHTML = baseText + (conteos[z] > 0 ? ' (' + conteos[z] + ')' : '');
+    const label = TAB_LABELS[z];
+    if (z && label && conteos[z] !== undefined) {
+      tab.innerHTML = `<i class="bi ${label.icon}"></i> ${label.text}` + (conteos[z] > 0 ? ' (' + conteos[z] + ')' : '');
     }
   });
 }
+
 
 function filtrarNoticias(zona, btn) {
   filtroActual = zona;
