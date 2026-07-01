@@ -881,10 +881,11 @@
         <div class="footer-brand">SMBIN<span>RTV</span></div>
         <p class="footer-desc">Portal de noticias regional comprometido con la verdad, la investigacion y la transparencia. Informamos con responsabilidad desde la Amazonia peruana.</p>
         <div class="footer-social">
-          <a href="https://www.facebook.com/smbinrtv" target="_blank"><i class="bi bi-facebook"></i></a>
-          <a href="https://www.youtube.com/smbinrtv" target="_blank"><i class="bi bi-youtube"></i></a>
-          <a href="https://www.twitter.com/smbinrtv" target="_blank"><i class="bi bi-twitter-x"></i></a>
-          <a href="https://www.instagram.com/smbinrtv" target="_blank"><i class="bi bi-instagram"></i></a>
+          <a href="https://web.facebook.com/SMBINTelevision/?locale=es_LA" target="_blank"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.youtube.com/@SmbinrtvCanalonline" target="_blank"><i class="bi bi-youtube"></i></a>
+          <a href="https://www.tiktok.com/@smbinrtvcanal" target="_blank"><i class="bi bi-tiktok"></i></a>
+          <a href="https://x.com/SmbinrtvC26838" target="_blank"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://www.instagram.com/smbinrtvcanalonline/" target="_blank"><i class="bi bi-instagram"></i></a>
           <a href="https://wa.me/51975367559" target="_blank"><i class="bi bi-whatsapp"></i></a>
         </div>
       </div>
@@ -1646,6 +1647,7 @@ function filtrarYRenderizar() {
         <div class="nc-actions">
           <button class="btn-nc btn-read" onclick="verNoticia(${idx})"><i class="bi bi-book"></i> Leer completa</button>
           ${botonesCompartir(n.titulo, n.url, idx)}
+          ${n.firebaseId && editorAutenticado ? `<button class="btn-nc" style="background:#2980b9;color:#fff;" onclick="abrirEditarNoticia('${n.firebaseId}', event)" title="Editar esta noticia"><i class="bi bi-pencil-fill"></i> Editar</button>` : ''}
           ${n.firebaseId && editorAutenticado ? `<button class="btn-nc" style="background:#c0392b;color:#fff;" onclick="eliminarNoticia('${n.firebaseId}', event)" title="Eliminar esta noticia"><i class="bi bi-trash-fill"></i> Eliminar</button>` : ''}
         </div>
       </div>
@@ -1669,6 +1671,73 @@ async function eliminarNoticia(firebaseId, event) {
     cargarDestacadaHero();
   } catch (e) {
     alert('❌ Error al eliminar: ' + e.message);
+  }
+}
+
+// ===== EDITAR NOTICIA (solo con clave) =====
+async function abrirEditarNoticia(firebaseId, event) {
+  if (event) event.stopPropagation();
+  if (!firebaseOK) { alert('⚠️ No se pudo conectar con la base de datos. Recarga la página e intenta de nuevo.'); return; }
+  const pass = prompt('🔒 Para editar esta noticia, ingresa la clave editorial:');
+  if (pass === null) return;
+  if (pass !== PASSWORD_EDITOR) { alert('❌ Clave incorrecta.'); return; }
+
+  try {
+    const doc = await db.collection('noticias').doc(firebaseId).get();
+    if (!doc.exists) { alert('❌ Esta noticia ya no existe.'); return; }
+    const d = doc.data();
+    document.getElementById('ed-id').value = firebaseId;
+    document.getElementById('ed-titulo').value = d.titulo || '';
+    document.getElementById('ed-categoria').value = d.categoria || 'Locales';
+    document.getElementById('ed-resumen').value = d.resumen || '';
+    document.getElementById('ed-cuerpo').value = d.cuerpo || '';
+    document.getElementById('ed-imagen').value = d.mediaURL || '';
+    document.getElementById('ed-destacada').checked = !!d.destacada;
+    document.getElementById('ed-msg').style.display = 'none';
+    abrirModal('modalEditarNoticia');
+  } catch (e) {
+    alert('❌ Error al cargar la noticia: ' + e.message);
+  }
+}
+
+async function guardarEdicionNoticia() {
+  const firebaseId = document.getElementById('ed-id').value;
+  const titulo   = document.getElementById('ed-titulo').value.trim();
+  const cat      = document.getElementById('ed-categoria').value;
+  const resumen  = document.getElementById('ed-resumen').value.trim();
+  const cuerpo   = document.getElementById('ed-cuerpo').value.trim();
+  const imagen   = document.getElementById('ed-imagen').value.trim();
+  const destacada = document.getElementById('ed-destacada').checked;
+  const m = document.getElementById('ed-msg');
+
+  if (!titulo || !resumen || !cuerpo) {
+    m.textContent = '⚠️ Completa título, resumen y noticia.';
+    m.style.display = 'block'; m.style.background = 'rgba(230,126,34,.15)'; m.style.border = '1px solid #e67e22'; m.style.color = '#e67e22';
+    return;
+  }
+
+  const btn = document.getElementById('btn-ed-guardar');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ Guardando...';
+
+  try {
+    await db.collection('noticias').doc(firebaseId).update({
+      titulo, categoria: cat, resumen, cuerpo,
+      mediaURL: imagen, destacada
+    });
+    m.textContent = '✅ ¡Noticia actualizada!';
+    m.style.display = 'block'; m.style.background = 'rgba(39,174,96,.15)'; m.style.border = '1px solid #27ae60'; m.style.color = '#27ae60';
+    setTimeout(() => {
+      cerrarModal('modalEditarNoticia');
+      cargarNoticiasGNews();
+      cargarDestacadaHero();
+    }, 1200);
+  } catch (e) {
+    m.textContent = '❌ Error al guardar: ' + e.message;
+    m.style.display = 'block'; m.style.background = 'rgba(192,57,43,.15)'; m.style.border = '1px solid #c0392b'; m.style.color = '#c0392b';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="bi bi-save"></i> GUARDAR CAMBIOS';
   }
 }
 
@@ -2003,8 +2072,15 @@ function verificarPub() {
   } else { alert('❌ Contraseña incorrecta'); }
 }
 
-function cargarPublicidadForm() {
-  const pub = JSON.parse(localStorage.getItem('smbinrtv_publicidad') || '{}');
+
+async function cargarPublicidadForm() {
+  let pub = {};
+  try {
+    if (firebaseOK) {
+      const doc = await db.collection('config').doc('publicidad').get();
+      if (doc.exists) pub = doc.data() || {};
+    }
+  } catch(e) { console.log('Publicidad (form):', e.message); }
   [1,2,3].forEach(i => {
     const p = pub[i] || {};
     ['nombre','imagen','link','tel'].forEach(f => {
@@ -2015,7 +2091,7 @@ function cargarPublicidadForm() {
   aplicarPublicidad(pub);
 }
 
-function guardarPublicidad() {
+async function guardarPublicidad() {
   const pub = {};
   [1,2,3].forEach(i => {
     pub[i] = {
@@ -2025,15 +2101,24 @@ function guardarPublicidad() {
       tel:    document.getElementById('pub'+i+'-tel').value.trim()
     };
   });
-  localStorage.setItem('smbinrtv_publicidad', JSON.stringify(pub));
-  aplicarPublicidad(pub);
   const m = document.getElementById('pub-msg');
-  m.textContent = '✅ ¡Publicidad guardada y aplicada!';
-  m.style.display = 'block';
-  m.style.background = 'rgba(39,174,96,.15)';
-  m.style.border = '1px solid #27ae60';
-  m.style.color = '#27ae60';
-  setTimeout(() => { m.style.display = 'none'; cerrarModal('modalPublicidad'); }, 2000);
+  try {
+    if (!firebaseOK) throw new Error('Firebase no disponible');
+    await db.collection('config').doc('publicidad').set(pub);
+    aplicarPublicidad(pub);
+    m.textContent = '✅ ¡Publicidad guardada y visible para todos los visitantes!';
+    m.style.display = 'block';
+    m.style.background = 'rgba(39,174,96,.15)';
+    m.style.border = '1px solid #27ae60';
+    m.style.color = '#27ae60';
+    setTimeout(() => { m.style.display = 'none'; cerrarModal('modalPublicidad'); }, 2000);
+  } catch(e) {
+    m.textContent = '❌ No se pudo guardar (revisa tu conexión): ' + e.message;
+    m.style.display = 'block';
+    m.style.background = 'rgba(192,57,43,.15)';
+    m.style.border = '1px solid #c0392b';
+    m.style.color = '#c0392b';
+  }
 }
 
 function aplicarPublicidad(pub) {
@@ -2052,10 +2137,13 @@ function aplicarPublicidad(pub) {
   });
 }
 
-// Cargar publicidad al iniciar
-document.addEventListener('DOMContentLoaded', () => {
-  const pub = JSON.parse(localStorage.getItem('smbinrtv_publicidad') || '{}');
-  if (Object.keys(pub).length) aplicarPublicidad(pub);
+// Cargar publicidad al iniciar (desde Firestore, visible para todos)
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    if (!firebaseOK) return;
+    const doc = await db.collection('config').doc('publicidad').get();
+    if (doc.exists) aplicarPublicidad(doc.data() || {});
+  } catch(e) { console.log('Publicidad (visitante):', e.message); }
 });
 
 // Cargar noticia destacada en hero desde Firebase
@@ -2098,5 +2186,52 @@ document.addEventListener('DOMContentLoaded', () => {
   cargarDestacadaHero();
 });
 </script>
+<!-- MODAL EDITAR NOTICIA -->
+<div class="modal-overlay" id="modalEditarNoticia" onclick="if(event.target===this)cerrarModal('modalEditarNoticia')" style="z-index:9999;">
+  <div class="modal-box" style="max-width:700px;">
+    <button class="modal-close" onclick="cerrarModal('modalEditarNoticia')">×</button>
+    <h3 style="color:#2980b9;"><i class="bi bi-pencil-fill"></i> Editar Noticia</h3>
+    <input type="hidden" id="ed-id" />
+    <div class="form-group">
+      <label>Título *</label>
+      <input type="text" id="ed-titulo" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Categoría *</label>
+      <select id="ed-categoria" class="form-control">
+        <option value="Locales">Locales</option>
+        <option value="Política">Política</option>
+        <option value="Policiales">Policiales</option>
+        <option value="Deportes">Deportes</option>
+        <option value="Economía">Economía</option>
+        <option value="Salud">Salud</option>
+        <option value="Nacional">Nacional</option>
+        <option value="Internacional">Internacional</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Resumen (portada) *</label>
+      <textarea id="ed-resumen" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Noticia completa *</label>
+      <textarea id="ed-cuerpo" class="form-control" style="min-height:120px;"></textarea>
+    </div>
+    <div class="form-group">
+      <label>URL de imagen</label>
+      <input type="text" id="ed-imagen" class="form-control" placeholder="https://..." />
+    </div>
+    <div class="form-group" style="background:rgba(41,128,185,.08);border:1.5px solid #2980b9;border-radius:10px;padding:14px;">
+      <label style="color:#2980b9;font-weight:700;font-size:14px;">⭐ ¿Noticia Destacada?</label>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
+        <input type="checkbox" id="ed-destacada" style="width:20px;height:20px;cursor:pointer;" />
+        <span style="font-size:13px;">Aparece en el <strong>banner principal</strong> de la portada</span>
+      </div>
+    </div>
+    <div id="ed-msg" style="display:none;padding:12px;border-radius:8px;font-weight:600;text-align:center;margin:12px 0;"></div>
+    <button class="btn-admin w-100" id="btn-ed-guardar" style="background:#2980b9;color:#fff;font-size:16px;padding:14px;" onclick="guardarEdicionNoticia()"><i class="bi bi-save"></i> GUARDAR CAMBIOS</button>
+  </div>
+</div>
+
 </body>
 </html>
