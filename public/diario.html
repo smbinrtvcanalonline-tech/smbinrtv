@@ -1093,7 +1093,7 @@ async function cargarDesdeFirebase() {
         resumen: d.resumen || '',
         cuerpoCompleto: d.cuerpo || d.resumen || '',
         imagen: d.mediaURL || '',
-        url: PORTAL_URL,
+        url: PORTAL_URL + '/noticia/' + doc.id,
         fuente: d.autor || 'Redacción SMBINRTV',
         fecha: fechaObj.toISOString(),
         hace: tiempoRelativo(fechaObj.toISOString()),
@@ -1855,7 +1855,7 @@ function verNoticia(idx) {
       ${editada ? '<br/><span style="color:var(--success);font-weight:600;"><i class="bi bi-pencil-fill"></i> Esta noticia fue editada por el director editorial</span>' : ''}
     </p>
     <div style="line-height:1.8;font-size:15.5px;color:var(--text);">${cuerpoFormateado.replace(/\n/g, '<br/>')}</div>
-    ${n.url && n.url !== '#' ? `<p style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);"><a href="${n.url}" target="_blank" style="color:var(--primary);font-weight:700;font-size:14px;text-decoration:none;"><i class="bi bi-box-arrow-up-right"></i> Ver noticia original en la fuente</a></p>` : ''}
+    ${n.url && n.url !== '#' && n.tipo !== 'mis' ? `<p style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);"><a href="${n.url}" target="_blank" style="color:var(--primary);font-weight:700;font-size:14px;text-decoration:none;"><i class="bi bi-box-arrow-up-right"></i> Ver noticia original en la fuente</a></p>` : ''}
   `;
 
   document.getElementById('modal-share-btns').innerHTML = botonesCompartir(titulo, n.url, idx);
@@ -1884,9 +1884,48 @@ document.getElementById('themeToggle').addEventListener('click', () => {
 // ===== FECHA =====
 document.getElementById('footer-year').textContent = new Date().getFullYear();
 
+// ===== ABRIR NOTICIA DESDE ENLACE COMPARTIDO (?n=ID) =====
+async function abrirNoticiaDesdeURL() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('n');
+  if (!id) return;
+
+  let idx = todasLasNoticias.findIndex(n => n.firebaseId === id);
+
+  if (idx === -1 && firebaseOK) {
+    try {
+      const doc = await db.collection('noticias').doc(id).get();
+      if (doc.exists) {
+        const d = doc.data();
+        const fechaObj = d.fecha ? d.fecha.toDate() : new Date();
+        todasLasNoticias.unshift({
+          firebaseId: doc.id,
+          zona: mapearCategoria(d.categoria),
+          cat: (d.categoria || 'SMBINRTV').toUpperCase(),
+          catClass: 'cat-mis',
+          titulo: d.titulo || '',
+          resumen: d.resumen || '',
+          cuerpoCompleto: d.cuerpo || d.resumen || '',
+          imagen: d.mediaURL || '',
+          url: PORTAL_URL + '/noticia/' + doc.id,
+          fuente: d.autor || 'Redacción SMBINRTV',
+          fecha: fechaObj.toISOString(),
+          hace: tiempoRelativo(fechaObj.toISOString()),
+          destacada: !!d.destacada,
+          tipo: 'mis'
+        });
+        idx = 0;
+      }
+    } catch (e) { console.warn('No se pudo cargar la noticia compartida:', e); }
+  }
+
+  if (idx !== -1) verNoticia(idx);
+}
+
 // ===== INICIALIZAR =====
-document.addEventListener('DOMContentLoaded', () => {
-  cargarNoticiasGNews();
+document.addEventListener('DOMContentLoaded', async () => {
+  await cargarNoticiasGNews();
+  abrirNoticiaDesdeURL();
 });
 </script>
 <!-- MODAL PUBLICADOR RÁPIDO FIREBASE -->
